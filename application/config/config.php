@@ -28,7 +28,6 @@ $base_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" :
 $base_url .= "://" . @$_SERVER['HTTP_HOST'];
 $base_url .=  str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 $config['base_url'] = $base_url;
-//$config['base_url'] = 'http://sj.hydraulinksystem.com/';
 
 /*
 |--------------------------------------------------------------------------
@@ -141,7 +140,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = "vendor/autoload.php";
 
 /*
 |--------------------------------------------------------------------------
@@ -329,7 +328,9 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = 'CMSintinusasejahterainternational';
+$config['encryption_key'] = '1nt1nus4s3j4ht3r41ntern4t10n4l';
+$config['google_key'] = '6LfRRYMeAAAAANk9SznvVOtxhTRUnvN6jHXJRU1L';
+$config['google_secret'] = '6LfRRYMeAAAAAGeW8zRhwS6wzmraw3vBosAlaaNG';
 
 /*
 |--------------------------------------------------------------------------
@@ -382,6 +383,7 @@ $config['encryption_key'] = 'CMSintinusasejahterainternational';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
+
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;

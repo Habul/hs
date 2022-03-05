@@ -1,220 +1,283 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Buffer extends CI_Controller
 {
 
-	function __construct()
-	{
-		parent::__construct();
+  function __construct()
+  {
+    parent::__construct();
+    date_default_timezone_set('Asia/Jakarta');
+    $this->load->model('m_data');
+    $session = $this->session->userdata('status');
+    if ($session == '') {
+      redirect(base_url() . 'login?alert=belum_login');
+    }
+  }
 
-		date_default_timezone_set('Asia/Jakarta');
+  public function buffer()
+  {
+    $data['title'] = 'Buffer Stock';
+    $data['master'] = $this->m_data->get_data('master')->result();
+    $data['buffer'] = $this->m_data->buffer();
+    $data['id_add'] = $this->db->select_max('id_buffer')->get('buffer')->row();
+    $this->load->view('dashboard/v_header', $data);
+    $this->load->view('buffer/v_buffer', $data);
+    $this->load->view('dashboard/v_footer');
+  }
 
-		$this->load->helper(array('form', 'url'));
-		$this->load->model('m_data');
-	}
+  public function buffer_aksi()
+  {
+    //$this->form_validation->set_rules('id_buffer', 'Id Buffer', 'required');
+    $this->form_validation->set_rules('sales', 'Nama Sales', 'required');
+    $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+    $this->form_validation->set_rules('brand', 'Brand Produk', 'required');
+    $this->form_validation->set_rules('deskripsi', 'Description Produk', 'required');
+    $this->form_validation->set_rules('qty', 'Quantity', 'required');
+    $this->form_validation->set_rules('keter', 'Keterangan', 'required');
 
-	public function buffer()
-	{
-		$data['master'] = $this->m_data->get_master()->result();
-		$data['buffer'] = $this->m_data->get_data('buffer')->result();
-		$this->load->view('dashboard/v_header');
-		$this->load->view('buffer/v_buffer', $data);
-		$this->load->view('dashboard/v_footer');
-	}
+    if ($this->form_validation->run() != false) {
 
-	public function buffer_aksi()
-	{
-		// Wajib isi
-		//$this->form_validation->set_rules('id_buffer', 'Id Buffer', 'required');
-		$this->form_validation->set_rules('sales', 'Nama Sales', 'required');
-		$this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
-		$this->form_validation->set_rules('brand', 'Brand Produk', 'required');
-		$this->form_validation->set_rules('deskripsi', 'Description Produk', 'required');
-		$this->form_validation->set_rules('qty', 'Quantity', 'required');
-		$this->form_validation->set_rules('keter', 'Keterangan', 'required');
+      $id_buffer = $this->input->post('id_buffer');
+      $sales = $this->input->post('sales');
+      $tanggal = $this->input->post('tanggal');
+      $brand = $this->input->post('brand');
+      $deskripsi = $this->input->post('deskripsi');
+      $qty = $this->input->post('qty');
+      $keter = $this->input->post('keter');
 
-		if ($this->form_validation->run() != false) {
+      $data = array(
+        'id_buffer' => $id_buffer,
+        'sales' => $sales,
+        'tanggal' => $tanggal,
+        'brand' => $brand,
+        'deskripsi' => $deskripsi,
+        'qty' => $qty,
+        'keter' => $keter
+      );
 
-			$id_buffer = $this->input->post('id_buffer');
-			$sales = $this->input->post('sales');
-			$tanggal = $this->input->post('tanggal');
-			$brand = $this->input->post('brand');
-			$deskripsi = $this->input->post('deskripsi');
-			$qty = $this->input->post('qty');
-			$keter = $this->input->post('keter');
+      $this->m_data->insert_data($data, 'buffer');
+      $this->session->set_flashdata('berhasil', 'Buffer berhasil di Tambah No Buffer : ' . $this->input->post('id_buffer', TRUE) . ' !');
+      redirect(base_url() . 'buffer/buffer');
+    } else {
+      $this->session->set_flashdata('gagal', 'Buffer Gagal di Tambah, ada form yang belum terisi, silahkan cek kembali !!!');
+      redirect(base_url() . 'buffer/buffer');
+    }
+  }
 
-			$data = array(
-				'id_buffer' => $id_buffer,
-				'sales' => $sales,
-				'tanggal' => $tanggal,
-				'brand' => $brand,
-				'deskripsi' => $deskripsi,
-				'qty' => $qty,
-				'keter' => $keter
-			);
+  public function buffer_update()
+  {
+    $this->form_validation->set_rules('status', 'Check', 'required');
+    $this->form_validation->set_rules('pr_no', 'PR No', 'required');
+    $this->form_validation->set_rules('fu', 'Follow Up', 'required');
+    $this->form_validation->set_rules('wh', 'Warehouse', 'required');
+    //$this->form_validation->set_rules('ket_wh', 'Ket Warehouse', 'required');
 
-			$this->m_data->insert_data($data, 'buffer');
-			$this->session->set_flashdata('berhasil', 'Buffer berhasil di Tambah No Buffer : ' . $this->input->post('id_buffer', TRUE) . ' !');
-			redirect(base_url() . 'buffer/buffer');
-		} else {
-			$this->session->set_flashdata('gagal', 'Buffer Gagal di Tambah, ada form yang belum terisi, silahkan cek kembali !!!');
-			redirect(base_url() . 'buffer/buffer');
-		}
-	}
+    if ($this->form_validation->run() != false) {
 
-	public function buffer_update()
-	{
-		// Wajib isi
-		$this->form_validation->set_rules('status', 'Check', 'required');
-		$this->form_validation->set_rules('pr_no', 'PR No', 'required');
-		$this->form_validation->set_rules('fu', 'Follow Up', 'required');
-		$this->form_validation->set_rules('wh', 'Warehouse', 'required');
-		//$this->form_validation->set_rules('ket_wh', 'Ket Warehouse', 'required');
+      $id = $this->input->post('id');
 
-		if ($this->form_validation->run() != false) {
+      $wh = $this->input->post('wh');
+      $fu = $this->input->post('fu');
+      $status = $this->input->post('status');
+      $pr_no = $this->input->post('pr_no');
+      $ket_wh = $this->input->post('ket_wh');
+      if ($this->form_validation->run() != false) {
+        $data = array(
+          'wh' => $wh,
+          'fu' => $fu,
+          'status' => $status,
+          'pr_no' => $pr_no,
+          'ket_wh' => $ket_wh
+        );
+      }
+      $where = array(
+        'id_buffer' => $id
+      );
+      $this->m_data->update_data($where, $data, 'buffer');
+      $this->session->set_flashdata('berhasil', 'Buffer berhasil di Update No ID : ' . $this->input->post('id', TRUE) . ' !');
+      redirect(base_url() . 'buffer/buffer');
+    } else {
+      $this->session->set_flashdata('gagal', 'Buffer Gagal di Update, ada form yang belum terisi, silahkan cek kembali !!!');
+      redirect(base_url() . 'buffer/buffer');
+    }
+  }
 
-			$id = $this->input->post('id');
+  public function buffer_edit()
+  {
+    $this->form_validation->set_rules('sales', 'Nama Sales', 'required');
+    $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+    $this->form_validation->set_rules('brand', 'Brand Produk', 'required');
+    $this->form_validation->set_rules('deskripsi', 'Description Product', 'required');
+    $this->form_validation->set_rules('qty', 'Quantity', 'required');
+    $this->form_validation->set_rules('keter', 'Keterangan', 'required');
 
-			$wh = $this->input->post('wh');
-			$fu = $this->input->post('fu');
-			$status = $this->input->post('status');
-			$pr_no = $this->input->post('pr_no');
-			$ket_wh = $this->input->post('ket_wh');
-			if ($this->form_validation->run() != false) {
-				$data = array(
-					'wh' => $wh,
-					'fu' => $fu,
-					'status' => $status,
-					'pr_no' => $pr_no,
-					'ket_wh' => $ket_wh
-				);
-			}
-			$where = array(
-				'id_buffer' => $id
-			);
-			$this->m_data->update_data($where, $data, 'buffer');
-			$this->session->set_flashdata('berhasil', 'Buffer berhasil di Update No ID : ' . $this->input->post('id', TRUE) . ' !');
-			redirect(base_url() . 'buffer/buffer');
-		} else {
-			$this->session->set_flashdata('gagal', 'Buffer Gagal di Update, ada form yang belum terisi, silahkan cek kembali !!!');
-			redirect(base_url() . 'buffer/buffer');
-		}
-	}
+    if ($this->form_validation->run() != false) {
 
-	public function buffer_edit()
-	{
-		// Wajib isi
-		$this->form_validation->set_rules('sales', 'Nama Sales', 'required');
-		$this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
-		$this->form_validation->set_rules('brand', 'Brand Produk', 'required');
-		$this->form_validation->set_rules('deskripsi', 'Description Product', 'required');
-		$this->form_validation->set_rules('qty', 'Quantity', 'required');
-		$this->form_validation->set_rules('keter', 'Keterangan', 'required');
+      $id = $this->input->post('id');
 
-		if ($this->form_validation->run() != false) {
+      $sales = $this->input->post('sales');
+      $tanggal = $this->input->post('tanggal');
+      $brand = $this->input->post('brand');
+      $deskripsi = $this->input->post('deskripsi');
+      $qty = $this->input->post('qty');
+      $keter = $this->input->post('keter');
 
-			$id = $this->input->post('id');
+      if ($this->form_validation->run() != false) {
+        $data = array(
 
-			$sales = $this->input->post('sales');
-			$tanggal = $this->input->post('tanggal');
-			$brand = $this->input->post('brand');
-			$deskripsi = $this->input->post('deskripsi');
-			$qty = $this->input->post('qty');
-			$keter = $this->input->post('keter');
+          'sales' => $sales,
+          'tanggal' => $tanggal,
+          'brand' => $brand,
+          'deskripsi' => $deskripsi,
+          'qty' => $qty,
+          'keter' => $keter
+        );
+      }
 
-			if ($this->form_validation->run() != false) {
-				$data = array(
+      $where = array(
+        'id_buffer' => $id
+      );
+      $this->m_data->update_data($where, $data, 'buffer');
+      $this->session->set_flashdata('berhasil', 'Buffer berhasil di Edit No ID : ' . $this->input->post('id', TRUE) . ' !');
+      redirect(base_url() . 'buffer/buffer');
+    } else {
+      $this->session->set_flashdata('gagal', 'Buffer Gagal di Edit, ada form yang belum terisi, silahkan cek kembali !!!');
+      redirect(base_url() . 'buffer/buffer');
+    }
+  }
 
-					'sales' => $sales,
-					'tanggal' => $tanggal,
-					'brand' => $brand,
-					'deskripsi' => $deskripsi,
-					'qty' => $qty,
-					'keter' => $keter
-				);
-			}
+  public function buffer_hapus()
+  {
+    $id = $this->input->post('id_buffer'); {
+      $where = array(
+        'id_buffer' => $id
+      );
+      $this->m_data->delete_data($where, 'buffer');
+      $this->session->set_flashdata('berhasil', 'Buffer berhasil di Hapus !');
+      redirect(base_url() . 'buffer/buffer');
+    }
+  }
 
-			$where = array(
-				'id_buffer' => $id
-			);
-			$this->m_data->update_data($where, $data, 'buffer');
-			$this->session->set_flashdata('berhasil', 'Buffer berhasil di Edit No ID : ' . $this->input->post('id', TRUE) . ' !');
-			redirect(base_url() . 'buffer/buffer');
-		} else {
-			$this->session->set_flashdata('gagal', 'Buffer Gagal di Edit, ada form yang belum terisi, silahkan cek kembali !!!');
-			redirect(base_url() . 'buffer/buffer');
-		}
-	}
+  public function buffer_view()
+  {
+    $data['title'] = 'Arsip Buffer';
+    $data['buffer'] = $this->m_data->arshipbuffer();
+    $this->load->view('dashboard/v_header', $data);
+    $this->load->view('buffer/v_buffer_view', $data);
+    $this->load->view('dashboard/v_footer');
+  }
 
-	public function buffer_hapus()
-	{
-		$id = $this->input->post('id_buffer'); {
-			$where = array(
-				'id_buffer' => $id
-			);
-			$this->m_data->delete_data($where, 'buffer');
-			$this->session->set_flashdata('berhasil', 'Buffer berhasil di Hapus !');
-			redirect(base_url() . 'buffer/buffer');
-		}
-	}
+  public function buffer_export()
+  {
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
 
-	public function buffer_view()
-	{
-		$data['buffer'] = $this->m_data->select_buffer();
+    $style_col = [
+      'font' => ['bold' => true],
+      'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+      ],
+      'borders' => [
+        'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+        'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+        'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+        'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+      ]
+    ];
 
-		$this->load->view('dashboard/v_header');
-		$this->load->view('buffer/v_buffer_view', $data);
-		$this->load->view('dashboard/v_footer');
-	}
+    $style_row = [
+      'alignment' => [
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+      ],
+      'borders' => [
+        'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+        'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+        'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+        'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+      ]
+    ];
 
-	public function buffer_export()
-	{
-		error_reporting(E_ALL);
+    $sheet->setCellValue('A1', "DATA BUFFER STOCK");
+    $sheet->mergeCells('A1:L1');
+    $sheet->getStyle('A1')->getFont()->setBold(true);
 
-		include_once './assets/phpexcel/Classes/PHPExcel.php';
-		$objPHPExcel = new PHPExcel();
+    $sheet->setCellValue('A3', 'Id Buffer');
+    $sheet->setCellValue('B3', 'Nama Sales');
+    $sheet->setCellValue('C3', 'Tanggal');
+    $sheet->setCellValue('D3', 'Brand');
+    $sheet->setCellValue('E3', 'Deskripsi');
+    $sheet->setCellValue('F3', 'Qty');
+    $sheet->setCellValue('G3', 'Keter(sales)');
+    $sheet->setCellValue('H3', 'Status');
+    $sheet->setCellValue('I3', 'PR No');
+    $sheet->setCellValue('J3', 'Nama WH');
+    $sheet->setCellValue('K3', 'Follow Up');
+    $sheet->setCellValue('L3', 'Keter(WH)');
 
-		$data = $this->m_data->select_buffer();
+    $sheet->getStyle('A3')->applyFromArray($style_col);
+    $sheet->getStyle('B3')->applyFromArray($style_col);
+    $sheet->getStyle('C3')->applyFromArray($style_col);
+    $sheet->getStyle('D3')->applyFromArray($style_col);
+    $sheet->getStyle('E3')->applyFromArray($style_col);
+    $sheet->getStyle('F3')->applyFromArray($style_col);
+    $sheet->getStyle('G3')->applyFromArray($style_col);
+    $sheet->getStyle('H3')->applyFromArray($style_col);
+    $sheet->getStyle('I3')->applyFromArray($style_col);
+    $sheet->getStyle('J3')->applyFromArray($style_col);
+    $sheet->getStyle('K3')->applyFromArray($style_col);
+    $sheet->getStyle('L3')->applyFromArray($style_col);
 
-		$objPHPExcel = new PHPExcel();
-		$objPHPExcel->setActiveSheetIndex(0);
-		$rowCount = 1;
+    $data = $this->m_data->arshipbuffer();
+    $x = 4;
+    foreach ($data as $row) {
+      $sheet->setCellValue('A' . $x, $row->id_buffer);
+      $sheet->setCellValue('B' . $x, $row->sales);
+      $sheet->setCellValue('C' . $x, $row->tanggal);
+      $sheet->setCellValue('D' . $x, $row->brand);
+      $sheet->setCellValue('E' . $x, $row->deskripsi);
+      $sheet->setCellValue('F' . $x, $row->qty);
+      $sheet->setCellValue('G' . $x, $row->keter);
+      $sheet->setCellValue('H' . $x, $row->status);
+      $sheet->setCellValue('I' . $x, $row->pr_no);
+      $sheet->setCellValue('J' . $x, $row->wh);
+      $sheet->setCellValue('K' . $x, $row->fu);
+      $sheet->setCellValue('L' . $x, $row->ket_wh);
 
-		$objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, "Id Buffer");
-		$objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, "Nama Sales");
-		$objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, "Tanggal");
-		$objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, "Brand Produk");
-		$objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, "Deskripsi");
-		$objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, "Qty");
-		$objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, "Keter(sales)");
-		$objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, "Status");
-		$objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, "PR No");
-		$objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, "Nama WH");
-		$objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, "Follow Up");
-		$objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, "Keter(WH)");
-		$rowCount++;
+      $sheet->getStyle('A' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('B' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('C' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('D' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('E' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('F' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('G' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('H' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('I' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('J' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('K' . $x)->applyFromArray($style_row);
+      $sheet->getStyle('L' . $x)->applyFromArray($style_row);
 
-		foreach ($data as $value) {
-			$objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $value->id_buffer);
-			$objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $value->sales);
-			$objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $value->tanggal);
-			$objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $value->brand);
-			$objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $value->deskripsi);
-			$objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $value->qty);
-			$objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $value->keter);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $value->status);
-			$objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $value->pr_no);
-			$objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $value->wh);
-			$objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $value->fu);
-			$objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $value->ket_wh);
-			$rowCount++;
-		}
+      $x++;
+    }
 
-		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-		$objWriter->save('./assets/excel/Data Buffer.xlsx');
+    $sheet->getDefaultRowDimension()->setRowHeight(-1);
 
-		$this->load->helper('download');
-		force_download('./assets/excel/Data Buffer.xlsx', NULL);
-	}
+    // Set orientasi kertas jadi LANDSCAPE
+    $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+
+    // Set judul file excel nya
+    $sheet->setTitle("Laporan Buffer Stock");
+
+    // Proses file excel
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="Data Buffer.xlsx"'); // Set nama file excel nya
+    header('Cache-Control: max-age=0');
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+  }
 }

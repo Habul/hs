@@ -1,34 +1,47 @@
-<footer class="main-footer">
-	<strong>Copyright &copy; 2021 <a href="https://wa.me/6287771911287?text=Hallo%20kakak%20yang%20baik%20!!!%20">Habul</a></strong> . All rights reserved.
+<div class="modal fade" id="logoutModal" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content bg-primary">
+			<div class="modal-header">
+				<h5 class="col-12 modal-title text-center">Ready to Leave?
+					<button class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h5>
+			</div>
+			<div class="modal-body">Select "Sign Out" below if you are ready to end your current session.</div>
+			<div class="modal-footer justify-content-between">
+				<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+				<a class="btn btn-outline-light" href="<?= base_url('dashboard/keluar'); ?>">Sign Out <i
+						class="fas fa-sign-out-alt"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="main-footer text-sm">
+	<strong>Copyright &copy; <?= date('Y'); ?><a href="https://github.com/Habul"> Habul</a></strong> . All rights
+	reserved.
 	<div class="float-right d-none d-sm-inline-block">
 		<b>IT</b> - Intinusa Sejahtera International
 	</div>
 </footer>
 
-<aside class="control-sidebar control-sidebar-dark">
-	<!-- Control sidebar content goes here -->
-</aside>
+<aside class="control-sidebar control-sidebar-dark"></aside>
 
 </div>
 
-<!-- /.control-sidebar -->
-<!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
 	$.widget.bridge('uibutton', $.ui.button)
+
 </script>
-<!-- ChartJS -->
 <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
-<!-- jQuery Knob Chart -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
+<script src="<?php echo base_url(); ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
-<!-- DataTables  & Plugins -->
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -41,263 +54,82 @@
 <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- SweetAlert2 -->
 <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
-<!-- Toastr -->
 <script src="<?php echo base_url(); ?>assets/plugins/toastr/toastr.min.js"></script>
-<!-- Summernote -->
 <script src="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
 <script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
 <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- daterangepicker -->
 <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/inputmask/jquery.inputmask.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap color picker -->
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Bootstrap Switch -->
-<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<!-- BS-Stepper -->
-<script src="<?php echo base_url(); ?>assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- dropzonejs -->
-<script src="<?php echo base_url(); ?>assets/plugins/dropzone/min/dropzone.min.js"></script>
-<!-- Summernote -->
-<script src="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?php echo base_url(); ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url(); ?>assets/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
-<script>
-$(document).ready(function () {	
-    $("#submitbtn").click(function () {
-		$('#submitbtn').text('saving...');
-        $("#submitbtn").attr("disabled", true);
-        $('#addform').submit();
-    });
-});	
+<script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js">
 </script>
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/dropzone/min/dropzone.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/filterizr/jquery.filterizr.min.js"></script>
+<?php include './assets/plugins/ajax.php'; ?>
 <script>
-	$(function() {
-		$("#example1").DataTable({
-			"responsive": true,
-			"lengthChange": false,
-			"autoWidth": false,
-			"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"searching": false,
-			"order": [
-				[2, "desc"]
-			],
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
-		$('#example3').DataTable({
-			"paging": true,
-			"responsive": true,
-			"lengthChange": true,
-			"autoWidth": false,
-			"order": [
-				[2, "desc"]
-			]
-		});
-		$("#example4").DataTable({
-			"responsive": false,
-			"searching": false,
-			"lengthChange": false,
-			"autoWidth": false,
-			"buttons": ["csv", "excel", "pdf", "print"]
-		}).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
-		$('#example5').DataTable({
-			"paging": true,
-			"responsive": true,
-			"lengthChange": true,
-			"autoWidth": false,
-			"ordering": true
-		});
-		$('#example6').DataTable({
-			"paging": true,
-			"responsive": true,
-			"lengthChange": true,
-			"autoWidth": false,
-			"order": [
-				[0, "desc"]
-			]
-		});
-		$('#example7').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"searching": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
-		$('#example8').DataTable({
-			"paging": true,
-			"responsive": true,
-			"lengthChange": true,
-			"autoWidth": false,
-			"ordering": true
+	$(document).ready(function () {
+		$(".toggle-password").click(function () {
+			$(this).toggleClass("fa-lock fa-lock-open");
+			let input = $($(this).attr("toggle"));
+			if (input.attr("type") == "password") {
+				input.attr("type", "text");
+			} else {
+				input.attr("type", "password");
+			}
 		});
 	});
-</script>
-<script>
-	//-------------
-    //- DONUT CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
-      labels: [ <?php
-            if (count($data_sales)>0) {
-              foreach ($data_sales as $data) {
-                echo "'" .$data->sales ."',";
-              }
-            }
-          ?> ],
-      datasets: [
-        {
-          data: [<?php
-                if (count($data_sales)>0) {
-                   foreach ($data_sales as $data) {
-                    echo $data->jmlh . ", ";
-                  }
-                }
-              ?>],
-          backgroundColor : ['#CDA776','#f56954', '#00A65A', '#F39C12', '#00C0EF', '#3C8DBC', '#D2D6DE','#DEB887','#A9A9A9','#DC143C','#F4A460','#2E8B57','#1D7A46'
-		,'#00CED1','#483D8B','#5F9EA0','#696969','#7CFC00','#808000','#9370DB','#A9A9A9','#B0C4DE','#C0C0C0','#D2B48C','#E6E6FA','#F0F8FF','#FFE4E1','#FFFF00'],
-        }
-      ]
-    }
-    var donutOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-	  legend: {
-        display: false
-    }
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(donutChartCanvas, {
-      type: 'doughnut',
-      data: donutData,
-      options: donutOptions
-    })
-
-    //-------------
-    //- PIE CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieData        = {
-      labels: [ <?php
-            if (count($data_brand)>0) {
-              foreach ($data_brand as $data) {
-                echo "'" .$data->brand ."',";
-              }
-            }
-          ?>
-      ],
-      datasets: [
-        {
-		  label: 'Statistik Sales',
-          data: [<?php
-                if (count($data_brand)>0) {
-                   foreach ($data_brand as $data) {
-                    echo $data->jmlh . ", ";
-                  }
-                }
-              ?>],
-          backgroundColor : ['#DEB887','#A9A9A9','#DC143C','#F4A460','#2E8B57','#1D7A46','#CDA776','#f56954', '#00A65A', '#F39C12', '#00C0EF', '#3C8DBC', '#D2D6DE',
-		  '#00CED1','#483D8B','#5F9EA0','#696969','#7CFC00','#808000','#9370DB','#A9A9A9','#B0C4DE','#C0C0C0','#D2B48C','#E6E6FA','#F0F8FF','#FFE4E1','#FFFF00'],
-        }
-      ]
-    }
-    var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-	  legend: {
-        display: false
-    }
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(pieChartCanvas, {
-      type: 'pie',
-      data: pieData,
-      options: pieOptions,
-	  
-    })
 
 </script>
 <script>
-	$(function() {
-		// Summernote
-		$('#summernote').summernote()
-	})
-</script>
-<script>
-	$(function() {
-		var Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 3000
-		});
+	var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+	var currentTheme = localStorage.getItem('theme');
+	var mainHeader = document.querySelector('.main-header');
 
-		$('.inquiryok').click(function() {
-			Toast.fire({
-				icon: 'success',
-				title: 'Inquiry successfully added'
-			})
-		});
+	if (currentTheme) {
+		if (currentTheme === 'dark') {
+			if (!document.body.classList.contains('dark-mode')) {
+				document.body.classList.add("dark-mode");
+			}
+			if (mainHeader.classList.contains('navbar-light')) {
+				mainHeader.classList.add('navbar-dark');
+				mainHeader.classList.remove('navbar-light');
+			}
+			toggleSwitch.checked = true;
+		}
+	}
 
-		$('.sjok').click(function() {
-			Toast.fire({
-				icon: 'success',
-				title: 'SJ successfully added'
-			})
-		});
-	})
-</script>
-<script>
-	$(function() {
-		//Initialize Select2 Elements
-		$('.select2').select2()
+	function switchTheme(e) {
+		if (e.target.checked) {
+			if (!document.body.classList.contains('dark-mode')) {
+				document.body.classList.add("dark-mode");
+			}
+			if (mainHeader.classList.contains('navbar-light')) {
+				mainHeader.classList.add('navbar-dark');
+				mainHeader.classList.remove('navbar-light');
+			}
+			localStorage.setItem('theme', 'dark');
+		} else {
+			if (document.body.classList.contains('dark-mode')) {
+				document.body.classList.remove("dark-mode");
+			}
+			if (mainHeader.classList.contains('navbar-dark')) {
+				mainHeader.classList.add('navbar-light');
+				mainHeader.classList.remove('navbar-dark');
+			}
+			localStorage.setItem('theme', 'light');
+		}
+	}
 
-		//Initialize Select2 Elements
-		$('.select2bs4').select2({
-			theme: 'bootstrap4'
-		})
+	toggleSwitch.addEventListener('change', switchTheme, false);
 
-		//Datemask dd/mm/yyyy
-		$('#datemask').inputmask('dd/mm/yyyy', {
-			'placeholder': 'dd/mm/yyyy'
-		})
-		//Datemask2 mm/dd/yyyy
-		$('#datemask2').inputmask('mm/dd/yyyy', {
-			'placeholder': 'mm/dd/yyyy'
-		})
-		//Money Euro
-		$('[data-mask]').inputmask()
-
-		//Date picker
-		$('#reservationdate').datetimepicker({
-			format: 'L'
-		});
-	})
 </script>
 </body>
 
