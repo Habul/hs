@@ -4,21 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Intisera | Register</title>
-	<link rel='icon' href="<?php echo base_url(); ?>gambar/website/Untitled-1-02.png" type="image/gif">
+	<title>HS | Register</title>
+	<link rel='icon' href="<?php echo base_url(); ?>gambar/website/hs-ico.png"" type=" image/gif">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<style>
-		.login-page {
-			background-image: url('http://it.intisera.com/gambar/website/IMG_1479.jpg');
-			background-color: #cccccc;
-			height: 500px;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-			position: relative;
-		}
-
-	</style>
 	<link rel="stylesheet" type="text/css"
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -29,11 +17,11 @@
 
 <body class="hold-transition login-page text-sm">
 	<div class="login-box">
-		<div class="card card-info card-outline">
-			<div class="card-body">
+		<div class="card card-warning card-outline">
+			<div class="card-body shadow">
 				<div class="login-logo">
-					<a href="#"><img src="<?php echo base_url() . 'gambar/website/Intisera2.png' ?>"
-							style="width:250px;height:110px;"></a>
+					<a href="#"><img src="<?php echo base_url() . 'gambar/website/Logo-02.png' ?>"
+							style="width:270px;height:60px;"></a>
 				</div>
 				<form onsubmit="regbtn.disabled = true; return true;"
 					action="<?php echo base_url('login/register_proses') ?>" method="post">

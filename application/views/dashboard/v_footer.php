@@ -22,7 +22,7 @@
 	<strong>Copyright &copy; <?= date('Y'); ?><a href="https://github.com/Habul"> Habul</a></strong> . All rights
 	reserved.
 	<div class="float-right d-none d-sm-inline-block">
-		<b>IT</b> - Intinusa Sejahtera International
+		<b>Hydraulic System</b>
 	</div>
 </footer>
 

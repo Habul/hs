@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Intisera | <?php echo $title; ?></title>
-	<link rel='icon' href="<?php echo base_url(); ?>gambar/website/Untitled-1-02.png" type="image/gif">
+	<title>HS | <?php echo $title; ?></title>
+	<link rel='icon' href="<?php echo base_url(); ?>gambar/website/hs-ico.png" type="image/gif">
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/fontawesome-free/css/all.min.css">
@@ -66,54 +66,6 @@
 
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a class="nav-link" data-widget="navbar-search" href="#" role="button">
-						<i class="fas fa-search"></i>
-					</a>
-					<div class="navbar-search-block">
-						<form class="form-inline">
-							<div class="input-group input-group-sm">
-								<input class="form-control form-control-navbar" type="search" placeholder="Search"
-									aria-label="Search">
-								<div class="input-group-append">
-									<button class="btn btn-navbar" type="submit">
-										<i class="fas fa-search"></i>
-									</button>
-									<button class="btn btn-navbar" type="button" data-widget="navbar-search">
-										<i class="fas fa-times"></i>
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</li>
-
-				<li class="nav-item dropdown">
-					<?php if ($this->session->userdata('level') != "sales") {  ?>
-					<?php if ($this->session->userdata('level') != "guest") {  ?>
-					<?php
-            $this->load->model('m_data');
-            $jml_inquiry = $this->m_data->total_inquiry();
-            $jml_buffer = $this->m_data->total_buffer();
-            $total = $jml_inquiry + $jml_buffer;  ?>
-					<a class="nav-link" data-toggle="dropdown" href="#">
-						<i class="far fa-bell"></i>
-						<span class="badge badge-warning navbar-badge"><?= $total; ?></span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<span class="dropdown-item dropdown-header">You have notifications</span>
-						<div class="dropdown-divider"></div>
-						<a href="<?php echo base_url('inquiry/inquiry') ?>" class="dropdown-item">
-							<i class="fas fa-book"></i> You have <?= $jml_inquiry; ?> Inquiry
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="<?php echo base_url('buffer/buffer') ?>" class="dropdown-item">
-							<i class="fas fa-database"></i> You have <?= $jml_buffer; ?> Buffer
-						</a>
-					</div>
-				</li>
-				<?php } ?>
-				<?php } ?>
-				<li class="nav-item">
 					<a class="nav-link" data-widget="fullscreen" href="#" role="button">
 						<i class="fas fa-expand-arrows-alt"></i>
 					</a>
@@ -156,9 +108,9 @@
 
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<a href="#" class="brand-link">
-				<img src="<?php echo base_url(); ?>gambar/website/Untitled-1-02.png" alt="AdminLTE Logo"
+				<img src="<?php echo base_url(); ?>gambar/website/hs-logo.png" alt="AdminLTE Logo"
 					class="brand-image img-circle elevation-2">
-				<span class="brand-text font-weight-green">INTISERA</span>
+				<span class="brand-text font-weight-green">Hydraulic System</span>
 			</a>
 
 			<div class="sidebar">
@@ -195,7 +147,7 @@
 								<p>Dashboard</p>
 							</a>
 						</li>
-						<?php if ($this->session->userdata('level') == "admin") { ?>
+
 						<li class="nav-item">
 							<a href="<?php echo base_url() . 'dashboard/pengguna' ?>"
 								<?= $this->uri->uri_string() == 'dashboard/pengguna' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
@@ -204,161 +156,56 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?php echo base_url() . 'it/data' ?>"
-								<?= $this->uri->uri_string() == 'it/data' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-								<i class="nav-icon fas fa-user-astronaut"></i>
-								<p>Data Penting</p>
-							</a>
-						</li>
-						<li <?= $this->uri->uri_string() == 'sj/sj' ||
-                    $this->uri->segment(2) == 'sj_view' ||
-                    $this->uri->segment(2) == 'sj_view_df' ||
-                    $this->uri->uri_string() == 'sj/sj_df' ||
-                    $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
-							<a href="#" <?= $this->uri->uri_string() == 'sj/sj' ||
-                              $this->uri->segment(2) == 'sj_view' ||
-                              $this->uri->segment(2) == 'sj_view_df' ||
-                              $this->uri->uri_string() == 'sj/sj_df' ||
-                              $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
+							<a href="<?php echo base_url() . 'sj/sj' ?>"
+								<?= $this->uri->uri_string() == 'sj/sj' || 
+								$this->uri->segment(2) == 'sj_view' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 								<i class="nav-icon fas fa-mail-bulk"></i>
-								<p>Surat Jalan
-									<i class="fas fa-angle-left right"></i>
-								</p>
+								<p>Delivery Orders</p>
 							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'sj/sj' ?>"
-										<?= $this->uri->uri_string() == 'sj/sj' || $this->uri->segment(2) == 'sj_view' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>SJ Hs</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'sj/sj_df' ?>"
-										<?= $this->uri->uri_string() == 'sj/sj_df' || $this->uri->segment(2) == 'sj_view_df' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>SJ Df</p>
-									</a>
-								</li>
-							</ul>
 						</li>
-						<?php
-            }
-            ?>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<?php if ($this->session->userdata('level') != "warehouse") { ?>
-						<li
-							<?= $this->uri->uri_string() == 'inquiry/inquiry_master' ||
-                    $this->uri->uri_string() == 'inquiry/inquiry_kurs' ||
-                    $this->uri->segment(2) == 'inquiry' ||
-                    $this->uri->segment(2) == 'inquiry_update_prch' ||
-                    $this->uri->uri_string() == 'inquiry/inquiry_view' || $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
-							<a href="#"
-								<?= $this->uri->uri_string() == 'inquiry/inquiry_master' ||
-                              $this->uri->uri_string() == 'inquiry/inquiry_kurs' ||
-                              $this->uri->segment(2) == 'inquiry' ||
-                              $this->uri->segment(2) == 'inquiry_update_prch' ||
-                              $this->uri->uri_string() == 'inquiry/inquiry_view' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-								<i class="nav-icon fas fa-book"></i>
-								<p>Inquiry
-									<i class="fas fa-angle-left right"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<?php if ($this->session->userdata('level') != "sales") { ?>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'inquiry/inquiry_master' ?>"
-										<?= $this->uri->uri_string() == 'inquiry/inquiry_master' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Master</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'inquiry/inquiry_kurs' ?>"
-										<?= $this->uri->uri_string() == 'inquiry/inquiry_kurs' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Kurs</p>
-									</a>
-								</li>
-								<?php } ?>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'inquiry/inquiry' ?>"
-										<?= $this->uri->segment(2) == 'inquiry' || $this->uri->segment(2) == 'inquiry_update_prch' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Inquiry</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'inquiry/inquiry_view' ?>"
-										<?= $this->uri->uri_string() == 'inquiry/inquiry_view' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Arsip Inquiry</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<?php } ?>
-						<?php
-            if ($this->session->userdata('level') != "purchase") { ?>
-						<li <?= $this->uri->uri_string() == 'buffer/buffer' ||
-                    $this->uri->uri_string() == 'buffer/buffer_view' ||
-                    $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
-							<a href="#" <?= $this->uri->uri_string() == 'buffer/buffer' ||
-                              $this->uri->uri_string() == 'buffer/buffer_view' ||
-                              $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-								<i class="nav-icon fas fa-database"></i>
-								<p>Buffer
-									<i class="fas fa-angle-left right"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'buffer/buffer' ?>"
-										<?= $this->uri->uri_string() == 'buffer/buffer' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Buffer</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'buffer/buffer_view' ?>"
-										<?= $this->uri->uri_string() == 'buffer/buffer_view' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Arsip Buffer</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<?php } ?>
-						<li <?= $this->uri->segment(2) == 'data_order' ||
-                  $this->uri->segment(2) == 'view' ||
-                  $this->uri->segment(2) == 'arsip' ||
+
+						<li <?= $this->uri->segment(2) == 'listing' ||
+                  $this->uri->segment(2) == 'assembly' ||
+                  $this->uri->segment(2) == 'listing_item' ||
+                  $this->uri->segment(2) == 'listing_detail' ||                  
                   $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
-							<a href="#" <?= $this->uri->segment(2) == 'data_order' ||
-                            $this->uri->segment(2) == 'view' ||
-                            $this->uri->segment(2) == 'arsip' ||
+							<a href="#" <?= $this->uri->segment(2) == 'listing' ||
+                            $this->uri->segment(2) == 'assembly' ||
+                            $this->uri->segment(2) == 'listing_item' ||
+                            $this->uri->segment(2) == 'listing_detail' ||                            
                             $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-								<i class="nav-icon fas fa-paper-plane"></i>
-								<p>Order & Delivery
-									<i class="fas fa-angle-left right"></i>
+								<i class="nav-icon fas fa-briefcase"></i>
+								<span class="badge badge-warning right">6</span>
+								<p>Listing Qoutation
+									<i class=" fas fa-angle-left right"></i>
 								</p>
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?php echo base_url() . 'tracking/data_order' ?>"
-										<?= $this->uri->segment(2) == 'data_order' || $this->uri->segment(2) == 'view' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Order & Delivery</p>
+									<a href="<?php echo base_url() . 'listing/listing_item' ?>" <?= $this->uri->segment(2) == 'listing/listing_item' ||
+                               $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
+										<i class="fas fa-tools nav-icon"></i>
+										<p>Item</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?php echo base_url() . 'tracking/arsip' ?>"
-										<?= $this->uri->segment(2) == 'arsip' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="far fa-circle nav-icon"></i>
-										<p>Arsip Order & Delivery</p>
+									<a href="<?php echo base_url() . 'listing/assembly' ?>" <?= $this->uri->segment(2) == 'listing/assembly' ||
+                               $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
+										<i class="fas fa-drafting-compass nav-icon"></i>
+										<p>Assembly</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="<?php echo base_url() . 'listing/listing' ?>" <?= $this->uri->segment(2) == 'listing' ||
+                               $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
+										<i class="fas fa-clipboard nav-icon"></i>
+										<span class="badge badge-warning right">6</span>
+										<p>Listing Qoutation</p>
 									</a>
 								</li>
 							</ul>
 						</li>
+						<?php if ($this->session->userdata('level') != "guest") {  ?>
 						<li <?= $this->uri->segment(2) == 'mobil' ||
                   $this->uri->segment(2) == 'mobil_odo' ||
                   $this->uri->segment(2) == 'motor' ||
@@ -406,13 +253,6 @@
 							</ul>
 						</li>
 						<?php } ?>
-						<li class="nav-item">
-							<a href="<?php echo base_url() . 'dashboard/mini_games' ?>"
-								<?= $this->uri->uri_string() == 'dashboard/mini_games' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-								<i class="nav-icon fas fa-hand-peace"></i></i>
-								<p>Mini Games</p>
-							</a>
-						</li>
 						<li class="nav-item">
 							<a href="<?php echo base_url() . 'dashboard/contact' ?>"
 								<?= $this->uri->uri_string() == 'dashboard/contact' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>

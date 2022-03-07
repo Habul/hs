@@ -18,51 +18,49 @@ class Dashboard extends CI_Controller
   public function index()
   {
     $data['title'] = 'Dashboard';
-    $data['jumlah_SJ'] = $this->m_data->get_data('sj_user_df')->num_rows();
-    $data['jumlah_pengguna'] = $this->m_data->get_data('pengguna')->num_rows();
-    $data['total_inquiry'] = $this->m_data->tot_inquiry();
-    $data['total_buffer'] = $this->m_data->tot_buffer();
+    $data['jumlah_SJ'] = $this->m_data->get_data('sj_user')->num_rows();
+    $data['jumlah_pengguna'] = $this->m_data->get_data('pengguna')->num_rows();    
     $data['tot_mobil'] = $this->db->where('type', 'mobil')->get('type_vehicles')->num_rows();
     $data['tot_motor'] = $this->db->where('type', 'motor')->get('type_vehicles')->num_rows();
     $data['tot_truck'] = $this->db->where('type', 'truck')->get('type_vehicles')->num_rows();
     $data['tot_vehicles'] = $this->m_data->get_data('type_vehicles')->num_rows();
 
-    $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+    // $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
 
-    $sales = $this->m_data->select_by_sales();
-    $index = 0;
-    foreach ($sales as $value) {
-      $color = '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)];
+    // $sales = $this->m_data->select_by_sales();
+    // $index = 0;
+    // foreach ($sales as $value) {
+    //   $color = '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)];
 
-      $sales_color[$index] = $color;
-      $data_sales[$index] = $value->nama;
+    //   $sales_color[$index] = $color;
+    //   $data_sales[$index] = $value->nama;
 
-      $index++;
-    }
+    //   $index++;
+    // }
 
-    $brand = $this->m_data->select_by_brand();
-    $index = 0;
-    foreach ($brand as $value) {
-      $color = '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)];
+    // $brand = $this->m_data->select_by_brand();
+    // $index = 0;
+    // foreach ($brand as $value) {
+    //   $color = '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)];
 
-      $brand_color[$index] = $color;
-      $data_posisi[$index] = $value->nama;
+    //   $brand_color[$index] = $color;
+    //   $data_posisi[$index] = $value->nama;
 
-      $index++;
-    }
+    //   $index++;
+    // }
 
-    $data['barmobil'] = $this->m_data->bartracking('mobil');
-    $data['barmotor'] = $this->m_data->bartracking('motor');
-    $data['bartruck'] = $this->m_data->bartracking('truck');
-    $data['suratdf'] = $this->m_data->suratjalan('sj_user_df');
-    $data['suraths'] = $this->m_data->suratjalan('sj_user');
-    $data['data_sales'] = $this->m_data->select_by_sales();
-    $data['data_brand'] = $this->m_data->select_by_brand();
-    $data['sales_color'] = json_encode($sales_color);
-    $data['brand_color'] = json_encode($brand_color);
+    // $data['barmobil'] = $this->m_data->bartracking('mobil');
+    // $data['barmotor'] = $this->m_data->bartracking('motor');
+    // $data['bartruck'] = $this->m_data->bartracking('truck');
+    // $data['suratdf'] = $this->m_data->suratjalan('sj_user_df');
+    // $data['suraths'] = $this->m_data->suratjalan('sj_user');
+    // $data['data_sales'] = $this->m_data->select_by_sales();
+    // $data['data_brand'] = $this->m_data->select_by_brand();
+    // $data['sales_color'] = json_encode($sales_color);
+    // $data['brand_color'] = json_encode($brand_color);
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('dashboard/v_index', $data);
-    $this->load->view('dashboard/v_footer', $data);
+    $this->load->view('dashboard/v_footer');
   }
 
   public function keluar()
