@@ -89,7 +89,8 @@
 					</div>
 				</div>
 				<div class="col-12 table-responsive-sm text-center">
-					<a href="<?php echo base_url() . 'sj/sj/' ?>" class="btn btn-default"><i class="fas fa-undo"></i> Back</a>
+					<a href="<?php echo base_url() . 'sj/sj/' ?>" class="btn btn-default"><i class="fas fa-undo"></i>
+						Back</a>
 				</div>
 			</div>
 			<?php endforeach; ?>

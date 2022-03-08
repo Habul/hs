@@ -166,16 +166,19 @@
 
 						<li <?= $this->uri->segment(2) == 'listing' ||
                   $this->uri->segment(2) == 'assembly' ||
+						$this->uri->uri_string() == 'listing/list_update' ||
                   $this->uri->segment(2) == 'listing_item' ||
                   $this->uri->segment(2) == 'listing_detail' ||                  
                   $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
 							<a href="#" <?= $this->uri->segment(2) == 'listing' ||
                             $this->uri->segment(2) == 'assembly' ||
+									 $this->uri->uri_string() == 'listing/list_update' ||
                             $this->uri->segment(2) == 'listing_item' ||
                             $this->uri->segment(2) == 'listing_detail' ||                            
                             $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 								<i class="nav-icon fas fa-briefcase"></i>
-								<span class="badge badge-warning right">6</span>
+								<?php $total = $this->db->where('status!=', '3')->get('listing')->num_rows(); ?>
+								<span class="badge badge-warning right"><?php echo $total; ?></span>
 								<p>Listing Qoutation
 									<i class=" fas fa-angle-left right"></i>
 								</p>
@@ -189,7 +192,7 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?php echo base_url() . 'listing/assembly' ?>" <?= $this->uri->segment(2) == 'listing/assembly' ||
+									<a href="<?php echo base_url() . 'listing/assembly' ?>" <?= $this->uri->segment(2) == 'assembly' ||
                                $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 										<i class="fas fa-drafting-compass nav-icon"></i>
 										<p>Assembly</p>
@@ -197,9 +200,10 @@
 								</li>
 								<li class="nav-item">
 									<a href="<?php echo base_url() . 'listing/listing' ?>" <?= $this->uri->segment(2) == 'listing' ||
+									 $this->uri->uri_string() == 'listing/list_update' ||
                                $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 										<i class="fas fa-clipboard nav-icon"></i>
-										<span class="badge badge-warning right">6</span>
+										<span class="badge badge-warning right"><?php echo $total; ?></span>
 										<p>Listing Qoutation</p>
 									</a>
 								</li>
