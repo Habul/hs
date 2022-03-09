@@ -19,13 +19,13 @@
 	<section class="content">
 		<div class="container-fluid">
 			<?php if ($this->session->flashdata('berhasil')) { ?>
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
 			</div>
 			<?php } ?>
 			<?php if ($this->session->flashdata('gagal')) { ?>
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
 			</div>
@@ -33,11 +33,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="callout callout-info">
-						<ul>
-							<li>ID : </li>
-							<li>Company Name : </li>
-							<li>Notes : </li>
-						</ul>
+						<?php foreach ($listing as $list) : ?>
+						<li>ID &emsp;&emsp;&emsp;: <b><?php echo $list->id_hs; ?></b></li>
+						<li>Company : <?php echo $list->company; ?></li>
+						<li>Notes&emsp;&emsp;: <?php echo $list->notes; ?></li>
 					</div>
 				</div>
 			</div>
@@ -67,7 +66,7 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<table id="index1" class="table table-bordered table-hover">
+							<table id="index1" class="table table-bordered table-striped">
 								<thead class="thead-dark" style="text-align:center">
 									<tr>
 										<th width="3%">No</th>
@@ -78,7 +77,11 @@
 										<th width="11%">Action</th>
 									</tr>
 								</thead>
-								<?php foreach ($qoutation as $p) { ?>
+								<?php 
+								$query = $this->db->where('id_listing', $list->id)->get('qoutation');
+								foreach ($query->result() as $p) {  
+									$sum_total[] = $p->price;
+									$total_qty = array_sum($sum_total); ?>
 								<tr>
 									<td style="text-align:center"></td>
 									<td><small class="badge badge-warning"><?php echo $p->id_assembly ?></small><br />
@@ -99,12 +102,17 @@
 									</td>
 								</tr>
 								<?php } ?>
+								<tr>
+									<td colspan="4" style="text-align:center"><b>Total<b></td>
+									<td colspan="2" style="text-align:center"><b><?php echo $total_qty; ?><b></td>
+								</tr>
 							</table>
 						</div>
-
 					</div>
 				</div>
 			</div>
+		</div>
+		<?php endforeach ?>
 	</section>
 </div>
 

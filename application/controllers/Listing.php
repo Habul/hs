@@ -92,21 +92,27 @@ class Listing extends CI_Controller
   {
     $id = $this->input->post('id'); {
       $where = array(
-        'no_po' => $id
+        'id' => $id
       );
       $this->m_data->delete_data($where, 'listing');
-      $this->m_data->delete_data($where, 'qoutation');
+      // $this->m_data->delete_data($where, 'qoutation');
       $this->session->set_flashdata('berhasil', 'Listing has been deleted !');
-      redirect(base_url() . 'sj/sj');
+      redirect(base_url() . 'listing/listing');
     }
   }
 
   public function list_update()
   {
+    $id = rawurldecode($this->encrypt->decode($_GET['list']));
+
+    $where = array(
+      'id' => $id
+    );
+
     $data['title'] = 'Create New List';
-    $data['listing'] = $this->m_data->get_data('listing')->result();
+    $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
+    $data['qoutation'] = $this->m_data->edit_data($where, 'qoutation')->result();
     $data['id_add'] = $this->db->select_max('id')->get('listing')->row();
-    $data['qoutation'] = $this->m_data->get_data('qoutation')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_detail', $data);
     $this->load->view('dashboard/v_footer');

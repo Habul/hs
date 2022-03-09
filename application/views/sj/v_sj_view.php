@@ -3,10 +3,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<?php foreach ($sj_user as $p) : ?>
-					<h1 class="m-0">Surat Jalan (No Po : <?php echo $p->no_po; ?>)</h1>
-					<small>Cust Name : <?php echo $p->cust_name ?> <br />
-						Address : <?php echo $p->address ?> </small>
+					<h1 class="m-0">Surat Jalan Detail</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -21,38 +18,49 @@
 
 	<section class="content">
 		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="callout callout-info">
+						<?php foreach ($sj_user as $p) : ?>
+						<li>No Do&emsp;&emsp;: <b><?php echo $p->no_delivery; ?></b></li>
+						<li>No Po&emsp;&emsp;: <b><?php echo $p->no_po; ?></b></li>
+						<li>Customer : <?php echo $p->cust_name; ?></li>
+						<li>Address &emsp;: <?php echo $p->address; ?></li>
+					</div>
+				</div>
+			</div>
 			<?php if ($this->session->flashdata('berhasil')) { ?>
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
 				<button type=" button" class="close" data-dismiss="alert">&times;</button>
 				<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
 			</div>
 			<?php } ?>
 			<?php if ($this->session->flashdata('gagal')) { ?>
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
 			</div>
 			<?php } ?>
 			<div class="row">
-				<div class="col-12 table-responsive-sm">
-					<a class="btn btn-success float-left shadow" data-toggle="modal" data-target="#modal_add">
-						<i class="fa fa-plus"></i>&nbsp; Add Order Delivery</a>
-					<?php $encrypturl = urlencode($this->encrypt->encode($p->no_po)) ?>
-					<a href="<?php echo base_url() . 'sj/sj_print/?p=' . $encrypturl ?>" rel="noopener" target="_blank"
-						class="btn btn-primary float-right shadow"><i class="fas fa-print"></i> Print Surat Jalan</a>
-				</div>
-				<br />
-				<br />
 				<div class="col-md-12">
 					<div class="card card-warning card-outline">
 						<div class="card-header">
-							<h4 class="card-title"><i class="fa fa-edit"></i> Surat Jalan HS</h4>
+							<h4 class="card-title">
+								<a class="btn btn-success shadow" data-toggle="modal" data-target="#modal_add">
+									<i class="fa fa-plus"></i>&nbsp; Add Order Delivery</a>
+								<?php $encrypturl = urlencode($this->encrypt->encode($p->no_po)) ?>
+								<a href="<?php echo base_url() . 'sj/sj_print/?p=' . $encrypturl ?>" rel="noopener"
+									target="_blank" class="btn btn-primary shadow"><i class="fas fa-print"></i> Print
+									Surat Jalan</a>
+							</h4>
 							<div class="card-tools">
-								<button type="button" class="btn btn-tool" data-card-widget="maximize">
-									<i class="fas fa-expand"></i>
-								</button>
-								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
+									data-card-widget="collapse">
 									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger"
+									data-card-widget="remove">
+									<i class="fas fa-times"></i>
 								</button>
 							</div>
 						</div>
@@ -67,9 +75,11 @@
 									</tr>
 								</thead>
 								<?php
-                $no = 1;
-                $query = $this->db->where('no_po', $p->no_po)->get('sj_hs');
-                foreach ($query->result() as $u) { ?>
+								$no = 1;
+								$query = $this->db->where('no_po', $p->no_po)->get('sj_hs');
+								foreach ($query->result() as $u) { 
+								$sum_total[] = $u->qty;
+								$total_qty = array_sum($sum_total); ?>
 								<tr>
 									<td style="text-align:center"><?php echo $no++; ?></td>
 									<td><?php echo $u->descript; ?></td>
@@ -84,11 +94,15 @@
 									</td>
 								</tr>
 								<?php } ?>
+								<tr>
+									<td colspan="2" style="text-align:center"><b>Total<b></td>
+									<td style="text-align:center"><b><?php echo $total_qty; ?><b></td>
+								</tr>
 							</table>
 						</div>
 					</div>
 				</div>
-				<div class="col-12 table-responsive-sm text-center">
+				<div class="col-12 table-responsive-sm text-center mb-3">
 					<a href="<?php echo base_url() . 'sj/sj/' ?>" class="btn btn-default"><i class="fas fa-undo"></i>
 						Back</a>
 				</div>

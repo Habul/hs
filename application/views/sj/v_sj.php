@@ -18,27 +18,24 @@
 	<section class="content">
 		<div class="container-fluid">
 			<?php if ($this->session->flashdata('berhasil')) { ?>
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
 				<button type=" button" class="close" data-dismiss="alert">&times;</button>
 				<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
 			</div>
 			<?php } ?>
 			<?php if ($this->session->flashdata('gagal')) { ?>
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
 			</div>
 			<?php } ?>
-			<div class="col-md-3 shadow" style="padding: 0;">
-				<a class=" form-control btn btn-success" data-toggle="modal" data-target="#modal_add_sj">
-					<i class="fa fa-plus"></i>&nbsp; Add SJ</a>
-			</div>
-			<br />
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card card-warning card-outline">
 						<div class="card-header">
-							<h4 class="card-title"><i class="fa fa-edit"></i> Delivery Orders HS</h4>
+							<h4 class="card-title">
+								<a class=" form-control btn btn-success" data-toggle="modal" data-target="#modal_add_sj">
+									<i class="fa fa-plus"></i>&nbsp; Create Delivery Order</a></h4>
 							<div class="card-tools">
 								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
 									data-card-widget="collapse">
@@ -99,7 +96,6 @@
 	</section>
 </div>
 
-
 <!-- modal add Sj -->
 <div class="modal fade" id="modal_add_sj" tabindex="-1" data-backdrop="static">
 	<div class="modal-dialog">
@@ -117,11 +113,9 @@
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">No Do *</label>
 						<div class="col-sm-10">
-							<?php
-              $cek = $this->db->select_max('no_id')->get('sj_user')->row();
-              ?>
+							<input type="hidden" name="id" class="form-control" value="<?php echo $id_add->no_id+1 ?>">
 							<input type="text" name="no_delivery" class="form-control"
-								value="<?php echo 'HS', date('Ymd-'), $cek->no_id + 1; ?>" readonly required>
+								value="<?php echo 'HS', date('Ymd-'), $id_add->no_id+1; ?>" readonly required>
 							<?php echo form_error('no_delivery'); ?>
 						</div>
 					</div>
