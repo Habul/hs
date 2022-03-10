@@ -30,7 +30,7 @@
 			<?php } ?>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="card card-warning card-outline">
+					<div class="card card-success card-outline">
 						<div class="card-header">
 							<h6 class="card-title"><a class="form-control btn btn-success col-15 shadow" data-toggle="modal"
 									data-target="#modal_add">

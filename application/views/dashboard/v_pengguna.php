@@ -37,13 +37,16 @@
 									data-target="#modal_add">
 									<i class="fa fa-plus"></i>&nbsp; Add user</a></h4>
 							<div class="card-tools">
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning" data-card-widget="collapse">
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
+									data-card-widget="collapse">
 									<i class="fas fa-minus"></i>
 								</button>
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-primary" data-card-widget="maximize">
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-primary"
+									data-card-widget="maximize">
 									<i class="fas fa-expand"></i>
 								</button>
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger" data-card-widget="remove">
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger"
+									data-card-widget="remove">
 									<i class="fas fa-times"></i>
 								</button>
 							</div>
@@ -117,7 +120,8 @@
 									<span><i class="fas fa-user-tie"></i></span>
 								</div>
 							</div>
-							<input type="text" name="nama" class="form-control" placeholder="Masukkan nama pengguna .." required>
+							<input type="text" name="nama" class="form-control" placeholder="Masukkan nama pengguna .."
+								required>
 							<?php echo form_error('nama'); ?>
 						</div>
 					</div>
@@ -128,7 +132,8 @@
 									<span><i class="fas fa-envelope-square"></i></span>
 								</div>
 							</div>
-							<input type="email" name="email" class="form-control" placeholder="Masukkan email pengguna .." required>
+							<input type="email" name="email" class="form-control" placeholder="Masukkan email pengguna .."
+								required>
 							<?php echo form_error('email'); ?>
 						</div>
 					</div>
@@ -245,7 +250,8 @@
 									<span><i class="fas fa-user"></i></span>
 								</div>
 							</div>
-							<input type="text" name="username" class="form-control" value="<?php echo $p->pengguna_username; ?>">
+							<input type="text" name="username" class="form-control"
+								value="<?php echo $p->pengguna_username; ?>">
 							<?php echo form_error('username'); ?>
 						</div>
 					</div>
@@ -256,7 +262,8 @@
 									<span><i class="fa fa-lock"></i></span>
 								</div>
 							</div>
-							<input type="password" class="form-control" name="password" placeholder="Masukan Password.." required>
+							<input type="password" class="form-control" name="password" placeholder="Masukan Password.."
+								required>
 							<?php echo form_error('password'); ?>
 						</div>
 						<small>Kosongkan jika tidak ingin mengubah password</small>

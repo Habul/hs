@@ -95,16 +95,16 @@
 										<small class="badge badge-info"><?php echo $p->thread ?></small>
 										<small class="badge badge-info"><?php echo $p->type ?></small>
 									</td>
-									<td style="text-align:center"><br /><?php echo $p->size ?></td>
-									<td style="text-align:center"><br /><?php echo $p->qty ?></td>
-									<td style="text-align:center"><br />
+									<td style="text-align:center"><?php echo $p->size ?></td>
+									<td style="text-align:center"><?php echo $p->qty ?></td>
+									<td style="text-align:center">
 										<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
 									</td>
-									<td style="text-align:center"><br />
-										<a class="btn-sm btn-warning" data-toggle="modal"
+									<td style="text-align:center">
+										<a class="btn btn-warning" data-toggle="modal"
 											data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
 												class="fa fa-pencil-alt"></i></a>
-										<a class="btn-sm btn-danger" data-toggle="modal"
+										<a class="btn btn-danger" data-toggle="modal"
 											data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
 												class="fa fa-trash"></i></a>
 									</td>
@@ -136,6 +136,7 @@
 	</section>
 </div>
 
+
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add_item" tabindex="-1" data-backdrop="static">
 	<div class="modal-dialog">
@@ -148,20 +149,18 @@
 				</h5>
 			</div>
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/create') ?>">
+				action="<?php echo base_url('listing/qoutation_save') ?>">
 				<div class="modal-body">
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Id</label>
 						<div class="col-sm-10">
-							<?php foreach ($listing as $u) : ?>
-							<input type="hidden" name="id" readonly class="form-control"
-								value="<?php echo $id_qoutation->id + 1; ?>">
-							<input type="text" name="id_hs" class="form-control" value="<?php echo $u->id_hs ?>" readonly>
-							<?php endforeach ?>
+							<input type="hidden" name="id" readonly class="form-control" value="<?php echo $cek->id + 1; ?>">
+							<input type="text" name="id_hs" class="form-control"
+								value="<?php echo 'HS', date('Ymd-'), $cek->id + 1; ?>" readonly>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Item*</label>
+						<label class="col-sm-2 col-form-label">Company*</label>
 						<div class="col-sm-10">
 							<input type="text" name="company" class="form-control" placeholder="Company Name.." required>
 						</div>
