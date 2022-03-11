@@ -65,7 +65,7 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<table id="example1" class="table table-bordered table-striped table-sm">
+							<table id="example2" class="table table-bordered table-hover table-sm">
 								<thead class="thead-dark" style="text-align:center">
 									<tr>
 										<th width="3%">No</th>
@@ -94,10 +94,18 @@
 									</td>
 								</tr>
 								<?php } ?>
-								<tr>
-									<td colspan="2" style="text-align:center"><b>Total<b></td>
-									<td style="text-align:center"><b><?php echo $total_qty; ?><b></td>
-								</tr>
+							</table>
+							<table class="table table-sm">
+								<thead class="thead-light">
+									<tr>
+										<th width="80%" style="text-align:center"><b>Total<b></th>
+										<th style="text-align:center">
+											<b><?php echo number_format($total_qty, 0, '.', '.'); ?><b>
+										</th>
+									</tr>
+								</thead>
+								<th></th>
+								<th></th>
 							</table>
 						</div>
 					</div>

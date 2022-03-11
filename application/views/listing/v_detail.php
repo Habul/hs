@@ -66,10 +66,10 @@
 							</div>
 						</div>
 						<div class="card-body table-responsive">
-							<table class="table table-bordered table-striped">
+							<table class="table table-bordered table-hover table-sm" id="example2">
 								<thead class="thead-dark" style="text-align:center">
 									<tr style="text-align:center">
-										<th width="3%">No</th>
+										<th width="5%">No</th>
 										<th>Category Type</th>
 										<th>Size</th>
 										<th>Qty</th>
@@ -100,36 +100,47 @@
 									<td style="text-align:center"><br />
 										<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
 									</td>
-									<td style="text-align:center"><br />
-										<a class="btn-sm btn-warning" data-toggle="modal"
+									<td style="text-align:center">
+										<a class="btn btn-warning" data-toggle="modal"
 											data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
 												class="fa fa-pencil-alt"></i></a>
-										<a class="btn-sm btn-danger" data-toggle="modal"
+										<a class="btn btn-danger" data-toggle="modal"
 											data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
 												class="fa fa-trash"></i></a>
 									</td>
 								</tr>
 								<?php } ?>
-								<tr>
-									<td colspan="4" style="text-align:center"><b>Total<b></td>
-									<td colspan="2" style="text-align:center">
-										<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
-									</td>
-								</tr>
 							</table>
+							<table class="table table-sm">
+								<thead class="thead-light">
+									<tr>
+										<th width="70%" style="text-align:center"><b>Total<b></th>
+										<th style="text-align:center">
+											<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
+										</th>
+									</tr>
+								</thead>
+								<th></th>
+								<th></th>
+							</table>
+						</div>
+						<div class="d-flex justify-content-around mb-3">
+							<a class=" btn btn-info col-15 shadow" href="">
+								<i class="fas fa-share"></i>&nbsp;Submit</a>
+							<a class="btn btn-warning col-15 shadow" href="">
+								<i class="fas fa-bullhorn"></i>&nbsp;Notice</a>
+							<a class="btn btn-success col-15 shadow" href="">
+								<i class="fas fa-lock"></i>&nbsp;Confrim</a>
+							<a class="btn btn-primary col-15 shadow" href="">
+								<i class="fas fa-print"></i>&nbsp;Print</a>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="d-flex justify-content-around mb-3">
-				<a class=" btn btn-info col-15 shadow" href="">
-					<i class="fas fa-share"></i>&nbsp; Submit List</a>
-				<a class="btn btn-warning col-15 shadow" href="">
-					<i class="fas fa-bullhorn"></i>&nbsp; Send Notice</a>
-				<a class="btn btn-success col-15 shadow" href="">
-					<i class="fas fa-lock"></i>&nbsp; Confrim Acceptance & Lock List</a>
-				<a class="btn btn-primary col-15 shadow" href="">
-					<i class="fas fa-print"></i>&nbsp; Print</a>
+				<div class="col-12 table-responsive-sm text-center mb-3">
+					<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i
+							class="fas fa-undo"></i>
+						Back</a>
+				</div>
 			</div>
 		</div>
 		<?php endforeach ?>
@@ -141,35 +152,38 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="col-12 modal-title text-center">Add Data
+				<h5 class="col-12 modal-title text-center">Add New Item
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</h5>
 			</div>
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/create') ?>">
+				action="<?php echo base_url('listing/qoutation_save') ?>">
 				<div class="modal-body">
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Id</label>
+						<label class="col-sm-2 col-form-label">Item</label>
 						<div class="col-sm-10">
-							<?php foreach ($listing as $u) : ?>
+							<?php foreach ($listing as $list) : ?>
 							<input type="hidden" name="id" readonly class="form-control"
 								value="<?php echo $id_qoutation->id + 1; ?>">
-							<input type="text" name="id_hs" class="form-control" value="<?php echo $u->id_hs ?>" readonly>
+							<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
+							<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
 							<?php endforeach ?>
+							<select name="" id='PickMAIN' class="form-control" required>
+								<option value="">- Choose Item -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Item*</label>
+						<label class="col-sm-2 col-form-label">Qty*</label>
 						<div class="col-sm-10">
-							<input type="text" name="company" class="form-control" placeholder="Company Name.." required>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Notes*</label>
-						<div class="col-sm-10">
-							<textarea type="text" name="notes" class="form-control" placeholder="Notes.." required></textarea>
+							<input type="number" name="company" class="form-control" min="1" placeholder="0" required>
 						</div>
 					</div>
 				</div>

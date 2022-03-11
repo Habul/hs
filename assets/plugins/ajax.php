@@ -126,13 +126,13 @@
       "searching": false
     })
     $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
+      "paging": false,
+      "lengthChange": true,
       "searching": false,
       "order": [
-        [2, "desc"]
+        [0, "asc"]
       ],
-      "info": true,
+      "info": false,
       "autoWidth": false,
       "responsive": true,
     });
@@ -434,5 +434,20 @@
     format: 'L',
     inline: true
   })
+
+</script>
+
+<script>
+  $(document).ready(function () {
+    $('#PickMAIN').on('change', function () {
+      var sel = $('#PickMAIN').val();
+      document.forms['fadditem']['hMAIN'].value = sel;
+      var link = '".$_SERVER['
+      // HTTP_REFERER ']."api/?api=getoptionitem&main=' + sel;
+      $.get(link, function (data, status) {
+        $('#dynamicmenu').html(data);
+      });
+    });
+  });
 
 </script>

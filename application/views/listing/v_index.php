@@ -51,7 +51,7 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<table id="index1" class="table table-bordered table-hover table-sm">
+							<table id="index1" class="table table-hover table-sm">
 								<thead class="thead-dark" style="text-align:center">
 									<tr>
 										<th width="3%">No</th>
@@ -70,14 +70,13 @@
 									<td style="text-align:center"><?php echo $p->notes ?></td>
 									<td style="text-align:center">
 										<?php if ($p->status == 1) : ?>
-										<span class="badge badge-info"><i class="fas fa-exclamation-triangle"></i> SUBMITED</span>
+										<span class="badge badge-info"><i class="fas fa-exclamation-circle"></i> SUBMITED</span>
 										<?php elseif ($p->status == 2) : ?>
 										<span class="badge badge-primary"><i class="fas fa-bell"></i> ACCEPTED</span>
 										<?php elseif ($p->status == 3) : ?>
-										<span class="badge badge-success"><i class="fas fa-check-circle"></i> CONFRIMED</span>
+										<span class="badge badge-success"><i class="fas fa-lock"></i> CONFRIMED</span>
 										<?php else : ?>
-										<span class="badge badge-warning"><i class="fas fa-exclamation-circle"></i> ON
-											PROSES</span>
+										<span class="badge badge-warning"><i class="fas fa-bullhorn"></i> NOTICE</span>
 										<?php endif; ?>
 									</td>
 									<td style="text-align:center">

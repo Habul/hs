@@ -59,8 +59,8 @@
 						<div class="card-header p-0 border-bottom-0">
 							<ul class="nav nav-tabs" role="tablist">
 								<li class="nav-item">
-									<a class="nav-link active" id="set_user" data-toggle="pill" href="#profile-settiing" role="tab"
-										aria-controls="profile-settiing" aria-selected="true">Profile</a>
+									<a class="nav-link active" id="set_user" data-toggle="pill" href="#profile-settiing"
+										role="tab" aria-controls="profile-settiing" aria-selected="true">Profile</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="set_pass" data-toggle="pill" href="#pass-setting" role="tab"
@@ -88,7 +88,8 @@
 											<label for="inputEmail" class="col-sm-2 col-form-label">Email *</label>
 											<div class="col-sm-10">
 												<input type="text" name="email" id="inputEmail" class="form-control"
-													placeholder="Masukkan email .." value="<?php echo $p->pengguna_email; ?>" required>
+													placeholder="Masukkan email .." value="<?php echo $p->pengguna_email; ?>"
+													required>
 												<?php echo form_error('email'); ?>
 											</div>
 										</div>

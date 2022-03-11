@@ -66,10 +66,10 @@
 							</div>
 						</div>
 						<div class="card-body table-responsive">
-							<table class="table table-bordered table-striped">
-								<thead class="thead-dark" style="text-align:center">
+							<table class="table table-bordered table-hover table-sm" id="example2">
+								<thead class="thead-light" style="text-align:center">
 									<tr style="text-align:center">
-										<th width="3%">No</th>
+										<th width="5%">No</th>
 										<th>Category Type</th>
 										<th>Size</th>
 										<th>Qty</th>
@@ -95,9 +95,9 @@
 										<small class="badge badge-info"><?php echo $p->thread ?></small>
 										<small class="badge badge-info"><?php echo $p->type ?></small>
 									</td>
-									<td style="text-align:center"><?php echo $p->size ?></td>
-									<td style="text-align:center"><?php echo $p->qty ?></td>
-									<td style="text-align:center">
+									<td style="text-align:center"><br /><?php echo $p->size ?></td>
+									<td style="text-align:center"><br /><?php echo $p->qty ?></td>
+									<td style="text-align:center"><br />
 										<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
 									</td>
 									<td style="text-align:center">
@@ -110,32 +110,40 @@
 									</td>
 								</tr>
 								<?php } ?>
-								<tr>
-									<td colspan="4" style="text-align:center"><b>Total<b></td>
-									<td colspan="2" style="text-align:center">
-										<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
-									</td>
-								</tr>
 							</table>
+							<table class="table table-sm">
+								<tr>
+									<th width="70%" style="text-align:center"><b>Total<b></th>
+									<th style="text-align:center">
+										<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
+									</th>
+								</tr>
+								<th></th>
+								<th></th>
+							</table>
+						</div>
+						<div class="d-flex justify-content-around mb-3">
+							<a class=" btn btn-info col-15 shadow" href="">
+								<i class="fas fa-share"></i>&nbsp;Submit</a>
+							<a class="btn btn-warning col-15 shadow" href="">
+								<i class="fas fa-bullhorn"></i>&nbsp;Notice</a>
+							<a class="btn btn-success col-15 shadow" href="">
+								<i class="fas fa-lock"></i>&nbsp;Confrim</a>
+							<a class="btn btn-primary col-15 shadow" href="">
+								<i class="fas fa-print"></i>&nbsp;Print</a>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="d-flex justify-content-around mb-3">
-				<a class=" btn btn-info col-15 shadow" href="">
-					<i class="fas fa-share"></i>&nbsp; Submit List</a>
-				<a class="btn btn-warning col-15 shadow" href="">
-					<i class="fas fa-bullhorn"></i>&nbsp; Send Notice</a>
-				<a class="btn btn-success col-15 shadow" href="">
-					<i class="fas fa-lock"></i>&nbsp; Confrim Acceptance & Lock List</a>
-				<a class="btn btn-primary col-15 shadow" href="">
-					<i class="fas fa-print"></i>&nbsp; Print</a>
+				<div class="col-12 table-responsive-sm text-center mb-3">
+					<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i
+							class="fas fa-undo"></i>
+						Back</a>
+				</div>
 			</div>
 		</div>
 		<?php endforeach ?>
 	</section>
 </div>
-
 
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add_item" tabindex="-1" data-backdrop="static">

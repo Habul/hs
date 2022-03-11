@@ -22,13 +22,13 @@
   <section class="content">
     <div class="container-fluid">
       <?php if ($this->session->flashdata('berhasil')) { ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
         </div>
       <?php } ?>
       <?php if ($this->session->flashdata('gagal')) { ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
         </div>

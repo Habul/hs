@@ -129,7 +129,6 @@ class Listing extends CI_Controller
     $data['title'] = 'Create New List';
     $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
     $data['qoutation'] = $this->m_data->edit_data($where, 'qoutation')->result();
-    $data['id_list'] = $this->db->select_max('id')->get('listing')->row();
     $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_detail', $data);
@@ -138,6 +137,7 @@ class Listing extends CI_Controller
 
   public function qoutation_save()
   {
-
+    $this->form_validation->set_rules('id_hs', 'ID HS', 'required');
+    $this->form_validation->set_rules('company', 'Company Name', 'required');
   }
 }
