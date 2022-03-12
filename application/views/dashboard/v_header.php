@@ -188,7 +188,7 @@
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?php echo base_url() . 'listing/listing_item' ?>" <?= $this->uri->segment(2) == 'listing/listing_item' ||
+									<a href="<?php echo base_url() . 'listing/listing_item' ?>" <?= $this->uri->segment(2) == 'listing_item' ||
                                $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 										<i class="fas fa-tools nav-icon"></i>
 										<p>Item</p>

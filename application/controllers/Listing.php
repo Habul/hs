@@ -140,4 +140,101 @@ class Listing extends CI_Controller
     $this->form_validation->set_rules('id_hs', 'ID HS', 'required');
     $this->form_validation->set_rules('company', 'Company Name', 'required');
   }
+
+  public function listing_item()
+  {
+    $data['title'] = 'Listing Item';
+    $data['brand'] = $this->m_data->get_data('list_brand')->result();
+    $data['total_brand']; $this->m_data->get_data('list_brand')->num_rows();
+    $this->load->view('dashboard/v_header', $data);
+    $this->load->view('listing/v_item', $data);
+    $this->load->view('dashboard/v_footer');
+  }
+
+  public function add_list_item()
+  {
+    $this->form_validation->set_rules('brand', 'Brand', 'required|is_unique[list_brand.brand]');
+
+    if ($this->form_validation->run() != false) {      
+      $brand = $this->input->post('brand');
+      $created_at = mdate('%Y-%m-%d %H:%i:%s');
+
+      $data = array(
+        'brand' => $brand,
+        'created_at' => $created_at
+      );
+
+      $this->m_data->insert_data($data, 'list_brand');
+      redirect(base_url() . 'listing/listing_item');
+      // $id = $this->input->post('id');
+      // $encrypt = urlencode($this->encrypt->encode($id));
+      // redirect(base_url() . 'listing/listing_item_detail/?item='.$encrypt);
+    } else {
+      $this->session->set_flashdata('gagal', 'Item failed to Add, Brand Duplicate Entry, Please repeat !');
+      redirect(base_url() . 'listing/listing_item');
+    }
+  }
+  
+  public function listing_item_detail()
+  {
+    $id = rawurldecode($this->encrypt->decode($_GET['item']));
+
+    $where = array(
+      'id' => $id
+    );
+
+    $data['title'] = 'List Item';
+    $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
+    $data['brand'] = $this->m_data->edit_data($where, 'list_brand')->result();
+    $data['item'] = $this->m_data->edit_data($where, '')->result();
+    $this->load->view('dashboard/v_header', $data);
+    $this->load->view('listing/v_item_detail', $data);
+    $this->load->view('dashboard/v_footer');
+  }
+
+  public function update_list_item()
+  {
+    $this->form_validation->set_rules('brand', 'Brand', 'required');
+    $this->form_validation->set_rules('id_brand', 'ID Brand', 'required');
+
+    if ($this->form_validation->run() != false) {
+      $id_brand = $this->input->post('id_brand');
+      $brand = $this->input->post('brand');
+      $category = $this->input->post('category');
+      $hole = $this->input->post('hole');
+      $i_d = $this->input->post('i_d');
+      $model = $this->input->post('model');
+      $od = $this->input->post('od');
+      $plat = $this->input->post('plat');
+      $size = $this->input->post('size');
+      $thread = $this->input->post('thread');
+      $type = $this->input->post('type');
+      $created_at = mdate('%Y-%m-%d %H:%i:%s');
+
+      $data = array(
+        'id_brand' => $id_brand,
+        'brand' => $brand,
+        'category' => $category,
+        'hole' => $hole,
+        'i_d' => $i_d,
+        'model' => $model,
+        'od' => $od,
+        'plat' => $plat,
+        'size' => $size,
+        'thread' => $thread,
+        'type' => $type,
+        'created_at' => $created_at
+      );
+
+      $this->m_data->insert_data($data, 'item');
+      $this->session->set_flashdata('berhasil', 'Update successfully, Brand : ' . $this->input->post('brand', TRUE) . ' !');
+      redirect(base_url() . 'listing/listing_item_detail');
+    } else {
+      $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+      redirect(base_url() . 'listing/listing_item_detail');
+    }
+  }
+
+  
+
 }
