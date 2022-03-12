@@ -168,6 +168,7 @@
 						$this->uri->segment(2) == 'list_update' ||
 						$this->uri->segment(2) == 'new_list' ||
                   $this->uri->segment(2) == 'listing_item' ||
+						$this->uri->segment(2) == 'listing_item_detail' ||
                   $this->uri->segment(2) == 'listing_detail' ||                  
                   $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
 							<a href="#" <?= $this->uri->segment(2) == 'listing' ||
@@ -175,6 +176,7 @@
 									 $this->uri->segment(2) == 'list_update' ||
 									 $this->uri->segment(2) == 'new_list' ||
                             $this->uri->segment(2) == 'listing_item' ||
+									 $this->uri->segment(2) == 'listing_item_detail' ||
                             $this->uri->segment(2) == 'listing_detail' ||                            
                             $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 								<i class="nav-icon fas fa-briefcase"></i>
@@ -189,6 +191,7 @@
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
 									<a href="<?php echo base_url() . 'listing/listing_item' ?>" <?= $this->uri->segment(2) == 'listing_item' ||
+										 $this->uri->segment(2) == 'listing_item_detail' ||
                                $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 										<i class="fas fa-tools nav-icon"></i>
 										<p>Item</p>

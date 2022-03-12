@@ -183,10 +183,13 @@ class Listing extends CI_Controller
       'id' => $id
     );
 
+    $where2 = array(
+      'id_brand' => $id
+    );
+
     $data['title'] = 'List Item';
-    $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
-    $data['brand'] = $this->m_data->edit_data($where, 'list_brand')->result();
-    $data['item'] = $this->m_data->edit_data($where, '')->result();
+    $data['listbrand'] = $this->m_data->edit_data($where, 'list_brand')->result();
+    $data['item'] = $this->m_data->edit_data($where2, 'item')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_item_detail', $data);
     $this->load->view('dashboard/v_footer');

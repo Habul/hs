@@ -3,12 +3,16 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0">Listing Item</h1>
+					<?php foreach ($listbrand as $b) { ?>
+					<h1 class="m-0">Listing Item <?php echo ucfirst($b->brand) ?></h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">Listing Item</li>
+						<li class="breadcrumb-item"><a href="<?php echo base_url('listing/listing_item') ?>">List Item</a>
+						</li>
+						<li class="breadcrumb-item active">Listing Item <?php echo ucwords($b->brand) ?>
+						</li>
 					</ol>
 				</div>
 			</div>
@@ -29,7 +33,6 @@
 			</div>
 			<?php } ?>
 			<div class="row">
-				<?php foreach ($brand as $u) { ?>
 				<div class="col-md-12">
 					<div class="card card-success card-outline">
 						<div class="card-header">
@@ -62,16 +65,16 @@
 										<th>ID</th>
 										<th>Model</th>
 										<th>OD</th>
-										<th>plat</th>
-										<th>size</th>
-										<th>thread</th>
-										<th>type</th>
+										<th>Plat</th>
+										<th>Size</th>
+										<th>Thread</th>
+										<th>Type</th>
 										<th width="11%">Action</th>
 									</tr>
 								</thead>
 								<?php
-								$query = $this->db->where('id_brand', $u->id)->get('item');
-								foreach ($query->result() as $u) { ?>
+								$query = $this->db->where('id_brand', $b->id)->get('item');
+								foreach ($query->result() as $p) { ?>
 								<tr>
 									<td style="text-align:center"></td>
 									<td><?php echo strtoupper($p->brand) ?></td>
@@ -100,7 +103,7 @@
 					</div>
 				</div>
 				<div class="col-12 table-responsive-sm text-center mb-3">
-					<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i
+					<a href="<?php echo base_url() . 'listing/listing_item' ?>" class="btn btn-default"><i
 							class="fas fa-undo"></i>
 						Back</a>
 				</div>
@@ -108,3 +111,36 @@
 			</div>
 	</section>
 </div>
+
+<!-- Bootstrap modal add -->
+<div class="modal fade" id="modal_add" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="col-12 modal-title text-center">Create New Item
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h5>
+			</div>
+			<form onsubmit="addbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('listing/add_list_item_detail') ?>">
+				<div class="modal-body">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Brand</label>
+						<div class="col-sm-10">
+							<?php foreach ($listbrand as $b) { ?>
+							<input type="text" name="brand" class="form-control" value="<?php echo $b->brand ?>" required>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--End Modals Add-->
