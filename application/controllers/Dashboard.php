@@ -364,7 +364,7 @@ class Dashboard extends CI_Controller
 
   public function contact()
   {
-    $data['title'] = 'Contact IT';
+    $data['title'] = 'Contact';
     $data['it'] = $this->m_data->get_data('kontak')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('dashboard/v_contact', $data);
@@ -396,16 +396,16 @@ class Dashboard extends CI_Controller
 
       $this->m_data->insert_data($data, 'kontak');
 
-      if (!empty($_FILES['file']['name'])) {
+      if (!empty($_FILES['foto']['name'])) {
 
         $config['upload_path']   = './gambar/contact/';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['overwrite']  = true;
-        $config['max_size']     = 5072;
+        $config['max_size']     = 2048;
 
         $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload('file')) {
+        if ($this->upload->do_upload('foto')) {
           $gambar = $this->upload->data();
 
           $id = $this->input->post('no_id');
@@ -453,22 +453,22 @@ class Dashboard extends CI_Controller
 
       $this->m_data->update_data($where, $data, 'kontak');
 
-      if (!empty($_FILES['file']['name'])) {
+      if (!empty($_FILES['foto']['name'])) {
 
         $config['upload_path']   = './gambar/contact/';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['overwrite']  = true;
-        $config['max_size']     = 5072;
+        $config['max_size']     = 2048;
 
         $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload('file')) {
+        if ($this->upload->do_upload('foto')) {
           $gambar = $this->upload->data();
 
-          $id = $this->input->post('id_user');
+          $id = $this->input->post('id');
           $file = $gambar['file_name'];
 
-          $this->db->query("UPDATE kontak SET foto='$file' WHERE no_id='$id'");
+          $this->db->query("UPDATE kontak SET foto='$file' WHERE id_user='$id'");
         }
       }
       $this->session->set_flashdata('berhasil', 'Edit contact successfully, Name : ' . $this->input->post('nama', TRUE) . ' !');

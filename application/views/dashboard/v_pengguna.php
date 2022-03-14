@@ -65,8 +65,8 @@
 									</tr>
 								</thead>
 								<?php
-                foreach ($pengguna as $p) {
-                ?>
+									foreach ($pengguna as $p) {
+									?>
 								<tr>
 									<td style="text-align:center"></td>
 									<td><?php echo strtoupper($p->pengguna_nama) ?></td>

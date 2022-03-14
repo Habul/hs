@@ -15,79 +15,40 @@
 		</div>
 	</div>
 	<section class="content">
+		<?php if ($this->session->flashdata('berhasil')) { ?>
+		<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
+		</div>
+		<?php } ?>
+		<?php if ($this->session->flashdata('gagal')) { ?>
+		<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
+		</div>
+		<?php } ?>
 		<div class="container-fluid">
-			<?php if ($this->session->flashdata('berhasil')) { ?>
-			<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
-			</div>
-			<?php } ?>
-			<?php if ($this->session->flashdata('gagal')) { ?>
-			<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
-			</div>
-			<?php } ?>
 			<div class="row">
-				<?php foreach ($brand as $b) { ?>
-				<div class="col-lg-3 col-6">
-					<div class="small-box bg-success">
-						<div class="inner">
-							<h3>15</h3>
-							<p><b><?php echo strtoupper($b->brand) ?></b></p>
-						</div>
-						<div class="icon">
-							<i class="fas fa-toolbox"></i>
-						</div>
-						<?php $encrypturl = urlencode($this->encrypt->encode($b->id)) ?>
-						<a href="<?php echo base_url() . 'listing/listing_item_detail/?item='. $encrypturl ?>"
-							class="small-box-footer">
-							View Detail <i class="fas fa-arrow-circle-right"></i>
-						</a>
-					</div>
-				</div>
-				<?php } ?>
 				<div class="card-deck">
-					<div class="card">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-								additional content. This content is a little bit longer.</p>
+					<?php foreach ($listitem as $b) { 
+					$encrypturl = urlencode($this->encrypt->encode($b->id)) ?>
+					<a href="<?php echo base_url() . 'listing/listing_item_detail/?item='. $encrypturl ?>">
+						<div class="card mb-3" style="width:17rem;">
+							<img src="<?php echo base_url() . 'gambar/brand/'. $b->foto ?>" class="card-img-top rounded"
+								onerror="this.style.display='none'">
+							<div class="card-body">
+								<h5 class="card-title text-center text-muted"><b><?php echo strtoupper($b->nama)?></b></h5>
+							</div>
 						</div>
-						<div class="card-footer">
-							<small class="text-muted">Last updated 3 mins ago</small>
-						</div>
-					</div>
-					<div class="card">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This card has supporting text below as a natural lead-in to additional
-								content.</p>
-						</div>
-						<div class="card-footer">
-							<small class="text-muted">Last updated 3 mins ago</small>
-						</div>
-					</div>
-					<div class="card">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-								additional content. This card has even longer content than the first to show that equal height
-								action.</p>
-						</div>
-						<div class="card-footer">
-							<small class="text-muted">Last updated 3 mins ago</small>
-						</div>
-					</div>
+					</a>
+					<?php } ?>
+				</div>
+				<div class="col-md-3 mb-3 shadow" style="padding: 0;">
+					<a class=" form-control btn btn-info" data-toggle="modal" data-target="#modal_add">
+						<i class="fa fa-plus"></i>&nbsp; Add Item</a>
 				</div>
 			</div>
-			<div class="col-md-3 shadow" style="padding: 0;">
-				<a class=" form-control btn btn-default" data-toggle="modal" data-target="#modal_add">
-					<i class="fa fa-plus"></i>&nbsp; Add Item</a>
-			</div>
+		</div>
 	</section>
 </div>
 
@@ -103,12 +64,22 @@
 				</h5>
 			</div>
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/add_list_item') ?>">
+				action="<?php echo base_url('listing/add_list_item') ?>" enctype="multipart/form-data">
 				<div class="modal-body">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Brand</label>
-						<div class="col-sm-10">
-							<input type="text" name="brand" class="form-control" required>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-tools nav-icon"></i></span>
+							</div>
+							<input type="hidden" name="id" class="form-control" value="<?php echo $add_id->id+1 ?>">
+							<input type="text" name="nama" class="form-control" placeholder="Input Item.." required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="customFile" name="foto">
+							<label class="custom-file-label" for="customFile">Choose file</label>
+							<small>*Max size 1 Mb</small>
 						</div>
 					</div>
 				</div>

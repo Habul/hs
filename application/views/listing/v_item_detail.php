@@ -3,15 +3,15 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<?php foreach ($listbrand as $b) { ?>
-					<h1 class="m-0">Listing Item <?php echo ucfirst($b->brand) ?></h1>
+					<?php foreach ($listitem as $b) { ?>
+					<h1 class="m-0">Listing Item <b><?php echo ucfirst($b->nama) ?></b></h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
 						<li class="breadcrumb-item"><a href="<?php echo base_url('listing/listing_item') ?>">List Item</a>
 						</li>
-						<li class="breadcrumb-item active">Listing Item <?php echo ucwords($b->brand) ?>
+						<li class="breadcrumb-item active">Listing Item <?php echo ucwords($b->nama) ?>
 						</li>
 					</ol>
 				</div>
@@ -111,36 +111,3 @@
 			</div>
 	</section>
 </div>
-
-<!-- Bootstrap modal add -->
-<div class="modal fade" id="modal_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="col-12 modal-title text-center">Create New Item
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</h5>
-			</div>
-			<form onsubmit="addbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/add_list_item_detail') ?>">
-				<div class="modal-body">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Brand</label>
-						<div class="col-sm-10">
-							<?php foreach ($listbrand as $b) { ?>
-							<input type="text" name="brand" class="form-control" value="<?php echo $b->brand ?>" required>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!--End Modals Add-->

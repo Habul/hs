@@ -144,8 +144,8 @@ class Listing extends CI_Controller
   public function listing_item()
   {
     $data['title'] = 'Listing Item';
-    $data['brand'] = $this->m_data->get_data('list_brand')->result();
-    $data['total_brand']; $this->m_data->get_data('list_brand')->num_rows();
+    $data['listitem'] = $this->m_data->get_data('list_item')->result();
+    $data['add_id'] =  $this->db->select_max('id')->get('list_item')->row();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_item', $data);
     $this->load->view('dashboard/v_footer');
@@ -153,24 +153,42 @@ class Listing extends CI_Controller
 
   public function add_list_item()
   {
-    $this->form_validation->set_rules('brand', 'Brand', 'required|is_unique[list_brand.brand]');
-
+    $this->form_validation->set_rules('nama', 'Nama', 'required|is_unique[list_item.nama]');
     if ($this->form_validation->run() != false) {      
-      $brand = $this->input->post('brand');
+      $id = $this->input->post('id');
+      $nama = $this->input->post('nama');
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
 
       $data = array(
-        'brand' => $brand,
+        'id' => $id,
+        'nama' => $nama,
         'created_at' => $created_at
       );
 
-      $this->m_data->insert_data($data, 'list_brand');
+      $this->m_data->insert_data($data, 'list_item');
+
+      if (!empty($_FILES['foto']['name'])) {
+        $config['upload_path']   = './gambar/brand/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['overwrite']  = true;
+        $config['max_size']     = 1024;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('foto')) {
+          $gambar = $this->upload->data();
+          $id = $this->input->post('id');
+          $file = $gambar['file_name'];
+
+          $this->db->query("UPDATE list_item SET foto='$file' WHERE id='$id'");
+        }
+      }
       redirect(base_url() . 'listing/listing_item');
       // $id = $this->input->post('id');
       // $encrypt = urlencode($this->encrypt->encode($id));
       // redirect(base_url() . 'listing/listing_item_detail/?item='.$encrypt);
     } else {
-      $this->session->set_flashdata('gagal', 'Item failed to Add, Brand Duplicate Entry, Please repeat !');
+      $this->session->set_flashdata('gagal', 'Item failed to Add, Item Duplicate Entry, Please repeat !');
       redirect(base_url() . 'listing/listing_item');
     }
   }
@@ -188,7 +206,7 @@ class Listing extends CI_Controller
     );
 
     $data['title'] = 'List Item';
-    $data['listbrand'] = $this->m_data->edit_data($where, 'list_brand')->result();
+    $data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
     $data['item'] = $this->m_data->edit_data($where2, 'item')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_item_detail', $data);

@@ -91,8 +91,8 @@
 					</button>
 				</h4>
 			</div>
-			<form class="form-horizontal" onsubmit="addbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('dashboard/contact_add') ?>">
+			<form onsubmit="addbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('dashboard/contact_add') ?>" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="form-group">
 						<div class="input-group">
@@ -162,8 +162,8 @@
 					</button>
 				</h4>
 			</div>
-			<form class="form-horizontal" onsubmit="editbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('dashboard/contact_edit') ?>">
+			<form onsubmit="editbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('dashboard/contact_edit') ?>" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="form-group">
 						<div class="input-group">
