@@ -33,81 +33,166 @@
 			</div>
 			<?php } ?>
 			<div class="row">
-				<div class="col-md-12">
-					<div class="card card-success card-outline">
+				<div class="col-md-6">
+					<div class="card card-success">
 						<div class="card-header">
-							<h6 class="card-title"><a class="form-control btn btn-success col-15 shadow" data-toggle="modal"
-									data-target="#modal_add">
-									<i class="fa fa-plus"></i>&nbsp; Create New List</a></h6>
+							<h4 class="card-title"><i class="fa fa-tools"></i> Brand</h4>
 							<div class="card-tools">
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
-									data-card-widget="collapse">
-									<i class="fas fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-primary"
-									data-card-widget="maximize">
+								<button type="button" class="btn btn-tool" data-card-widget="maximize">
 									<i class="fas fa-expand"></i>
 								</button>
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger"
-									data-card-widget="remove">
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool" data-card-widget="remove">
 									<i class="fas fa-times"></i>
 								</button>
 							</div>
 						</div>
 						<div class="card-body">
-							<table id="index1" class="table table-hover table-sm">
+							<table id="example9" class="table table-hover table-sm">
 								<thead class="thead-dark" style="text-align:center">
 									<tr>
-										<th width="3%">No</th>
-										<th width="10%">Brand</th>
-										<th>Category</th>
-										<th>hole</th>
-										<th>ID</th>
-										<th>Model</th>
-										<th>OD</th>
-										<th>Plat</th>
-										<th>Size</th>
-										<th>Thread</th>
-										<th>Type</th>
-										<th width="11%">Action</th>
+										<th>No</th>
+										<th>Nama</th>
+										<th width="16%">Action</th>
 									</tr>
 								</thead>
 								<?php
-								$query = $this->db->where('id_brand', $b->id)->get('item');
+								$no = 1;
+								$query = $this->db->where('id_item', $b->id_item)->get('item_brand');
 								foreach ($query->result() as $p) { ?>
-								<tr>
-									<td style="text-align:center"></td>
-									<td><?php echo strtoupper($p->brand) ?></td>
-									<td style="text-align:center"><?php echo strtoupper($p->category) ?></td>
-									<td style="text-align:center"><?php echo $p->hole ?></td>
-									<td style="text-align:center"><?php echo $p->i_d ?></td>
-									<td style="text-align:center"><?php echo $p->model ?></td>
-									<td style="text-align:center"><?php echo $p->od ?></td>
-									<td style="text-align:center"><?php echo $p->plat ?></td>
-									<td style="text-align:center"><?php echo $p->size ?></td>
-									<td style="text-align:center"><?php echo $p->thread ?></td>
-									<td style="text-align:center"><?php echo $p->type ?></td>
+								<tr id="example9" style="text-align:center">
+									<td><?php echo $no++ ?></td>
+									<td><?php echo strtoupper($p->nama) ?></td>
 									<td style="text-align:center">
-										<?php $encrypturl = urlencode($this->encrypt->encode($p->id)) ?>
 										<a class="btn-sm btn-warning" data-toggle="modal"
-											data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
-												class="fa fa-pencil-alt"></i></a>
+											data-target="#modal_edit<?php echo $p->no_id; ?>" title="Edit"><i
+												class="fa fa-edit"></i></a>
 										<a class="btn-sm btn-danger" data-toggle="modal"
-											data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
+											data-target="#modal_hapus<?php echo $p->no_id; ?>" title="Delete"><i
 												class="fa fa-trash"></i></a>
 									</td>
 								</tr>
 								<?php } ?>
 							</table>
 						</div>
+						<div class="card-body row">
+							<div class="col-md-4">
+								<button class="btn btn-success btn-block" data-toggle="modal" data-target="#modal_add">
+									<i class="fa fa-plus"></i> Add New Brand</button>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="col-12 table-responsive-sm text-center mb-3">
-					<a href="<?php echo base_url() . 'listing/listing_item' ?>" class="btn btn-default"><i
-							class="fas fa-undo"></i>
-						Back</a>
+
+				<div class="col-md-6">
+					<div class="card card-info">
+						<div class="card-header">
+							<h4 class="card-title"><i class="fa fa-tools"></i> Type</h4>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="maximize">
+									<i class="fas fa-expand"></i>
+								</button>
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool" data-card-widget="remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<table id="example10" class="table table-hover table-sm">
+								<thead class="thead-dark" style="text-align:center">
+									<tr>
+										<th>No</th>
+										<th>Nama</th>
+										<th width="16%">Action</th>
+									</tr>
+								</thead>
+								<?php
+								$no = 1;
+								$query = $this->db->where('id_item', $u->no_id)->get('item_type');
+								foreach ($query->result() as $p) { ?>
+								<tr>
+									<td><?php echo $no++ ?></td>
+									<td style="text-align:center"><?php echo strtoupper($p->nama) ?></td>
+									<td style="text-align:center">
+										<a class="btn-sm btn-warning" data-toggle="modal"
+											data-target="#history_edit<?php echo $p->no_id; ?>" title="Edit"><i
+												class="fa fa-edit"></i></a>
+										<a class="btn-sm btn-danger" data-toggle="modal"
+											data-target="#history_hapus<?php echo $p->no_id; ?>" title="Delete"><i
+												class="fa fa-trash"></i></a>
+									</td>
+								</tr>
+								<?php } ?>
+							</table>
+						</div>
+						<div class="card-body row">
+							<div class="col-md-4">
+								<button class="btn btn-info btn-block" data-toggle="modal" data-target="#add_history">
+									<i class="fa fa-plus"></i> Add New Type</button>
+							</div>
+						</div>
+					</div>
 				</div>
-				<?php } ?>
+
+				<div class="col-md-6">
+					<div class="card card-warning">
+						<div class="card-header">
+							<h4 class="card-title"><i class="fa fa-tools"></i> Size</h4>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="maximize">
+									<i class="fas fa-expand"></i>
+								</button>
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool" data-card-widget="remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<table id="example10" class="table table-hover table-sm">
+								<thead class="thead-dark" style="text-align:center">
+									<tr>
+										<th>No</th>
+										<th>Nama</th>
+										<th width="16%">Action</th>
+									</tr>
+								</thead>
+								<?php
+								$no = 1;
+								$query = $this->db->where('id_item', $u->no_id)->get('item_size');
+								foreach ($query->result() as $p) { ?>
+								<tr>
+									<td><?php echo $no++ ?></td>
+									<td style="text-align:center"><?php echo strtoupper($p->nama) ?></td>
+									<td style="text-align:center">
+										<a class="btn-sm btn-warning" data-toggle="modal"
+											data-target="#history_edit<?php echo $p->no_id; ?>" title="Edit"><i
+												class="fa fa-edit"></i></a>
+										<a class="btn-sm btn-danger" data-toggle="modal"
+											data-target="#history_hapus<?php echo $p->no_id; ?>" title="Delete"><i
+												class="fa fa-trash"></i></a>
+									</td>
+								</tr>
+								<?php } ?>
+							</table>
+						</div>
+						<div class="card-body row">
+							<div class="col-md-4">
+								<button class="btn btn-info btn-block" data-toggle="modal" data-target="#add_history">
+									<i class="fa fa-plus"></i> Add New Size</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>
+		<?php } ?>
 	</section>
 </div>

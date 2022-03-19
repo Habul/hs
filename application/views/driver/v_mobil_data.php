@@ -61,18 +61,20 @@
 									</tr>
 								</thead>
 								<?php
-                $no = 1;
-                $query = $this->db->where('join_id', $u->no_id)->get('driver');
-                foreach ($query->result() as $p) { ?>
+								$no = 1;
+								$query = $this->db->where('join_id', $u->no_id)->get('driver');
+								foreach ($query->result() as $p) { ?>
 								<tr id="example9" style="text-align:center">
 									<td><?php echo strtoupper($p->nama) ?></td>
 									<td><?php echo $p->tanggal; ?></td>
 									<td><?php echo number_format($p->odometer, 0, '.', '.'); ?>&nbsp;Km</td>
 									<td style="text-align:center">
-										<a class="btn-sm btn-warning" data-toggle="modal" data-target="#modal_edit<?php echo $p->no_id; ?>"
-											title="Edit"><i class="fa fa-edit"></i></a>
-										<a class="btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus<?php echo $p->no_id; ?>"
-											title="Delete"><i class="fa fa-trash"></i></a>
+										<a class="btn-sm btn-warning" data-toggle="modal"
+											data-target="#modal_edit<?php echo $p->no_id; ?>" title="Edit"><i
+												class="fa fa-edit"></i></a>
+										<a class="btn-sm btn-danger" data-toggle="modal"
+											data-target="#modal_hapus<?php echo $p->no_id; ?>" title="Delete"><i
+												class="fa fa-trash"></i></a>
 									</td>
 								</tr>
 								<?php } ?>
@@ -119,10 +121,12 @@
 								<tr>
 									<td><?php echo strtoupper($p->jenis) ?></td>
 									<td style="text-align:center"><?php echo $p->tanggal; ?></td>
-									<td style="text-align:center"><?php echo number_format($p->odometer, 0, '.', '.'); ?>&nbsp;Km</td>
+									<td style="text-align:center"><?php echo number_format($p->odometer, 0, '.', '.'); ?>&nbsp;Km
+									</td>
 									<td style="text-align:center">
 										<a class="btn-sm btn-warning" data-toggle="modal"
-											data-target="#history_edit<?php echo $p->no_id; ?>" title="Edit"><i class="fa fa-edit"></i></a>
+											data-target="#history_edit<?php echo $p->no_id; ?>" title="Edit"><i
+												class="fa fa-edit"></i></a>
 										<a class="btn-sm btn-danger" data-toggle="modal"
 											data-target="#history_hapus<?php echo $p->no_id; ?>" title="Delete"><i
 												class="fa fa-trash"></i></a>
@@ -177,14 +181,16 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Tanggal</label>
 						<div class="col-xs-9">
-							<input type="date" name="tanggal" readonly class="form-control" value="<?php echo mdate("%Y-%m-%d"); ?>">
+							<input type="date" name="tanggal" readonly class="form-control"
+								value="<?php echo mdate("%Y-%m-%d"); ?>">
 							<?php echo form_error('tanggal'); ?>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Odometer *</label>
 						<div class="col-xs-9">
-							<input type="number" name="odometer" min="1" class="form-control" placeholder="Input Odometer.." required>
+							<input type="number" name="odometer" min="1" class="form-control" placeholder="Input Odometer.."
+								required>
 							<?php echo set_value('odometer'); ?>
 						</div>
 					</div>
@@ -226,13 +232,15 @@
 						<div class="col-xs-9">
 							<input type="hidden" name="no_id" class="form-control" value="<?php echo $p->no_id; ?>">
 							<input type="hidden" name="join_id" class="form-control" value="<?php echo $p->join_id; ?>">
-							<input type="date" name="tanggal" readonly class="form-control" value="<?php echo mdate("%Y-%m-%d"); ?>">
+							<input type="date" name="tanggal" readonly class="form-control"
+								value="<?php echo mdate("%Y-%m-%d"); ?>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Merk *</label>
 						<div class="col-xs-9">
-							<input type="text" name="odometer" class="form-control" value="<?php echo $p->odometer; ?>" required>
+							<input type="text" name="odometer" class="form-control" value="<?php echo $p->odometer; ?>"
+								required>
 							<?php echo form_error('odometer'); ?>
 						</div>
 					</div>

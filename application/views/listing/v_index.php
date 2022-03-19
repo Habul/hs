@@ -30,55 +30,48 @@
 			<?php } ?>
 			<div class="card card-solid">
 				<div class="card-header">
-					<h6 class="card-title"><a class="form-control btn btn-success col-15 shadow" data-toggle="modal"
-							data-target="#modal_add">
-							<i class="fa fa-plus"></i>&nbsp; Create New List</a></h6>
-					<div class="card-tools">
-						<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning" data-card-widget="collapse">
-							<i class="fas fa-minus"></i>
-						</button>
-						<button type="button" class="btn btn-xs btn-icon btn-circle btn-primary" data-card-widget="maximize">
-							<i class="fas fa-expand"></i>
-						</button>
-						<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger" data-card-widget="remove">
-							<i class="fas fa-times"></i>
-						</button>
-					</div>
-				</div>
-				<div class="card-body pb-0">
-					<div class="row row-cols-1 row-cols-md-2 g-4">
-						<?php foreach ($listing as $list) { ?>
-						<div class="col">
-							<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
-							<a href="<?php echo base_url() . 'listing/list_update/?list=' . $encrypturl; ?>"
-								class="text-muted">
-								<?php if ($list->status == 1) : ?> <div class="card bg-warning shadow">
-									<?php elseif ($list->status == 2) : ?> <div class="card bg-info shadow">
-										<?php elseif ($list->status == 3) : ?> <div class="card bg-success shadow">
-											<?php else : ?> <div class="card bg-default shadow">
-												<?php endif; ?>
-												<div class="card-body">
-													<span class="float-left list-inline-item"><?php echo $list->id_hs ?></span>
-													<span
-														class="float-right list-inline-item"><?php echo strtoupper($list->company) ?></span><br />
-													<span class="float-left list-inline-item">
-														<i class='fas fa-user'></i>&nbsp;&nbsp;<?php echo ucwords($list->user) ?>
-													</span>
-													<span class="float-right list-inline-item"><?php echo $list->created_at ?></span>
-												</div>
-											</div>
-							</a>
-						</div>
-						<?php } ?>
-					</div>
+					<form action="" class="card-title">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="Serach.." name="serach">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="submit">Search</button>
+							</div>
+					</form>
 				</div>
 			</div>
-			<div class="col-md-3 mb-3 shadow" style="padding: 0;">
-				<a class="form-control btn btn-block btn-outline-success" data-toggle="modal" data-target="#modal_add">
-					<i class="fa fa-plus"></i>&nbsp; Create New List</a>
+			<div class="card-body pb-0">
+				<div class="row row-cols-1 row-cols-md-2 g-4">
+					<?php foreach ($listing as $list) { ?>
+					<div class="col">
+						<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
+						<a href="<?php echo base_url() . 'listing/list_update/?list=' . $encrypturl; ?>" class="text-muted">
+							<?php if ($list->status == 1) : ?> <div class="card bg-warning shadow">
+								<?php elseif ($list->status == 2) : ?> <div class="card bg-info shadow">
+									<?php elseif ($list->status == 3) : ?> <div class="card bg-success shadow">
+										<?php else : ?> <div class="card bg-default shadow">
+											<?php endif; ?>
+											<div class="card-body">
+												<span class="float-left list-inline-item"><?php echo $list->id_hs ?></span>
+												<span
+													class="float-right list-inline-item"><?php echo strtoupper($list->company) ?></span><br />
+												<span class="float-left list-inline-item">
+													<i class='fas fa-user'></i>&nbsp;&nbsp;<?php echo ucwords($list->user) ?>
+												</span>
+												<span class="float-right list-inline-item"><?php echo $list->created_at ?></span>
+											</div>
+										</div>
+						</a>
+					</div>
+					<?php } ?>
+				</div>
 			</div>
 		</div>
-	</section>
+		<div class="col-md-3 mb-3 shadow" style="padding: 0;">
+			<a class="form-control btn btn-block btn-outline-success" data-toggle="modal" data-target="#modal_add">
+				<i class="fa fa-plus"></i>&nbsp; Create New List</a>
+		</div>
+</div>
+</section>
 </div>
 
 <!-- Bootstrap modal add -->

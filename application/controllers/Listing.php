@@ -152,48 +152,6 @@ class Listing extends CI_Controller
     $this->load->view('listing/v_item', $data);
     $this->load->view('dashboard/v_footer');
   }
-
-  public function add_list_item()
-  {
-    $this->form_validation->set_rules('nama', 'Nama', 'required|is_unique[list_item.nama]');
-    if ($this->form_validation->run() != false) {      
-      $id = $this->input->post('id');
-      $nama = $this->input->post('nama');
-      $created_at = mdate('%Y-%m-%d %H:%i:%s');
-
-      $data = array(
-        'id' => $id,
-        'nama' => $nama,
-        'created_at' => $created_at
-      );
-
-      $this->m_data->insert_data($data, 'list_item');
-
-      if (!empty($_FILES['foto']['name'])) {
-        $config['upload_path']   = './gambar/brand/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['overwrite']  = true;
-        $config['max_size']     = 1024;
-
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('foto')) {
-          $gambar = $this->upload->data();
-          $id = $this->input->post('id');
-          $file = $gambar['file_name'];
-
-          $this->db->query("UPDATE list_item SET foto='$file' WHERE id='$id'");
-        }
-      }
-      redirect(base_url() . 'listing/listing_item');
-      // $id = $this->input->post('id');
-      // $encrypt = urlencode($this->encrypt->encode($id));
-      // redirect(base_url() . 'listing/listing_item_detail/?item='.$encrypt);
-    } else {
-      $this->session->set_flashdata('gagal', 'Item failed to Add, Item Duplicate Entry, Please repeat !');
-      redirect(base_url() . 'listing/listing_item');
-    }
-  }
   
   public function listing_item_detail()
   {
@@ -204,12 +162,21 @@ class Listing extends CI_Controller
     );
 
     $where2 = array(
-      'id_brand' => $id
+      'id_item' => $id
     );
 
-    $data['title'] = 'List Item';
+    $data['title'] = 'List Item Detail';
     $data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
-    $data['item'] = $this->m_data->edit_data($where2, 'item')->result();
+    $data['item_brand'] = $this->m_data->edit_data($where2, 'item_brand')->result();
+    $data['item_category'] = $this->m_data->edit_data($where2, 'item_category')->result();
+    $data['item_hole'] = $this->m_data->edit_data($where2, 'item_hole')->result();
+    $data['item_id'] = $this->m_data->edit_data($where2, 'item_id')->result();
+    $data['item_model'] = $this->m_data->edit_data($where2, 'item_model')->result();
+    $data['item_od'] = $this->m_data->edit_data($where2, 'item_od')->result();
+    $data['item_plat'] = $this->m_data->edit_data($where2, 'item_plat')->result();
+    $data['item_size'] = $this->m_data->edit_data($where2, 'item_size')->result();
+    $data['item_thread'] = $this->m_data->edit_data($where2, 'item_thread')->result();
+    $data['item_type'] = $this->m_data->edit_data($where2, 'item_type')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_item_detail', $data);
     $this->load->view('dashboard/v_footer');
