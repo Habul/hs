@@ -19,7 +19,7 @@ class Listing extends CI_Controller
   public function listing()
   {
     $data['title'] = 'Listing Qoutation';
-    $data['listing'] = $this->m_data->get_data('listing')->result();
+    $data['listing'] = $this->db->order_by('created_at', 'desc')->get('listing')->result();
     $data['id_add'] = $this->db->select_max('id')->get('listing')->row();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_index', $data);
@@ -38,12 +38,14 @@ class Listing extends CI_Controller
       $company = $this->input->post('company');
       $notes = $this->input->post('notes');
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
+      $user = $this->session->userdata('username');
 
       $data = array(
         'id' => $id,
         'id_hs' => $id_hs,
         'company' => $company,
         'notes' => $notes,
+        'user' => $user,
         'created_at' => $created_at
       );
 

@@ -28,56 +28,76 @@
 				<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
 			</div>
 			<?php } ?>
-			<div class="card card-solid">
-				<div class="card-header">
-					<h6 class="card-title"><a class="form-control btn btn-success col-15 shadow" data-toggle="modal"
-							data-target="#modal_add">
-							<i class="fa fa-plus"></i>&nbsp; Create New List</a></h6>
-					<div class="card-tools">
-						<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning" data-card-widget="collapse">
-							<i class="fas fa-minus"></i>
-						</button>
-						<button type="button" class="btn btn-xs btn-icon btn-circle btn-primary" data-card-widget="maximize">
-							<i class="fas fa-expand"></i>
-						</button>
-						<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger" data-card-widget="remove">
-							<i class="fas fa-times"></i>
-						</button>
-					</div>
-				</div>
-				<div class="card-body pb-0">
-					<div class="row row-cols-1 row-cols-md-2 g-4">
-						<?php foreach ($listing as $list) { ?>
-						<div class="col">
-							<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
-							<a href="<?php echo base_url() . 'listing/list_update/?list=' . $encrypturl; ?>"
-								class="text-muted">
-								<?php if ($list->status == 1) : ?> <div class="card bg-warning shadow">
-									<?php elseif ($list->status == 2) : ?> <div class="card bg-info shadow">
-										<?php elseif ($list->status == 3) : ?> <div class="card bg-success shadow">
-											<?php else : ?> <div class="card bg-default shadow">
-												<?php endif; ?>
-												<div class="card-body">
-													<span class="float-left list-inline-item"><?php echo $list->id_hs ?></span>
-													<span
-														class="float-right list-inline-item"><?php echo strtoupper($list->company) ?></span><br />
-													<span class="float-left list-inline-item">
-														<i class='fas fa-user'></i>&nbsp;&nbsp;<?php echo ucwords($list->user) ?>
-													</span>
-													<span class="float-right list-inline-item"><?php echo $list->created_at ?></span>
-												</div>
-											</div>
-							</a>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-success card-outline">
+						<div class="card-header">
+							<h6 class="card-title"><a class="form-control btn btn-success col-15 shadow" data-toggle="modal"
+									data-target="#modal_add">
+									<i class="fa fa-plus"></i>&nbsp; Create New List</a></h6>
+							<div class="card-tools">
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
+									data-card-widget="collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-primary"
+									data-card-widget="maximize">
+									<i class="fas fa-expand"></i>
+								</button>
+								<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger"
+									data-card-widget="remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
 						</div>
-						<?php } ?>
+						<div class="card-body">
+							<table id="index1" class="table table-hover table-sm">
+								<thead class="thead-dark" style="text-align:center">
+									<tr>
+										<th width="3%">No</th>
+										<th width="10%">Id</th>
+										<th>Company Name</th>
+										<th>Notes</th>
+										<th>Status</th>
+										<th width="11%">Action</th>
+									</tr>
+								</thead>
+								<?php foreach ($listing as $p) { ?>
+								<tr>
+									<td style="text-align:center"></td>
+									<td><?php echo strtoupper($p->id_hs) ?></td>
+									<td style="text-align:center"><?php echo strtoupper($p->company) ?></td>
+									<td style="text-align:center"><?php echo $p->notes ?></td>
+									<td style="text-align:center">
+										<?php if ($p->status == 1) : ?>
+										<span class="badge badge-info"><i class="fas fa-exclamation-circle"></i> SUBMITED</span>
+										<?php elseif ($p->status == 2) : ?>
+										<span class="badge badge-primary"><i class="fas fa-bell"></i> ACCEPTED</span>
+										<?php elseif ($p->status == 3) : ?>
+										<span class="badge badge-success"><i class="fas fa-lock"></i> CONFRIMED</span>
+										<?php else : ?>
+										<span class="badge badge-warning"><i class="fas fa-bullhorn"></i> NOTICE</span>
+										<?php endif; ?>
+									</td>
+									<td style="text-align:center">
+										<?php $encrypturl = urlencode($this->encrypt->encode($p->id)) ?>
+										<a class="btn-sm btn-warning" data-toggle="modal"
+											data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
+												class="fa fa-pencil-alt"></i></a>
+										<a href="<?php echo base_url() . 'listing/list_update/?list=' . $encrypturl; ?>"
+											class="btn-sm btn-primary" title="Edit, Detail & Print"><i class=" fa
+											fa-search"></i></a>
+										<a class="btn-sm btn-danger" data-toggle="modal"
+											data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
+												class="fa fa-trash"></i></a>
+									</td>
+								</tr>
+								<?php } ?>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 mb-3 shadow" style="padding: 0;">
-				<a class="form-control btn btn-block btn-outline-success" data-toggle="modal" data-target="#modal_add">
-					<i class="fa fa-plus"></i>&nbsp; Create New List</a>
-			</div>
-		</div>
 	</section>
 </div>
 
