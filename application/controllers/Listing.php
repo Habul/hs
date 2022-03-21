@@ -182,49 +182,83 @@ class Listing extends CI_Controller
     $this->load->view('dashboard/v_footer');
   }
 
-  public function update_list_item()
+  public function add_brand()
   {
-    $this->form_validation->set_rules('brand', 'Brand', 'required');
-    $this->form_validation->set_rules('id_brand', 'ID Brand', 'required');
+    $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
+    $this->form_validation->set_rules('nama', 'name', 'required');
 
     if ($this->form_validation->run() != false) {
-      $id_brand = $this->input->post('id_brand');
-      $brand = $this->input->post('brand');
-      $category = $this->input->post('category');
-      $hole = $this->input->post('hole');
-      $i_d = $this->input->post('i_d');
-      $model = $this->input->post('model');
-      $od = $this->input->post('od');
-      $plat = $this->input->post('plat');
-      $size = $this->input->post('size');
-      $thread = $this->input->post('thread');
-      $type = $this->input->post('type');
+      $id_item = $this->input->post('id_item');
+      $nama = $this->input->post('nama');
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
 
       $data = array(
-        'id_brand' => $id_brand,
-        'brand' => $brand,
-        'category' => $category,
-        'hole' => $hole,
-        'i_d' => $i_d,
-        'model' => $model,
-        'od' => $od,
-        'plat' => $plat,
-        'size' => $size,
-        'thread' => $thread,
-        'type' => $type,
+        'id_item' => $id_item,
+        'nama' => $nama,
         'created_at' => $created_at
       );
 
-      $this->m_data->insert_data($data, 'item');
-      $this->session->set_flashdata('berhasil', 'Update successfully, Brand : ' . $this->input->post('brand', TRUE) . ' !');
-      redirect(base_url() . 'listing/listing_item_detail');
+      $this->m_data->insert_data($data, 'item_brand');
+      $this->session->set_flashdata('berhasil', 'Add successfully, Brand : ' . $this->input->post('nama', TRUE) . ' !');
+      $id = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
     } else {
       $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
-      redirect(base_url() . 'listing/listing_item_detail');
+      $id = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
     }
   }
 
-  
+  public function edit_brand()
+  {
+    $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
+    $this->form_validation->set_rules('nama', 'name', 'required');
+
+    if ($this->form_validation->run() != false) {
+      $id = $this->input->post('id');
+      $id_item = $this->input->post('id_item');
+      $nama = $this->input->post('nama');
+      $created_at = mdate('%Y-%m-%d %H:%i:%s');
+
+      $where = array(
+        'id' => $id
+      );
+
+      $data = array(
+        'id_item' => $id_item,
+        'nama' => $nama,
+        'created_at' => $created_at
+      );
+
+      $this->m_data->update_data($where, $data, 'item_brand');
+      $this->session->set_flashdata('berhasil', 'Update successfully, Brand : ' . $this->input->post('nama', TRUE) . ' !');
+      $id = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+    } else {
+      $this->session->set_flashdata('gagal', 'Data failed to update, Please repeat !');
+      $id = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+    }
+  }
+
+  public function del_brand()
+  {
+    $id_del = $this->input->post('id'); 
+    $id = $this->input->post('id_item'); 
+    {
+      $where = array(
+        'id' => $id_del
+      );
+      $this->m_data->delete_data($where, 'item_brand');
+      $this->session->set_flashdata('berhasil', 'Data has been deleted !');
+      $id = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+    }
+  }  
 
 }

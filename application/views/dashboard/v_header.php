@@ -49,7 +49,6 @@
 		</div>
 
 		<nav class="main-header navbar navbar-expand navbar-light navbar-light">
-
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -66,11 +65,6 @@
 
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a class="nav-link" data-widget="fullscreen" href="#" role="button">
-						<i class="fas fa-expand-arrows-alt"></i>
-					</a>
-				</li>
-				<li class="nav-item">
 					<div class="theme-switch-wrapper nav-link">
 						<label class="theme-switch" for="checkbox">
 							<input type="checkbox" id="checkbox" title="Dark Mode" />
@@ -79,7 +73,7 @@
 					</div>
 				</li>
 
-				<li class="nav-item dropdown user-menu ">
+				<li class="nav-item dropdown user-menu">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
 						<img src="<?php echo base_url() . 'gambar/profile/' . $this->session->userdata('foto'); ?>"
 							class="user-image img-circle elevation-2" alt="User Image">
@@ -93,6 +87,7 @@
 							<p>
 								<?php echo $this->session->userdata('nama');  ?>
 								<small><?php echo $this->session->userdata('level');  ?></small>
+								<small id='hclock'><?php mdate('%Y-%m-%d %H:%i:%s') ?></small>
 							</p>
 						</li>
 						<li class="user-footer">
@@ -123,6 +118,7 @@
 						<a href="<?php echo base_url() . 'dashboard/profil' ?>"
 							class="d-block"><?php echo $this->session->userdata('nama');  ?></a>
 					</div>
+
 				</div>
 
 				<div class="form-inline">
