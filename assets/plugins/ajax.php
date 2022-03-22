@@ -120,30 +120,31 @@
 
   $(function () {
     $("#example1").DataTable({
+      "paging": true,
+      "searching": false,
       "responsive": true,
       "lengthChange": false,
-      "autoWidth": true,
-      "searching": false
+      "autoWidth": false,
+      "ordering": false,
+      "info": false,
     })
     $('#example2').DataTable({
-      "paging": false,
-      "lengthChange": true,
+      "paging": true,
       "searching": false,
-      "order": [
-        [0, "asc"]
-      ],
-      "info": false,
-      "autoWidth": false,
       "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "ordering": false,
+      "info": false,
     });
     $('#example3').DataTable({
       "paging": true,
+      "searching": false,
       "responsive": true,
-      "lengthChange": true,
+      "lengthChange": false,
       "autoWidth": false,
-      "order": [
-        [2, "desc"]
-      ]
+      "ordering": false,
+      "info": false,
     });
     $("#example4").DataTable({
       "responsive": true,
@@ -165,69 +166,77 @@
     }).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
     $('#example5').DataTable({
       "paging": true,
+      "searching": false,
       "responsive": true,
-      "lengthChange": true,
+      "lengthChange": false,
       "autoWidth": false,
-      "ordering": true
+      "ordering": false,
+      "info": false,
     });
     $('#example6').DataTable({
       "paging": true,
+      "searching": false,
       "responsive": true,
-      "lengthChange": true,
+      "lengthChange": false,
       "autoWidth": false,
-      "order": [
-        [0, "desc"]
-      ]
+      "ordering": false,
+      "info": false,
     });
     $('#example7').DataTable({
       "paging": true,
-      "lengthChange": false,
       "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": true,
       "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "ordering": false,
+      "info": false,
     });
     $('#example8').DataTable({
       "paging": true,
+      "searching": false,
       "responsive": true,
-      "lengthChange": true,
+      "lengthChange": false,
       "autoWidth": false,
-      "ordering": true
+      "ordering": false,
+      "info": false,
     });
     $('#example9').DataTable({
       "paging": true,
+      "searching": false,
       "responsive": true,
-      "lengthChange": true,
+      "lengthChange": false,
       "autoWidth": false,
-      "order": [
-        [1, "desc"]
-      ]
+      "ordering": false,
+      "info": false,
     });
     $('#example10').DataTable({
       "paging": true,
+      "searching": false,
       "responsive": true,
-      "lengthChange": true,
+      "lengthChange": false,
       "autoWidth": false,
-      "order": [
-        [1, "desc"]
-      ]
+      "ordering": false,
+      "info": false,
     });
     $('#example11').DataTable({
       "paging": true,
+      "searching": false,
       "responsive": true,
-      "lengthChange": true,
+      "lengthChange": false,
       "autoWidth": false,
-      "order": [
-        [7, "desc"]
-      ]
+      "ordering": false,
+      "info": false,
     });
     $('#example12').DataTable({
-      "paging": true,
-      "responsive": true,
+      "paging": false,
       "lengthChange": true,
+      "searching": false,
+      "order": [
+        [0, "asc"]
+      ],
+      "info": false,
       "autoWidth": false,
-      "ordering": true
+      "responsive": true,
     });
   });
 

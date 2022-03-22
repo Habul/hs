@@ -66,7 +66,7 @@
 							</div>
 						</div>
 						<div class="card-body table-responsive">
-							<table class="table table-bordered table-hover table-sm" id="example2">
+							<table class="table table-bordered table-hover table-sm" id="example12">
 								<thead class="thead-dark" style="text-align:center">
 									<tr style="text-align:center">
 										<th width="5%">No</th>

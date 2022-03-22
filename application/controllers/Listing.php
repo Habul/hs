@@ -182,7 +182,7 @@ class Listing extends CI_Controller
     $this->load->view('dashboard/v_footer');
   }
 
-  public function add_brand()
+  public function add_item()
   {
     $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
     $this->form_validation->set_rules('nama', 'name', 'required');
@@ -191,6 +191,7 @@ class Listing extends CI_Controller
       $id_item = $this->input->post('id_item');
       $nama = $this->input->post('nama');
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
+      $jenis = $this->input->post('jenis');
 
       $data = array(
         'id_item' => $id_item,
@@ -198,8 +199,8 @@ class Listing extends CI_Controller
         'created_at' => $created_at
       );
 
-      $this->m_data->insert_data($data, 'item_brand');
-      $this->session->set_flashdata('berhasil', 'Add successfully, Brand : ' . $this->input->post('nama', TRUE) . ' !');
+      $this->m_data->insert_data($data, $jenis);
+      $this->session->set_flashdata('berhasil', 'Add successfully ' . $this->input->post('nama', TRUE) . ' !');
       $id = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
@@ -211,7 +212,7 @@ class Listing extends CI_Controller
     }
   }
 
-  public function edit_brand()
+  public function edit_item()
   {
     $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
     $this->form_validation->set_rules('nama', 'name', 'required');
@@ -221,6 +222,7 @@ class Listing extends CI_Controller
       $id_item = $this->input->post('id_item');
       $nama = $this->input->post('nama');
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
+      $jenis = $this->input->post('jenis');
 
       $where = array(
         'id' => $id
@@ -232,8 +234,8 @@ class Listing extends CI_Controller
         'created_at' => $created_at
       );
 
-      $this->m_data->update_data($where, $data, 'item_brand');
-      $this->session->set_flashdata('berhasil', 'Update successfully, Brand : ' . $this->input->post('nama', TRUE) . ' !');
+      $this->m_data->update_data($where, $data, $jenis);
+      $this->session->set_flashdata('berhasil', 'Update successfully ' . $this->input->post('nama', TRUE) . ' !');
       $id = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
@@ -245,15 +247,16 @@ class Listing extends CI_Controller
     }
   }
 
-  public function del_brand()
+  public function del_item()
   {
     $id_del = $this->input->post('id'); 
-    $id = $this->input->post('id_item'); 
+    $id = $this->input->post('id_item');
+    $jenis = $this->input->post('jenis');
     {
       $where = array(
         'id' => $id_del
       );
-      $this->m_data->delete_data($where, 'item_brand');
+      $this->m_data->delete_data($where, $jenis);
       $this->session->set_flashdata('berhasil', 'Data has been deleted !');
       $id = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id));

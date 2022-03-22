@@ -32,7 +32,7 @@
 				<div class="card-header">
 					<form action="" class="card-title">
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Serach.." name="serach">
+							<input type="text" class="form-control" placeholder="Search.." name="search">
 							<div class="input-group-append">
 								<button class="btn btn-outline-secondary" type="submit">Search</button>
 							</div>
