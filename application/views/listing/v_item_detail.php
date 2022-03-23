@@ -564,10 +564,10 @@
 									<td><?php echo strtoupper($p->nama) ?></td>
 									<td>
 										<a class="btn-sm btn-warning" data-toggle="modal"
-											data-target="#thread_edit<?php echo $p->no_id; ?>" title="Edit">
+											data-target="#thread_edit<?php echo $p->id; ?>" title="Edit">
 											<i class="fa fa-edit"></i></a>
 										<a class="btn-sm btn-danger" data-toggle="modal"
-											data-target="#thread_hapus<?php echo $p->no_id; ?>" title="Delete">
+											data-target="#thread_del<?php echo $p->id; ?>" title="Delete">
 											<i class="fa fa-trash"></i></a>
 									</td>
 								</tr>
@@ -591,7 +591,7 @@
 
 <!-- modal brand -->
 <div class="modal fade" id="brand_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Brand
@@ -603,15 +603,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_brand">
-							<input type="text" name="nama" class="form-control" placeholder="Input Brand.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Brand</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_brand">
+						<input type="text" name="nama" class="form-control" placeholder="...." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -624,7 +624,7 @@
 </div>
 <?php foreach ($item_brand as $brand) : ?>
 <div class="modal fade" id="brand_edit<?php echo $brand->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Brand
@@ -636,16 +636,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<input type="hidden" name="id" class="form-control" value="<?php echo $brand->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_brand">
-							<input type="text" name="nama" class="form-control" value="<?php echo $brand->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Brand</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<input type="hidden" name="id" class="form-control" value="<?php echo $brand->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_brand">
+						<input type="text" name="nama" class="form-control" value="<?php echo $brand->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -657,7 +657,7 @@
 	</div>
 </div>
 <div class="modal fade" id="brand_del<?php echo $brand->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Brand
@@ -674,7 +674,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="jenis" class="form-control" value="item_brand">
 					<input type="hidden" name="id" value="<?php echo $brand->id; ?>">
-					<p>Are you sure delete <?php echo $brand->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $brand->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -689,7 +689,7 @@
 
 <!-- modal type -->
 <div class="modal fade" id="type_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Type
@@ -701,15 +701,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_type">
-							<input type="text" name="nama" class="form-control" placeholder="Input Type.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Type</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_type">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -722,7 +722,7 @@
 </div>
 <?php foreach ($item_type as $type) : ?>
 <div class="modal fade" id="type_edit<?php echo $type->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Type
@@ -734,16 +734,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<input type="hidden" name="id" class="form-control" value="<?php echo $type->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_type">
-							<input type="text" name="nama" class="form-control" value="<?php echo $type->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Type</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<input type="hidden" name="id" class="form-control" value="<?php echo $type->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_type">
+						<input type="text" name="nama" class="form-control" value="<?php echo $type->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -755,7 +755,7 @@
 	</div>
 </div>
 <div class="modal fade" id="type_del<?php echo $type->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Type
@@ -772,7 +772,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $type->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_type">
-					<p>Are you sure delete <?php echo $type->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $type->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -787,7 +787,7 @@
 
 <!-- modal size -->
 <div class="modal fade" id="size_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Size
@@ -799,15 +799,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_size">
-							<input type="text" name="nama" class="form-control" placeholder="Input Size.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Size</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_size">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -820,7 +820,7 @@
 </div>
 <?php foreach ($item_size as $size) : ?>
 <div class="modal fade" id="size_edit<?php echo $size->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Size
@@ -832,16 +832,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<input type="hidden" name="id" class="form-control" value="<?php echo $size->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_size">
-							<input type="text" name="nama" class="form-control" value="<?php echo $size->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Size</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<input type="hidden" name="id" class="form-control" value="<?php echo $size->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_size">
+						<input type="text" name="nama" class="form-control" value="<?php echo $size->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -853,10 +853,10 @@
 	</div>
 </div>
 <div class="modal fade" id="size_del<?php echo $size->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
-				<h4 class="col-12 modal-title text-center">Delete Type
+				<h4 class="col-12 modal-title text-center">Delete Size
 					<button class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -870,7 +870,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $size->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_size">
-					<p>Are you sure delete <?php echo $size->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $size->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -885,7 +885,7 @@
 
 <!-- modal model -->
 <div class="modal fade" id="model_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Model
@@ -897,15 +897,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_model">
-							<input type="text" name="nama" class="form-control" placeholder="Input Model.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Model</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_model">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -918,7 +918,7 @@
 </div>
 <?php foreach ($item_model as $model) : ?>
 <div class="modal fade" id="model_edit<?php echo $model->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Model
@@ -930,16 +930,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<input type="hidden" name="id" class="form-control" value="<?php echo $model->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_model">
-							<input type="text" name="nama" class="form-control" value="<?php echo $model->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Model</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<input type="hidden" name="id" class="form-control" value="<?php echo $model->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_model">
+						<input type="text" name="nama" class="form-control" value="<?php echo $model->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -951,10 +951,10 @@
 	</div>
 </div>
 <div class="modal fade" id="model_del<?php echo $model->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
-				<h4 class="col-12 modal-title text-center">Delete Type
+				<h4 class="col-12 modal-title text-center">Delete Model
 					<button class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -968,7 +968,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $model->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_model">
-					<p>Are you sure delete <?php echo $model->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $model->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -983,7 +983,7 @@
 
 <!-- modal OD -->
 <div class="modal fade" id="od_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Od
@@ -995,15 +995,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_od">
-							<input type="text" name="nama" class="form-control" placeholder="Input Od.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Od</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_od">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1016,7 +1016,7 @@
 </div>
 <?php foreach ($item_od as $od) : ?>
 <div class="modal fade" id="od_edit<?php echo $od->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Od
@@ -1028,16 +1028,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $od->id; ?>">
-							<input type="hidden" name="jenis" class="form-control" value="item_od">
-							<input type="text" name="nama" class="form-control" value="<?php echo $od->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Od</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $od->id; ?>">
+						<input type="hidden" name="jenis" class="form-control" value="item_od">
+						<input type="text" name="nama" class="form-control" value="<?php echo $od->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1049,7 +1049,7 @@
 	</div>
 </div>
 <div class="modal fade" id="od_del<?php echo $od->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Od
@@ -1066,7 +1066,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $od->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_model">
-					<p>Are you sure delete <?php echo $od->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $od->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -1081,7 +1081,7 @@
 
 <!-- modal Category -->
 <div class="modal fade" id="category_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Category
@@ -1093,15 +1093,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_category">
-							<input type="text" name="nama" class="form-control" placeholder="Input Category.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Category</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_category">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1114,7 +1114,7 @@
 </div>
 <?php foreach ($item_category as $category) : ?>
 <div class="modal fade" id="category_edit<?php echo $category->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Category
@@ -1126,16 +1126,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $category->id; ?>">
-							<input type="hidden" name="jenis" class="form-control" value="item_category">
-							<input type="text" name="nama" class="form-control" value="<?php echo $category->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Category</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $category->id; ?>">
+						<input type="hidden" name="jenis" class="form-control" value="item_category">
+						<input type="text" name="nama" class="form-control" value="<?php echo $category->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1147,7 +1147,7 @@
 	</div>
 </div>
 <div class="modal fade" id="category_del<?php echo $category->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Category
@@ -1164,7 +1164,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $category->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_category">
-					<p>Are you sure delete <?php echo $category->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $category->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -1179,7 +1179,7 @@
 
 <!-- modal hole -->
 <div class="modal fade" id="hole_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Hole
@@ -1191,15 +1191,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_hole">
-							<input type="text" name="nama" class="form-control" placeholder="Input Hole.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Hole</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_hole">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1212,7 +1212,7 @@
 </div>
 <?php foreach ($item_hole as $hole) : ?>
 <div class="modal fade" id="hole_edit<?php echo $hole->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Hole
@@ -1224,16 +1224,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $hole->id; ?>">
-							<input type="hidden" name="jenis" class="form-control" value="item_hole">
-							<input type="text" name="nama" class="form-control" value="<?php echo $hole->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Hole</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $hole->id; ?>">
+						<input type="hidden" name="jenis" class="form-control" value="item_hole">
+						<input type="text" name="nama" class="form-control" value="<?php echo $hole->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1245,7 +1245,7 @@
 	</div>
 </div>
 <div class="modal fade" id="hole_del<?php echo $hole->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Hole
@@ -1262,7 +1262,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $hole->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_hole">
-					<p>Are you sure delete <?php echo $hole->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $hole->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -1277,7 +1277,7 @@
 
 <!-- modal Id -->
 <div class="modal fade" id="id_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Id
@@ -1289,15 +1289,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_id">
-							<input type="text" name="nama" class="form-control" placeholder="Input Id.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Id</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_id">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1310,7 +1310,7 @@
 </div>
 <?php foreach ($item_id as $id) : ?>
 <div class="modal fade" id="id_edit<?php echo $id->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Id
@@ -1322,16 +1322,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $id->id; ?>">
-							<input type="hidden" name="jenis" class="form-control" value="item_id">
-							<input type="text" name="nama" class="form-control" value="<?php echo $id->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Id</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $id->id; ?>">
+						<input type="hidden" name="jenis" class="form-control" value="item_id">
+						<input type="text" name="nama" class="form-control" value="<?php echo $id->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1343,7 +1343,7 @@
 	</div>
 </div>
 <div class="modal fade" id="id_del<?php echo $id->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Id
@@ -1360,7 +1360,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $id->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_id">
-					<p>Are you sure delete <?php echo $id->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $id->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -1375,7 +1375,7 @@
 
 <!-- modal plat -->
 <div class="modal fade" id="plat_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Plat
@@ -1387,15 +1387,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_plat">
-							<input type="text" name="nama" class="form-control" placeholder="Input Plat.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Plat</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_plat">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1408,7 +1408,7 @@
 </div>
 <?php foreach ($item_plat as $plat) : ?>
 <div class="modal fade" id="plat_edit<?php echo $plat->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Plat
@@ -1420,16 +1420,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $plat->id; ?>">
-							<input type="hidden" name="jenis" class="form-control" value="item_plat">
-							<input type="text" name="nama" class="form-control" value="<?php echo $plat->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Plat</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $plat->id; ?>">
+						<input type="hidden" name="jenis" class="form-control" value="item_plat">
+						<input type="text" name="nama" class="form-control" value="<?php echo $plat->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1441,7 +1441,7 @@
 	</div>
 </div>
 <div class="modal fade" id="plat_del<?php echo $plat->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Plat
@@ -1458,7 +1458,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $plat->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_plat">
-					<p>Are you sure delete <?php echo $plat->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $plat->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
@@ -1473,7 +1473,7 @@
 
 <!-- modal thread -->
 <div class="modal fade" id="thread_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Thread
@@ -1485,15 +1485,15 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/add_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="jenis" class="form-control" value="item_thread">
-							<input type="text" name="nama" class="form-control" placeholder="Input Thread.." required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Thread</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_thread">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1506,7 +1506,7 @@
 </div>
 <?php foreach ($item_thread as $thread) : ?>
 <div class="modal fade" id="thread_edit<?php echo $thread->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Plat
@@ -1518,16 +1518,16 @@
 			<form onsubmit="editbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/edit_item') ?>">
 				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nama</label>
-						<div class="col-xs-9">
-							<?php foreach ($listitem as $u) : ?>
-							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
-							<?php endforeach; ?>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $thread->id; ?>">
-							<input type="hidden" name="jenis" class="form-control" value="item_thread">
-							<input type="text" name="nama" class="form-control" value="<?php echo $thread->nama ?>" required>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Thread</span>
 						</div>
+						<?php foreach ($listitem as $u) : ?>
+						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $thread->id; ?>">
+						<input type="hidden" name="jenis" class="form-control" value="item_thread">
+						<input type="text" name="nama" class="form-control" value="<?php echo $thread->nama ?>" required>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -1539,7 +1539,7 @@
 	</div>
 </div>
 <div class="modal fade" id="thread_del<?php echo $thread->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Delete Thread
@@ -1556,7 +1556,7 @@
 					<?php endforeach ?>
 					<input type="hidden" name="id" value="<?php echo $thread->id; ?>">
 					<input type="hidden" name="jenis" class="form-control" value="item_thread">
-					<p>Are you sure delete <?php echo $thread->nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $thread->nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>

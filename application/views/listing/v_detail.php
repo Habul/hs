@@ -161,17 +161,32 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/qoutation_save') ?>">
 				<div class="modal-body">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Item</label>
-						<div class="col-sm-10">
-							<?php foreach ($listing as $list) : ?>
-							<input type="hidden" name="id" readonly class="form-control"
-								value="<?php echo $id_qoutation->id + 1; ?>">
-							<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
-							<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
-							<?php endforeach ?>
-							<select name="" id='PickMAIN' class="form-control" required>
-								<option value="">- Choose Item -</option>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text pr-4">Item&nbsp;</span>
+						</div>
+						<?php foreach ($listing as $list) : ?>
+						<input type="hidden" name="id" readonly class="form-control"
+							value="<?php echo $id_qoutation->id + 1; ?>">
+						<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
+						<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
+						<?php endforeach ?>
+						<select id="item" name="item" class="form-control" onchange="" required>
+							<option value="">- Choose Item -</option>
+							<option value="hose">HOSE</option>
+							<option value="fitting">FITTING</option>
+							<option value="pipe">PIPE</option>
+							<option value="clamp pipe">CLAIM PIPE</option>
+							<option value="hose cover">HOSE COVER</option>
+						</select>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-3">Brand</span>
+							</div>
+							<select name="brand" id="brand" class="form-control">
+								<option value="">- Choose Brand -</option>
 								<option value="">HOSE</option>
 								<option value="">FITTING</option>
 								<option value="">PIPE</option>
@@ -180,10 +195,162 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Qty*</label>
-						<div class="col-sm-10">
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-3">Model</span>
+							</div>
+							<select name="model" id="model" class="form-control">
+								<option value="">- Choose Model -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-4">Od&emsp;</span>
+							</div>
+							<select name="od" id="od" class="form-control">
+								<option value="">- Choose Od -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-3">Size&emsp;</span>
+							</div>
+							<select name="size" id="size" class="form-control">
+								<option value="">- Choose Size -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-4">Type</span>
+							</div>
+							<select name="type" id="type" class="form-control">
+								<option value="">- Choose Type -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-1">Category</span>
+							</div>
+							<select name="category" id="category" class="form-control">
+								<option value="">- Choose Category -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-4">Hole</span>
+							</div>
+							<select name="hole" id="hole" class="form-control">
+								<option value="">- Choose Hole -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-4">Id&emsp;</span>
+							</div>
+							<select name="ID" id="ID" class="form-control">
+								<option value="">- Choose Id -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-3">Plat&emsp;</span>
+							</div>
+							<select name="plat" id="plat" class="form-control">
+								<option value="">- Choose Plat -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-2">Thread&nbsp;</span>
+							</div>
+							<select name="thread" id="thread" class="form-control">
+								<option value="">- Choose Thread -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-3">Qty&emsp;</span>
+							</div>
 							<input type="number" name="company" class="form-control" min="1" placeholder="0" required>
+						</div>
+					</div>
+					<div class="form-group mb-0">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-2">Assembly</span>
+							</div>
+							<select name="" id="assembly" class="form-control" required>
+								<option value="">- Choose Item -</option>
+								<option value="">HOSE</option>
+								<option value="">FITTING</option>
+								<option value="">PIPE</option>
+								<option value="">CLAIM PIPE</option>
+								<option value="">HOSE COVER</option>
+							</select>
 						</div>
 					</div>
 				</div>

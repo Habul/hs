@@ -29,9 +29,9 @@
 			</div>
 			<?php } ?>
 			<div class="card card-solid">
-				<div class="card-header">
+				<div class="card-header d-flex justify-content-end">
 					<form action="" class="card-title">
-						<div class="input-group mb-3">
+						<div class="input-group">
 							<input type="text" class="form-control" placeholder="Search.." name="search">
 							<div class="input-group-append">
 								<button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -76,7 +76,7 @@
 
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="col-12 modal-title text-center">Create New List
@@ -88,25 +88,26 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/post') ?>">
 				<div class="modal-body">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Id</label>
-						<div class="col-sm-10">
-							<input type="hidden" name="id" readonly class="form-control"
-								value="<?php echo $id_add->id + 1; ?>">
-							<input type="text" name="id_hs" class="form-control"
-								value="<?php echo 'HS', date('Ymd-'), $id_add->id + 1; ?>" readonly>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text pr-5">ID</span>
 						</div>
+						<input type="hidden" name="id" readonly class="form-control" value="<?php echo $id_add->id + 1; ?>">
+						<input type="text" name="id_hs" class="form-control"
+							value="<?php echo 'HS', date('Ymd-'), $id_add->id + 1; ?>" readonly>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Company*</label>
-						<div class="col-sm-10">
-							<input type="text" name="company" class="form-control" placeholder="Company Name.." required>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text pr-1">Company</span>
 						</div>
+						<input type=" text" name="company" class="form-control" placeholder="..." required>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Notes*</label>
-						<div class="col-sm-10">
-							<textarea type="text" name="notes" class="form-control" placeholder="Notes.." required></textarea>
+					<div class="form-group mb-0">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text pr-4">Notes</span>
+							</div>
+							<textarea type="text" name="notes" class="form-control" placeholder="..." required></textarea>
 						</div>
 					</div>
 				</div>

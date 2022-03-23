@@ -34,7 +34,7 @@
 					<div class="card card-warning card-outline">
 						<div class="card-header">
 							<h4 class="card-title">
-								<a class=" form-control btn btn-success" data-toggle="modal" data-target="#modal_add_sj">
+								<a class="form-control btn btn-success" data-toggle="modal" data-target="#modal_add_sj">
 									<i class="fa fa-plus"></i>&nbsp; Create Delivery Order</a></h4>
 							<div class="card-tools">
 								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"

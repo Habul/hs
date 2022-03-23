@@ -126,12 +126,22 @@ class Listing extends CI_Controller
 
     $where = array(
       'id' => $id
-    );
+    );   
 
     $data['title'] = 'Create New List';
     $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
     $data['qoutation'] = $this->m_data->edit_data($where, 'qoutation')->result();
     $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
+    $data['item_brand'] = $this->m_data->get_data('item_brand')->result();
+    $data['item_category'] = $this->m_data->get_data('item_category')->result();
+    $data['item_hole'] = $this->m_data->get_data('item_hole')->result();
+    $data['item_id'] = $this->m_data->get_data('item_id')->result();
+    $data['item_model'] = $this->m_data->get_data('item_model')->result();
+    $data['item_od'] = $this->m_data->get_data('item_od')->result();
+    $data['item_plat'] = $this->m_data->get_data('item_plat')->result();
+    $data['item_size'] = $this->m_data->get_data('item_size')->result();
+    $data['item_thread'] = $this->m_data->get_data('item_thread')->result();
+    $data['item_type'] = $this->m_data->get_data('item_type')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_detail', $data);
     $this->load->view('dashboard/v_footer');
