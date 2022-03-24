@@ -56,7 +56,6 @@
 <script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/toastr/toastr.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
@@ -84,6 +83,36 @@
 			} else {
 				input.attr("type", "password");
 			}
+		});
+	});
+
+</script>
+<script>
+	$(document).ready(function () {
+		$('#item').change(function () {
+			var id = $(this).val();
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_item');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_brand').show();
+					$('#brand').html(html);
+					$('#div_type').show();
+					$('#div_size').show();
+				}
+			});
+			return false;
 		});
 	});
 

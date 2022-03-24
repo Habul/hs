@@ -132,6 +132,7 @@ class Listing extends CI_Controller
     $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
     $data['qoutation'] = $this->m_data->edit_data($where, 'qoutation')->result();
     $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
+    $data['list_item'] = $this->m_data->get_data('list_item')->result();
     $data['item_brand'] = $this->m_data->get_data('item_brand')->result();
     $data['item_category'] = $this->m_data->get_data('item_category')->result();
     $data['item_hole'] = $this->m_data->get_data('item_hole')->result();
@@ -145,6 +146,13 @@ class Listing extends CI_Controller
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_detail', $data);
     $this->load->view('dashboard/v_footer');
+  }
+
+  public function get_list_item()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_id($id)->result();
+		echo json_encode($data);
   }
 
   public function qoutation_save()
@@ -198,10 +206,10 @@ class Listing extends CI_Controller
     $this->form_validation->set_rules('nama', 'name', 'required');
 
     if ($this->form_validation->run() != false) {
-      $id_item = $this->input->post('id_item');
-      $nama = $this->input->post('nama');
+      $id_item = $this->input->post('id_item',TRUE);
+      $nama = $this->input->post('nama', TRUE);
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
-      $jenis = $this->input->post('jenis');
+      $jenis = $this->input->post('jenis',TRUE);
 
       $data = array(
         'id_item' => $id_item,
@@ -230,9 +238,9 @@ class Listing extends CI_Controller
     if ($this->form_validation->run() != false) {
       $id = $this->input->post('id');
       $id_item = $this->input->post('id_item');
-      $nama = $this->input->post('nama');
+      $nama = $this->input->post('nama',TRUE);
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
-      $jenis = $this->input->post('jenis');
+      $jenis = $this->input->post('jenis',TRUE);
 
       $where = array(
         'id' => $id
