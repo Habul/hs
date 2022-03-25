@@ -68,9 +68,9 @@ class M_data extends CI_Model
     return $data->num_rows();
   }
 
-  function get_id($id)
+  function get_item($id, $table)
   {
-		$query = $this->db->get_where('item_brand', array('id_item' => $id));
+		$query = $this->db->get_where($table, array('id_item' => $id));
 		return $query;
 	}
 

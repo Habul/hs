@@ -171,7 +171,7 @@
 						<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
 						<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
 						<?php endforeach ?>
-						<select id="item" name="item" class="form-control" id="item" required>
+						<select id="item" name="item" class="form-control" required>
 							<option value="">- Choose Item -</option>
 							<?php foreach ($list_item as $list) : ?>
 							<option value="<?php echo $list->id ?>"><?php echo strtoupper($list->nama) ?></option>
@@ -223,7 +223,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text pr-4">Type</span>
 							</div>
-							<select name="type" class="form-control">
+							<select name="type" class="form-control" id="type">
 								<option value="">- Choose Type -</option>
 							</select>
 						</div>
@@ -248,12 +248,12 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group mb-3" style="display: none;" id="div_ID">
+					<div class="form-group mb-3" style="display: none;" id="div_id">
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text pr-4">Id&emsp;</span>
 							</div>
-							<select name="ID" class="form-control" id="ID">
+							<select name="id" class="form-control" id="id">
 								<option value="">- Choose Id -</option>
 							</select>
 						</div>
@@ -291,7 +291,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text pr-2">Assembly</span>
 							</div>
-							<select name="" id="assembly" class="form-control" required>
+							<select name="" id="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
 							</select>
 						</div>

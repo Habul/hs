@@ -148,10 +148,73 @@ class Listing extends CI_Controller
     $this->load->view('dashboard/v_footer');
   }
 
-  public function get_list_item()
+  public function get_list_brand()
   {
     $id = $this->input->post('id',TRUE);
-		$data = $this->m_data->get_id($id)->result();
+		$data = $this->m_data->get_item($id,'item_brand')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_type()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_type')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_size()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_size')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_model()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_model')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_od()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_od')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_category()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_category')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_hole()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_hole')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_id()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_id')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_plat()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_plat')->result();
+		echo json_encode($data);
+  }
+
+  public function get_list_thread()
+  {
+    $id = $this->input->post('id',TRUE);
+		$data = $this->m_data->get_item($id,'item_thread')->result();
 		echo json_encode($data);
   }
 
