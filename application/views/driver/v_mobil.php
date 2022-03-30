@@ -107,38 +107,42 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('driver/mobil_add') ?>" enctype="multipart/form-data">
 				<div class="modal-body">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Type *</label>
-						<div class="col-sm-10">
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Type</span>
+							</div>
 							<input type="text" name="type" class="form-control" value="Mobil" readonly required>
 							<?php echo set_value('type'); ?>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Merk *</label>
-						<div class="col-sm-10">
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Merk</span>
+							</div>
 							<input type="hidden" name="no_id" class="form-control" value="<?php echo $id_add->no_id + 1; ?> ">
 							<input type="text" name="merk" class="form-control" placeholder="Input Merk.." required>
 							<?php echo set_value('merk'); ?>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Plat *</label>
-						<div class="col-sm-10">
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Plat</span>
+							</div>
 							<input type="text" name="plat" class="form-control" placeholder="Input Plat.." required>
 							<?php echo set_value('plat'); ?>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group mb-0">
 						<label class="control-label col-xs-3">Attach Image</label>
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="customFile" name="foto">
+							<input type="file" class="custom-file-input" id="image" name="foto" onchange="priviewImage()">
 							<?php echo set_value('foto'); ?>
-							<label class="custom-file-label" for="customFile">Choose file</label>
+							<label class="custom-file-label" for="image">Choose file</label>
+							<img class="img-priview img-fluid col-sm-5 rounded">
 						</div>
-						<small>* Max size 2 Mb</small><br />
-						<small>* Max file name image 10 character</small><br />
-						<small>* File type Jpg, Png & Gif</small>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -239,3 +243,20 @@
 	</div>
 </div>
 <?php endforeach; ?>
+
+<script>
+	function priviewImage() {
+		const image = document.querySelector('#image');
+		const imgPreview = document.querySelector('.img-priview');
+
+		imgPreview.style.display = 'block';
+
+		const oFReader = new FileReader();
+		oFReader.readAsDataURL(image.files[0]);
+
+		oFReader.onload = function (oFREvent) {
+			imgPreview.src = oFREvent.target.result;
+		}
+	}
+
+</script>

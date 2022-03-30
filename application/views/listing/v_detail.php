@@ -185,6 +185,9 @@
 							</div>
 							<select name="brand" id="brand" class="form-control">
 								<option value="">- Choose Brand -</option>
+								<?php foreach ($item_brand as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -195,6 +198,9 @@
 							</div>
 							<select name="model" class="form-control" id="model">
 								<option value="">- Choose Model -</option>
+								<?php foreach ($item_model as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -205,6 +211,9 @@
 							</div>
 							<select name="od" class="form-control" id="od">
 								<option value="">- Choose Od -</option>
+								<?php foreach ($item_od as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -215,6 +224,9 @@
 							</div>
 							<select name="size" class="form-control" id="size">
 								<option value="">- Choose Size -</option>
+								<?php foreach ($item_size as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -225,6 +237,9 @@
 							</div>
 							<select name="type" class="form-control" id="type">
 								<option value="">- Choose Type -</option>
+								<?php foreach ($item_type as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -235,6 +250,9 @@
 							</div>
 							<select name="category" class="form-control" id="category">
 								<option value="">- Choose Category -</option>
+								<?php foreach ($item_category as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -245,6 +263,9 @@
 							</div>
 							<select name="hole" class="form-control" id="hole">
 								<option value="">- Choose Hole -</option>
+								<?php foreach ($item_hole as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -255,6 +276,9 @@
 							</div>
 							<select name="id" class="form-control" id="id">
 								<option value="">- Choose Id -</option>
+								<?php foreach ($item_id as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -265,6 +289,9 @@
 							</div>
 							<select name="plat" class="form-control" id="plat">
 								<option value="">- Choose Plat -</option>
+								<?php foreach ($item_plat as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -275,6 +302,9 @@
 							</div>
 							<select name="thread" class="form-control" id="thread">
 								<option value="">- Choose Thread -</option>
+								<?php foreach ($item_thread as $i) : ?>
+								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
@@ -293,8 +323,52 @@
 							</div>
 							<select name="" id="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
+								<?php foreach ($assembly as $i) : ?>
+								<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--End Modals Add-->
+
+<!-- Bootstrap modal add assembly -->
+<div class="modal fade" id="modal_add_ass" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="col-12 modal-title text-center">Create New Assembly
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h5>
+			</div>
+			<form onsubmit="addbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('listing/add_assembly') ?>">
+				<div class="modal-body">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text pr-3">Id Assm</span>
+						</div>
+						<?php foreach ($listing as $list) : ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $list->id ?>" readonly>
+						<?php endforeach ?>
+						<input type="text" name="name" class="form-control" value="<?= 'ASSM',date('md-'), $id_assm->id+1 ?>"
+							readonly>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text pr-4">Desc &nbsp;&nbsp;</span>
+						</div>
+						<textarea name="desc" class="form-control" placeholder="..." required></textarea>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">

@@ -29,6 +29,11 @@ class M_data extends CI_Model
     return $this->db->get_where($table, $where);
   }
 
+  function multiple_edit($where, $where2, $table)
+  {
+    return $this->db->where($where)->where($where2)->get($table);
+  }
+
   // fungsi untuk mengupdate atau mengubah data di database
   function update_data($where, $data, $table)
   {

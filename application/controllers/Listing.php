@@ -126,11 +126,13 @@ class Listing extends CI_Controller
 
     $where = array(
       'id' => $id
-    );   
+    );
 
     $data['title'] = 'Create New List';
     $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
     $data['qoutation'] = $this->m_data->edit_data($where, 'qoutation')->result();
+    $data['assembly'] = $this->db->get_where('assembly', array('id_qoutation' => null))->result();
+    $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
     $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
     $data['list_item'] = $this->m_data->get_data('list_item')->result();
     $data['item_brand'] = $this->m_data->get_data('item_brand')->result();
@@ -147,6 +149,35 @@ class Listing extends CI_Controller
     $this->load->view('listing/v_detail', $data);
     $this->load->view('dashboard/v_footer');
   }
+
+  public function add_assembly()
+  {
+    $this->form_validation->set_rules('name', 'Name', 'required');
+    $this->form_validation->set_rules('desc', 'Notes', 'required');
+    if ($this->form_validation->run() != false) {
+      $id = $this->input->post('id');
+      $name = $this->input->post('name');
+      $desc = $this->input->post('desc');
+      $created_at = mdate('%Y-%m-%d %H:%i:%s');
+
+      $data = array(
+        'name' => $name,
+        'desc' => $desc,
+        'created_at' => $created_at,
+      );
+
+      $this->m_data->insert_data($data, 'assembly');
+      $id = $this->input->post('id');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/list_update/?list='.$encrypt);
+    } else {
+      $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+      $id = $this->input->post('id');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/list_update/?list='.$encrypt);
+    }
+  }
+   
 
   public function get_list_brand()
   {
