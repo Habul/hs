@@ -178,7 +178,6 @@ class Listing extends CI_Controller
     }
   }
    
-
   public function get_list_brand()
   {
     $id = $this->input->post('id',TRUE);

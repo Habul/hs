@@ -48,7 +48,7 @@
 								<a class="btn btn-success col-15 shadow" data-toggle="modal" data-target="#modal_add_item">
 									<i class="fa fa-plus"></i>&nbsp; Add Item</a>
 								<a class="btn btn-warning col-15 shadow" data-toggle="modal" data-target="#modal_add_ass">
-									<i class="fa fa-plus-square"></i>&nbsp; Add Assembly</a>
+									<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
 							</h3>
 							<div class="card-tools">
 								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
@@ -149,7 +149,7 @@
 
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add_item" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="col-12 modal-title text-center">Add New Item
@@ -163,7 +163,7 @@
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text pr-4">Item&nbsp;</span>
+							<label class="input-group-text pr-4">Item</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
 						<input type="hidden" name="id" readonly class="form-control"
@@ -181,137 +181,107 @@
 					<div class="form-group mb-3" style="display: none;" id="div_brand">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-3">Brand</span>
+								<label class="input-group-text pr-3">Brand</label>
 							</div>
 							<select name="brand" id="brand" class="form-control">
 								<option value="">- Choose Brand -</option>
-								<?php foreach ($item_brand as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_model">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-3">Model</span>
+								<label class="input-group-text pr-3">Model</label>
 							</div>
 							<select name="model" class="form-control" id="model">
 								<option value="">- Choose Model -</option>
-								<?php foreach ($item_model as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_od">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-4">Od&emsp;</span>
+								<label class="input-group-text pr-4">Od&emsp;</label>
 							</div>
 							<select name="od" class="form-control" id="od">
 								<option value="">- Choose Od -</option>
-								<?php foreach ($item_od as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_size">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-3">Size&emsp;</span>
+								<label class="input-group-text pr-3">Size&emsp;</label>
 							</div>
 							<select name="size" class="form-control" id="size">
 								<option value="">- Choose Size -</option>
-								<?php foreach ($item_size as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_type">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-4">Type</span>
+								<label class="input-group-text pr-4">Type</label>
 							</div>
 							<select name="type" class="form-control" id="type">
 								<option value="">- Choose Type -</option>
-								<?php foreach ($item_type as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_category">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-1">Category</span>
+								<label class="input-group-text pr-1">Category</label>
 							</div>
 							<select name="category" class="form-control" id="category">
 								<option value="">- Choose Category -</option>
-								<?php foreach ($item_category as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_hole">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-4">Hole</span>
+								<label class="input-group-text pr-4">Hole</label>
 							</div>
 							<select name="hole" class="form-control" id="hole">
 								<option value="">- Choose Hole -</option>
-								<?php foreach ($item_hole as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_id">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-4">Id&emsp;</span>
+								<label class="input-group-text pr-4">Id&emsp;</label>
 							</div>
 							<select name="id" class="form-control" id="id">
 								<option value="">- Choose Id -</option>
-								<?php foreach ($item_id as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class=" form-group mb-3" style="display: none;" id="div_plat">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-3">Plat&emsp;</span>
+								<label class="input-group-text pr-3">Plat&emsp;</label>
 							</div>
 							<select name="plat" class="form-control" id="plat">
 								<option value="">- Choose Plat -</option>
-								<?php foreach ($item_plat as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3" style="display: none;" id="div_thread">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-2">Thread&nbsp;</span>
+								<label class="input-group-text pr-2">Thread&nbsp;</label>
 							</div>
 							<select name="thread" class="form-control" id="thread">
 								<option value="">- Choose Thread -</option>
-								<?php foreach ($item_thread as $i) : ?>
-								<option value="<?php echo $i->nama ?>"><?php echo strtoupper($i->nama) ?></option>
-								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
 					<div class="form-group mb-3">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-3">Qty&emsp;</span>
+								<label class="input-group-text pr-3">Qty&emsp;</label>
 							</div>
 							<input type="number" name="qty" class="form-control" min="1" placeholder="0" required>
 						</div>
@@ -319,7 +289,7 @@
 					<div class="form-group mb-0">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-2">Assembly</span>
+								<label class="input-group-text pr-2">Assembly</label>
 							</div>
 							<select name="" id="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>

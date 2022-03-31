@@ -90,22 +90,204 @@
 <script>
 	$(function () {
 		$('#item').change(function () {
-			$('#div_brand')[($("option[value='1']").is(":checked")) || ($("option[value='2']").is(
-				":checked")) || ($("option[value='3']").is(":checked")) ? "show" : "hide"]();
-			$('#div_model')[($("option[value='1']").is(":checked")) || ($("option[value='3']").is(
-				":checked")) ? "show" : "hide"]();
-			$('#div_id')[($("option[value='1']").is(":checked")) ? "show" : "hide"]();
-			$('#div_od')[($("option[value='1']").is(":checked")) ? "show" : "hide"]();
-			$('#div_type')[($("option[value='2']").is(":checked")) || ($("option[value='3']").is(
-				":checked")) ? "show" : "hide"]();
-			$('#div_size')[($("option[value='2']").is(":checked")) || ($("option[value='3']").is(
-				":checked")) || ($("option[value='4']").is(":checked")) || ($("option[value='5']")
-				.is(":checked")) ? "show" : "hide"]();
-			$('#div_category')[($("option[value='3']").is(":checked")) || ($("option[value='4']").is(
-				":checked")) ? "show" : "hide"]();
-			$('#div_hole')[($("option[value='5']").is(":checked")) ? "show" : "hide"]();
-			$('#div_plat')[($("option[value='5']").is(":checked")) ? "show" : "hide"]();
-			$('#div_thread')[($("option[value='3']").is(":checked")) ? "show" : "hide"]();
+			var id = $(this).val();
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_brand');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_brand')[($("option[value='1']").is(":checked")) || ($("option[value='2']").is(
+						":checked")) || ($("option[value='3']").is(":checked")) ? "show" : "hide"]();
+					$('#brand').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_type');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_type')[($("option[value='2']").is(":checked")) || ($("option[value='3']").is(
+						":checked")) ? "show" : "hide"]();
+					$('#type').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_size');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_size')[($("option[value='2']").is(":checked")) || ($("option[value='3']").is(
+						":checked")) || ($("option[value='4']").is(":checked")) || ($(
+						"option[value='5']").is(":checked")) ? "show" : "hide"]();
+					$('#size').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_model');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_model')[($("option[value='1']").is(":checked")) || ($("option[value='3']").is(
+						":checked")) ? "show" : "hide"]();
+					$('#model').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_od');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_od')[($("option[value='1']").is(":checked")) ? "show" : "hide"]();
+					$('#od').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_category');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_category')[($("option[value='3']").is(":checked")) || ($("option[value='4']")
+						.is(":checked")) ? "show" : "hide"]();
+					$('#category').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_hole');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_hole')[($("option[value='5']").is(":checked")) ? "show" : "hide"]();
+					$('#hole').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_id');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_id')[($("option[value='1']").is(":checked")) ? "show" : "hide"]();
+					$('#id').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_plat');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_plat')[($("option[value='5']").is(":checked")) ? "show" : "hide"]();
+					$('#plat').html(html);
+				}
+			});
+			$.ajax({
+				url: "<?php echo site_url('listing/get_list_thread');?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function (data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i]
+							.nama.toUpperCase() + '</option>';
+					}
+					$('#div_thread')[($("option[value='3']").is(":checked")) ? "show" : "hide"]();
+					$('#thread').html(html);
+				}
+			});
+			return false;
 		});
 	});
 

@@ -100,7 +100,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text pr-1">Company</span>
 						</div>
-						<input type=" text" name="company" class="form-control" placeholder="..." required>
+						<input type=" text" name="company" class="form-control" placeholder="(ex. PT. XYZ)" required>
 					</div>
 					<div class="form-group mb-0">
 						<div class="input-group">
