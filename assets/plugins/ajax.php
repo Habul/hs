@@ -1,12 +1,4 @@
 <script>
-  $(document).ready(function () {
-    $("#submitbtn").click(function () {
-      $('#submitbtn').text('saving...');
-      $("#submitbtn").attr("disabled", true);
-      $('#addform').submit();
-    });
-  });
-
   $(function () {
     bsCustomFileInput.init();
   });
@@ -443,20 +435,5 @@
     format: 'L',
     inline: true
   })
-
-</script>
-
-<script>
-  $(document).ready(function () {
-    $('#PickMAIN').on('change', function () {
-      var sel = $('#PickMAIN').val();
-      document.forms['fadditem']['hMAIN'].value = sel;
-      var link = '".$_SERVER['
-      // HTTP_REFERER ']."api/?api=getoptionitem&main=' + sel;
-      $.get(link, function (data, status) {
-        $('#dynamicmenu').html(data);
-      });
-    });
-  });
 
 </script>

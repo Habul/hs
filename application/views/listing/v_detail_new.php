@@ -48,7 +48,7 @@
 								<a class="btn btn-success col-15 shadow" data-toggle="modal" data-target="#modal_add_item">
 									<i class="fa fa-plus"></i>&nbsp; Add Item</a>
 								<a class="btn btn-warning col-15 shadow" data-toggle="modal" data-target="#modal_add_ass">
-									<i class="fa fa-plus-square"></i>&nbsp; Add Assembly</a>
+									<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
 							</h3>
 							<div class="card-tools">
 								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
@@ -66,8 +66,8 @@
 							</div>
 						</div>
 						<div class="card-body table-responsive">
-							<table class="table table-bordered table-hover table-sm" id="example2">
-								<thead class="thead-light" style="text-align:center">
+							<table class="table table-bordered table-hover table-sm" id="example12">
+								<thead class="thead-dark" style="text-align:center">
 									<tr style="text-align:center">
 										<th width="5%">No</th>
 										<th>Category Type</th>
@@ -112,12 +112,14 @@
 								<?php } ?>
 							</table>
 							<table class="table table-sm">
-								<tr>
-									<th width="70%" style="text-align:center"><b>Total<b></th>
-									<th style="text-align:center">
-										<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
-									</th>
-								</tr>
+								<thead class="thead-light">
+									<tr>
+										<th width="70%" style="text-align:center"><b>Total<b></th>
+										<th style="text-align:center">
+											<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
+										</th>
+									</tr>
+								</thead>
 								<th></th>
 								<th></th>
 							</table>
@@ -147,10 +149,10 @@
 
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add_item" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="col-12 modal-title text-center">Add Data
+				<h5 class="col-12 modal-title text-center">Add New Item
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -159,25 +161,184 @@
 			<form onsubmit="addbtn.disabled = true; return true;" method="post"
 				action="<?php echo base_url('listing/qoutation_save') ?>">
 				<div class="modal-body">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Id</label>
-						<div class="col-sm-10">
-							<input type="hidden" name="id" readonly class="form-control" value="<?php echo $cek->id + 1; ?>">
-							<input type="text" name="id_hs" class="form-control"
-								value="<?php echo 'HS', date('Ymd-'), $cek->id + 1; ?>" readonly>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text pr-4">Item</label>
+						</div>
+						<?php foreach ($listing as $list) : ?>
+						<input type="hidden" name="id" readonly class="form-control"
+							value="<?php echo $id_qoutation->id + 1; ?>">
+						<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
+						<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
+						<?php endforeach ?>
+						<select id="item" name="item" class="form-control" required>
+							<option value="">- Choose Item -</option>
+							<?php foreach ($list_item as $list) : ?>
+							<option value="<?php echo $list->id ?>"><?php echo strtoupper($list->nama) ?></option>
+							<?php endforeach ?>
+						</select>
+					</div>
+					<div class="form-group mb-3" style="display: none;" id="div_brand">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-3">Brand</label>
+							</div>
+							<select name="brand" id="brand" class="form-control">
+								<option value="">- Choose Brand -</option>
+							</select>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Company*</label>
-						<div class="col-sm-10">
-							<input type="text" name="company" class="form-control" placeholder="Company Name.." required>
+					<div class="form-group mb-3" style="display: none;" id="div_model">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-3">Model</label>
+							</div>
+							<select name="model" class="form-control" id="model">
+								<option value="">- Choose Model -</option>
+							</select>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Notes*</label>
-						<div class="col-sm-10">
-							<textarea type="text" name="notes" class="form-control" placeholder="Notes.." required></textarea>
+					<div class="form-group mb-3" style="display: none;" id="div_od">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Od&emsp;</label>
+							</div>
+							<select name="od" class="form-control" id="od">
+								<option value="">- Choose Od -</option>
+							</select>
 						</div>
+					</div>
+					<div class="form-group mb-3" style="display: none;" id="div_size">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-3">Size&emsp;</label>
+							</div>
+							<select name="size" class="form-control" id="size">
+								<option value="">- Choose Size -</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3" style="display: none;" id="div_type">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Type</label>
+							</div>
+							<select name="type" class="form-control" id="type">
+								<option value="">- Choose Type -</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3" style="display: none;" id="div_category">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-1">Category</label>
+							</div>
+							<select name="category" class="form-control" id="category">
+								<option value="">- Choose Category -</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3" style="display: none;" id="div_hole">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Hole</label>
+							</div>
+							<select name="hole" class="form-control" id="hole">
+								<option value="">- Choose Hole -</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3" style="display: none;" id="div_id">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Id&emsp;</label>
+							</div>
+							<select name="id" class="form-control" id="id">
+								<option value="">- Choose Id -</option>
+							</select>
+						</div>
+					</div>
+					<div class=" form-group mb-3" style="display: none;" id="div_plat">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-3">Plat&emsp;</label>
+							</div>
+							<select name="plat" class="form-control" id="plat">
+								<option value="">- Choose Plat -</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3" style="display: none;" id="div_thread">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-2">Thread&nbsp;</label>
+							</div>
+							<select name="thread" class="form-control" id="thread">
+								<option value="">- Choose Thread -</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-3">Qty&emsp;</label>
+							</div>
+							<input type="number" name="qty" class="form-control" min="1" placeholder="0" required>
+						</div>
+					</div>
+					<div class="form-group mb-0">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-2">Assembly</label>
+							</div>
+							<select name="" id="assembly" class="form-control">
+								<option value="">- Choose Assembly -</option>
+								<?php foreach ($assembly as $i) : ?>
+								<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>
+								<?php endforeach ?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--End Modals Add-->
+
+<!-- Bootstrap modal add assembly -->
+<div class="modal fade" id="modal_add_ass" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="col-12 modal-title text-center">Create New Assembly
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h5>
+			</div>
+			<form onsubmit="addbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('listing/add_assembly') ?>">
+				<div class="modal-body">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text pr-3">Id Assm</span>
+						</div>
+						<?php foreach ($listing as $list) : ?>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $list->id ?>" readonly>
+						<?php endforeach ?>
+						<input type="text" name="name" class="form-control" value="<?= 'ASSM',date('md-'), $id_assm->id+1 ?>"
+							readonly>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text pr-4">Desc &nbsp;&nbsp;</span>
+						</div>
+						<textarea name="desc" class="form-control" placeholder="..." required></textarea>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">

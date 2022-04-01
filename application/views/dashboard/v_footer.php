@@ -91,202 +91,216 @@
 	$(function () {
 		$('#item').change(function () {
 			var id = $(this).val();
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_brand');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+			$('#div_brand')[(id == 1) || (id == 2) || (id == 3) ? "show" : "hide"]();
+			$('#div_type')[(id == 2) || (id == 3) ? "show" : "hide"]();
+			$('#div_size')[(id == 2) || (id == 3) || (id == 4) || (id == 5) ? "show" : "hide"]();
+			$('#div_model')[(id == 1) || (id == 3) ? "show" : "hide"]();
+			$('#div_od')[(id == 1) ? "show" : "hide"]();
+			$('#div_id')[(id == 1) ? "show" : "hide"]();
+			$('#div_hole')[(id == 5) ? "show" : "hide"]();
+			$('#div_category')[(id == 3) || (id == 4) ? "show" : "hide"]();
+			$('#div_plat')[(id == 5) ? "show" : "hide"]();
+			$('#div_thread')[(id == 3) ? "show" : "hide"]();
+			if (id == 1 || id == 2 || id == 3) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_brand');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].id + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#brand').html(html);
 					}
-					$('#div_brand')[($("option[value='1']").is(":checked")) || ($("option[value='2']").is(
-						":checked")) || ($("option[value='3']").is(":checked")) ? "show" : "hide"]();
-					$('#brand').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_type');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 2 || id == 3) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_type');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].id + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#type').html(html);
 					}
-					$('#div_type')[($("option[value='2']").is(":checked")) || ($("option[value='3']").is(
-						":checked")) ? "show" : "hide"]();
-					$('#type').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_size');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 2 || id == 3 || id == 4 || id == 5) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_size');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#size').html(html);
 					}
-					$('#div_size')[($("option[value='2']").is(":checked")) || ($("option[value='3']").is(
-						":checked")) || ($("option[value='4']").is(":checked")) || ($(
-						"option[value='5']").is(":checked")) ? "show" : "hide"]();
-					$('#size').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_model');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 1 || id == 3) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_model');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#model').html(html);
 					}
-					$('#div_model')[($("option[value='1']").is(":checked")) || ($("option[value='3']").is(
-						":checked")) ? "show" : "hide"]();
-					$('#model').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_od');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 1) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_od');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#od').html(html);
 					}
-					$('#div_od')[($("option[value='1']").is(":checked")) ? "show" : "hide"]();
-					$('#od').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_category');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 3 || id == 4) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_category');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#category').html(html);
 					}
-					$('#div_category')[($("option[value='3']").is(":checked")) || ($("option[value='4']")
-						.is(":checked")) ? "show" : "hide"]();
-					$('#category').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_hole');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 5) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_hole');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#hole').html(html);
 					}
-					$('#div_hole')[($("option[value='5']").is(":checked")) ? "show" : "hide"]();
-					$('#hole').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_id');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 1) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_id');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#id').html(html);
 					}
-					$('#div_id')[($("option[value='1']").is(":checked")) ? "show" : "hide"]();
-					$('#id').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_plat');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 5) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_plat');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#plat').html(html);
 					}
-					$('#div_plat')[($("option[value='5']").is(":checked")) ? "show" : "hide"]();
-					$('#plat').html(html);
-				}
-			});
-			$.ajax({
-				url: "<?php echo site_url('listing/get_list_thread');?>",
-				method: "POST",
-				data: {
-					id: id
-				},
-				async: true,
-				dataType: 'json',
-				success: function (data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id + '>' + data[i]
-							.nama.toUpperCase() + '</option>';
+				});
+			}
+			if (id == 3) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_thread');?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function (data) {
+						var html = '';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#thread').html(html);
 					}
-					$('#div_thread')[($("option[value='3']").is(":checked")) ? "show" : "hide"]();
-					$('#thread').html(html);
-				}
-			});
+				});
+			}
 			return false;
 		});
 	});
@@ -336,19 +350,6 @@
 
 </script>
 <script>
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				$('#blah').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-	$("#imgInp").change(function () {
-		readURL(this);
-	});
-
 	$("#info").fadeTo(2000, 500).slideUp(500, function () {
 		$("#info").slideUp(1000);
 	});

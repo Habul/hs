@@ -251,7 +251,51 @@ class Listing extends CI_Controller
   public function qoutation_save()
   {
     $this->form_validation->set_rules('id_hs', 'ID HS', 'required');
-    $this->form_validation->set_rules('company', 'Company Name', 'required');
+    $this->form_validation->set_rules('id_listing', 'ID Listing', 'required');
+
+    if ($this->form_validation->run() != false) {
+      $id_hs = $this->input->post('id_hs',TRUE);
+      $id_listing = $this->input->post('id_listing',TRUE);
+      $item = $this->input->post('item',TRUE);
+      $brand = $this->input->post('brand', TRUE);
+      $model = $this->input->post('model', TRUE);
+      $od = $this->input->post('od', TRUE);
+      $size = $this->input->post('size', TRUE);
+      $type = $this->input->post('type', TRUE);
+      $category = $this->input->post('category', TRUE);
+      $hole = $this->input->post('hole', TRUE);
+      $id = $this->input->post('id', TRUE);
+      $plat = $this->input->post('plat', TRUE);
+      $thread = $this->input->post('thread', TRUE);
+      $created_at = mdate('%Y-%m-%d %H:%i:%s');
+      $data = array(
+        'id_hs' => $id_hs,
+        'id_listing' => $id_listing,
+        'item' => $item,
+        'brand' => $brand,
+        'model' => $model,
+        'od' => $od,
+        'size' => $size,
+        'type' => $type,
+        'category' => $category,
+        'hole' => $hole,
+        'i_d' => $id,
+        'plat' => $plat,
+        'thread' => $thread,
+        'created_at' => $created_at,
+      );
+
+      $this->m_data->insert_data($data,'quotation');
+      $this->session->set_flashdata('berhasil', 'Add successfully ' . $this->input->post('item', TRUE) . ' !');
+      $id = $this->input->post('id_listing');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
+    } else {
+      $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+      $id = $this->input->post('id_listing');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
+    }
   }
 
   public function listing_item()
