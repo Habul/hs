@@ -479,6 +479,18 @@ class Dashboard extends CI_Controller
     }
   }
 
+  public function contact_hapus()
+  {
+    $id = $this->input->post('id'); {
+      $where = array(
+        'id_user' => $id
+      );
+      $this->m_data->delete_data($where, 'kontak');
+      $this->session->set_flashdata('berhasil', 'Data has been deleted !');
+      redirect(base_url() . 'dashboard/contact');
+    }
+  }
+
   public function mini_games()
   {
     $data['title'] = 'Mini Games';

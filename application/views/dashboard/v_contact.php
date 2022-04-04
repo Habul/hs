@@ -47,7 +47,7 @@
 												Address:
 												<?php echo $row->alamat; ?> </li>
 											<li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone :
-												0<?php echo $row->no_hp; ?> </li>
+												<?php echo $row->no_hp; ?> </li>
 										</ul>
 									</div>
 									<div class="col-5 text-center">
@@ -57,13 +57,16 @@
 								</div>
 							</div>
 							<div class="card-footer">
-								<a href="https://wa.me/62<?php echo $row->no_hp; ?>?text=Hallo%20kakak%20"
+								<a href="https://wa.me/62<?php echo substr($row->no_hp,1); ?>?text=Hallo%20kakak%20"
 									class="btn btn-sm bg-teal float-right shadow" rel="noopener" target="_blank">
 									<i class="fab fa-whatsapp"></i></a>
 								<?php if ($this->session->userdata('level') == "admin") { ?>
 								<a class="btn btn-sm bg-info" data-toggle="modal"
 									data-target="#modal_edit<?php echo $row->id_user; ?>" title="Edit"><i
 										class="fa fa-pencil-alt"></i></a>
+								<a class="btn btn-sm bg-danger" data-toggle="modal"
+									data-target="#modal_hapus<?php echo $row->id_user; ?>" title="Delete"><i
+										class="fa fa-trash"></i></a>
 								<?php }  ?>
 							</div>
 						</div>
@@ -82,7 +85,7 @@
 </div>
 
 <div class="modal fade" id="modal_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add Contact
@@ -126,7 +129,7 @@
 							<input type="text" name="about" class="form-control" placeholder="Input about" required>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group mb-0">
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="icon fas fa-home"></i></span>
@@ -135,10 +138,11 @@
 								required></textarea>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group mb-0">
+						<img class="img-priview img-fluid col-sm-5 mb-1 mt-1">
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="customFile" name="foto">
-							<label class="custom-file-label" for="customFile">Upload Image</label>
+							<input type="file" class="custom-file-input" id="image" name="foto" onchange="priviewImage()">
+							<label class="custom-file-label" for="image">Upload Image</label>
 						</div>
 					</div>
 				</div>
@@ -153,7 +157,7 @@
 
 <?php foreach ($it as $row) : ?>
 <div class="modal fade" id="modal_edit<?php echo $row->id_user; ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Edit Contact
@@ -226,3 +230,47 @@
 	</div>
 </div>
 <?php endforeach; ?>
+
+<?php foreach ($it as $u) : ?>
+<div class="modal fade" id="modal_hapus<?php echo $u->id_user; ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content bg-danger">
+			<div class="modal-header">
+				<h5 class="col-12 modal-title text-center">Delete Data
+					<button class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h5>
+			</div>
+			<form onsubmit="delbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('dashboard/contact_hapus') ?>">
+				<div class="modal-body">
+					<input type="hidden" name="id" value="<?php echo $u->id_user; ?>">
+					<span>Are you sure delete <?php echo $u->nama; ?> ?</span>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+					<button class="btn btn-outline-light" id="delbtn"><i class="fa fa-check"></i> Yes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php endforeach; ?>
+
+<script>
+	function priviewImage() {
+		const image = document.querySelector('#image');
+		const imgPreview = document.querySelector('.img-priview');
+
+		imgPreview.style.display = 'block';
+
+		const oFReader = new FileReader();
+		oFReader.readAsDataURL(image.files[0]);
+
+		oFReader.onload = function (oFREvent) {
+			imgPreview.src = oFREvent.target.result;
+		}
+	}
+
+</script>

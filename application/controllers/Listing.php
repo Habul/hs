@@ -254,24 +254,26 @@ class Listing extends CI_Controller
     $this->form_validation->set_rules('id_listing', 'ID Listing', 'required');
 
     if ($this->form_validation->run() != false) {
-      $id_hs = $this->input->post('id_hs',TRUE);
-      $id_listing = $this->input->post('id_listing',TRUE);
-      $item = $this->input->post('item',TRUE);
-      $brand = $this->input->post('brand', TRUE);
-      $model = $this->input->post('model', TRUE);
-      $od = $this->input->post('od', TRUE);
-      $size = $this->input->post('size', TRUE);
-      $type = $this->input->post('type', TRUE);
-      $category = $this->input->post('category', TRUE);
-      $hole = $this->input->post('hole', TRUE);
-      $id = $this->input->post('id', TRUE);
-      $plat = $this->input->post('plat', TRUE);
-      $thread = $this->input->post('thread', TRUE);
+      $id_hs = $this->input->post('id_hs');
+      $id_listing = $this->input->post('id_listing');
+      $item = $this->input->post('item');
+      $brand = $this->input->post('brand');
+      $model = $this->input->post('model');
+      $od = $this->input->post('od');
+      $size = $this->input->post('size');
+      $type = $this->input->post('type');
+      $category = $this->input->post('category');
+      $hole = $this->input->post('hole');
+      $i_d = $this->input->post('i_d');
+      $plat = $this->input->post('plat');
+      $thread = $this->input->post('thread');
+      $qty = $this->input->post('qty');
+      $assembly = $this->input->post('assembly');
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
       $data = array(
         'id_hs' => $id_hs,
         'id_listing' => $id_listing,
-        'item' => $item,
+        'id_item' => $item,
         'brand' => $brand,
         'model' => $model,
         'od' => $od,
@@ -279,13 +281,15 @@ class Listing extends CI_Controller
         'type' => $type,
         'category' => $category,
         'hole' => $hole,
-        'i_d' => $id,
+        'i_d' => $i_d,
         'plat' => $plat,
         'thread' => $thread,
+        'qty' => $qty,
+        'id_assembly' => $assembly,
         'created_at' => $created_at,
       );
 
-      $this->m_data->insert_data($data,'quotation');
+      $this->m_data->insert_data($data,'qoutation');
       $this->session->set_flashdata('berhasil', 'Add successfully ' . $this->input->post('item', TRUE) . ' !');
       $id = $this->input->post('id_listing');
       $encrypt = urlencode($this->encrypt->encode($id));

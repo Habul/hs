@@ -66,7 +66,7 @@
 							</div>
 						</div>
 						<div class="card-body table-responsive">
-							<table class="table table-bordered table-hover table-sm" id="example12">
+							<table class="table table-hover table-sm" id="example12">
 								<thead class="thead-dark" style="text-align:center">
 									<tr style="text-align:center">
 										<th width="5%">No</th>
@@ -79,7 +79,7 @@
 								</thead>
 								<?php 
 								$no=1;
-								$query = $this->db->where('id_listing', $list->id)->get('qoutation');
+								$query =	$this->db->query("SELECT q.*,l.nama AS item FROM qoutation q INNER JOIN list_item l ON q.id_item=l.id WHERE q.id_listing='$list->id' order by created_at ASC");
 								foreach ($query->result() as $p) {  
 									$sum_total[] = $p->price;
 									$total_qty = array_sum($sum_total); ?>
@@ -89,11 +89,17 @@
 										<?php if ($p->id_assembly != 0) : ?>
 										<span class="badge badge-warning"> Assembly</span>
 										<?php endif; ?><br />
-										<b><?php echo strtoupper($p->category) ?></b><br />
-										<small class="badge badge-info"><?php echo $p->brand ?></small>
-										<small class="badge badge-info"><?php echo $p->model ?></small>
-										<small class="badge badge-info"><?php echo $p->thread ?></small>
-										<small class="badge badge-info"><?php echo $p->type ?></small>
+										<b><?php echo strtoupper($p->item) ?></b><br />
+										<small class="badge badge-info"><?php echo strtoupper($p->brand) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->model) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->od) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->size) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->type) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->category) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->hole) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->id) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->plat) ?></small>
+										<small class="badge badge-info"><?php echo strtoupper($p->thread) ?></small>
 									</td>
 									<td style="text-align:center"><br /><?php echo $p->size ?></td>
 									<td style="text-align:center"><br /><?php echo $p->qty ?></td>
@@ -253,7 +259,7 @@
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-4">Id&emsp;</label>
 							</div>
-							<select name="id" class="form-control" id="id">
+							<select name="i_d" class="form-control" id="id">
 								<option value="">- Choose Id -</option>
 							</select>
 						</div>
@@ -291,7 +297,7 @@
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-2">Assembly</label>
 							</div>
-							<select name="" id="assembly" class="form-control">
+							<select name="assembly" id="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
 								<?php foreach ($assembly as $i) : ?>
 								<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>

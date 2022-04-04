@@ -204,54 +204,6 @@
 								</li>
 							</ul>
 						</li>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<li <?= $this->uri->segment(2) == 'mobil' ||
-                  $this->uri->segment(2) == 'mobil_odo' ||
-                  $this->uri->segment(2) == 'motor' ||
-                  $this->uri->segment(2) == 'motor_odo' ||
-                  $this->uri->segment(2) == 'truck' ||
-                  $this->uri->segment(2) == 'truck_odo' ||
-                  $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
-							<a href="#" <?= $this->uri->segment(2) == 'mobil' ||
-                            $this->uri->segment(2) == 'mobil_odo' ||
-                            $this->uri->segment(2) == 'motor' ||
-                            $this->uri->segment(2) == 'motor_odo' ||
-                            $this->uri->segment(2) == 'truck' ||
-                            $this->uri->segment(2) == 'truck_odo' ||
-                            $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-								<i class="nav-icon fas fa-wrench"></i>
-								<p>Tracking
-									<i class="fas fa-angle-left right"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'driver/mobil' ?>"
-										<?= $this->uri->segment(2) == 'mobil' ||
-                              $this->uri->segment(2) == 'mobil_odo' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="fas fa-car-side nav-icon"></i>
-										<p>Mobil</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'driver/motor' ?>"
-										<?= $this->uri->segment(2) == 'motor' ||
-                              $this->uri->segment(2) == 'motor_odo' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="fas fa-motorcycle nav-icon"></i>
-										<p>Motor</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?php echo base_url() . 'driver/truck' ?>"
-										<?= $this->uri->segment(2) == 'truck' ||
-                              $this->uri->segment(2) == 'truck_odo' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
-										<i class="fas fa-truck nav-icon"></i>
-										<p>Truck</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<?php } ?>
 						<li class="nav-item">
 							<a href="<?php echo base_url() . 'dashboard/contact' ?>"
 								<?= $this->uri->uri_string() == 'dashboard/contact' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>

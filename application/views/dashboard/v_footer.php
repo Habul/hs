@@ -114,7 +114,7 @@
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
-							html += '<option value=' + data[i].id + '>' + data[i]
+							html += '<option value=' + data[i].nama + '>' + data[i]
 								.nama.toUpperCase() + '</option>';
 						}
 						$('#brand').html(html);
