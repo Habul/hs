@@ -44,12 +44,14 @@
 				<div class="col-md-12">
 					<div class="card card-warning card-outline">
 						<div class="card-header">
+							<?php if ($list->status != 3) : ?>
 							<h3 class="card-title">
 								<a class="btn btn-success col-15 shadow" data-toggle="modal" data-target="#modal_add_item">
 									<i class="fa fa-plus"></i>&nbsp; Add Item</a>
 								<a class="btn btn-warning col-15 shadow" data-toggle="modal" data-target="#modal_add_ass">
 									<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
 							</h3>
+							<?php endif; ?>
 							<div class="card-tools">
 								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
 									data-card-widget="collapse">
@@ -91,7 +93,11 @@
 										<?php endif; ?><br />
 										<b><?php echo strtoupper($p->item) ?></b><br />
 										<small class="badge badge-info"><?php echo strtoupper($p->brand) ?></small>
+										<?php if ($p->model === '45' || $p->model === '90') : ?>
+										<small class="badge badge-info"><?php echo strtoupper($p->model) ?>&deg;</small>
+										<?php else : ?>
 										<small class="badge badge-info"><?php echo strtoupper($p->model) ?></small>
+										<?php endif ?>
 										<small class="badge badge-info"><?php echo strtoupper($p->od) ?></small>
 										<small class="badge badge-info"><?php echo strtoupper($p->size) ?></small>
 										<small class="badge badge-info"><?php echo strtoupper($p->type) ?></small>
@@ -107,12 +113,17 @@
 										<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
 									</td>
 									<td style="text-align:center">
+										<?php if ($list->status != 3) : ?>
 										<a class="btn btn-warning" data-toggle="modal"
 											data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
 												class="fa fa-pencil-alt"></i></a>
 										<a class="btn btn-danger" data-toggle="modal"
 											data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
 												class="fa fa-trash"></i></a>
+										<?php elseif ($list->status == 3) : ?>
+										<button href="#" class="btn btn-danger" title="Lock" disabled><i
+												class="fas fa-lock"></i></button>
+										<?php endif ?>
 									</td>
 								</tr>
 								<?php } ?>
@@ -131,13 +142,28 @@
 							</table>
 						</div>
 						<div class="d-flex justify-content-around mb-3">
-							<a class=" btn btn-info col-15 shadow" href="">
-								<i class="fas fa-share"></i>&nbsp;Submit</a>
-							<a class="btn btn-warning col-15 shadow" href="">
-								<i class="fas fa-bullhorn"></i>&nbsp;Notice</a>
-							<a class="btn btn-success col-15 shadow" href="">
-								<i class="fas fa-lock"></i>&nbsp;Confrim</a>
-							<a class="btn btn-primary col-15 shadow" href="">
+							<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+								<input type="hidden" name="id" value="<?php echo $list->id ?>">
+								<input type="hidden" name="status" value="2">
+								<input type="hidden" name="ket" value="Submited">
+								<button class="btn btn-info col-15 shadow" type="submit">
+									<i class="fas fa-share"></i>&nbsp;Submit</button>
+							</form>
+							<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+								<input type="hidden" name="id" value="<?php echo $list->id ?>">
+								<input type="hidden" name="status" value="1">
+								<input type="hidden" name="ket" value="Notice">
+								<button class="btn btn-warning col-15 shadow" type="submit">
+									<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
+							</form>
+							<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+								<input type="hidden" name="id" value="<?php echo $list->id ?>">
+								<input type="hidden" name="status" value="3">
+								<input type="hidden" name="ket" value="Confrim">
+								<button class="btn btn-success col-15 shadow" type="submit">
+									<i class="fas fa-lock"></i>&nbsp;Confrim</button>
+							</form>
+							<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print') ?>">
 								<i class="fas fa-print"></i>&nbsp;Print</a>
 						</div>
 					</div>

@@ -20,44 +20,8 @@ class Dashboard extends CI_Controller
     $data['title'] = 'Dashboard';
     $data['jumlah_SJ'] = $this->m_data->get_data('sj_user')->num_rows();
     $data['jumlah_pengguna'] = $this->m_data->get_data('pengguna')->num_rows();    
-    $data['tot_mobil'] = $this->db->where('type', 'mobil')->get('type_vehicles')->num_rows();
-    $data['tot_motor'] = $this->db->where('type', 'motor')->get('type_vehicles')->num_rows();
-    $data['tot_truck'] = $this->db->where('type', 'truck')->get('type_vehicles')->num_rows();
-    $data['tot_vehicles'] = $this->m_data->get_data('type_vehicles')->num_rows();
-
-    // $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
-
-    // $sales = $this->m_data->select_by_sales();
-    // $index = 0;
-    // foreach ($sales as $value) {
-    //   $color = '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)];
-
-    //   $sales_color[$index] = $color;
-    //   $data_sales[$index] = $value->nama;
-
-    //   $index++;
-    // }
-
-    // $brand = $this->m_data->select_by_brand();
-    // $index = 0;
-    // foreach ($brand as $value) {
-    //   $color = '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)];
-
-    //   $brand_color[$index] = $color;
-    //   $data_posisi[$index] = $value->nama;
-
-    //   $index++;
-    // }
-
-    // $data['barmobil'] = $this->m_data->bartracking('mobil');
-    // $data['barmotor'] = $this->m_data->bartracking('motor');
-    // $data['bartruck'] = $this->m_data->bartracking('truck');
-    // $data['suratdf'] = $this->m_data->suratjalan('sj_user_df');
-    // $data['suraths'] = $this->m_data->suratjalan('sj_user');
-    // $data['data_sales'] = $this->m_data->select_by_sales();
-    // $data['data_brand'] = $this->m_data->select_by_brand();
-    // $data['sales_color'] = json_encode($sales_color);
-    // $data['brand_color'] = json_encode($brand_color);
+    $data['listing_all'] = $this->m_data->get_data('listing')->num_rows();
+    $data['listing_ok'] = $this->m_data->db->get_where('listing', ['status' => '3'])->num_rows();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('dashboard/v_index', $data);
     $this->load->view('dashboard/v_footer');
@@ -187,70 +151,6 @@ class Dashboard extends CI_Controller
     }
   }
 
-  public function pengaturan()
-  {
-    $data['pengaturan'] = $this->m_data->get_data('pengaturan')->result();
-
-    $this->load->view('dashboard/v_header');
-    $this->load->view('dashboard/v_pengaturan', $data);
-    $this->load->view('dashboard/v_footer');
-  }
-
-  public function pengaturan_update()
-  {
-    $this->form_validation->set_rules('nama', 'Nama Website', 'required');
-    $this->form_validation->set_rules('deskripsi', 'Deskripsi Website', 'required');
-
-    if ($this->form_validation->run() != false) {
-
-      $nama = $this->input->post('nama');
-      $deskripsi = $this->input->post('deskripsi');
-      $link_facebook = $this->input->post('link_facebook');
-      $link_twitter = $this->input->post('link_twitter');
-      $link_instagram = $this->input->post('link_instagram');
-      $link_github = $this->input->post('link_github');
-
-      $where = array();
-
-      $data = array(
-        'nama' => $nama,
-        'deskripsi' => $deskripsi,
-        'link_facebook' => $link_facebook,
-        'link_twitter' => $link_twitter,
-        'link_instagram' => $link_instagram,
-        'link_github' => $link_github
-      );
-
-      $this->m_data->update_data($where, $data, 'pengaturan');
-
-      if (!empty($_FILES['logo']['name'])) {
-
-        $config['upload_path']   = './gambar/website/';
-        $config['allowed_types'] = 'jpg|png|gif';
-
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('logo')) {
-
-          $gambar = $this->upload->data();
-
-          $logo = $gambar['file_name'];
-
-          $this->db->query("UPDATE pengaturan SET logo='$logo'");
-        }
-      }
-
-      redirect(base_url() . 'dashboard/pengaturan/?alert=sukses');
-    } else {
-      $data['pengaturan'] = $this->m_data->get_data('pengaturan')->result();
-
-      $this->load->view('dashboard/v_header');
-      $this->load->view('dashboard/v_pengaturan', $data);
-      $this->load->view('dashboard/v_footer');
-    }
-  }
-
-  // CRUD PENGGUNA
   public function pengguna()
   {
     $data['title'] = 'User Access';
@@ -489,13 +389,5 @@ class Dashboard extends CI_Controller
       $this->session->set_flashdata('berhasil', 'Data has been deleted !');
       redirect(base_url() . 'dashboard/contact');
     }
-  }
-
-  public function mini_games()
-  {
-    $data['title'] = 'Mini Games';
-    $this->load->view('dashboard/v_header', $data);
-    $this->load->view('it/v_games.php');
-    $this->load->view('dashboard/v_footer');
   }
 }

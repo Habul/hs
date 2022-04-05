@@ -41,7 +41,7 @@
 				</div>
 				<div class="card-body pb-0">
 					<div class="row row-cols-1 row-cols-md-2 g-4">
-						<?php foreach ($listings as $list) { ?>
+						<?php foreach ($listing as $list) { ?>
 						<div class="col">
 							<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
 							<a href="<?php echo base_url() . 'listing/list_update/?list=' . $encrypturl; ?>"

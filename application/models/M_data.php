@@ -97,16 +97,18 @@ class M_data extends CI_Model
 
     return $data->result();
   }
-
-  public function select_sjdf($no_id)
+ 
+  public function search_listing($keyword)
   {
-    $sql = "SELECT sj_df.no_id AS no_id, sj_df.id_join AS id_join, sj_df.descript AS descript, sj_df.qty AS qty FROM sj_df INNER JOIN sj_user_df 
-    ON sj_df.id_join=sj_user_df.no_id WHERE sj_user_df.no_id=$no_id";
-
-    $data = $this->db->query($sql);
-
-    return $data->result();
-  }
+		$this->db->select('*');
+		$this->db->from('listing');
+		if(!empty($keyword))
+    {
+			$this->db->like('id_hs',$keyword);
+			$this->db->or_like('company',$keyword);
+		}
+		return $this->db->get()->result();
+	}
 
   public function select_by_sales()
   {
@@ -128,7 +130,7 @@ class M_data extends CI_Model
 
   public function suratjalan($table)
   {
-    $sql = "SELECT COUNT(*) as total FROM $table WHERE EXTRACT(YEAR FROM date_delivery) = '2021'
+    $sql = "SELECT COUNT(*) as total FROM $table WHERE EXTRACT(YEAR FROM date_delivery) = date('Y');
 		GROUP BY EXTRACT(MONTH FROM date_delivery) ORDER BY EXTRACT(MONTH FROM date_delivery)";
 
     $data = $this->db->query($sql);
@@ -139,7 +141,7 @@ class M_data extends CI_Model
   public function bartracking($type)
   {
     $sql = "SELECT COUNT(*) AS total FROM driver WHERE join_id IN (SELECT no_id FROM type_vehicles WHERE TYPE='$type') AND
-		EXTRACT(YEAR FROM tanggal) = '2021' GROUP BY EXTRACT(MONTH FROM tanggal) ORDER BY EXTRACT(MONTH FROM tanggal)";
+		EXTRACT(YEAR FROM tanggal) = date('Y') GROUP BY EXTRACT(MONTH FROM tanggal) ORDER BY EXTRACT(MONTH FROM tanggal)";
 
     $data = $this->db->query($sql);
 

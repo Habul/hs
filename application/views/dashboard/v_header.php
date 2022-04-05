@@ -117,7 +117,6 @@
 						<a href="<?php echo base_url() . 'dashboard/profil' ?>"
 							class="d-block"><?php echo $this->session->userdata('nama');  ?></a>
 					</div>
-
 				</div>
 
 				<div class="form-inline">

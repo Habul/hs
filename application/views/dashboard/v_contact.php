@@ -28,58 +28,56 @@
 			<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
 		</div>
 		<?php } ?>
-		<div class="card card-solid">
-			<div class="card-body pb-0">
-				<div class="row">
-					<?php foreach ($it as $row) { ?>
-					<div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-						<div class="card bg-light d-flex flex-fill">
-							<div class="card-header text-muted border-bottom-0">
-								<?php echo strtoupper($row->posisi) ?>
-							</div>
-							<div class="card-body pt-0">
-								<div class="row">
-									<div class="col-7">
-										<h2 class="lead"><b><?php echo $row->nama; ?></b></h2>
-										<p class="text-muted text-sm"><b>About: </b> <?php echo $row->about; ?> </p>
-										<ul class="ml-4 mb-0 fa-ul text-muted">
-											<li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
-												Address:
-												<?php echo $row->alamat; ?> </li>
-											<li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone :
-												<?php echo $row->no_hp; ?> </li>
-										</ul>
-									</div>
-									<div class="col-5 text-center">
-										<img src="<?php echo base_url() . 'gambar/contact/' . $row->foto; ?>" alt="user-avatar"
-											class="img-circle img-fluid">
-									</div>
+		<div class="card-body pb-0">
+			<div class="row">
+				<?php foreach ($it as $row) { ?>
+				<div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+					<div class="card bg-light d-flex flex-fill">
+						<div class="card-header text-muted border-bottom-0">
+							<?php echo strtoupper($row->posisi) ?>
+						</div>
+						<div class="card-body pt-0">
+							<div class="row">
+								<div class="col-7">
+									<h2 class="lead"><b><?php echo $row->nama; ?></b></h2>
+									<p class="text-muted text-sm"><b>About: </b> <?php echo $row->about; ?> </p>
+									<ul class="ml-4 mb-0 fa-ul text-muted">
+										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
+											Address:
+											<?php echo $row->alamat; ?> </li>
+										<li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone :
+											<?php echo $row->no_hp; ?> </li>
+									</ul>
+								</div>
+								<div class="col-5 text-center">
+									<img src="<?php echo base_url() . 'gambar/contact/' . $row->foto; ?>" alt="user-avatar"
+										class="img-circle img-fluid">
 								</div>
 							</div>
-							<div class="card-footer">
-								<a href="https://wa.me/62<?php echo substr($row->no_hp,1); ?>?text=Hallo%20kakak%20"
-									class="btn btn-sm bg-teal float-right shadow" rel="noopener" target="_blank">
-									<i class="fab fa-whatsapp"></i></a>
-								<?php if ($this->session->userdata('level') == "admin") { ?>
-								<a class="btn btn-sm bg-info" data-toggle="modal"
-									data-target="#modal_edit<?php echo $row->id_user; ?>" title="Edit"><i
-										class="fa fa-pencil-alt"></i></a>
-								<a class="btn btn-sm bg-danger" data-toggle="modal"
-									data-target="#modal_hapus<?php echo $row->id_user; ?>" title="Delete"><i
-										class="fa fa-trash"></i></a>
-								<?php }  ?>
-							</div>
+						</div>
+						<div class="card-footer">
+							<a href="https://wa.me/62<?php echo substr($row->no_hp,1); ?>?text=Hallo%20kakak%20"
+								class="btn btn-sm bg-teal float-right shadow" rel="noopener" target="_blank">
+								<i class="fab fa-whatsapp"></i></a>
+							<?php if ($this->session->userdata('level') == "admin") { ?>
+							<a class="btn btn-sm bg-info" data-toggle="modal"
+								data-target="#modal_edit<?php echo $row->id_user; ?>" title="Edit"><i
+									class="fa fa-pencil-alt"></i></a>
+							<a class="btn btn-sm bg-danger" data-toggle="modal"
+								data-target="#modal_hapus<?php echo $row->id_user; ?>" title="Delete"><i
+									class="fa fa-trash"></i></a>
+							<?php }  ?>
 						</div>
 					</div>
-					<?php } ?>
 				</div>
-				<?php if ($this->session->userdata('level') == "admin") { ?>
-				<div class="col-md-3 shadow" style="padding: 0;">
-					<a class=" form-control btn btn-success" data-toggle="modal" data-target="#modal_add">
-						<i class="fa fa-plus"></i>&nbsp; Add</a>
-				</div>
-				<?php }  ?><br />
+				<?php } ?>
 			</div>
+			<?php if ($this->session->userdata('level') == "admin") { ?>
+			<div class="col-md-3 shadow" style="padding: 0;">
+				<a class=" form-control btn btn-success" data-toggle="modal" data-target="#modal_add">
+					<i class="fa fa-plus"></i>&nbsp; Add</a>
+			</div>
+			<?php }  ?><br />
 		</div>
 	</section>
 </div>
@@ -191,8 +189,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="icon fas fa-phone"></i></span>
 							</div>
-							<input type="number" name="no_hp" class="form-control" value="0<?php echo $row->no_hp; ?>"
-								required>
+							<input type="number" name="no_hp" class="form-control" value="<?php echo $row->no_hp; ?>" required>
 						</div>
 					</div>
 					<div class="form-group">

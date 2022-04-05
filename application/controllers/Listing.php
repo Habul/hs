@@ -19,13 +19,22 @@ class Listing extends CI_Controller
   public function listing()
   {
     $data['title'] = 'Listing Qoutation';
-    $data['listing'] = $this->db->order_by('created_at', 'desc')->get('listing')->result();
+    $data['listings'] = $this->db->order_by('created_at', 'desc')->get('listing')->result();
     $data['id_add'] = $this->db->select_max('id')->get('listing')->row();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_index', $data);
     $this->load->view('dashboard/v_footer', $data);
   }
 
+  public function search()
+  {
+    $data['title'] = 'Listing Qoutation';
+    $keyword = $this->input->post('keyword');
+    $data['listing']=$this->m_data->search_listing($keyword);
+    $this->load->view('dashboard/v_header', $data);
+    $this->load->view('listing/v_search', $data);
+    $this->load->view('dashboard/v_footer', $data);
+  }
   
   public function post()
   {
@@ -300,6 +309,28 @@ class Listing extends CI_Controller
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
     }
+  }
+
+  public function qoutation_submit()
+  {
+    $keter = $this->input->post('ket');
+
+    $data = array(
+      'status' => $this->input->post('status')
+    );
+
+    $where = array(
+      'id' => $this->input->post('id')
+    );
+    
+    $this->m_data->update_data($where, $data,'listing');
+    $this->session->set_flashdata('berhasil', 'Listing has been '.$this->input->post('ket', TRUE).' !');
+    redirect(base_url() . 'listing/listing');
+  }
+
+  public function qoutation_print()
+  {
+
   }
 
   public function listing_item()

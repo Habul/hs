@@ -27,7 +27,23 @@
 							<i class="ion ion-android-list"></i>
 						</div>
 						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('sj/sj_df') ?>" class="small-box-footer">More info <i
+						<a href="<?php echo base_url('sj/sj') ?>" class="small-box-footer">More info <i
+								class="fa fa-arrow-circle-right"></i></a>
+						<?php } ?>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-6">
+					<div class="small-box bg-yellow shadow">
+						<div class="inner">
+							<h3><?php echo $listing_all ?></h3>
+							<p>Total Qoutation</p>
+						</div>
+						<div class="icon">
+							<i class="ion ion-android-document"></i>
+						</div>
+						<?php if ($this->session->userdata('level') != "guest") {  ?>
+						<a href="<?php echo base_url('listing/listing') ?>" class="small-box-footer">More info <i
 								class="fa fa-arrow-circle-right"></i></a>
 						<?php } ?>
 					</div>
@@ -36,35 +52,21 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-green shadow">
 						<div class="inner">
-							<h3></h3>
-							<p>Total Qoutation</p>
-						</div>
-						<div class="icon">
-							<i class="ion ion-android-document"></i>
-						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-6">
-					<div class="small-box bg-red shadow">
-						<div class="inner">
-							<h3> </h3>
+							<h3><?php echo $listing_ok ?></h3>
 							<p>Total Qoutation Clear</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-ios-briefcase"></i>
 						</div>
 						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="<?php echo base_url('listing/listing') ?>" class="small-box-footer">More info <i
+								class="fa fa-arrow-circle-right"></i></a>
 						<?php } ?>
 					</div>
 				</div>
 
 				<div class="col-lg-3 col-6">
-					<div class="small-box bg-yellow shadow">
+					<div class="small-box bg-red shadow">
 						<div class="inner">
 							<h3><?php echo $jumlah_pengguna ?></h3>
 							<p>Total Pengguna</p>
@@ -73,68 +75,8 @@
 							<i class="fas fa-users"></i>
 						</div>
 						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-6">
-					<div class="small-box bg-success shadow">
-						<div class="inner">
-							<h3><?php echo $tot_mobil ?></h3>
-							<p>Total Mobil</p>
-						</div>
-						<div class="icon">
-							<i class="fas fa-car-side"></i>
-						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('driver/mobil') ?>" class="small-box-footer">More info <i
-								class="fas fa-arrow-circle-right"></i></a>
-						<?php } ?>
-					</div>
-				</div>
-				<div class="col-lg-3 col-6">
-					<div class="small-box bg-info shadow">
-						<div class="inner">
-							<h3><?php echo $tot_motor ?></h3>
-							<p>Total Motor</p>
-						</div>
-						<div class="icon">
-							<i class="fas fa-motorcycle"></i>
-						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('driver/motor') ?>" class="small-box-footer">More info <i
-								class="fas fa-arrow-circle-right"></i></a>
-						<?php } ?>
-
-					</div>
-				</div>
-				<div class="col-lg-3 col-6">
-					<div class="small-box bg-warning shadow">
-						<div class="inner">
-							<h3><?php echo $tot_truck ?></h3>
-							<p>Total Truck</p>
-						</div>
-						<div class="icon">
-							<i class="fas fa-truck"></i>
-						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('driver/truck') ?>" class="small-box-footer">More info <i
-								class="fas fa-arrow-circle-right"></i></a>
-						<?php } ?>
-					</div>
-				</div>
-				<div class="col-lg-3 col-6">
-					<div class="small-box bg-danger shadow">
-						<div class="inner">
-							<h3><?php echo $tot_vehicles ?></h3>
-							<p>Total Kendaraan</p>
-						</div>
-						<div class="icon">
-							<i class="fas fa-paper-plane"></i>
-						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="<?php echo base_url('dashboard/pengguna') ?>" class="small-box-footer">More info <i
+								class="fa fa-arrow-circle-right"></i></a>
 						<?php } ?>
 					</div>
 				</div>
