@@ -42,108 +42,151 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="card card-warning card-outline">
-						<div class="card-header">
-							<h3 class="card-title">
-								<a class="btn btn-success col-15 shadow" data-toggle="modal" data-target="#modal_add_item">
-									<i class="fa fa-plus"></i>&nbsp; Add Item</a>
-								<a class="btn btn-warning col-15 shadow" data-toggle="modal" data-target="#modal_add_ass">
-									<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
-							</h3>
-							<div class="card-tools">
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning"
-									data-card-widget="collapse">
-									<i class="fas fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-primary"
-									data-card-widget="maximize">
-									<i class="fas fa-expand"></i>
-								</button>
-								<button type="button" class="btn btn-xs btn-icon btn-circle btn-danger"
-									data-card-widget="remove">
-									<i class="fas fa-times"></i>
-								</button>
-							</div>
-						</div>
-						<div class="card-body table-responsive">
-							<table class="table table-bordered table-hover table-sm" id="example12">
-								<thead class="thead-dark" style="text-align:center">
-									<tr style="text-align:center">
-										<th width="5%">No</th>
-										<th>Category Type</th>
-										<th>Size</th>
-										<th>Qty</th>
-										<th>Price</th>
-										<th width="11%">Action</th>
-									</tr>
-								</thead>
-								<?php 
+					<?php if ($list->status == 1) : ?> <div class="card card-warning">
+						<?php elseif ($list->status == 2) : ?> <div class="card card-info">
+							<?php elseif ($list->status == 3) : ?> <div class="card card-success">
+								<?php else : ?> <div class="card card-default">
+									<?php endif; ?>
+									<div class="card-header">
+										<?php if ($list->status == 0 || $list->status == 1) : ?>
+										<h3 class="card-title">
+											<a class="btn btn-success col-15 shadow" data-toggle="modal"
+												data-target="#modal_add_item">
+												<i class="fa fa-plus"></i>&nbsp; Add Item</a>
+											<a class="btn btn-info col-15 shadow" data-toggle="modal" data-target="#modal_add_ass">
+												<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
+										</h3>
+										<?php endif; ?>
+										<div class="card-tools">
+											<button type="button" class="btn btn-xs btn-icon btn-circle"
+												data-card-widget="maximize">
+												<i class="fas fa-expand"></i>
+											</button>
+											<button type="button" class="btn btn-xs btn-icon btn-circle"
+												data-card-widget="collapse">
+												<i class="fas fa-minus"></i>
+											</button>
+											<button type="button" class="btn btn-xs btn-icon btn-circle" data-card-widget="remove">
+												<i class="fas fa-times"></i>
+											</button>
+										</div>
+									</div>
+									<div class="card-body table-responsive">
+										<table class="table table-hover table-sm" id="example12">
+											<thead class="thead-dark" style="text-align:center">
+												<tr style="text-align:center">
+													<th width="5%">No</th>
+													<th>Category Type</th>
+													<th>Size</th>
+													<th>Qty</th>
+													<th>Price</th>
+													<th width="11%">Action</th>
+												</tr>
+											</thead>
+											<?php 
 								$no=1;
-								$query = $this->db->where('id_listing', $list->id)->get('qoutation');
+								$query =	$this->db->query("SELECT q.*,l.nama AS item FROM qoutation q INNER JOIN list_item l ON q.id_item=l.id WHERE q.id_listing='$list->id' order by created_at ASC");
 								foreach ($query->result() as $p) {  
 									$sum_total[] = $p->price;
 									$total_qty = array_sum($sum_total); ?>
-								<tr>
-									<td style="text-align:center"><?php echo $no++ ?></td>
-									<td>
-										<?php if ($p->id_assembly != 0) : ?>
-										<span class="badge badge-warning"> Assembly</span>
-										<?php endif; ?><br />
-										<b><?php echo strtoupper($p->category) ?></b><br />
-										<small class="badge badge-info"><?php echo $p->brand ?></small>
-										<small class="badge badge-info"><?php echo $p->model ?></small>
-										<small class="badge badge-info"><?php echo $p->thread ?></small>
-										<small class="badge badge-info"><?php echo $p->type ?></small>
-									</td>
-									<td style="text-align:center"><br /><?php echo $p->size ?></td>
-									<td style="text-align:center"><br /><?php echo $p->qty ?></td>
-									<td style="text-align:center"><br />
-										<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
-									</td>
-									<td style="text-align:center">
-										<a class="btn btn-warning" data-toggle="modal"
-											data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
-												class="fa fa-pencil-alt"></i></a>
-										<a class="btn btn-danger" data-toggle="modal"
-											data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
-												class="fa fa-trash"></i></a>
-									</td>
-								</tr>
-								<?php } ?>
-							</table>
-							<table class="table table-sm">
-								<thead class="thead-light">
-									<tr>
-										<th width="70%" style="text-align:center"><b>Total<b></th>
-										<th style="text-align:center">
-											<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
-										</th>
-									</tr>
-								</thead>
-								<th></th>
-								<th></th>
-							</table>
-						</div>
-						<div class="d-flex justify-content-around mb-3">
-							<a class=" btn btn-info col-15 shadow" href="">
-								<i class="fas fa-share"></i>&nbsp;Submit</a>
-							<a class="btn btn-warning col-15 shadow" href="">
-								<i class="fas fa-bullhorn"></i>&nbsp;Notice</a>
-							<a class="btn btn-success col-15 shadow" href="">
-								<i class="fas fa-lock"></i>&nbsp;Confrim</a>
-							<a class="btn btn-primary col-15 shadow" href="">
-								<i class="fas fa-print"></i>&nbsp;Print</a>
+											<tr>
+												<td style="text-align:center"><?php echo $no++ ?></td>
+												<td>
+													<?php if ($p->id_assembly != 0) : ?>
+													<span class="badge badge-warning"> Assembly</span>
+													<?php endif; ?><br />
+													<b><?php echo strtoupper($p->item) ?></b><br />
+													<small class="badge badge-info"><?php echo strtoupper($p->brand) ?></small>
+													<?php if ($p->model === '45' || $p->model === '90') : ?>
+													<small class="badge badge-info"><?php echo strtoupper($p->model) ?>&deg;</small>
+													<?php else : ?>
+													<small class="badge badge-info"><?php echo strtoupper($p->model) ?></small>
+													<?php endif ?>
+													<small class="badge badge-info"><?php echo strtoupper($p->od) ?></small>
+													<small class="badge badge-info"><?php echo strtoupper($p->size) ?></small>
+													<small class="badge badge-info"><?php echo strtoupper($p->type) ?></small>
+													<small class="badge badge-info"><?php echo strtoupper($p->category) ?></small>
+													<small class="badge badge-info"><?php echo strtoupper($p->hole) ?></small>
+													<small class="badge badge-info"><?php echo strtoupper($p->id) ?></small>
+													<small class="badge badge-info"><?php echo strtoupper($p->plat) ?></small>
+													<small class="badge badge-info"><?php echo strtoupper($p->thread) ?></small>
+												</td>
+												<td style="text-align:center"><br /><?php echo $p->size ?></td>
+												<td style="text-align:center"><br /><?php echo $p->qty ?></td>
+												<td style="text-align:center"><br />
+													<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
+												</td>
+												<td class="align-middle text-center">
+													<?php if ($list->status == 1 || $list->status == 0) : ?>
+													<a class="btn btn-warning" data-toggle="modal"
+														data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
+															class="fa fa-pencil-alt"></i></a>
+													<a class="btn btn-danger" data-toggle="modal"
+														data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
+															class="fa fa-trash"></i></a>
+													<?php elseif ($list->status == 3 || $list->status == 2) : ?>
+													<button type="button" class="btn btn-danger float-end" title="Lock" disabled><i
+															class="fas fa-lock"></i></button>
+													<?php endif ?>
+												</td>
+											</tr>
+											<?php } ?>
+										</table>
+										<table class="table table-sm">
+											<thead class="thead-light">
+												<tr>
+													<th width="70%" style="text-align:center"><b>Total<b></th>
+													<th style="text-align:center">
+														<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
+													</th>
+												</tr>
+											</thead>
+											<th></th>
+											<th></th>
+										</table>
+									</div>
+									<div class="d-flex justify-content-around mb-3">
+										<?php if ($list->status != 3) : ?>
+										<?php if ($list->status != 2) : ?>
+										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+											<input type="hidden" name="id" value="<?php echo $list->id ?>">
+											<input type="hidden" name="status" value="2">
+											<input type="hidden" name="ket" value="Submited">
+											<button class="btn btn-info col-15 shadow" type="submit">
+												<i class="fas fa-share"></i>&nbsp;Submit</button>
+										</form>
+										<?php endif ?>
+										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+											<input type="hidden" name="id" value="<?php echo $list->id ?>">
+											<input type="hidden" name="status" value="1">
+											<input type="hidden" name="ket" value="Notice">
+											<button class="btn btn-warning col-15 shadow" type="submit">
+												<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
+										</form>
+										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+											<input type="hidden" name="id" value="<?php echo $list->id ?>">
+											<input type="hidden" name="status" value="3">
+											<input type="hidden" name="ket" value="Confrim">
+											<input type="hidden" name="updated_at" value="mdate('%Y-%m-%d %H:%i:%s')">
+											<button class="btn btn-success col-15 shadow" type="submit">
+												<i class="fas fa-lock"></i>&nbsp;Confrim</button>
+										</form>
+										<?php elseif ($list->status == 3) : ?>
+										<a class="btn btn-primary col-15 shadow"
+											href="<?php echo base_url('listing/qoutation_print') ?>">
+											<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
+										<?php endif ?>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 table-responsive-sm text-center mb-3">
+								<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i
+										class="fas fa-undo"></i>
+									Back</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-12 table-responsive-sm text-center mb-3">
-					<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i
-							class="fas fa-undo"></i>
-						Back</a>
-				</div>
-			</div>
-		</div>
-		<?php endforeach ?>
+					<?php endforeach ?>
 	</section>
 </div>
 
@@ -253,7 +296,7 @@
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-4">Id&emsp;</label>
 							</div>
-							<select name="id" class="form-control" id="id">
+							<select name="i_d" class="form-control" id="id">
 								<option value="">- Choose Id -</option>
 							</select>
 						</div>
@@ -291,7 +334,7 @@
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-2">Assembly</label>
 							</div>
-							<select name="" id="assembly" class="form-control">
+							<select name="assembly" id="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
 								<?php foreach ($assembly as $i) : ?>
 								<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>
