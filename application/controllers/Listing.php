@@ -299,7 +299,7 @@ class Listing extends CI_Controller
       );
 
       $this->m_data->insert_data($data,'qoutation');
-      $this->session->set_flashdata('berhasil', 'Add successfully ' . $this->input->post('item', TRUE) . ' !');
+      $this->session->set_flashdata('berhasil', 'Add successfully !');
       $id = $this->input->post('id_listing');
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
@@ -316,7 +316,8 @@ class Listing extends CI_Controller
     $keter = $this->input->post('ket');
 
     $data = array(
-      'status' => $this->input->post('status')
+      'status' => $this->input->post('status'),
+      'updated_at' => $this->input->post('updated_at')
     );
 
     $where = array(

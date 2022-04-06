@@ -44,7 +44,7 @@
 				<div class="col-md-12">
 					<div class="card card-warning card-outline">
 						<div class="card-header">
-							<?php if ($list->status != 3) : ?>
+							<?php if ($list->status == 0 || $list->status == 1) : ?>
 							<h3 class="card-title">
 								<a class="btn btn-success col-15 shadow" data-toggle="modal" data-target="#modal_add_item">
 									<i class="fa fa-plus"></i>&nbsp; Add Item</a>
@@ -112,16 +112,16 @@
 									<td style="text-align:center"><br />
 										<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
 									</td>
-									<td style="text-align:center">
-										<?php if ($list->status != 3) : ?>
+									<td class="align-middle text-center">
+										<?php if ($list->status == 1 || $list->status == 0) : ?>
 										<a class="btn btn-warning" data-toggle="modal"
 											data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
 												class="fa fa-pencil-alt"></i></a>
 										<a class="btn btn-danger" data-toggle="modal"
 											data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
 												class="fa fa-trash"></i></a>
-										<?php elseif ($list->status == 3) : ?>
-										<button href="#" class="btn btn-danger" title="Lock" disabled><i
+										<?php elseif ($list->status == 3 || $list->status == 2) : ?>
+										<button type="button" class="btn btn-danger float-end" title="Lock" disabled><i
 												class="fas fa-lock"></i></button>
 										<?php endif ?>
 									</td>
@@ -142,6 +142,8 @@
 							</table>
 						</div>
 						<div class="d-flex justify-content-around mb-3">
+							<?php if ($list->status != 3) : ?>
+							<?php if ($list->status != 2) : ?>
 							<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 								<input type="hidden" name="id" value="<?php echo $list->id ?>">
 								<input type="hidden" name="status" value="2">
@@ -149,6 +151,7 @@
 								<button class="btn btn-info col-15 shadow" type="submit">
 									<i class="fas fa-share"></i>&nbsp;Submit</button>
 							</form>
+							<?php endif ?>
 							<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 								<input type="hidden" name="id" value="<?php echo $list->id ?>">
 								<input type="hidden" name="status" value="1">
@@ -160,11 +163,14 @@
 								<input type="hidden" name="id" value="<?php echo $list->id ?>">
 								<input type="hidden" name="status" value="3">
 								<input type="hidden" name="ket" value="Confrim">
+								<input type="hidden" name="updated_at" value="mdate('%Y-%m-%d %H:%i:%s')">
 								<button class="btn btn-success col-15 shadow" type="submit">
 									<i class="fas fa-lock"></i>&nbsp;Confrim</button>
 							</form>
+							<?php elseif ($list->status == 3) : ?>
 							<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print') ?>">
-								<i class="fas fa-print"></i>&nbsp;Print</a>
+								<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
+							<?php endif ?>
 						</div>
 					</div>
 				</div>

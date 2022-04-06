@@ -163,13 +163,15 @@
                   $this->uri->segment(2) == 'listing_item' ||
 						$this->uri->segment(2) == 'listing_item_detail' ||
                   $this->uri->segment(2) == 'listing_detail' ||                  
+                  $this->uri->segment(2) == 'search' ||                  
                   $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
 							<a href="#" <?= $this->uri->segment(2) == 'listing' ||
                             $this->uri->segment(2) == 'list_update' ||
 									 $this->uri->segment(2) == 'new_list' ||
                             $this->uri->segment(2) == 'listing_item' ||
 									 $this->uri->segment(2) == 'listing_item_detail' ||
-                            $this->uri->segment(2) == 'listing_detail' ||                            
+                            $this->uri->segment(2) == 'listing_detail' ||
+									 $this->uri->segment(2) == 'search' ||                             
                             $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 								<i class="nav-icon fas fa-briefcase"></i>
 								<?php $total = $this->db->where('status!=', '3')->get('listing')->num_rows(); ?>
@@ -193,6 +195,7 @@
 									<a href="<?php echo base_url() . 'listing/listing' ?>" <?= $this->uri->segment(2) == 'listing' ||
 									 $this->uri->segment(2) == 'list_update' ||
 									 $this->uri->segment(2) == 'new_list' ||
+									 $this->uri->segment(2) == 'search' || 
                                $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 										<i class="fas fa-drafting-compass nav-icon"></i>
 										<?php if ($total != 0) : ?>
