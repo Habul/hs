@@ -182,9 +182,17 @@
 												<i class="fas fa-lock"></i>&nbsp;Confrim</button>
 										</form>
 										<?php elseif ($list->status == 3) : ?>
+										<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
 										<a class="btn btn-primary col-15 shadow"
-											href="<?php echo base_url('listing/qoutation_print') ?>">
+											href="<?php echo base_url('listing/qoutation_print/?print='. $encrypturl) ?>">
 											<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
+										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+											<input type="hidden" name="id" value="<?php echo $list->id ?>">
+											<input type="hidden" name="status" value="1">
+											<input type="hidden" name="ket" value="Revoke">
+											<button class="btn btn-warning col-15 shadow" type="submit">
+												<i class="fas fa-lock-open"></i>&nbsp;Revoke Acceptance</button>
+										</form>
 										<?php endif ?>
 									</div>
 								</div>
@@ -379,7 +387,7 @@
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text pr-3">Id Assm</span>
+							<label class="input-group-text pr-3">Id Assm</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
 						<input type="hidden" name="id" class="form-control" value="<?php echo $list->id ?>" readonly>
@@ -389,7 +397,7 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text pr-4">Desc &nbsp;&nbsp;</span>
+							<label class="input-group-text pr-4">Desc &nbsp;&nbsp;</label>
 						</div>
 						<textarea name="desc" class="form-control" placeholder="..." required></textarea>
 					</div>

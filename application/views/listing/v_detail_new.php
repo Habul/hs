@@ -34,13 +34,23 @@
 				<div class="col-md-12">
 					<div class="callout callout-info">
 						<?php foreach ($listing as $list) : ?>
-						<li>ID &emsp;&emsp;&emsp;: <b><?php echo $list->id_hs; ?></b></li>
+						<li>ID &emsp;&emsp;&emsp;: <b><?php echo $list->id_hs; ?></b>
+							<?php if ($list->status == 1 ) : ?>
+							<span class="badge badge-warning">NOTICE</span>
+							<?php elseif ($list->status == 2) : ?>
+							<span class="badge badge-info">SUBMITED</span>
+							<?php elseif ($list->status == 3) : ?>
+							<span class="badge badge-success">CONFRIMED</span>
+							<?php else : ?>
+							<span class="badge badge-default">OPEN</span>
+							<?php endif ?>
+						</li>
 						<li>Company : <?php echo $list->company; ?></li>
 						<li>Notes&emsp;&emsp;: <?php echo $list->notes; ?></li>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class=" row">
 				<div class="col-md-12">
 					<?php if ($list->status == 1) : ?> <div class="card card-warning">
 						<?php elseif ($list->status == 2) : ?> <div class="card card-info">
@@ -369,7 +379,7 @@
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text pr-3">Id Assm</span>
+							<label class="input-group-text pr-3">Id Assm</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
 						<input type="hidden" name="id" class="form-control" value="<?php echo $list->id ?>" readonly>
@@ -379,7 +389,7 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text pr-4">Desc &nbsp;&nbsp;</span>
+							<label class="input-group-text pr-4">Desc &nbsp;&nbsp;</label>
 						</div>
 						<textarea name="desc" class="form-control" placeholder="..." required></textarea>
 					</div>

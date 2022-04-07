@@ -102,6 +102,7 @@ class M_data extends CI_Model
   {
 		$this->db->select('*');
 		$this->db->from('listing');
+    $this->db->order_by('created_at', 'DESC');
 		if(!empty($keyword))
     {
 			$this->db->like('id_hs',$keyword);

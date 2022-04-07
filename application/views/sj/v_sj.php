@@ -62,8 +62,8 @@
 									</tr>
 								</thead>
 								<?php
-                foreach ($sj_user as $p) {
-                ?>
+								foreach ($sj_user as $p) {
+								?>
 								<tr>
 									<td><?php echo $p->no_delivery; ?></td>
 									<td><?php echo date('d/m/Y', strtotime($p->due_date)); ?></td>
@@ -74,7 +74,7 @@
 									<td>
 										<?php echo preg_replace('/\d{3}/', '$0-', str_replace('.', 'null', trim($p->phone)), 1); ?>
 									</td>
-									<td style="text-align:center">
+									<td class="align-middle text-center">
 										<?php $encrypturl = urlencode($this->encrypt->encode($p->no_po)) ?>
 										<a class="btn-sm btn-warning" data-toggle="modal"
 											data-target="#modal_edit_sj<?php echo $p->no_po; ?>" title="Edit SJ"><i

@@ -81,10 +81,10 @@
 								$sum_total[] = $u->qty;
 								$total_qty = array_sum($sum_total); ?>
 								<tr>
-									<td style="text-align:center"><?php echo $no++; ?></td>
+									<td class="text-center"><?php echo $no++; ?></td>
 									<td><?php echo $u->descript; ?></td>
-									<td style="text-align:center"><?php echo $u->qty; ?></td>
-									<td style="text-align:center">
+									<td class="text-center"><?php echo $u->qty; ?></td>
+									<td class="align-middle text-center">
 										<a class="btn-sm btn-warning" data-toggle="modal"
 											data-target="#modal_edit_desc<?php echo $u->no_id; ?>" title="Edit Desc SJ"><i
 												class="fa fa-edit"></i></a>
@@ -98,8 +98,8 @@
 							<table class="table table-sm">
 								<thead class="thead-light">
 									<tr>
-										<th width="80%" style="text-align:center"><b>Total<b></th>
-										<th style="text-align:center">
+										<th width="80%" class="text-center"><b>Total<b></th>
+										<th class="text-center">
 											<b><?php echo number_format($total_qty, 0, '.', '.'); ?><b>
 										</th>
 									</tr>

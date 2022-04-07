@@ -605,7 +605,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Brand</span>
+							<label class="input-group-text">Brand</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -638,7 +638,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Brand</span>
+							<label class="input-group-text">Brand</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -703,7 +703,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Type</span>
+							<label class="input-group-text">Type</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -736,7 +736,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Type</span>
+							<label class="input-group-text">Type</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -801,7 +801,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Size</span>
+							<label class="input-group-text">Size</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -834,7 +834,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Size</span>
+							<label class="input-group-text">Size</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -899,7 +899,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Model</span>
+							<label class="input-group-text">Model</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -932,7 +932,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Model</span>
+							<label class="input-group-text">Model</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -997,7 +997,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Od</span>
+							<label class="input-group-text">Od</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1030,7 +1030,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Od</span>
+							<label class="input-group-text">Od</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1095,7 +1095,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Category</span>
+							<label class="input-group-text">Category</span>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1128,7 +1128,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Category</span>
+							<label class="input-group-text">Category</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1193,7 +1193,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Hole</span>
+							<label class="input-group-text">Hole</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1226,7 +1226,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Hole</span>
+							<label class="input-group-text">Hole</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1291,7 +1291,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Id</span>
+							<label class="input-group-text">Id</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1324,7 +1324,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Id</span>
+							<label class="input-group-text">Id</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1389,7 +1389,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Plat</span>
+							<label class="input-group-text">Plat</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1422,7 +1422,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Plat</span>
+							<label class="input-group-text">Plat</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1487,7 +1487,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Thread</span>
+							<label class="input-group-text">Thread</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
@@ -1520,7 +1520,7 @@
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text">Thread</span>
+							<label class="input-group-text">Thread</label>
 						</div>
 						<?php foreach ($listitem as $u) : ?>
 						<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
