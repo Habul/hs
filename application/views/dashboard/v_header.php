@@ -163,7 +163,8 @@
                   $this->uri->segment(2) == 'listing_item' ||
 						$this->uri->segment(2) == 'listing_item_detail' ||
                   $this->uri->segment(2) == 'listing_detail' ||                  
-                  $this->uri->segment(2) == 'search' ||                  
+                  $this->uri->segment(2) == 'search' ||
+						$this->uri->segment(2) == 'listing_price' ||                  
                   $this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
 							<a href="#" <?= $this->uri->segment(2) == 'listing' ||
                             $this->uri->segment(2) == 'list_update' ||
@@ -171,7 +172,8 @@
                             $this->uri->segment(2) == 'listing_item' ||
 									 $this->uri->segment(2) == 'listing_item_detail' ||
                             $this->uri->segment(2) == 'listing_detail' ||
-									 $this->uri->segment(2) == 'search' ||                             
+									 $this->uri->segment(2) == 'search' ||
+									 $this->uri->segment(2) == 'listing_price' ||                             
                             $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 								<i class="nav-icon fas fa-briefcase"></i>
 								<?php $total = $this->db->where('status!=', '3')->get('listing')->num_rows(); ?>
@@ -202,6 +204,14 @@
 										<span class="badge badge-warning right"><?php echo $total; ?></span>
 										<?php endif; ?>
 										<p>Listing Qoutation</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="<?php echo base_url() . 'listing/listing_price' ?>" <?= $this->uri->segment(2) == 'listing_price' ||
+										 $this->uri->segment(2) == 'listing_item_price' ||
+                               $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
+										<i class="fas fa-dollar-sign nav-icon"></i>
+										<p>Price List</p>
 									</a>
 								</li>
 							</ul>

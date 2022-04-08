@@ -18,10 +18,12 @@ class Dashboard extends CI_Controller
   public function index()
   {
     $data['title'] = 'Dashboard';
-    $data['jumlah_SJ'] = $this->m_data->get_data('sj_user')->num_rows();
     $data['jumlah_pengguna'] = $this->m_data->get_data('pengguna')->num_rows();    
     $data['listing_all'] = $this->m_data->get_data('listing')->num_rows();
-    $data['listing_ok'] = $this->m_data->db->get_where('listing', ['status' => '3'])->num_rows();
+    $data['listing_accept'] = $this->m_data->db->get_where('listing', ['status' => '3'])->num_rows();
+    $data['listing_notice'] = $this->m_data->db->get_where('listing', ['status' => '1'])->num_rows();
+    $data['listing_submit'] = $this->m_data->db->get_where('listing', ['status' => '2'])->num_rows();
+    $data['listing_na'] = $this->m_data->db->get_where('listing', ['status' => '0'])->num_rows();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('dashboard/v_index', $data);
     $this->load->view('dashboard/v_footer');

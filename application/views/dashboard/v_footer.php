@@ -101,6 +101,7 @@
 			$('#div_category')[(id == 3) || (id == 4) ? "show" : "hide"]();
 			$('#div_plat')[(id == 5) ? "show" : "hide"]();
 			$('#div_thread')[(id == 3) ? "show" : "hide"]();
+			$('#div_posisi')[(id == 3) ? "show" : "hide"]();
 			if (id == 1 || id == 2 || id == 3) {
 				$.ajax({
 					url: "<?php echo site_url('listing/get_list_brand');?>",

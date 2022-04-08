@@ -63,7 +63,8 @@
 											<a class="btn btn-success col-15 shadow" data-toggle="modal"
 												data-target="#modal_add_item">
 												<i class="fa fa-plus"></i>&nbsp; Add Item</a>
-											<a class="btn btn-info col-15 shadow" data-toggle="modal" data-target="#modal_add_ass">
+											<a class="btn btn-secondary col-15 shadow" data-toggle="modal"
+												data-target="#modal_add_ass">
 												<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
 										</h3>
 										<?php endif; ?>
@@ -161,30 +162,38 @@
 										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="2">
-											<input type="hidden" name="ket" value="Submited">
+											<input type="hidden" name="ket" value="Submited ID : <?php echo $list->id_hs ?>">
 											<button class="btn btn-info col-15 shadow" type="submit">
-												<i class="fas fa-share"></i>&nbsp;Submit</button>
+												<i class="fas fa-bookmark"></i>&nbsp;Submit</button>
 										</form>
 										<?php endif ?>
 										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="1">
-											<input type="hidden" name="ket" value="Notice">
+											<input type="hidden" name="ket" value="Notice ID : <?php echo $list->id_hs ?>">
 											<button class="btn btn-warning col-15 shadow" type="submit">
 												<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
 										</form>
 										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="3">
-											<input type="hidden" name="ket" value="Confrim">
+											<input type="hidden" name="ket" value="Confrim ID : <?php echo $list->id_hs ?>">
 											<input type="hidden" name="updated_at" value="mdate('%Y-%m-%d %H:%i:%s')">
 											<button class="btn btn-success col-15 shadow" type="submit">
 												<i class="fas fa-lock"></i>&nbsp;Confrim</button>
 										</form>
 										<?php elseif ($list->status == 3) : ?>
+										<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
 										<a class="btn btn-primary col-15 shadow"
-											href="<?php echo base_url('listing/qoutation_print') ?>">
+											href="<?php echo base_url('listing/qoutation_print/?print='. $encrypturl) ?>">
 											<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
+										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+											<input type="hidden" name="id" value="<?php echo $list->id ?>">
+											<input type="hidden" name="status" value="1">
+											<input type="hidden" name="ket" value="Revoke">
+											<button class="btn btn-warning col-15 shadow" type="submit">
+												<i class="fas fa-lock-open"></i>&nbsp;Revoke Acceptance</button>
+										</form>
 										<?php endif ?>
 									</div>
 								</div>
@@ -216,7 +225,7 @@
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text pr-4">Item</label>
+							<label class="input-group-text pr-5">Item&emsp;</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
 						<input type="hidden" name="id" readonly class="form-control"
@@ -234,7 +243,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_brand">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-3">Brand</label>
+								<label class="input-group-text pr-5">Brand</label>
 							</div>
 							<select name="brand" id="brand" class="form-control">
 								<option value="">- Choose Brand -</option>
@@ -244,7 +253,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_model">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-3">Model</label>
+								<label class="input-group-text pr-5">Model</label>
 							</div>
 							<select name="model" class="form-control" id="model">
 								<option value="">- Choose Model -</option>
@@ -254,7 +263,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_od">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-4">Od&emsp;</label>
+								<label class="input-group-text pr-5">Od&emsp;&nbsp;&nbsp;</label>
 							</div>
 							<select name="od" class="form-control" id="od">
 								<option value="">- Choose Od -</option>
@@ -264,7 +273,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_size">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-3">Size&emsp;</label>
+								<label class="input-group-text pr-5">Size&emsp;</label>
 							</div>
 							<select name="size" class="form-control" id="size">
 								<option value="">- Choose Size -</option>
@@ -274,7 +283,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_type">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-4">Type</label>
+								<label class="input-group-text pr-5">Type&emsp;</label>
 							</div>
 							<select name="type" class="form-control" id="type">
 								<option value="">- Choose Type -</option>
@@ -284,7 +293,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_category">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-1">Category</label>
+								<label class="input-group-text pr-4">Category&emsp;</label>
 							</div>
 							<select name="category" class="form-control" id="category">
 								<option value="">- Choose Category -</option>
@@ -294,7 +303,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_hole">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-4">Hole</label>
+								<label class="input-group-text pr-5">Hole&emsp;</label>
 							</div>
 							<select name="hole" class="form-control" id="hole">
 								<option value="">- Choose Hole -</option>
@@ -304,7 +313,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_id">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-4">Id&emsp;</label>
+								<label class="input-group-text pr-5">Id&emsp;&emsp;</label>
 							</div>
 							<select name="i_d" class="form-control" id="id">
 								<option value="">- Choose Id -</option>
@@ -314,7 +323,7 @@
 					<div class=" form-group mb-3" style="display: none;" id="div_plat">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-3">Plat&emsp;</label>
+								<label class="input-group-text pr-5">Plat&emsp;</label>
 							</div>
 							<select name="plat" class="form-control" id="plat">
 								<option value="">- Choose Plat -</option>
@@ -324,7 +333,7 @@
 					<div class="form-group mb-3" style="display: none;" id="div_thread">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-2">Thread&nbsp;</label>
+								<label class="input-group-text pr-4">Thread&emsp;&nbsp;&nbsp;</label>
 							</div>
 							<select name="thread" class="form-control" id="thread">
 								<option value="">- Choose Thread -</option>
@@ -334,21 +343,41 @@
 					<div class="form-group mb-3">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-3">Qty&emsp;</label>
+								<label class="input-group-text pr-5">Qty&emsp;&nbsp;</label>
 							</div>
 							<input type="number" name="qty" class="form-control" min="1" placeholder="0" required>
 						</div>
 					</div>
-					<div class="form-group mb-0">
+					<div class="form-group mb-3">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-2">Assembly</label>
+								<label class="input-group-text pr-4">Type Price</label>
+							</div>
+							<select name="type_price" class="form-control" id="type_price">
+								<option value="">- Choose Type Price -</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Assembly&nbsp;&nbsp;&nbsp;</label>
 							</div>
 							<select name="assembly" id="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
 								<?php foreach ($assembly as $i) : ?>
 								<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>
 								<?php endforeach ?>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-0" style="display: none;" id="div_posisi">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text">Posisi Fitting</label>
+							</div>
+							<select name="posisi" class="form-control" id="posisi">
+								<option value="">- Choose posisi -</option>
 							</select>
 						</div>
 					</div>
@@ -403,3 +432,33 @@
 	</div>
 </div>
 <!--End Modals Add-->
+
+
+<!--MODAL HAPUS DESC-->
+<?php foreach ($qoutation as $u) : ?>
+<div class="modal fade" id="modal_hapus<?php echo $u->id; ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content bg-danger">
+			<div class="modal-header">
+				<h5 class="col-12 modal-title text-center">Delete Data
+					<button class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h5>
+			</div>
+			<form onsubmit="delbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('listing/qoutation_delete') ?>">
+				<div class="modal-body">
+					<input type="hidden" name="id" value="<?php echo $u->id; ?>">
+					<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
+					<span>Are you sure delete this ?</span>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+					<button class="btn btn-outline-light" id="delbtn"><i class="fa fa-check"></i> Yes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php endforeach; ?>
