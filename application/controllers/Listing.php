@@ -463,4 +463,81 @@ class Listing extends CI_Controller
     }
   }  
 
+  public function listing_price()
+  {
+    $data['title'] = 'Price List';
+    $data['listprice'] = $this->m_data->get_data('list_price')->result();
+    $data['listitem'] = $this->m_data->get_data('list_item')->result();
+    $this->load->view('dashboard/v_header', $data);
+    $this->load->view('listing/v_price', $data);
+    $this->load->view('dashboard/v_footer');
+  }
+
+  public function listing_price_detail()
+  {
+    $id = rawurldecode($this->encrypt->decode($_GET['price']));
+
+    $where = array(
+      'id' => $id
+    );
+
+    $where2 = array(
+      'id_item' => $id
+    );
+
+    $data['title'] = 'Price List Detail';
+    $data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
+    $data['listprice'] = $this->m_data->edit_data($where2, 'list_price')->result();
+    $this->load->view('dashboard/v_header', $data);
+    $this->load->view('listing/v_price_detail', $data);
+    $this->load->view('dashboard/v_footer');
+  }
+
+  public function price_add()
+  {
+    $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
+    $this->form_validation->set_rules('jenis', 'Jenis', 'required');
+    $this->form_validation->set_rules('part_code', 'Part Code', 'required');
+    $this->form_validation->set_rules('desc', 'Desc', 'required');
+    $this->form_validation->set_rules('distributor', 'Distributor', 'required');
+    $this->form_validation->set_rules('oem', 'Oem', 'required');
+    $this->form_validation->set_rules('reseller', 'Reseller', 'required');
+    $this->form_validation->set_rules('user', 'User', 'required');
+
+    if ($this->form_validation->run() != false) {
+      $id_item = $this->input->post('id_item',TRUE);
+      $jenis = $this->input->post('jenis', TRUE);
+      $part_code = $this->input->post('part_code', TRUE);
+      $desc = $this->input->post('desc', TRUE);
+      $distributor = $this->input->post('distributor', TRUE);
+      $oem = $this->input->post('oem', TRUE);
+      $reseller = $this->input->post('reseller', TRUE);
+      $user = $this->input->post('user', TRUE);
+      $created_at = mdate('%Y-%m-%d %H:%i:%s');
+
+      $data = array(
+        'id_item' => $id_item,
+        'jenis' => $jenis,
+        'part_code' => $part_code,
+        'desc' => $desc,
+        'distributor' => $distributor,
+        'oem' => $oem,
+        'reseller' => $reseller,
+        'user' => $user,
+        'created_at' => $created_at
+      );
+
+      $this->m_data->insert_data($data, 'list_price');
+      $this->session->set_flashdata('berhasil', 'Add successfully ' . $this->input->post('jenis', TRUE) . ' !');
+      $id = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+    } else {
+      $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+      $id = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+    }
+  }
+
 }

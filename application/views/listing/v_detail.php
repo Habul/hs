@@ -320,7 +320,7 @@
 							</select>
 						</div>
 					</div>
-					<div class=" form-group mb-3" style="display: none;" id="div_plat">
+					<div class="form-group mb-3" style="display: none;" id="div_plat">
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-5">Plat&emsp;</label>

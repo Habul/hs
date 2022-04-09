@@ -52,7 +52,7 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<table id="index2" class="table table-bordered table-striped table-sm">
+							<table id="index1" class="table table-striped table-sm">
 								<thead class="thead-dark" style="text-align:center">
 									<tr>
 										<th width="5%">No</th>
@@ -262,8 +262,7 @@
 									<span><i class="fa fa-lock"></i></span>
 								</div>
 							</div>
-							<input type="password" class="form-control" name="password" placeholder="Masukan Password.."
-								required>
+							<input type="password" class="form-control" name="password" placeholder="Masukan Password..">
 							<?php echo form_error('password'); ?>
 						</div>
 						<small>Kosongkan jika tidak ingin mengubah password</small>

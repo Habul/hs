@@ -57,41 +57,41 @@
     ],
     "buttons": [{
         extend: 'copyHtml5',
-        filename: 'Data Pengguna',
-        title: 'Rekap Data Pengguna',
+        filename: 'Data',
+        title: 'Rekap Data',
         footer: true,
         exportOptions: {
-          columns: [1, 2, 3, 4, 5],
+          columns: [1, 2, 3, 4, 5, 6, 7],
           orthogonal: 'export',
         },
       },
       {
         extend: 'excelHtml5',
-        filename: 'Data Pengguna',
-        title: 'Rekap Data Pengguna',
+        filename: 'Data',
+        title: 'Rekap Data',
         footer: true,
         exportOptions: {
-          columns: [1, 2, 3, 4, 5],
+          columns: [1, 2, 3, 4, 5, 6, 7],
           orthogonal: 'export'
         },
       },
       {
         extend: 'csvHtml5',
-        filename: 'Data Pengguna',
-        title: 'Rekap Data Pengguna',
+        filename: 'Data',
+        title: 'Rekap Data',
         footer: true,
         exportOptions: {
-          columns: [1, 2, 3, 4, 5],
+          columns: [1, 2, 3, 4, 5, 6, 7],
           orthogonal: 'export'
         },
       },
       {
         extend: 'pdfHtml5',
-        filename: 'Data Pengguna',
-        title: 'Rekap Data Pengguna',
+        filename: 'Data',
+        title: 'Rekap Data',
         footer: true,
         exportOptions: {
-          columns: [1, 2, 3, 4, 5],
+          columns: [1, 2, 3, 4, 5, 6, 7],
           orthogonal: 'export',
           modifier: {
             orientation: 'landscape'
