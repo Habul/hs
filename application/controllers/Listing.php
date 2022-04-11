@@ -111,7 +111,7 @@ class Listing extends CI_Controller
       );
 
       $this->m_data->update_data($where, $data, 'listing');
-      $this->session->set_flashdata('berhasil', 'Update successfully, ID : ' . $this->input->post('id_hs', TRUE) . ' !');
+      $this->session->set_flashdata('berhasil', 'Update successfully, ID : ' . $id_hs. ' !');
       redirect(base_url() . 'listing/listing');
     } else {
       $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
@@ -333,7 +333,7 @@ class Listing extends CI_Controller
     );
     
     $this->m_data->update_data($where, $data,'listing');
-    $this->session->set_flashdata('berhasil', 'Listing has been '.$this->input->post('ket', TRUE).' !');
+    $this->session->set_flashdata('berhasil', 'Listing has been '.$keter.' !');
     redirect(base_url() . 'listing/listing');
   }
 
@@ -399,7 +399,7 @@ class Listing extends CI_Controller
       );
 
       $this->m_data->insert_data($data, $jenis);
-      $this->session->set_flashdata('berhasil', 'Add successfully ' . $this->input->post('nama', TRUE) . ' !');
+      $this->session->set_flashdata('berhasil', 'Add successfully ' . $nama . ' !');
       $id = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
@@ -434,7 +434,7 @@ class Listing extends CI_Controller
       );
 
       $this->m_data->update_data($where, $data, $jenis);
-      $this->session->set_flashdata('berhasil', 'Update successfully ' . $this->input->post('nama', TRUE) . ' !');
+      $this->session->set_flashdata('berhasil', 'Update successfully ' . $nama. ' !');
       $id = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
@@ -528,7 +528,7 @@ class Listing extends CI_Controller
       );
 
       $this->m_data->insert_data($data, 'list_price');
-      $this->session->set_flashdata('berhasil', 'Add successfully ' . $this->input->post('jenis', TRUE) . ' !');
+      $this->session->set_flashdata('berhasil', 'Add successfully ' . $jenis. ' !');
       $id = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
@@ -540,4 +540,67 @@ class Listing extends CI_Controller
     }
   }
 
+  public function price_edit()
+  {
+    $this->form_validation->set_rules('desc', 'Desc', 'required');
+    $this->form_validation->set_rules('distributor', 'distributor', 'required');
+    $this->form_validation->set_rules('oem', 'oem', 'required');
+    $this->form_validation->set_rules('reseller', 'reseller', 'required');
+    $this->form_validation->set_rules('user', 'user', 'required');
+
+    if ($this->form_validation->run() != false) {
+      $jenis = $this->input->post('jenis',TRUE);
+      $part_code = $this->input->post('part_code',TRUE);
+      $id_item = $this->input->post('id_item',TRUE);
+      $id = $this->input->post('id', TRUE);
+      $desc = $this->input->post('desc',TRUE);
+      $distributor = $this->input->post('distributor', TRUE);
+      $oem = $this->input->post('oem',TRUE);
+      $reseller = $this->input->post('reseller',TRUE);
+      $user = $this->input->post('user',TRUE);
+      $updated_at = mdate('%Y-%m-%d %H:%i:%s');
+
+      $data = array(
+        'distributor' => $distributor,
+        'desc' => $desc,
+        'oem' => $oem,
+        'reseller' => $reseller,
+        'user' => $user,
+        'updated_at' => $updated_at
+      );
+      
+      $where = array(
+        'id' => $id
+      );
+
+      $this->m_data->update_data($where, $data, 'list_price');
+      $this->session->set_flashdata('berhasil', 'Update successfully Jenis '.$jenis.' Part Code '.$part_code.' !');
+      $id_item = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id_item));
+      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+    } else {
+      $this->session->set_flashdata('gagal', 'Data failed to Edit, Please repeat !');
+      $id_item = $this->input->post('id_item');
+      $encrypt = urlencode($this->encrypt->encode($id_item));
+      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+    }
+  }
+
+  public function price_delete()
+  {
+    $id = $this->input->post('id', TRUE);
+    $id_item = $this->input->post('id_item', TRUE);
+    $jenis = $this->input->post('jenis', TRUE);
+    $part_code = $this->input->post('part_code', TRUE);
+
+    $where = array(
+      'id' => $id
+    );
+
+    $this->m_data->delete_data($where, 'list_price');
+    $this->session->set_flashdata('berhasil', 'Delete successfully Jenis '.$jenis.' Part Code '.$part_code.' !');
+    $id_item = $this->input->post('id_item');
+    $encrypt = urlencode($this->encrypt->encode($id_item));
+    redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+  }
 }

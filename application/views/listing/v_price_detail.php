@@ -11,7 +11,7 @@
 						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
 						<li class="breadcrumb-item"><a href="<?php echo base_url('listing/listing_price') ?>">Price List</a>
 						</li>
-						<li class="breadcrumb-item active"><?php echo $b->nama ?></li>
+						<li class="breadcrumb-item active"><?php echo ucwords($b->nama) ?></li>
 					</ol>
 				</div>
 			</div>
@@ -59,26 +59,28 @@
 									<tr>
 										<th width="5%">No</th>
 										<th>Jenis</th>
-										<th>Part Code</th>
+										<th width="13%">Part Code</th>
 										<th>Desc</th>
 										<th>Distributor</th>
 										<th>Oem</th>
 										<th>Reseller</th>
 										<th>User</th>
-										<th width="10%">Actions</th>
+										<th width="9%">Actions</th>
 									</tr>
 								</thead>
 								<?php $query = $this->db->where('id_item', $b->id)->get('list_price');
                         foreach ($query->result() as $u) { 	?>
-								<tr class="align-middle">
-									<td class="text-center"></td>
-									<td><?php echo strtoupper($u->jenis) ?></td>
-									<td><?php echo strtoupper($u->part_code) ?></td>
+								<tr>
+									<td class="align-middle text-center"></td>
+									<td class="align-middle text-center"><?php echo strtoupper($u->jenis) ?></td>
+									<td class="align-middle text-center"><?php echo strtoupper($u->part_code) ?></td>
 									<td><?php echo $u->desc; ?></td>
-									<td class="text-center"><?php echo number_format($u->distributor, 0, '.', '.'); ?></td>
-									<td class="text-center"><?php echo number_format($u->oem, 0, '.', '.'); ?></td>
-									<td class="text-center"><?php echo number_format($u->reseller, 0, '.', '.'); ?></td>
-									<td class="text-center"><?php echo number_format($u->user, 0, '.', '.'); ?></td>
+									<td class="align-middle text-center">
+										<?php echo number_format($u->distributor, 0, '.', '.'); ?></td>
+									<td class="align-middle text-center"><?php echo number_format($u->oem, 0, '.', '.'); ?></td>
+									<td class="align-middle text-center"><?php echo number_format($u->reseller, 0, '.', '.'); ?>
+									</td>
+									<td class="align-middle text-center"><?php echo number_format($u->user, 0, '.', '.'); ?></td>
 									<td class="align-middle text-center">
 										<a class="btn-sm btn-warning" data-toggle="modal"
 											data-target="#modal_edit<?php echo $u->id; ?>" title="Edit">
@@ -105,7 +107,7 @@
 
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="col-12 modal-title text-center">Add New List
@@ -188,3 +190,117 @@
 	</div>
 </div>
 <!--End Modals Add-->
+
+<!-- modal Edit -->
+<?php foreach ($listprice as $u) : ?>
+<div class="modal fade" id="modal_edit<?php echo $u->id; ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="col-12 modal-title text-center">Edit List <?php echo ucwords($u->jenis); ?>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h4>
+			</div>
+			<form class="form-horizontal" onsubmit="editdesc.disabled = true; return true;" method="post"
+				action="<?php echo base_url('listing/price_edit') ?>">
+				<div class="modal-body">
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Part Code</label>
+							</div>
+							<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
+							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id_item; ?>">
+							<input type="hidden" name="jenis" class="form-control" value="<?php echo $u->jenis; ?>">
+							<input type="text" name="part_code" class="form-control" readonly
+								value="<?php echo $u->part_code; ?>">
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-5">Desc&nbsp;&nbsp;</label>
+							</div>
+							<textarea name="desc" class="form-control" required><?php echo $u->desc; ?></textarea>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text">Distributor</label>
+							</div>
+							<input type="number" name="distributor" class="form-control" min="1"
+								value=<?php echo $u->distributor; ?> required>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-5">Oem&nbsp;</label>
+							</div>
+							<input type="number" name="oem" class="form-control" min="1" value=<?php echo $u->oem; ?> required>
+						</div>
+					</div>
+					<div class="form-group mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Reseller&nbsp;&nbsp;</label>
+							</div>
+							<input type="number" name="reseller" class="form-control" min="1" value=<?php echo $u->reseller; ?>
+								required>
+						</div>
+					</div>
+					<div class="form-group mb-0">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-5">User&nbsp;</label>
+							</div>
+							<input type="number" name="user" class="form-control" min="1" value=<?php echo $u->user; ?>
+								required>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					<button class="btn btn-primary" id="editdesc"><i class="fa fa-check"></i> Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php endforeach; ?>
+<!-- end modal -->
+
+
+<!--MODAL HAPUS ALL-->
+<?php foreach ($listprice as $p) : ?>
+<div class="modal fade" id="modal_hapus<?php echo $p->id; ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content bg-danger">
+			<div class="modal-header">
+				<h4 class="col-12 modal-title text-center">Delete List <?php echo ucwords($p->jenis); ?>
+					<button class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h4>
+			</div>
+			<form class="form-horizontal" onsubmit="delform.disabled = true; return true;" method="post"
+				action="<?php echo base_url('listing/price_delete') ?>">
+				<div class="modal-body">
+					<input type="hidden" name="id" value="<?php echo $p->id; ?>">
+					<input type="hidden" name="id_item" value="<?php echo $p->id_item; ?>">
+					<input type="hidden" name="jenis" value="<?php echo $p->jenis; ?>">
+					<input type="hidden" name="part_code" value="<?php echo $p->part_code; ?>">
+					<span>Are you sure delete part code <?php echo $p->part_code; ?> ?</span>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+					<button class="btn btn-outline-light" id="delform"><i class="fa fa-check"></i> Yes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php endforeach; ?>
