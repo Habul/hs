@@ -164,9 +164,18 @@
 											<input type="hidden" name="status" value="2">
 											<input type="hidden" name="ket" value="Submited ID : <?php echo $list->id_hs ?>">
 											<button class="btn btn-info col-15 shadow" type="submit">
-												<i class="fas fa-bookmark"></i>&nbsp;Submit</button>
+												<i class="fas fa-bookmark"></i>&nbsp;Submit List</button>
 										</form>
 										<?php endif ?>
+										<?php if ($list->status == 0) : ?>
+										<form action="<?php echo base_url('listing/qoutation_remove') ?>" method="post">
+											<input type="hidden" name="id" value="<?php echo $list->id ?>">
+											<input type="hidden" name="id_hs" value="<?php echo $list->id_hs ?>">
+											<button class="btn btn-danger col-15 shadow" type="submit">
+												<i class="fa fa-trash"></i>&nbsp;Remove List</button>
+										</form>
+										<?php endif ?>
+										<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="1">
@@ -178,15 +187,18 @@
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="3">
 											<input type="hidden" name="ket" value="Confrim ID : <?php echo $list->id_hs ?>">
-											<input type="hidden" name="updated_at" value="mdate('%Y-%m-%d %H:%i:%s')">
+											<input type="hidden" name="updated_at"
+												value="<?php echo mdate('%Y-%m-%d %H:%i:%s') ?>">
 											<button class="btn btn-success col-15 shadow" type="submit">
 												<i class="fas fa-lock"></i>&nbsp;Confrim</button>
 										</form>
-										<?php elseif ($list->status == 3) : ?>
+										<?php } ?>
+										<?php elseif ($list->status == 3 ) :  ?>
 										<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
 										<a class="btn btn-primary col-15 shadow"
 											href="<?php echo base_url('listing/qoutation_print/?print='. $encrypturl) ?>">
 											<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
+										<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="1">
@@ -194,6 +206,7 @@
 											<button class="btn btn-warning col-15 shadow" type="submit">
 												<i class="fas fa-lock-open"></i>&nbsp;Revoke Acceptance</button>
 										</form>
+										<?php } ?>
 										<?php endif ?>
 									</div>
 								</div>

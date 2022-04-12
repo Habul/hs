@@ -95,11 +95,11 @@
 												</tr>
 											</thead>
 											<?php 
-								$no=1;
-								$query =	$this->db->query("SELECT q.*,l.nama AS item FROM qoutation q INNER JOIN list_item l ON q.id_item=l.id WHERE q.id_listing='$list->id' order by created_at ASC");
-								foreach ($query->result() as $p) {  
-									$sum_total[] = $p->price;
-									$total_qty = array_sum($sum_total); ?>
+											$no=1;
+											$query =	$this->db->query("SELECT q.*,l.nama AS item FROM qoutation q INNER JOIN list_item l ON q.id_item=l.id WHERE q.id_listing='$list->id' order by created_at ASC");
+											foreach ($query->result() as $p) {  
+											$sum_total[] = $p->price;
+											$total_qty = array_sum($sum_total); ?>
 											<tr>
 												<td style="text-align:center"><?php echo $no++ ?></td>
 												<td>
@@ -130,14 +130,14 @@
 												<td class="align-middle text-center">
 													<?php if ($list->status == 1 || $list->status == 0) : ?>
 													<a class="btn btn-warning" data-toggle="modal"
-														data-target="#modal_edit<?php echo $p->id; ?>" title="Edit"><i
-															class="fa fa-pencil-alt"></i></a>
+														data-target="#modal_edit<?php echo $p->id; ?>" title="Edit">
+														<i class="fa fa-pencil-alt"></i></a>
 													<a class="btn btn-danger" data-toggle="modal"
-														data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete"><i
-															class="fa fa-trash"></i></a>
+														data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete">
+														<i class="fa fa-trash"></i></a>
 													<?php elseif ($list->status == 3 || $list->status == 2) : ?>
-													<button type="button" class="btn btn-danger float-end" title="Lock" disabled><i
-															class="fas fa-lock"></i></button>
+													<button type="button" class="btn btn-danger float-end" title="Lock" disabled>
+														<i class="fas fa-lock"></i></button>
 													<?php endif ?>
 												</td>
 											</tr>
@@ -164,9 +164,18 @@
 											<input type="hidden" name="status" value="2">
 											<input type="hidden" name="ket" value="Submited ID : <?php echo $list->id_hs ?>">
 											<button class="btn btn-info col-15 shadow" type="submit">
-												<i class="fas fa-bookmark"></i>&nbsp;Submit</button>
+												<i class="fas fa-bookmark"></i>&nbsp;Submit List</button>
 										</form>
 										<?php endif ?>
+										<?php if ($list->status == 0) : ?>
+										<form action="<?php echo base_url('listing/qoutation_remove') ?>" method="post">
+											<input type="hidden" name="id" value="<?php echo $list->id ?>">
+											<input type="hidden" name="id_hs" value="<?php echo $list->id_hs ?>">
+											<button class="btn btn-danger col-15 shadow" type="submit">
+												<i class="fa fa-trash"></i>&nbsp;Remove List</button>
+										</form>
+										<?php endif ?>
+										<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="1">
@@ -178,15 +187,18 @@
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="3">
 											<input type="hidden" name="ket" value="Confrim ID : <?php echo $list->id_hs ?>">
-											<input type="hidden" name="updated_at" value="mdate('%Y-%m-%d %H:%i:%s')">
+											<input type="hidden" name="updated_at"
+												value="<?php echo mdate('%Y-%m-%d %H:%i:%s') ?>">
 											<button class="btn btn-success col-15 shadow" type="submit">
 												<i class="fas fa-lock"></i>&nbsp;Confrim</button>
 										</form>
-										<?php elseif ($list->status == 3) : ?>
+										<?php } ?>
+										<?php elseif ($list->status == 3 ) :  ?>
 										<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
 										<a class="btn btn-primary col-15 shadow"
 											href="<?php echo base_url('listing/qoutation_print/?print='. $encrypturl) ?>">
 											<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
+										<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 											<input type="hidden" name="id" value="<?php echo $list->id ?>">
 											<input type="hidden" name="status" value="1">
@@ -194,6 +206,7 @@
 											<button class="btn btn-warning col-15 shadow" type="submit">
 												<i class="fas fa-lock-open"></i>&nbsp;Revoke Acceptance</button>
 										</form>
+										<?php } ?>
 										<?php endif ?>
 									</div>
 								</div>
@@ -320,7 +333,7 @@
 							</select>
 						</div>
 					</div>
-					<div class=" form-group mb-3" style="display: none;" id="div_plat">
+					<div class="form-group mb-3" style="display: none;" id="div_plat">
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-5">Plat&emsp;</label>

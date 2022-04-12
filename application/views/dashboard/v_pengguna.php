@@ -171,10 +171,11 @@
 							<select class="form-control" name="level" required>
 								<option value="">- Pilih Divisi -</option>
 								<option value="admin">Admin</option>
+								<option value="mgr">Mgr</option>
+								<option value="sales">Sales</option>
+								<option value="fat">Fat</option>
 								<option value="purchase">Purchase</option>
-								<option value="driver">Driver</option>
-								<option value="ga">GA</option>
-								<option value="guest">Guest</option>
+								<option value="warehouse">Warehouse</option>
 							</select>
 							<?php echo form_error('level'); ?>
 						</div>
@@ -288,12 +289,9 @@
 								<option <?php if ($p->pengguna_level == "driver") {
                             echo "selected='selected'";
                           } ?> value="driver">Driver</option>
-								<option <?php if ($p->pengguna_level == "ga") {
+								<option <?php if ($p->pengguna_level == "mgr") {
                             echo "selected='selected'";
-                          } ?> value="ga">Ga</option>
-								<option <?php if ($p->pengguna_level == "guest") {
-                            echo "selected='selected'";
-                          } ?> value="guest">Guest</option>
+                          } ?> value="mgr">Mgr</option>
 							</select>
 							<?php echo form_error('level'); ?>
 						</div>
@@ -345,7 +343,7 @@
 				action="<?php echo base_url('dashboard/pengguna_hapus') ?>">
 				<div class="modal-body">
 					<input type="hidden" name="id" value="<?php echo $u->pengguna_id; ?>">
-					<p>Are you sure delete <?php echo $u->pengguna_nama; ?> ?</p>
+					<span>Are you sure delete <?php echo $u->pengguna_nama; ?> ?</span>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>

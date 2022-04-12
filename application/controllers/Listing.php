@@ -9,7 +9,6 @@ class Listing extends CI_Controller
     parent::__construct();
 
     date_default_timezone_set('Asia/Jakarta');
-    $this->load->model('m_data');
     $session = $this->session->userdata('status');
     if ($session == '') {
       redirect(base_url() . 'login?alert=belum_login');
@@ -71,6 +70,7 @@ class Listing extends CI_Controller
   public function new_list()
   {
     $id = rawurldecode($this->encrypt->decode($_GET['list']));
+
     $where = array(
       'id' => $id
     );
@@ -82,6 +82,10 @@ class Listing extends CI_Controller
     $data['title'] = 'Create New List';
     $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
     $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
+    $data['assembly'] = $this->db->get_where('assembly', array('id_qoutation' => null))->result();
+    $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
+    $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
+    $data['list_item'] = $this->m_data->get_data('list_item')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_detail_new', $data);
     $this->load->view('dashboard/v_footer');
@@ -138,16 +142,6 @@ class Listing extends CI_Controller
     $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
     $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
     $data['list_item'] = $this->m_data->get_data('list_item')->result();
-    $data['item_brand'] = $this->m_data->get_data('item_brand')->result();
-    $data['item_category'] = $this->m_data->get_data('item_category')->result();
-    $data['item_hole'] = $this->m_data->get_data('item_hole')->result();
-    $data['item_id'] = $this->m_data->get_data('item_id')->result();
-    $data['item_model'] = $this->m_data->get_data('item_model')->result();
-    $data['item_od'] = $this->m_data->get_data('item_od')->result();
-    $data['item_plat'] = $this->m_data->get_data('item_plat')->result();
-    $data['item_size'] = $this->m_data->get_data('item_size')->result();
-    $data['item_thread'] = $this->m_data->get_data('item_thread')->result();
-    $data['item_type'] = $this->m_data->get_data('item_type')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('listing/v_detail', $data);
     $this->load->view('dashboard/v_footer');
@@ -337,270 +331,289 @@ class Listing extends CI_Controller
     redirect(base_url() . 'listing/listing');
   }
 
-  public function qoutation_print()
+  public function qoutation_remove()
   {
+    $id = $this->input->post('id');
+    $id_hs = $this->input->post('id_hs'); 
 
-  }
-
-  public function listing_item()
-  {
-    $data['title'] = 'Listing Item';
-    $data['listitem'] = $this->m_data->get_data('list_item')->result();
-    $data['add_id'] =  $this->db->select_max('id')->get('list_item')->row();
-    $this->load->view('dashboard/v_header', $data);
-    $this->load->view('listing/v_item', $data);
-    $this->load->view('dashboard/v_footer');
-  }
-  
-  public function listing_item_detail()
-  {
-    $id = rawurldecode($this->encrypt->decode($_GET['item']));
-
-    $where = array(
-      'id' => $id
-    );
-
-    $where2 = array(
-      'id_item' => $id
-    );
-
-    $data['title'] = 'List Item Detail';
-    $data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
-    $data['item_brand'] = $this->m_data->edit_data($where2, 'item_brand')->result();
-    $data['item_category'] = $this->m_data->edit_data($where2, 'item_category')->result();
-    $data['item_hole'] = $this->m_data->edit_data($where2, 'item_hole')->result();
-    $data['item_id'] = $this->m_data->edit_data($where2, 'item_id')->result();
-    $data['item_model'] = $this->m_data->edit_data($where2, 'item_model')->result();
-    $data['item_od'] = $this->m_data->edit_data($where2, 'item_od')->result();
-    $data['item_plat'] = $this->m_data->edit_data($where2, 'item_plat')->result();
-    $data['item_size'] = $this->m_data->edit_data($where2, 'item_size')->result();
-    $data['item_thread'] = $this->m_data->edit_data($where2, 'item_thread')->result();
-    $data['item_type'] = $this->m_data->edit_data($where2, 'item_type')->result();
-    $this->load->view('dashboard/v_header', $data);
-    $this->load->view('listing/v_item_detail', $data);
-    $this->load->view('dashboard/v_footer');
-  }
-
-  public function add_item()
-  {
-    $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
-    $this->form_validation->set_rules('nama', 'name', 'required');
-
-    if ($this->form_validation->run() != false) {
-      $id_item = $this->input->post('id_item',TRUE);
-      $nama = $this->input->post('nama', TRUE);
-      $created_at = mdate('%Y-%m-%d %H:%i:%s');
-      $jenis = $this->input->post('jenis',TRUE);
-
-      $data = array(
-        'id_item' => $id_item,
-        'nama' => $nama,
-        'created_at' => $created_at
+      $where2 = array(
+        'id_listing' => $id
       );
-
-      $this->m_data->insert_data($data, $jenis);
-      $this->session->set_flashdata('berhasil', 'Add successfully ' . $nama . ' !');
-      $id = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id));
-      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
-    } else {
-      $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
-      $id = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id));
-      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
-    }
-  }
-
-  public function edit_item()
-  {
-    $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
-    $this->form_validation->set_rules('nama', 'name', 'required');
-
-    if ($this->form_validation->run() != false) {
-      $id = $this->input->post('id');
-      $id_item = $this->input->post('id_item');
-      $nama = $this->input->post('nama',TRUE);
-      $created_at = mdate('%Y-%m-%d %H:%i:%s');
-      $jenis = $this->input->post('jenis',TRUE);
 
       $where = array(
         'id' => $id
       );
 
-      $data = array(
-        'id_item' => $id_item,
-        'nama' => $nama,
-        'created_at' => $created_at
-      );
+      $this->m_data->delete_data($where2, 'qoutation');
+      $this->m_data->delete_data($where, 'listing');
+      $this->session->set_flashdata('berhasil', 'Qoutation ID '.$id_hs. ' has been deleted !');
+redirect(base_url() . 'listing/listing');
+}
 
-      $this->m_data->update_data($where, $data, $jenis);
-      $this->session->set_flashdata('berhasil', 'Update successfully ' . $nama. ' !');
-      $id = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id));
-      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
-    } else {
-      $this->session->set_flashdata('gagal', 'Data failed to update, Please repeat !');
-      $id = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id));
-      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
-    }
-  }
+public function qoutation_print()
+{
 
-  public function del_item()
-  {
-    $id_del = $this->input->post('id'); 
-    $id = $this->input->post('id_item');
-    $jenis = $this->input->post('jenis');
-    {
-      $where = array(
-        'id' => $id_del
-      );
-      $this->m_data->delete_data($where, $jenis);
-      $this->session->set_flashdata('berhasil', 'Data has been deleted !');
-      $id = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id));
-      redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
-    }
-  }  
+}
 
-  public function listing_price()
-  {
-    $data['title'] = 'Price List';
-    $data['listprice'] = $this->m_data->get_data('list_price')->result();
-    $data['listitem'] = $this->m_data->get_data('list_item')->result();
-    $this->load->view('dashboard/v_header', $data);
-    $this->load->view('listing/v_price', $data);
-    $this->load->view('dashboard/v_footer');
-  }
+public function listing_item()
+{
+$data['title'] = 'Listing Item';
+$data['listitem'] = $this->m_data->get_data('list_item')->result();
+$data['add_id'] = $this->db->select_max('id')->get('list_item')->row();
+$this->load->view('dashboard/v_header', $data);
+$this->load->view('listing/v_item', $data);
+$this->load->view('dashboard/v_footer');
+}
 
-  public function listing_price_detail()
-  {
-    $id = rawurldecode($this->encrypt->decode($_GET['price']));
+public function listing_item_detail()
+{
+$id = rawurldecode($this->encrypt->decode($_GET['item']));
 
-    $where = array(
-      'id' => $id
-    );
+$where = array(
+'id' => $id
+);
 
-    $where2 = array(
-      'id_item' => $id
-    );
+$where2 = array(
+'id_item' => $id
+);
 
-    $data['title'] = 'Price List Detail';
-    $data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
-    $data['listprice'] = $this->m_data->edit_data($where2, 'list_price')->result();
-    $this->load->view('dashboard/v_header', $data);
-    $this->load->view('listing/v_price_detail', $data);
-    $this->load->view('dashboard/v_footer');
-  }
+$data['title'] = 'List Item Detail';
+$data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
+$data['item_brand'] = $this->m_data->edit_data($where2, 'item_brand')->result();
+$data['item_category'] = $this->m_data->edit_data($where2, 'item_category')->result();
+$data['item_hole'] = $this->m_data->edit_data($where2, 'item_hole')->result();
+$data['item_id'] = $this->m_data->edit_data($where2, 'item_id')->result();
+$data['item_model'] = $this->m_data->edit_data($where2, 'item_model')->result();
+$data['item_od'] = $this->m_data->edit_data($where2, 'item_od')->result();
+$data['item_plat'] = $this->m_data->edit_data($where2, 'item_plat')->result();
+$data['item_size'] = $this->m_data->edit_data($where2, 'item_size')->result();
+$data['item_thread'] = $this->m_data->edit_data($where2, 'item_thread')->result();
+$data['item_type'] = $this->m_data->edit_data($where2, 'item_type')->result();
+$this->load->view('dashboard/v_header', $data);
+$this->load->view('listing/v_item_detail', $data);
+$this->load->view('dashboard/v_footer');
+}
 
-  public function price_add()
-  {
-    $this->form_validation->set_rules('id_item', 'Item Brand', 'required');
-    $this->form_validation->set_rules('jenis', 'Jenis', 'required');
-    $this->form_validation->set_rules('part_code', 'Part Code', 'required');
-    $this->form_validation->set_rules('desc', 'Desc', 'required');
-    $this->form_validation->set_rules('distributor', 'Distributor', 'required');
-    $this->form_validation->set_rules('oem', 'Oem', 'required');
-    $this->form_validation->set_rules('reseller', 'Reseller', 'required');
-    $this->form_validation->set_rules('user', 'User', 'required');
+public function add_item()
+{
+$this->form_validation->set_rules('id_item', 'Item Brand', 'required');
+$this->form_validation->set_rules('nama', 'name', 'required');
 
-    if ($this->form_validation->run() != false) {
-      $id_item = $this->input->post('id_item',TRUE);
-      $jenis = $this->input->post('jenis', TRUE);
-      $part_code = $this->input->post('part_code', TRUE);
-      $desc = $this->input->post('desc', TRUE);
-      $distributor = $this->input->post('distributor', TRUE);
-      $oem = $this->input->post('oem', TRUE);
-      $reseller = $this->input->post('reseller', TRUE);
-      $user = $this->input->post('user', TRUE);
-      $created_at = mdate('%Y-%m-%d %H:%i:%s');
+if ($this->form_validation->run() != false) {
+$id_item = $this->input->post('id_item',TRUE);
+$nama = $this->input->post('nama', TRUE);
+$created_at = mdate('%Y-%m-%d %H:%i:%s');
+$jenis = $this->input->post('jenis',TRUE);
 
-      $data = array(
-        'id_item' => $id_item,
-        'jenis' => $jenis,
-        'part_code' => $part_code,
-        'desc' => $desc,
-        'distributor' => $distributor,
-        'oem' => $oem,
-        'reseller' => $reseller,
-        'user' => $user,
-        'created_at' => $created_at
-      );
+$data = array(
+'id_item' => $id_item,
+'nama' => $nama,
+'created_at' => $created_at
+);
 
-      $this->m_data->insert_data($data, 'list_price');
-      $this->session->set_flashdata('berhasil', 'Add successfully ' . $jenis. ' !');
-      $id = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id));
-      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
-    } else {
-      $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
-      $id = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id));
-      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
-    }
-  }
+$this->m_data->insert_data($data, $jenis);
+$this->session->set_flashdata('berhasil', 'Add successfully ' . $nama . ' !');
+$id = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id));
+redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+} else {
+$this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+$id = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id));
+redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+}
+}
 
-  public function price_edit()
-  {
-    $this->form_validation->set_rules('desc', 'Desc', 'required');
-    $this->form_validation->set_rules('distributor', 'distributor', 'required');
-    $this->form_validation->set_rules('oem', 'oem', 'required');
-    $this->form_validation->set_rules('reseller', 'reseller', 'required');
-    $this->form_validation->set_rules('user', 'user', 'required');
+public function edit_item()
+{
+$this->form_validation->set_rules('id_item', 'Item Brand', 'required');
+$this->form_validation->set_rules('nama', 'name', 'required');
 
-    if ($this->form_validation->run() != false) {
-      $jenis = $this->input->post('jenis',TRUE);
-      $part_code = $this->input->post('part_code',TRUE);
-      $id_item = $this->input->post('id_item',TRUE);
-      $id = $this->input->post('id', TRUE);
-      $desc = $this->input->post('desc',TRUE);
-      $distributor = $this->input->post('distributor', TRUE);
-      $oem = $this->input->post('oem',TRUE);
-      $reseller = $this->input->post('reseller',TRUE);
-      $user = $this->input->post('user',TRUE);
-      $updated_at = mdate('%Y-%m-%d %H:%i:%s');
+if ($this->form_validation->run() != false) {
+$id = $this->input->post('id');
+$id_item = $this->input->post('id_item');
+$nama = $this->input->post('nama',TRUE);
+$created_at = mdate('%Y-%m-%d %H:%i:%s');
+$jenis = $this->input->post('jenis',TRUE);
 
-      $data = array(
-        'distributor' => $distributor,
-        'desc' => $desc,
-        'oem' => $oem,
-        'reseller' => $reseller,
-        'user' => $user,
-        'updated_at' => $updated_at
-      );
-      
-      $where = array(
-        'id' => $id
-      );
+$where = array(
+'id' => $id
+);
 
-      $this->m_data->update_data($where, $data, 'list_price');
-      $this->session->set_flashdata('berhasil', 'Update successfully Jenis '.$jenis.' Part Code '.$part_code.' !');
-      $id_item = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id_item));
-      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
-    } else {
-      $this->session->set_flashdata('gagal', 'Data failed to Edit, Please repeat !');
-      $id_item = $this->input->post('id_item');
-      $encrypt = urlencode($this->encrypt->encode($id_item));
-      redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
-    }
-  }
+$data = array(
+'id_item' => $id_item,
+'nama' => $nama,
+'created_at' => $created_at
+);
 
-  public function price_delete()
-  {
-    $id = $this->input->post('id', TRUE);
-    $id_item = $this->input->post('id_item', TRUE);
-    $jenis = $this->input->post('jenis', TRUE);
-    $part_code = $this->input->post('part_code', TRUE);
+$this->m_data->update_data($where, $data, $jenis);
+$this->session->set_flashdata('berhasil', 'Update successfully ' . $nama. ' !');
+$id = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id));
+redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+} else {
+$this->session->set_flashdata('gagal', 'Data failed to update, Please repeat !');
+$id = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id));
+redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+}
+}
 
-    $where = array(
-      'id' => $id
-    );
+public function del_item()
+{
+$id_del = $this->input->post('id');
+$id = $this->input->post('id_item');
+$jenis = $this->input->post('jenis');
+{
+$where = array(
+'id' => $id_del
+);
+$this->m_data->delete_data($where, $jenis);
+$this->session->set_flashdata('berhasil', 'Data has been deleted !');
+$id = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id));
+redirect(base_url() . 'listing/listing_item_detail/?item=' . $encrypt);
+}
+}
 
-    $this->m_data->delete_data($where, 'list_price');
-    $this->session->set_flashdata('berhasil', 'Delete successfully Jenis '.$jenis.' Part Code '.$part_code.' !');
-    $id_item = $this->input->post('id_item');
-    $encrypt = urlencode($this->encrypt->encode($id_item));
-    redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
-  }
+public function listing_price()
+{
+$data['title'] = 'Price List';
+$data['listprice'] = $this->m_data->get_data('list_price')->result();
+$data['listitem'] = $this->m_data->get_data('list_item')->result();
+$this->load->view('dashboard/v_header', $data);
+$this->load->view('listing/v_price', $data);
+$this->load->view('dashboard/v_footer');
+}
+
+public function listing_price_detail()
+{
+$id = rawurldecode($this->encrypt->decode($_GET['price']));
+
+$where = array(
+'id' => $id
+);
+
+$where2 = array(
+'id_item' => $id
+);
+
+$data['title'] = 'Price List Detail';
+$data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
+$data['listprice'] = $this->m_data->edit_data($where2, 'list_price')->result();
+$this->load->view('dashboard/v_header', $data);
+$this->load->view('listing/v_price_detail', $data);
+$this->load->view('dashboard/v_footer');
+}
+
+public function price_add()
+{
+$this->form_validation->set_rules('id_item', 'Item Brand', 'required');
+$this->form_validation->set_rules('jenis', 'Jenis', 'required');
+$this->form_validation->set_rules('part_code', 'Part Code', 'required');
+$this->form_validation->set_rules('desc', 'Desc', 'required');
+$this->form_validation->set_rules('distributor', 'Distributor', 'required');
+$this->form_validation->set_rules('oem', 'Oem', 'required');
+$this->form_validation->set_rules('reseller', 'Reseller', 'required');
+$this->form_validation->set_rules('user', 'User', 'required');
+
+if ($this->form_validation->run() != false) {
+$id_item = $this->input->post('id_item',TRUE);
+$jenis = $this->input->post('jenis', TRUE);
+$part_code = $this->input->post('part_code', TRUE);
+$desc = $this->input->post('desc', TRUE);
+$distributor = $this->input->post('distributor', TRUE);
+$oem = $this->input->post('oem', TRUE);
+$reseller = $this->input->post('reseller', TRUE);
+$user = $this->input->post('user', TRUE);
+$created_at = mdate('%Y-%m-%d %H:%i:%s');
+
+$data = array(
+'id_item' => $id_item,
+'jenis' => $jenis,
+'part_code' => $part_code,
+'desc' => $desc,
+'distributor' => $distributor,
+'oem' => $oem,
+'reseller' => $reseller,
+'user' => $user,
+'created_at' => $created_at
+);
+
+$this->m_data->insert_data($data, 'list_price');
+$this->session->set_flashdata('berhasil', 'Add successfully ' . $jenis. ' !');
+$id = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id));
+redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+} else {
+$this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+$id = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id));
+redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+}
+}
+
+public function price_edit()
+{
+$this->form_validation->set_rules('desc', 'Desc', 'required');
+$this->form_validation->set_rules('distributor', 'distributor', 'required');
+$this->form_validation->set_rules('oem', 'oem', 'required');
+$this->form_validation->set_rules('reseller', 'reseller', 'required');
+$this->form_validation->set_rules('user', 'user', 'required');
+
+if ($this->form_validation->run() != false) {
+$jenis = $this->input->post('jenis',TRUE);
+$part_code = $this->input->post('part_code',TRUE);
+$id_item = $this->input->post('id_item',TRUE);
+$id = $this->input->post('id', TRUE);
+$desc = $this->input->post('desc',TRUE);
+$distributor = $this->input->post('distributor', TRUE);
+$oem = $this->input->post('oem',TRUE);
+$reseller = $this->input->post('reseller',TRUE);
+$user = $this->input->post('user',TRUE);
+$updated_at = mdate('%Y-%m-%d %H:%i:%s');
+
+$data = array(
+'distributor' => $distributor,
+'desc' => $desc,
+'oem' => $oem,
+'reseller' => $reseller,
+'user' => $user,
+'updated_at' => $updated_at
+);
+
+$where = array(
+'id' => $id
+);
+
+$this->m_data->update_data($where, $data, 'list_price');
+$this->session->set_flashdata('berhasil', 'Update successfully Jenis '.$jenis.' Part Code '.$part_code.' !');
+$id_item = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id_item));
+redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+} else {
+$this->session->set_flashdata('gagal', 'Data failed to Edit, Please repeat !');
+$id_item = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id_item));
+redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+}
+}
+
+public function price_delete()
+{
+$id = $this->input->post('id', TRUE);
+$id_item = $this->input->post('id_item', TRUE);
+$jenis = $this->input->post('jenis', TRUE);
+$part_code = $this->input->post('part_code', TRUE);
+
+$where = array(
+'id' => $id
+);
+
+$this->m_data->delete_data($where, 'list_price');
+$this->session->set_flashdata('berhasil', 'Delete successfully Jenis '.$jenis.' Part Code '.$part_code.' !');
+$id_item = $this->input->post('id_item');
+$encrypt = urlencode($this->encrypt->encode($id_item));
+redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+}
 }

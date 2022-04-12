@@ -142,7 +142,7 @@
 								<p>Dashboard</p>
 							</a>
 						</li>
-
+						<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 						<li class="nav-item">
 							<a href="<?php echo base_url() . 'dashboard/pengguna' ?>"
 								<?= $this->uri->uri_string() == 'dashboard/pengguna' || $this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
@@ -158,6 +158,7 @@
 								<p>Delivery Orders</p>
 							</a>
 						</li>
+						<?php } ?>
 						<li <?= $this->uri->segment(2) == 'listing' ||
                   $this->uri->segment(2) == 'list_update' ||
 						$this->uri->segment(2) == 'new_list' ||
