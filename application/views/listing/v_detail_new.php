@@ -104,8 +104,11 @@
 												<td style="text-align:center"><?php echo $no++ ?></td>
 												<td>
 													<?php if ($p->id_assembly != 0) : ?>
-													<span class="badge badge-warning"> Assembly</span>
-													<?php endif; ?><br />
+													<span class="badge badge-secondary"> Assembly</span>
+													<?php endif; ?>
+													<small
+														class="badge badge-danger"><?php echo strtoupper($p->type_price) ?></small>
+													<br />
 													<b><?php echo strtoupper($p->item) ?></b><br />
 													<small class="badge badge-info"><?php echo strtoupper($p->brand) ?></small>
 													<?php if ($p->model === '45' || $p->model === '90') : ?>
@@ -368,6 +371,10 @@
 							</div>
 							<select name="type_price" class="form-control" id="type_price">
 								<option value="">- Choose Type Price -</option>
+								<option value="oem">Oem</option>
+								<option value="distributor">Distributor</option>
+								<option value="reseller">Reseller</option>
+								<option value="user">User</option>
 							</select>
 						</div>
 					</div>
@@ -446,9 +453,72 @@
 </div>
 <!--End Modals Add-->
 
-
-<!--MODAL HAPUS DESC-->
+<!--Modals edit&delete-->
 <?php foreach ($qoutation as $u) : ?>
+<div class="modal fade" id="modal_edit<?php echo $u->id ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="col-12 modal-title text-center">Update Price
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h4>
+			</div>
+			<form onsubmit="editbtn.disabled = true; return true;" method="post"
+				action="<?php echo base_url('listing/qoutation_update') ?>">
+				<div class="modal-body">
+					<?php if ($u->id_assembly != 0) : ?>
+					<span class="badge badge-secondary"> Assembly</span>
+					<?php endif; ?>
+					<small class="badge badge-danger"><?php echo strtoupper($u->type_price) ?></small>
+					<br />
+					<?php if ($u->id_item == 1) : ?>
+					<b>PIPE</b>
+					<?php elseif ($u->id_item == 2) : ?>
+					<b>HOSE</b>
+					<?php elseif ($u->id_item == 3) : ?>
+					<b>FITTING</b>
+					<?php elseif ($u->id_item == 4) : ?>
+					<b>HOSE COVER</b>
+					<?php elseif ($u->id_item == 5) : ?>
+					<b>CLAMP PIPE</b>
+					<?php endif ?>
+					<br />
+					<small class="badge badge-info"><?php echo strtoupper($u->brand) ?></small>
+					<?php if ($u->model === '45' || $u->model === '90') : ?>
+					<small class="badge badge-info"><?php echo strtoupper($u->model) ?>&deg;</small>
+					<?php else : ?>
+					<small class="badge badge-info"><?php echo strtoupper($u->model) ?></small>
+					<?php endif ?>
+					<small class="badge badge-info"><?php echo strtoupper($u->od) ?></small>
+					<small class="badge badge-info"><?php echo strtoupper($u->size) ?></small>
+					<small class="badge badge-info"><?php echo strtoupper($u->type) ?></small>
+					<small class="badge badge-info"><?php echo strtoupper($u->category) ?></small>
+					<small class="badge badge-info"><?php echo strtoupper($u->hole) ?></small>
+					<small class="badge badge-info"><?php echo strtoupper($u->id) ?></small>
+					<small class="badge badge-info"><?php echo strtoupper($u->plat) ?></small>
+					<small class="badge badge-info"><?php echo strtoupper($u->thread) ?></small>
+					<div class="input-group mt-1">
+						<div class="input-group-prepend">
+							<label class="input-group-text pr-5">Price</label>
+						</div>
+						<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
+						<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
+						<input type="hidden" name="id_hs" value="<?php echo $u->id_hs; ?>">
+						<input type="text" name="price" class="form-control" value="<?php echo $u->price ?>" required>
+					</div>
+					<small>Max markdown 10%</small>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					<button class="btn btn-primary" id="editbtn"><i class="fa fa-check"></i> Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <div class="modal fade" id="modal_hapus<?php echo $u->id; ?>" tabindex="-1" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content bg-danger">

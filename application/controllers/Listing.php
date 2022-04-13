@@ -266,6 +266,7 @@ class Listing extends CI_Controller
       $thread = $this->input->post('thread');
       $qty = $this->input->post('qty');
       $assembly = $this->input->post('assembly');
+      $type_price = $this->input->post('type_price');
       $created_at = mdate('%Y-%m-%d %H:%i:%s');
       $data = array(
         'id_hs' => $id_hs,
@@ -283,11 +284,45 @@ class Listing extends CI_Controller
         'thread' => $thread,
         'qty' => $qty,
         'id_assembly' => $assembly,
+        'type_price' => $type_price,
         'created_at' => $created_at,
       );
 
       $this->m_data->insert_data($data,'qoutation');
       $this->session->set_flashdata('berhasil', 'Add successfully !');
+      $id = $this->input->post('id_listing');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
+    } else {
+      $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+      $id = $this->input->post('id_listing');
+      $encrypt = urlencode($this->encrypt->encode($id));
+      redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
+    }
+  }
+
+  public function qoutation_update()
+  {
+    $this->form_validation->set_rules('id_hs', 'ID', 'required');
+    $this->form_validation->set_rules('id_listing', 'ID Listing', 'required');
+
+    if ($this->form_validation->run() != false) {
+      $id = $this->input->post('id');
+      $id_hs = $this->input->post('id_hs');
+      $price = $this->input->post('price');
+      $updated_at = mdate('%Y-%m-%d %H:%i:%s');
+
+      $data = array(
+        'price' => $price,
+        'updated_at' => $updated_at
+      );
+      
+      $where = array(
+        'id' => $id
+      );
+
+      $this->m_data->update_data($where, $data, 'qoutation');
+      $this->session->set_flashdata('berhasil', 'Update successfully, ID : ' . $id_hs. ' !');
       $id = $this->input->post('id_listing');
       $encrypt = urlencode($this->encrypt->encode($id));
       redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
