@@ -11,8 +11,7 @@
 			<div class="modal-body">Select "Sign Out" below if you are ready to end your current session.</div>
 			<div class="modal-footer justify-content-between">
 				<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-				<a class="btn btn-outline-light" href="<?= base_url('dashboard/keluar'); ?>">Sign Out <i
-						class="fas fa-sign-out-alt"></i></a>
+				<a class="btn btn-outline-light" href="<?= base_url('dashboard/keluar'); ?>">Sign Out <i class="fas fa-sign-out-alt"></i></a>
 			</div>
 		</div>
 	</div>
@@ -34,7 +33,6 @@
 <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
 	$.widget.bridge('uibutton', $.ui.button)
-
 </script>
 <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
@@ -74,8 +72,8 @@
 <script src="<?php echo base_url(); ?>assets/plugins/filterizr/jquery.filterizr.min.js"></script>
 <?php include './assets/plugins/ajax.php'; ?>
 <script>
-	$(document).ready(function () {
-		$(".toggle-password").click(function () {
+	$(document).ready(function() {
+		$(".toggle-password").click(function() {
 			$(this).toggleClass("fa-lock fa-lock-open");
 			let input = $($(this).attr("toggle"));
 			if (input.attr("type") == "password") {
@@ -85,11 +83,10 @@
 			}
 		});
 	});
-
 </script>
 <script>
-	$(function () {
-		$('#item').change(function () {
+	$(function() {
+		$('#item').change(function() {
 			var id = $(this).val();
 			$('#div_brand')[(id == 1) || (id == 2) || (id == 3) ? "show" : "hide"]();
 			$('#div_type')[(id == 2) || (id == 3) ? "show" : "hide"]();
@@ -104,14 +101,14 @@
 			$('#div_posisi')[(id == 3) ? "show" : "hide"]();
 			if (id == 1 || id == 2 || id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_brand');?>",
+					url: "<?php echo site_url('listing/get_list_brand'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -124,18 +121,18 @@
 			}
 			if (id == 2 || id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_type');?>",
+					url: "<?php echo site_url('listing/get_list_type'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
-							html += '<option value=' + data[i].id + '>' + data[i]
+							html += '<option value=' + data[i].nama + '>' + data[i]
 								.nama.toUpperCase() + '</option>';
 						}
 						$('#type').html(html);
@@ -144,14 +141,14 @@
 			}
 			if (id == 2 || id == 3 || id == 4 || id == 5) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_size');?>",
+					url: "<?php echo site_url('listing/get_list_size'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -164,14 +161,14 @@
 			}
 			if (id == 1 || id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_model');?>",
+					url: "<?php echo site_url('listing/get_list_model'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -184,14 +181,14 @@
 			}
 			if (id == 1) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_od');?>",
+					url: "<?php echo site_url('listing/get_list_od'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -204,14 +201,14 @@
 			}
 			if (id == 3 || id == 4) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_category');?>",
+					url: "<?php echo site_url('listing/get_list_category'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -224,14 +221,14 @@
 			}
 			if (id == 5) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_hole');?>",
+					url: "<?php echo site_url('listing/get_list_hole'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -244,14 +241,14 @@
 			}
 			if (id == 1) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_id');?>",
+					url: "<?php echo site_url('listing/get_list_id'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -264,14 +261,14 @@
 			}
 			if (id == 5) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_plat');?>",
+					url: "<?php echo site_url('listing/get_list_plat'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -284,14 +281,14 @@
 			}
 			if (id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_thread');?>",
+					url: "<?php echo site_url('listing/get_list_thread'); ?>",
 					method: "POST",
 					data: {
 						id: id
 					},
 					async: true,
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
@@ -305,7 +302,6 @@
 			return false;
 		});
 	});
-
 </script>
 <script>
 	var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
@@ -348,13 +344,11 @@
 	}
 
 	toggleSwitch.addEventListener('change', switchTheme, false);
-
 </script>
 <script>
-	$("#info").fadeTo(2000, 500).slideUp(500, function () {
+	$("#info").fadeTo(2000, 500).slideUp(500, function() {
 		$("#info").slideUp(1000);
 	});
-
 </script>
 <script>
 	function gethclock() {
@@ -368,7 +362,6 @@
 		setTimeout(gethclock, 1000);
 	}
 	gethclock();
-
 </script>
 </body>
 

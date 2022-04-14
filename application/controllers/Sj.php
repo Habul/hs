@@ -36,7 +36,7 @@ class Sj extends CI_Controller
     $this->form_validation->set_rules('city', 'City', 'required');
     $this->form_validation->set_rules('phone', 'Phone', 'required');
 
-    if ($this->form_validation->run() != false) {      
+    if ($this->form_validation->run() != false) {
       $id = $this->input->post('id');
       $no_delivery = $this->input->post('no_delivery');
       $date_delivery = $this->input->post('date_delivery');

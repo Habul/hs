@@ -27,10 +27,8 @@
 						<div class="icon">
 							<i class="fas fa-file"></i>
 						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('listing/listing') ?>" class="small-box-footer">More info
+						<a href="<?php echo base_url('listing/list/0') ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
 					</div>
 				</div>
 
@@ -43,10 +41,8 @@
 						<div class="icon">
 							<i class="fas fa-bookmark"></i>
 						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href=" <?php echo base_url('listing/listing') ?>" class="small-box-footer">More info
+						<a href="<?= base_url('listing/list/2') ?>" data-name="keyword" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
 					</div>
 				</div>
 
@@ -59,10 +55,8 @@
 						<div class="icon">
 							<i class="fas fa-bullhorn"></i>
 						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('listing/listing') ?>" class="small-box-footer">More info
+						<a href="<?= base_url('listing/list/1') ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
 					</div>
 				</div>
 
@@ -75,10 +69,8 @@
 						<div class="icon">
 							<i class="fas fa-lock"></i>
 						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('listing/listing') ?>" class="small-box-footer">More info
+						<a href="<?= base_url('listing/list/3') ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
 					</div>
 				</div>
 
@@ -91,10 +83,8 @@
 						<div class="icon">
 							<i class="fas fa-file-alt"></i>
 						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('listing/listing') ?>" class="small-box-footer">More info
+						<a href="<?= base_url('listing/listing') ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
 					</div>
 				</div>
 
@@ -107,12 +97,15 @@
 						<div class="icon">
 							<i class="fas fa-users"></i>
 						</div>
-						<?php if ($this->session->userdata('level') != "guest") {  ?>
-						<a href="<?php echo base_url('dashboard/pengguna') ?>" class="small-box-footer">More info
+						<a href="<?= base_url('dashboard/pengguna') ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
-						<?php } ?>
 					</div>
 				</div>
 			</div>
 	</section>
 </div>
+<script>
+	$("a").click(function() {
+		val = $(this).data('value')
+	});
+</script>

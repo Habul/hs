@@ -19,34 +19,34 @@
 	<section class="content">
 		<div class="container-fluid">
 			<?php if ($this->session->flashdata('berhasil')) { ?>
-			<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
-			</div>
+				<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
+				</div>
 			<?php } ?>
 			<?php if ($this->session->flashdata('gagal')) { ?>
-			<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
-			</div>
+				<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
+				</div>
 			<?php } ?>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="callout callout-info">
 						<?php foreach ($listing as $list) : ?>
-						<li>ID &emsp;&emsp;&emsp;: <b><?php echo $list->id_hs; ?></b>
-							<?php if ($list->status == 1 ) : ?>
-							<span class="badge badge-warning">NOTICE</span>
-							<?php elseif ($list->status == 2) : ?>
-							<span class="badge badge-info">SUBMITED</span>
-							<?php elseif ($list->status == 3) : ?>
-							<span class="badge badge-success">CONFRIMED</span>
-							<?php else : ?>
-							<span class="badge badge-default">OPEN</span>
-							<?php endif ?>
-						</li>
-						<li>Company : <?php echo $list->company; ?></li>
-						<li>Notes&emsp;&emsp;: <?php echo $list->notes; ?></li>
+							<li>ID &emsp;&emsp;&emsp;: <b><?php echo $list->id_hs; ?></b>
+								<?php if ($list->status == 1) : ?>
+									<span class="badge badge-warning">NOTICE</span>
+								<?php elseif ($list->status == 2) : ?>
+									<span class="badge badge-info">SUBMITED</span>
+								<?php elseif ($list->status == 3) : ?>
+									<span class="badge badge-success">CONFRIMED</span>
+								<?php else : ?>
+									<span class="badge badge-default">OPEN</span>
+								<?php endif ?>
+							</li>
+							<li>Company : <?php echo $list->company; ?></li>
+							<li>Notes&emsp;&emsp;: <?php echo $list->notes; ?></li>
 					</div>
 				</div>
 			</div>
@@ -59,22 +59,18 @@
 									<?php endif; ?>
 									<div class="card-header">
 										<?php if ($list->status == 0 || $list->status == 1) : ?>
-										<h3 class="card-title">
-											<a class="btn btn-success col-15 shadow" data-toggle="modal"
-												data-target="#modal_add_item">
-												<i class="fa fa-plus"></i>&nbsp; Add Item</a>
-											<a class="btn btn-secondary col-15 shadow" data-toggle="modal"
-												data-target="#modal_add_ass">
-												<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
-										</h3>
+											<h3 class="card-title">
+												<a class="btn btn-success col-15 shadow" data-toggle="modal" data-target="#modal_add_item">
+													<i class="fa fa-plus"></i>&nbsp; Add Item</a>
+												<a class="btn btn-secondary col-15 shadow" data-toggle="modal" data-target="#modal_add_ass">
+													<i class="fa fa-plus"></i>&nbsp; Add Assembly</a>
+											</h3>
 										<?php endif; ?>
 										<div class="card-tools">
-											<button type="button" class="btn btn-xs btn-icon btn-circle"
-												data-card-widget="maximize">
+											<button type="button" class="btn btn-xs btn-icon btn-circle" data-card-widget="maximize">
 												<i class="fas fa-expand"></i>
 											</button>
-											<button type="button" class="btn btn-xs btn-icon btn-circle"
-												data-card-widget="collapse">
+											<button type="button" class="btn btn-xs btn-icon btn-circle" data-card-widget="collapse">
 												<i class="fas fa-minus"></i>
 											</button>
 											<button type="button" class="btn btn-xs btn-icon btn-circle" data-card-widget="remove">
@@ -94,56 +90,54 @@
 													<th width="11%">Action</th>
 												</tr>
 											</thead>
-											<?php 
-											$no=1;
+											<?php
+											$no = 1;
 											$query =	$this->db->query("SELECT q.*,l.nama AS item FROM qoutation q INNER JOIN list_item l ON q.id_item=l.id WHERE q.id_listing='$list->id' order by created_at ASC");
-											foreach ($query->result() as $p) {  
-											$sum_total[] = $p->price;
-											$total_qty = array_sum($sum_total); ?>
-											<tr>
-												<td style="text-align:center"><?php echo $no++ ?></td>
-												<td>
-													<?php if ($p->id_assembly != 0) : ?>
-													<span class="badge badge-secondary"> Assembly</span>
-													<?php endif; ?>
-													<small
-														class="badge badge-danger"><?php echo strtoupper($p->type_price) ?></small>
-													<br />
-													<b><?php echo strtoupper($p->item) ?></b><br />
-													<small class="badge badge-info"><?php echo strtoupper($p->brand) ?></small>
-													<?php if ($p->model === '45' || $p->model === '90') : ?>
-													<small class="badge badge-info"><?php echo strtoupper($p->model) ?>&deg;</small>
-													<?php else : ?>
-													<small class="badge badge-info"><?php echo strtoupper($p->model) ?></small>
-													<?php endif ?>
-													<small class="badge badge-info"><?php echo strtoupper($p->od) ?></small>
-													<small class="badge badge-info"><?php echo strtoupper($p->size) ?></small>
-													<small class="badge badge-info"><?php echo strtoupper($p->type) ?></small>
-													<small class="badge badge-info"><?php echo strtoupper($p->category) ?></small>
-													<small class="badge badge-info"><?php echo strtoupper($p->hole) ?></small>
-													<small class="badge badge-info"><?php echo strtoupper($p->id) ?></small>
-													<small class="badge badge-info"><?php echo strtoupper($p->plat) ?></small>
-													<small class="badge badge-info"><?php echo strtoupper($p->thread) ?></small>
-												</td>
-												<td style="text-align:center"><br /><?php echo $p->size ?></td>
-												<td style="text-align:center"><br /><?php echo $p->qty ?></td>
-												<td style="text-align:center"><br />
-													<?php echo number_format($p->price, 0, '.', '.'); ?> IDR
-												</td>
-												<td class="align-middle text-center">
-													<?php if ($list->status == 1 || $list->status == 0) : ?>
-													<a class="btn btn-warning" data-toggle="modal"
-														data-target="#modal_edit<?php echo $p->id; ?>" title="Edit">
-														<i class="fa fa-pencil-alt"></i></a>
-													<a class="btn btn-danger" data-toggle="modal"
-														data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete">
-														<i class="fa fa-trash"></i></a>
-													<?php elseif ($list->status == 3 || $list->status == 2) : ?>
-													<button type="button" class="btn btn-danger float-end" title="Lock" disabled>
-														<i class="fas fa-lock"></i></button>
-													<?php endif ?>
-												</td>
-											</tr>
+											foreach ($query->result() as $p) {
+												$sum_total[] = $p->price;
+												$total_qty = array_sum($sum_total); ?>
+												<tr>
+													<td class="align-middle text-center"><?php echo $no++ ?></td>
+													<td>
+														<?php if ($p->id_assembly != 0) : ?>
+															<span class="badge badge-secondary"> Assembly</span>
+														<?php endif; ?>
+														<small class="badge badge-danger"><?php echo strtoupper($p->type_price) ?></small>
+														<br />
+														<b><?php echo strtoupper($p->item) ?></b><br />
+														<small class="badge badge-info"><?php echo strtoupper($p->brand) ?></small>
+														<?php if ($p->model === '45' || $p->model === '90') : ?>
+															<small class="badge badge-info"><?php echo strtoupper($p->model) ?>&deg;</small>
+														<?php else : ?>
+															<small class="badge badge-info"><?php echo strtoupper($p->model) ?></small>
+														<?php endif ?>
+														<small class="badge badge-info"><?php echo strtoupper($p->od) ?></small>
+														<small class="badge badge-info"><?php echo strtoupper($p->size) ?></small>
+														<small class="badge badge-info"><?php echo strtoupper($p->type) ?></small>
+														<small class="badge badge-info"><?php echo strtoupper($p->category) ?></small>
+														<small class="badge badge-info"><?php echo strtoupper($p->hole) ?></small>
+														<small class="badge badge-info"><?php echo strtoupper($p->id) ?></small>
+														<small class="badge badge-info"><?php echo strtoupper($p->plat) ?></small>
+														<small class="badge badge-info"><?php echo strtoupper($p->thread) ?></small>
+													</td>
+													<td class="align-middle text-center"><?php echo $p->size ?></td>
+													<td class="align-middle text-center"><?php echo $p->qty ?></td>
+													<td class="align-middle text-center">
+														<?= number_format($p->price, 0, '.', '.'); ?> IDR<br />
+														<small>@ <?= number_format(1000, 0, '.', '.') ?> IDR</small>
+													</td>
+													<td class="align-middle text-center">
+														<?php if ($list->status == 1 || $list->status == 0) : ?>
+															<a class="btn btn-warning" data-toggle="modal" data-target="#modal_edit<?php echo $p->id; ?>" title="Edit">
+																<i class="fa fa-pencil-alt"></i></a>
+															<a class="btn btn-danger" data-toggle="modal" data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete">
+																<i class="fa fa-trash"></i></a>
+														<?php elseif ($list->status == 3 || $list->status == 2) : ?>
+															<button type="button" class="btn btn-danger float-end" title="Lock" disabled>
+																<i class="fas fa-lock"></i></button>
+														<?php endif ?>
+													</td>
+												</tr>
 											<?php } ?>
 										</table>
 										<table class="table table-sm">
@@ -161,66 +155,65 @@
 									</div>
 									<div class="d-flex justify-content-around mb-3">
 										<?php if ($list->status != 3) : ?>
-										<?php if ($list->status != 2) : ?>
-										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-											<input type="hidden" name="id" value="<?php echo $list->id ?>">
-											<input type="hidden" name="status" value="2">
-											<input type="hidden" name="ket" value="Submited ID : <?php echo $list->id_hs ?>">
-											<button class="btn btn-info col-15 shadow" type="submit">
-												<i class="fas fa-bookmark"></i>&nbsp;Submit List</button>
-										</form>
-										<?php endif ?>
-										<?php if ($list->status == 0) : ?>
-										<form action="<?php echo base_url('listing/qoutation_remove') ?>" method="post">
-											<input type="hidden" name="id" value="<?php echo $list->id ?>">
-											<input type="hidden" name="id_hs" value="<?php echo $list->id_hs ?>">
-											<button class="btn btn-danger col-15 shadow" type="submit">
-												<i class="fa fa-trash"></i>&nbsp;Remove List</button>
-										</form>
-										<?php endif ?>
-										<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
-										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-											<input type="hidden" name="id" value="<?php echo $list->id ?>">
-											<input type="hidden" name="status" value="1">
-											<input type="hidden" name="ket" value="Notice ID : <?php echo $list->id_hs ?>">
-											<button class="btn btn-warning col-15 shadow" type="submit">
-												<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
-										</form>
-										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-											<input type="hidden" name="id" value="<?php echo $list->id ?>">
-											<input type="hidden" name="status" value="3">
-											<input type="hidden" name="ket" value="Confrim ID : <?php echo $list->id_hs ?>">
-											<input type="hidden" name="updated_at"
-												value="<?php echo mdate('%Y-%m-%d %H:%i:%s') ?>">
-											<button class="btn btn-success col-15 shadow" type="submit">
-												<i class="fas fa-lock"></i>&nbsp;Confrim</button>
-										</form>
-										<?php } ?>
-										<?php elseif ($list->status == 3 ) :  ?>
-										<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
-										<a class="btn btn-primary col-15 shadow"
-											href="<?php echo base_url('listing/qoutation_print/?print='. $encrypturl) ?>">
-											<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
-										<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
-										<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-											<input type="hidden" name="id" value="<?php echo $list->id ?>">
-											<input type="hidden" name="status" value="1">
-											<input type="hidden" name="ket" value="Revoke">
-											<button class="btn btn-warning col-15 shadow" type="submit">
-												<i class="fas fa-lock-open"></i>&nbsp;Revoke Acceptance</button>
-										</form>
-										<?php } ?>
+											<?php if ($list->status != 2) : ?>
+												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+													<input type="hidden" name="id" value="<?php echo $list->id ?>">
+													<input type="hidden" name="status" value="2">
+													<input type="hidden" name="ket" value="Submited ID : <?php echo $list->id_hs ?>">
+													<button class="btn btn-info col-15 shadow" type="submit">
+														<i class="fas fa-bookmark"></i>&nbsp;Submit List</button>
+												</form>
+											<?php endif ?>
+											<?php if ($list->status == 0) : ?>
+												<form action="<?php echo base_url('listing/qoutation_remove') ?>" method="post">
+													<input type="hidden" name="id" value="<?php echo $list->id ?>">
+													<input type="hidden" name="id_hs" value="<?php echo $list->id_hs ?>">
+													<button class="btn btn-danger col-15 shadow" type="submit">
+														<i class="fa fa-trash"></i>&nbsp;Remove List</button>
+												</form>
+											<?php endif ?>
+											<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
+												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+													<input type="hidden" name="id" value="<?php echo $list->id ?>">
+													<input type="hidden" name="status" value="1">
+													<input type="hidden" name="ket" value="Notice ID : <?php echo $list->id_hs ?>">
+													<button class="btn btn-warning col-15 shadow" type="submit">
+														<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
+												</form>
+												<?php if ($list->status != 0) : ?>
+													<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+														<input type="hidden" name="id" value="<?php echo $list->id ?>">
+														<input type="hidden" name="status" value="3">
+														<input type="hidden" name="ket" value="Confrim ID : <?php echo $list->id_hs ?>">
+														<input type="hidden" name="updated_at" value="<?php echo mdate('%Y-%m-%d %H:%i:%s') ?>">
+														<button class="btn btn-success col-15 shadow" type="submit">
+															<i class="fas fa-lock"></i>&nbsp;Confrim</button>
+													</form>
+												<?php endif ?>
+											<?php } ?>
+										<?php elseif ($list->status == 3) :  ?>
+											<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
+											<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print/?print=' . $encrypturl) ?>">
+												<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
+											<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
+												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+													<input type="hidden" name="id" value="<?php echo $list->id ?>">
+													<input type="hidden" name="status" value="1">
+													<input type="hidden" name="ket" value="Revoke">
+													<button class="btn btn-warning col-15 shadow" type="submit">
+														<i class="fas fa-lock-open"></i>&nbsp;Revoke Acceptance</button>
+												</form>
+											<?php } ?>
 										<?php endif ?>
 									</div>
+									</div>
+								</div>
+								<div class="col-12 table-responsive-sm text-center mb-3">
+									<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i class="fas fa-undo"></i>
+										Back</a>
 								</div>
 							</div>
-							<div class="col-12 table-responsive-sm text-center mb-3">
-								<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i
-										class="fas fa-undo"></i>
-									Back</a>
-							</div>
 						</div>
-					</div>
 					<?php endforeach ?>
 	</section>
 </div>
@@ -236,23 +229,21 @@
 					</button>
 				</h5>
 			</div>
-			<form onsubmit="addbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/qoutation_save') ?>">
+			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/qoutation_save') ?>">
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text pr-5">Item&emsp;</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
-						<input type="hidden" name="id" readonly class="form-control"
-							value="<?php echo $id_qoutation->id + 1; ?>">
-						<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
-						<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
+							<input type="hidden" name="id" readonly class="form-control" value="<?php echo $id_qoutation->id + 1; ?>">
+							<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
+							<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
 						<?php endforeach ?>
 						<select id="item" name="item" class="form-control" required>
 							<option value="">- Choose Item -</option>
 							<?php foreach ($list_item as $list) : ?>
-							<option value="<?php echo $list->id ?>"><?php echo strtoupper($list->nama) ?></option>
+								<option value="<?php echo $list->id ?>"><?php echo strtoupper($list->nama) ?></option>
 							<?php endforeach ?>
 						</select>
 					</div>
@@ -386,7 +377,7 @@
 							<select name="assembly" id="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
 								<?php foreach ($assembly as $i) : ?>
-								<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>
+									<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>
 								<?php endforeach ?>
 							</select>
 						</div>
@@ -423,18 +414,16 @@
 					</button>
 				</h5>
 			</div>
-			<form onsubmit="addbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/add_assembly') ?>">
+			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/add_assembly') ?>">
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text pr-3">Id Assm</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
-						<input type="hidden" name="id" class="form-control" value="<?php echo $list->id ?>" readonly>
+							<input type="hidden" name="id" class="form-control" value="<?php echo $list->id ?>" readonly>
 						<?php endforeach ?>
-						<input type="text" name="name" class="form-control" value="<?= 'ASSM',date('md-'), $id_assm->id+1 ?>"
-							readonly>
+						<input type="text" name="name" class="form-control" value="<?= 'ASSM', date('md-'), $id_assm->id + 1 ?>" readonly>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -455,93 +444,91 @@
 
 <!--Modals edit&delete-->
 <?php foreach ($qoutation as $u) : ?>
-<div class="modal fade" id="modal_edit<?php echo $u->id ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="col-12 modal-title text-center">Update Price
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</h4>
-			</div>
-			<form onsubmit="editbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/qoutation_update') ?>">
-				<div class="modal-body">
-					<?php if ($u->id_assembly != 0) : ?>
-					<span class="badge badge-secondary"> Assembly</span>
-					<?php endif; ?>
-					<small class="badge badge-danger"><?php echo strtoupper($u->type_price) ?></small>
-					<br />
-					<?php if ($u->id_item == 1) : ?>
-					<b>PIPE</b>
-					<?php elseif ($u->id_item == 2) : ?>
-					<b>HOSE</b>
-					<?php elseif ($u->id_item == 3) : ?>
-					<b>FITTING</b>
-					<?php elseif ($u->id_item == 4) : ?>
-					<b>HOSE COVER</b>
-					<?php elseif ($u->id_item == 5) : ?>
-					<b>CLAMP PIPE</b>
-					<?php endif ?>
-					<br />
-					<small class="badge badge-info"><?php echo strtoupper($u->brand) ?></small>
-					<?php if ($u->model === '45' || $u->model === '90') : ?>
-					<small class="badge badge-info"><?php echo strtoupper($u->model) ?>&deg;</small>
-					<?php else : ?>
-					<small class="badge badge-info"><?php echo strtoupper($u->model) ?></small>
-					<?php endif ?>
-					<small class="badge badge-info"><?php echo strtoupper($u->od) ?></small>
-					<small class="badge badge-info"><?php echo strtoupper($u->size) ?></small>
-					<small class="badge badge-info"><?php echo strtoupper($u->type) ?></small>
-					<small class="badge badge-info"><?php echo strtoupper($u->category) ?></small>
-					<small class="badge badge-info"><?php echo strtoupper($u->hole) ?></small>
-					<small class="badge badge-info"><?php echo strtoupper($u->id) ?></small>
-					<small class="badge badge-info"><?php echo strtoupper($u->plat) ?></small>
-					<small class="badge badge-info"><?php echo strtoupper($u->thread) ?></small>
-					<div class="input-group mt-1">
-						<div class="input-group-prepend">
-							<label class="input-group-text pr-5">Price</label>
+	<div class="modal fade" id="modal_edit<?php echo $u->id ?>" tabindex="-1" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="col-12 modal-title text-center">Update Price
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</h4>
+				</div>
+				<form onsubmit="editbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/qoutation_update') ?>">
+					<div class="modal-body">
+						<?php if ($u->id_assembly != 0) : ?>
+							<span class="badge badge-secondary"> Assembly</span>
+						<?php endif; ?>
+						<small class="badge badge-danger"><?php echo strtoupper($u->type_price) ?></small>
+						<br />
+						<?php if ($u->id_item == 1) : ?>
+							<b>PIPE</b>
+						<?php elseif ($u->id_item == 2) : ?>
+							<b>HOSE</b>
+						<?php elseif ($u->id_item == 3) : ?>
+							<b>FITTING</b>
+						<?php elseif ($u->id_item == 4) : ?>
+							<b>HOSE COVER</b>
+						<?php elseif ($u->id_item == 5) : ?>
+							<b>CLAMP PIPE</b>
+						<?php endif ?>
+						<br />
+						<small class="badge badge-info"><?php echo strtoupper($u->brand) ?></small>
+						<?php if ($u->model === '45' || $u->model === '90') : ?>
+							<small class="badge badge-info"><?php echo strtoupper($u->model) ?>&deg;</small>
+						<?php else : ?>
+							<small class="badge badge-info"><?php echo strtoupper($u->model) ?></small>
+						<?php endif ?>
+						<small class="badge badge-info"><?php echo strtoupper($u->od) ?></small>
+						<small class="badge badge-info"><?php echo strtoupper($u->size) ?></small>
+						<small class="badge badge-info"><?php echo strtoupper($u->type) ?></small>
+						<small class="badge badge-info"><?php echo strtoupper($u->category) ?></small>
+						<small class="badge badge-info"><?php echo strtoupper($u->hole) ?></small>
+						<small class="badge badge-info"><?php echo strtoupper($u->id) ?></small>
+						<small class="badge badge-info"><?php echo strtoupper($u->plat) ?></small>
+						<small class="badge badge-info"><?php echo strtoupper($u->thread) ?></small>
+						<div class="input-group mt-1">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-5">Price</label>
+							</div>
+							<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
+							<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
+							<input type="hidden" name="id_hs" value="<?php echo $u->id_hs; ?>">
+							<input type="text" name="price" class="form-control" value="<?php echo $u->price ?>" required>
 						</div>
-						<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
-						<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
-						<input type="hidden" name="id_hs" value="<?php echo $u->id_hs; ?>">
-						<input type="text" name="price" class="form-control" value="<?php echo $u->price ?>" required>
+						<small>Max markdown 10%</small>
 					</div>
-					<small>Max markdown 10%</small>
-				</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-					<button class="btn btn-primary" id="editbtn"><i class="fa fa-check"></i> Update</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="modal_hapus<?php echo $u->id; ?>" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content bg-danger">
-			<div class="modal-header">
-				<h5 class="col-12 modal-title text-center">Delete Data
-					<button class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</h5>
+					<div class="modal-footer justify-content-between">
+						<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+						<button class="btn btn-primary" id="editbtn"><i class="fa fa-check"></i> Update</button>
+					</div>
+				</form>
 			</div>
-			<form onsubmit="delbtn.disabled = true; return true;" method="post"
-				action="<?php echo base_url('listing/qoutation_delete') ?>">
-				<div class="modal-body">
-					<input type="hidden" name="id" value="<?php echo $u->id; ?>">
-					<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
-					<span>Are you sure delete this ?</span>
-				</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
-					<button class="btn btn-outline-light" id="delbtn"><i class="fa fa-check"></i> Yes</button>
-				</div>
-			</form>
 		</div>
 	</div>
-</div>
+
+	<div class="modal fade" id="modal_hapus<?php echo $u->id; ?>" tabindex="-1" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content bg-danger">
+				<div class="modal-header">
+					<h5 class="col-12 modal-title text-center">Delete Data
+						<button class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</h5>
+				</div>
+				<form onsubmit="delbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/qoutation_delete') ?>">
+					<div class="modal-body">
+						<input type="hidden" name="id" value="<?php echo $u->id; ?>">
+						<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
+						<span>Are you sure delete this ?</span>
+					</div>
+					<div class="modal-footer justify-content-between">
+						<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+						<button class="btn btn-outline-light" id="delbtn"><i class="fa fa-check"></i> Yes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 <?php endforeach; ?>

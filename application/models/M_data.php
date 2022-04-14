@@ -60,72 +60,53 @@ class M_data extends CI_Model
     $this->db->from($this->table);
     $this->db->where('id', $id);
     $query = $this->db->get();
-
     return $query->row();
   }
 
   public function tot_inquiry()
   {
     $sql = "SELECT * FROM inquiry";
-
     $data = $this->db->query($sql);
-
     return $data->num_rows();
   }
 
   function get_item($id, $table)
   {
-		$query = $this->db->get_where($table, array('id_item' => $id));
-		return $query;
-	}
-
-  public function tot_buffer()
-  {
-    $sql = "SELECT * FROM `buffer`";
-
-    $data = $this->db->query($sql);
-
-    return $data->num_rows();
+    $query = $this->db->get_where($table, array('id_item' => $id));
+    return $query;
   }
 
   public function select_sjhs($no_po)
   {
     $sql = "SELECT sj_hs.no_id as no_id, sj_hs.no_po as no_po, sj_hs.descript as descript, sj_hs.qty as qty FROM sj_hs INNER JOIN sj_user 
     ON sj_hs.no_po=sj_user.no_po WHERE sj_user.no_po=$no_po";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
- 
+
   public function search_listing($keyword)
   {
-		$this->db->select('*');
-		$this->db->from('listing');
+    $this->db->select('*');
+    $this->db->from('listing');
     $this->db->order_by('created_at', 'DESC');
-		if(!empty($keyword))
-    {
-			$this->db->like('id_hs',$keyword);
-			$this->db->or_like('company',$keyword);
-		}
-		return $this->db->get()->result();
-	}
+    if (!empty($keyword)) {
+      $this->db->like('id_hs', $keyword);
+      $this->db->or_like('company', $keyword);
+    }
+    return $this->db->get()->result();
+  }
 
   public function select_by_sales()
   {
     $sql = "SELECT sales,COUNT(inquiry_id) AS jmlh FROM inquiry GROUP BY sales";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
 
   public function select_by_brand()
   {
     $sql = "SELECT brand,COUNT(inquiry_id) AS jmlh FROM inquiry GROUP BY brand";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
 
@@ -133,9 +114,7 @@ class M_data extends CI_Model
   {
     $sql = "SELECT COUNT(*) as total FROM $table WHERE EXTRACT(YEAR FROM date_delivery) = date('Y');
 		GROUP BY EXTRACT(MONTH FROM date_delivery) ORDER BY EXTRACT(MONTH FROM date_delivery)";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
 
@@ -143,18 +122,14 @@ class M_data extends CI_Model
   {
     $sql = "SELECT COUNT(*) AS total FROM driver WHERE join_id IN (SELECT no_id FROM type_vehicles WHERE TYPE='$type') AND
 		EXTRACT(YEAR FROM tanggal) = date('Y') GROUP BY EXTRACT(MONTH FROM tanggal) ORDER BY EXTRACT(MONTH FROM tanggal)";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
 
   public function kontak($id)
   {
     $sql = "SELECT * FROM kontak where id_user = '$id'";
-
     $data = $this->db->query($sql);
-
     return $data->row();
   }
 
@@ -208,7 +183,6 @@ class M_data extends CI_Model
   public function insert_kurs($data)
   {
     $this->db->insert_batch('kurs', $data);
-
     return $this->db->affected_rows();
   }
 
@@ -216,7 +190,6 @@ class M_data extends CI_Model
   {
     $this->db->where('currency', $currency);
     $data = $this->db->get('kurs');
-
     return $data->num_rows();
   }
 
@@ -224,14 +197,12 @@ class M_data extends CI_Model
   {
     $this->db->where('brand', $brand);
     $data = $this->db->get('master');
-
     return $data->num_rows();
   }
 
   public function insert_master($data)
   {
     $this->db->insert_batch('master', $data);
-
     return $this->db->affected_rows();
   }
 
@@ -239,27 +210,21 @@ class M_data extends CI_Model
   {
     $sql = "SELECT a.sales,a.tanggal,a.inquiry_id,a.brand,a.desc,a.qty,a.deadline,a.keter,a.request,a.cek,a.fu1,a.ket_fu,a.cogs,b.currency 
     AS kurs,a.cogs_idr,a.reseller,a.new_seller,a.user,a.delivery,a.ket_purch,a.name_purch FROM inquiry a INNER JOIN kurs b ON a.kurs=b.id_kurs";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
 
   public function buffer()
   {
     $sql = "SELECT * FROM `buffer` WHERE status!='approve' AND status!='finish'";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
 
   public function arshipbuffer()
   {
     $sql = "SELECT * FROM `buffer` WHERE status='approve' OR status='finish'";
-
     $data = $this->db->query($sql);
-
     return $data->result();
   }
 }
