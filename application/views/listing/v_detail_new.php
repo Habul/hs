@@ -100,7 +100,7 @@
 													<td class="align-middle text-center"><?php echo $no++ ?></td>
 													<td>
 														<?php if ($p->id_assembly != 0) : ?>
-															<span class="badge badge-secondary"> Assembly</span>
+															<span class="badge badge-secondary" title="Assembly"> Assembly</span>
 														<?php endif; ?>
 														<small class="badge badge-danger" title="Price Type"><?php echo strtoupper($p->type_price) ?></small>
 														<br />
@@ -123,7 +123,7 @@
 													<td class="align-middle text-center"><?php echo $p->qty ?></td>
 													<td class="align-middle text-center">
 														<?= number_format($p->price, 0, '.', '.'); ?> IDR<br />
-														<small>@ <?= number_format(1000, 0, '.', '.') ?> IDR</small>
+														<small>@ <?= number_format(0, 0, '.', '.') ?> IDR</small>
 													</td>
 													<td class="align-middle text-center">
 														<?php if ($list->status == 1 || $list->status == 0) : ?>
@@ -458,7 +458,7 @@
 						<?php if ($u->id_assembly != 0) : ?>
 							<span class="badge badge-secondary"> Assembly</span>
 						<?php endif; ?>
-						<small class="badge badge-danger"><?php echo strtoupper($u->type_price) ?></small>
+						<small class="badge badge-danger" title="Type Price"><?php echo strtoupper($u->type_price) ?></small>
 						<br />
 						<?php if ($u->id_item == 1) : ?>
 							<b>PIPE</b>
