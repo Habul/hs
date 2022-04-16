@@ -18,7 +18,7 @@ class Login extends CI_Controller
       $pass = $this->input->post('password');
 
       $where = array(
-         'pengguna_username' => $user,
+         'pengguna_username' => trim($user),
          'pengguna_status' => 1
       );
 

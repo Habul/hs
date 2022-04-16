@@ -107,8 +107,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -159,8 +159,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -212,8 +212,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -265,8 +265,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -318,8 +318,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -370,8 +370,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -420,8 +420,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -473,8 +473,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php
@@ -523,8 +523,8 @@
 									<thead class="thead-light" style="text-align:center">
 										<tr>
 											<th width="7%">No</th>
-											<th>Nama</th>
-											<th width="25%">Action</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
 										</tr>
 									</thead>
 									<?php

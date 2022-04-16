@@ -118,6 +118,8 @@
 						$('#brand').html(html);
 					}
 				});
+			} else {
+				$('#brand').html('');
 			}
 			if (id == 2 || id == 3) {
 				$.ajax({
@@ -138,6 +140,8 @@
 						$('#type').html(html);
 					}
 				});
+			} else {
+				$('#type').html('');
 			}
 			if (id == 2 || id == 3 || id == 4 || id == 5) {
 				$.ajax({
@@ -158,6 +162,8 @@
 						$('#size').html(html);
 					}
 				});
+			} else {
+				$('#size').html('');
 			}
 			if (id == 1 || id == 3) {
 				$.ajax({
@@ -178,6 +184,8 @@
 						$('#model').html(html);
 					}
 				});
+			} else {
+				$('#model').html('');
 			}
 			if (id == 1) {
 				$.ajax({
@@ -198,6 +206,8 @@
 						$('#od').html(html);
 					}
 				});
+			} else {
+				$('#od').html('');
 			}
 			if (id == 3 || id == 4) {
 				$.ajax({
@@ -218,6 +228,8 @@
 						$('#category').html(html);
 					}
 				});
+			} else {
+				$('#category').html('');
 			}
 			if (id == 5) {
 				$.ajax({
@@ -238,6 +250,8 @@
 						$('#hole').html(html);
 					}
 				});
+			} else {
+				$('#hole').html('');
 			}
 			if (id == 1) {
 				$.ajax({
@@ -258,6 +272,8 @@
 						$('#id').html(html);
 					}
 				});
+			} else {
+				$('#id').html('');
 			}
 			if (id == 5) {
 				$.ajax({
@@ -278,6 +294,8 @@
 						$('#plat').html(html);
 					}
 				});
+			} else {
+				$('#plat').html('');
 			}
 			if (id == 3) {
 				$.ajax({
@@ -298,6 +316,8 @@
 						$('#thread').html(html);
 					}
 				});
+			} else {
+				$('#thread').html('');
 			}
 			return false;
 		});

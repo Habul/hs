@@ -460,7 +460,7 @@ class Listing extends CI_Controller
 
          $data = array(
             'id_item' => $id_item,
-            'nama' => $nama,
+            'nama' => str_replace(' ', '', $nama),
             'created_at' => $created_at
          );
 
@@ -495,7 +495,7 @@ class Listing extends CI_Controller
 
          $data = array(
             'id_item' => $id_item,
-            'nama' => $nama,
+            'nama' => str_replace(' ', '', $nama),
             'created_at' => $created_at
          );
 
@@ -584,7 +584,7 @@ class Listing extends CI_Controller
             'id_item' => $id_item,
             'jenis' => $jenis,
             'part_code' => $part_code,
-            'desc' => strtoupper($desc),
+            'desc' => str_replace(' ', '', strtoupper($desc)),
             'distributor' => $distributor,
             'oem' => $oem,
             'reseller' => $reseller,
@@ -627,7 +627,7 @@ class Listing extends CI_Controller
 
          $data = array(
             'distributor' => $distributor,
-            'desc' => $desc,
+            'desc' => str_replace(' ', '', strtoupper($desc)),
             'oem' => $oem,
             'reseller' => $reseller,
             'user' => $user,

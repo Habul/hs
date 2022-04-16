@@ -102,23 +102,22 @@
 														<?php if ($p->id_assembly != 0) : ?>
 															<span class="badge badge-secondary"> Assembly</span>
 														<?php endif; ?>
-														<small class="badge badge-danger"><?php echo strtoupper($p->type_price) ?></small>
+														<small class="badge badge-danger" title="Price Type"><?php echo strtoupper($p->type_price) ?></small>
 														<br />
 														<b><?php echo strtoupper($p->item) ?></b><br />
-														<small class="badge badge-info"><?php echo strtoupper($p->brand) ?></small>
+														<small class="badge badge-info" title="brand"><?php echo strtoupper($p->brand) ?></small>
 														<?php if ($p->model === '45' || $p->model === '90') : ?>
-															<small class="badge badge-info"><?php echo strtoupper($p->model) ?>&deg;</small>
+															<small class="badge badge-info" title="Model"><?php echo strtoupper($p->model) ?>&deg;</small>
 														<?php else : ?>
-															<small class="badge badge-info"><?php echo strtoupper($p->model) ?></small>
+															<small class="badge badge-info" title="Model"><?php echo strtoupper($p->model) ?></small>
 														<?php endif ?>
-														<small class="badge badge-info"><?php echo strtoupper($p->od) ?></small>
-														<small class="badge badge-info"><?php echo strtoupper($p->size) ?></small>
-														<small class="badge badge-info"><?php echo strtoupper($p->type) ?></small>
-														<small class="badge badge-info"><?php echo strtoupper($p->category) ?></small>
-														<small class="badge badge-info"><?php echo strtoupper($p->hole) ?></small>
-														<small class="badge badge-info"><?php echo strtoupper($p->id) ?></small>
-														<small class="badge badge-info"><?php echo strtoupper($p->plat) ?></small>
-														<small class="badge badge-info"><?php echo strtoupper($p->thread) ?></small>
+														<small class="badge badge-info" title="OD"><?php echo strtoupper($p->od) ?></small>
+														<small class="badge badge-info" title="Type"><?php echo strtoupper($p->type) ?></small>
+														<small class="badge badge-info" title="Category"><?php echo strtoupper($p->category) ?></small>
+														<small class="badge badge-info" title="Hole"><?php echo strtoupper($p->hole) ?></small>
+														<small class="badge badge-info" title="ID"><?php echo strtoupper($p->i_d) ?></small>
+														<small class="badge badge-info" title="Plat"><?php echo strtoupper($p->plat) ?></small>
+														<small class="badge badge-info" title="Thread"><?php echo strtoupper($p->thread) ?></small>
 													</td>
 													<td class="align-middle text-center"><?php echo $p->size ?></td>
 													<td class="align-middle text-center"><?php echo $p->qty ?></td>
@@ -358,10 +357,10 @@
 					<div class="form-group mb-3">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<label class="input-group-text pr-4">Type Price</label>
+								<label class="input-group-text pr-4">Price Type</label>
 							</div>
-							<select name="type_price" class="form-control" id="type_price">
-								<option value="">- Choose Type Price -</option>
+							<select name="type_price" class="form-control" id="type_price" required>
+								<option value="">- Choose Price Type -</option>
 								<option value="oem">Oem</option>
 								<option value="distributor">Distributor</option>
 								<option value="reseller">Reseller</option>
@@ -473,20 +472,21 @@
 							<b>CLAMP PIPE</b>
 						<?php endif ?>
 						<br />
-						<small class="badge badge-info"><?php echo strtoupper($u->brand) ?></small>
+						<small class="badge badge-info" title="Brand"><?php echo strtoupper($u->brand) ?></small>
 						<?php if ($u->model === '45' || $u->model === '90') : ?>
-							<small class="badge badge-info"><?php echo strtoupper($u->model) ?>&deg;</small>
+							<small class="badge badge-info" title="Model"><?php echo strtoupper($u->model) ?>&deg;</small>
 						<?php else : ?>
-							<small class="badge badge-info"><?php echo strtoupper($u->model) ?></small>
+							<small class="badge badge-info" title="Model"><?php echo strtoupper($u->model) ?></small>
 						<?php endif ?>
-						<small class="badge badge-info"><?php echo strtoupper($u->od) ?></small>
-						<small class="badge badge-info"><?php echo strtoupper($u->size) ?></small>
-						<small class="badge badge-info"><?php echo strtoupper($u->type) ?></small>
-						<small class="badge badge-info"><?php echo strtoupper($u->category) ?></small>
-						<small class="badge badge-info"><?php echo strtoupper($u->hole) ?></small>
-						<small class="badge badge-info"><?php echo strtoupper($u->id) ?></small>
-						<small class="badge badge-info"><?php echo strtoupper($u->plat) ?></small>
-						<small class="badge badge-info"><?php echo strtoupper($u->thread) ?></small>
+						<small class="badge badge-info" title="OD"><?php echo strtoupper($u->od) ?></small>
+						<small class="badge badge-info" title="Type"><?php echo strtoupper($u->type) ?></small>
+						<small class="badge badge-info" title="Category"><?php echo strtoupper($u->category) ?></small>
+						<small class="badge badge-info" title="Hole"><?php echo strtoupper($u->hole) ?></small>
+						<small class="badge badge-info" title="ID"><?php echo strtoupper($u->i_d) ?></small>
+						<small class="badge badge-info" title="Plat"><?php echo strtoupper($u->plat) ?></small>
+						<small class="badge badge-info" title="Thread"><?php echo strtoupper($u->thread) ?></small>
+						<small class="badge badge-warning" title="Size"><?php echo strtoupper($u->size) ?></small>
+						<small class="badge badge-warning" title="Qty"><?php echo strtoupper($u->qty) ?></small>
 						<div class="input-group mt-1">
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-5">Price</label>
