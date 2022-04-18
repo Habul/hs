@@ -123,7 +123,7 @@
 													<td class="align-middle text-center"><?php echo $p->qty ?></td>
 													<td class="align-middle text-center">
 														<?= number_format($p->price, 0, '.', '.'); ?> IDR<br />
-														<small>@ <?= number_format(0, 0, '.', '.') ?> IDR</small>
+														<small>@ <?= number_format($p->price_unit, 0, '.', '.') ?> IDR</small>
 													</td>
 													<td class="align-middle text-center">
 														<?php if ($list->status == 1 || $list->status == 0) : ?>
@@ -494,7 +494,26 @@
 							<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
 							<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
 							<input type="hidden" name="id_hs" value="<?php echo $u->id_hs; ?>">
-							<input type="text" name="price" class="form-control" value="<?php echo $u->price ?>" required>
+							<?php if ($u->type_price == 'distributor') : ?>
+								<?php $cek = $this->db->select('distributor')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
+								<input type="hidden" name="price_unit" value="<?php echo $cek->distributor; ?>">
+								<input type="text" name="price" class="form-control" value="<?php echo $cek->distributor * $u->qty ?>" required>
+							<?php elseif ($u->type_price == 'oem') : ?>
+								<?php $cek = $this->db->select('oem')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
+								<input type="hidden" name="price_unit" value="<?php echo $cek->oem; ?>">
+								<input type="text" name="price" class="form-control" value="<?php echo $cek->oem * $u->qty ?>" required>
+							<?php elseif ($u->type_price == 'reseller') : ?>
+								<?php $cek = $this->db->select('reseller')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
+								<input type="hidden" name="price_unit" value="<?php echo $cek->reseller; ?>">
+								<input type="text" name="price" class="form-control" value="<?php echo $cek->reseller * $u->qty ?>" required>
+							<?php elseif ($u->type_price == 'user') : ?>
+								<?php $cek = $this->db->select('user')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
+								<input type="hidden" name="price_unit" value="<?php echo $cek->user; ?>">
+								<input type="text" name="price" class="form-control" value="<?php echo $cek->user * $u->qty ?>" required>
+							<?php else : ?>
+								<input type="hidden" name="price_unit" value="0">
+								<input type="text" name="price" class="form-control" value="<?= $u->price ?>" required>
+							<?php endif ?>
 						</div>
 						<small>Max markdown 10%</small>
 					</div>
