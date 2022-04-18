@@ -291,6 +291,8 @@ class Listing extends CI_Controller
          $assembly = $this->input->post('assembly');
          $type_price = $this->input->post('type_price');
          $created_at = mdate('%Y-%m-%d %H:%i:%s');
+         $price_unit = $this->db->select('oem')->where('desc', $brand - $size - $type)->get('list_price')->row();
+         $price = $qty * $price_unit;
          $data = array(
             'id_hs' => $id_hs,
             'id_listing' => $id_listing,
@@ -308,6 +310,8 @@ class Listing extends CI_Controller
             'qty' => $qty,
             'id_assembly' => $assembly,
             'type_price' => $type_price,
+            'price_unit' => $price_unit->oem,
+            'price' => $price,
             'created_at' => $created_at,
          );
 
@@ -333,10 +337,12 @@ class Listing extends CI_Controller
          $id = $this->input->post('id');
          $id_hs = $this->input->post('id_hs');
          $price = $this->input->post('price');
+         $price_unit = $this->input->post('price_unit');
          $updated_at = mdate('%Y-%m-%d %H:%i:%s');
 
          $data = array(
             'price' => $price,
+            'price_unit' => $price_unit,
             'updated_at' => $updated_at
          );
 
