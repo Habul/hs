@@ -291,8 +291,99 @@ class Listing extends CI_Controller
          $assembly = $this->input->post('assembly');
          $type_price = $this->input->post('type_price');
          $created_at = mdate('%Y-%m-%d %H:%i:%s');
-         $price_unit = $this->db->select('oem')->where('desc', $brand - $size - $type)->get('list_price')->row();
-         $price = $qty * $price_unit;
+
+         if ($item == 1) :
+            if ($type_price == 'distributor') :
+               $cek = $this->db->select('distributor')->where('desc', $brand . '-' . $model . '-' . $od . '-' . $i_d)->get('list_price')->row();
+               $price_unit = $cek->distributor;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'oem') :
+               $cek = $this->db->select('oem')->where('desc', $brand . '-' . $model . '-' . $od . '-' . $i_d)->get('list_price')->row();
+               $price_unit = $cek->oem;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'reseller') :
+               $cek = $this->db->select('reseller')->where('desc', $brand . '-' . $model . '-' . $od . '-' . $i_d)->get('list_price')->row();
+               $price_unit = $cek->reseller;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'user') :
+               $cek = $this->db->select('user')->where('desc', $brand . '-' . $model . '-' . $od . '-' . $i_d)->get('list_price')->row();
+               $price_unit = $cek->user;
+               $price = $qty * $price_unit;
+            endif;
+         elseif ($item == 2) :
+            if ($type_price == 'distributor') :
+               $cek = $this->db->select('distributor')->where('desc', $brand . '-' . $size . '-' . $type)->get('list_price')->row();
+               $price_unit = $cek->distributor;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'oem') :
+               $cek = $this->db->select('oem')->where('desc', $brand . '-' . $size . '-' . $type)->get('list_price')->row();
+               $price_unit = $cek->oem;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'reseller') :
+               $cek = $this->db->select('reseller')->where('desc', $brand . '-' . $size . '-' . $type)->get('list_price')->row();
+               $price_unit = $cek->reseller;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'user') :
+               $cek = $this->db->select('user')->where('desc', $brand . '-' . $size . '-' . $type)->get('list_price')->row();
+               $price_unit = $cek->user;
+               $price = $qty * $price_unit;
+            endif;
+         elseif ($item == 3) :
+            if ($type_price == 'distributor') :
+               $cek = $this->db->select('distributor')->where('desc', $brand . '-' . $model . '-' . $size . '-' . $type . '-' . $category . '-' . $thread)->get('list_price')->row();
+               $price_unit = $cek->distributor;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'oem') :
+               $cek = $this->db->select('oem')->where('desc', $brand . '-' . $model . '-' . $size . '-' . $type . '-' . $category . '-' . $thread)->get('list_price')->row();
+               $price_unit = $cek->oem;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'reseller') :
+               $cek = $this->db->select('reseller')->where('desc', $brand . '-' . $model . '-' . $size . '-' . $type . '-' . $category . '-' . $thread)->get('list_price')->row();
+               $price_unit = $cek->reseller;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'user') :
+               $cek = $this->db->select('user')->where('desc', $brand . '-' . $model . '-' . $size . '-' . $type . '-' . $category . '-' . $thread)->get('list_price')->row();
+               $price_unit = $cek->user;
+               $price = $qty * $price_unit;
+            endif;
+         elseif ($item == 4) :
+            if ($type_price == 'distributor') :
+               $cek = $this->db->select('distributor')->where('desc', $size . '-' . $category)->get('list_price')->row();
+               $price_unit = $cek->distributor;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'oem') :
+               $cek = $this->db->select('oem')->where('desc', $size . '-' . $category)->get('list_price')->row();
+               $price_unit = $cek->oem;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'reseller') :
+               $cek = $this->db->select('reseller')->where('desc', $size . '-' . $category)->get('list_price')->row();
+               $price_unit = $cek->reseller;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'user') :
+               $cek = $this->db->select('user')->where('desc', $size . '-' . $category)->get('list_price')->row();
+               $price_unit = $cek->user;
+               $price = $qty * $price_unit;
+            endif;
+         elseif ($item == 5) :
+            if ($type_price == 'distributor') :
+               $cek = $this->db->select('distributor')->where('desc', $size . '-' . $hole . '-' . $plat)->get('list_price')->row();
+               $price_unit = $cek->distributor;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'oem') :
+               $cek = $this->db->select('oem')->where('desc', $size . '-' . $hole . '-' . $plat)->get('list_price')->row();
+               $price_unit = $cek->oem;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'reseller') :
+               $cek = $this->db->select('reseller')->where('desc', $size . '-' . $hole . '-' . $plat)->get('list_price')->row();
+               $price_unit = $cek->reseller;
+               $price = $qty * $price_unit;
+            elseif ($type_price == 'user') :
+               $cek = $this->db->select('user')->where('desc', $size . '-' . $hole . '-' . $plat)->get('list_price')->row();
+               $price_unit = $cek->user;
+               $price = $qty * $price_unit;
+            endif;
+         endif;
+
          $data = array(
             'id_hs' => $id_hs,
             'id_listing' => $id_listing,
@@ -310,7 +401,7 @@ class Listing extends CI_Controller
             'qty' => $qty,
             'id_assembly' => $assembly,
             'type_price' => $type_price,
-            'price_unit' => $price_unit->oem,
+            'price_unit' => $price_unit,
             'price' => $price,
             'created_at' => $created_at,
          );

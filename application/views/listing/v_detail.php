@@ -494,26 +494,8 @@
 							<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
 							<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
 							<input type="hidden" name="id_hs" value="<?php echo $u->id_hs; ?>">
-							<?php if ($u->type_price == 'distributor') : ?>
-								<?php $cek = $this->db->select('distributor')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
-								<input type="hidden" name="price_unit" value="<?php echo $cek->distributor; ?>">
-								<input type="text" name="price" class="form-control" value="<?php echo $cek->distributor * $u->qty ?>" required>
-							<?php elseif ($u->type_price == 'oem') : ?>
-								<?php $cek = $this->db->select('oem')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
-								<input type="hidden" name="price_unit" value="<?php echo $cek->oem; ?>">
-								<input type="text" name="price" class="form-control" value="<?php echo $cek->oem * $u->qty ?>" required>
-							<?php elseif ($u->type_price == 'reseller') : ?>
-								<?php $cek = $this->db->select('reseller')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
-								<input type="hidden" name="price_unit" value="<?php echo $cek->reseller; ?>">
-								<input type="text" name="price" class="form-control" value="<?php echo $cek->reseller * $u->qty ?>" required>
-							<?php elseif ($u->type_price == 'user') : ?>
-								<?php $cek = $this->db->select('user')->where('desc', $brand - $size - $type)->get('list_price')->row(); ?>
-								<input type="hidden" name="price_unit" value="<?php echo $cek->user; ?>">
-								<input type="text" name="price" class="form-control" value="<?php echo $cek->user * $u->qty ?>" required>
-							<?php else : ?>
-								<input type="hidden" name="price_unit" value="0">
-								<input type="text" name="price" class="form-control" value="0" required>
-							<?php endif ?>
+							<input type="hidden" name="price_unit" value="<?php echo $u->price_unit; ?>">
+							<input type="number" name="price" class="form-control" id="price" min="1" value="<?php echo $u->price ?>" onchange="editprice(this.value)">
 						</div>
 						<small>Max markdown 10%</small>
 					</div>
@@ -551,3 +533,9 @@
 		</div>
 	</div>
 <?php endforeach; ?>
+
+<script>
+	function editprice(val) {
+		alert("Max Markdown 10% " + val);
+	}
+</script>

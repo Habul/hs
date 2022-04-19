@@ -134,7 +134,7 @@
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
-							html += '<option value=' + data[i].nama + '>' + data[i]
+							html += '<option value=' + data[i].nama.replaceAll(' ', '') + '>' + data[i]
 								.nama.toUpperCase() + '</option>';
 						}
 						$('#type').html(html);
@@ -178,7 +178,7 @@
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
-							html += '<option value=' + data[i].nama + '>' + data[i]
+							html += '<option value=' + data[i].nama.replaceAll(' ', '') + '>' + data[i]
 								.nama.toUpperCase() + '</option>';
 						}
 						$('#model').html(html);
@@ -222,7 +222,7 @@
 						var html = '';
 						var i;
 						for (i = 0; i < data.length; i++) {
-							html += '<option value=' + data[i].nama + '>' + data[i]
+							html += '<option value=' + data[i].nama.replaceAll(' ', '') + '>' + data[i]
 								.nama.toUpperCase() + '</option>';
 						}
 						$('#category').html(html);
@@ -323,6 +323,8 @@
 		});
 	});
 </script>
+
+
 <script>
 	var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 	var currentTheme = localStorage.getItem('theme');
