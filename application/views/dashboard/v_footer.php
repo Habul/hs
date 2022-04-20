@@ -323,8 +323,14 @@
 		});
 	});
 </script>
-
-
+<!-- <script>
+	$(function() {
+		$('#price').change(function() {
+			var price = $(this).val();
+			$(price)
+		});
+	});
+</script> -->
 <script>
 	var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 	var currentTheme = localStorage.getItem('theme');

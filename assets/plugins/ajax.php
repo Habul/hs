@@ -1,10 +1,10 @@
 <script>
-  $(function () {
+  $(function() {
     bsCustomFileInput.init();
   });
 
-  $(function () {
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+  $(function() {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
       event.preventDefault();
       $(this).ekkoLightbox({
         alwaysShowClose: true
@@ -14,7 +14,7 @@
     $('.filter-container').filterizr({
       gutterPixels: 3
     });
-    $('.btn[data-filter]').on('click', function () {
+    $('.btn[data-filter]').on('click', function() {
       $('.btn[data-filter]').removeClass('active');
       $(this).addClass('active');
     });
@@ -34,11 +34,11 @@
     ]
   });
 
-  t.on('order.dt search.dt', function () {
+  t.on('order.dt search.dt', function() {
     t.column(0, {
       search: 'applied',
       order: 'applied'
-    }).nodes().each(function (cell, i) {
+    }).nodes().each(function(cell, i) {
       cell.innerHTML = i + 1;
     });
   }).draw();
@@ -101,16 +101,16 @@
     ],
   });
 
-  x.on('order.dt search.dt', function () {
+  x.on('order.dt search.dt', function() {
     x.column(0, {
       search: 'applied',
       order: 'applied'
-    }).nodes().each(function (cell, j) {
+    }).nodes().each(function(cell, j) {
       cell.innerHTML = j + 1;
     }).buttons().container().appendTo('#index2_wrapper .col-md-6:eq(0)');
   }).draw();
 
-  $(function () {
+  $(function() {
     $("#example1").DataTable({
       "paging": true,
       "searching": false,
@@ -231,12 +231,11 @@
       "responsive": true,
     });
   });
-
 </script>
 <script>
   var awal_date;
   var akhir_date;
-  var filterdate = (function (oSettings, aData, iDataIndex) {
+  var filterdate = (function(oSettings, aData, iDataIndex) {
     var mulaistart = parseDateValue(awal_date);
     var akhirend = parseDateValue(akhir_date);
     var evalDate = parseDateValue(aData[6]);
@@ -255,7 +254,7 @@
     return parsingdate;
   }
 
-  $(document).ready(function () {
+  $(document).ready(function() {
     var $tableid = $('#filter1').DataTable({
       "dom": "<'row'<'col-sm-4'l><'col-sm-5' <'datecaribox'>><'col-sm-3'f>>" +
         "<'row'<'col-sm-12'tr>>" +
@@ -277,7 +276,7 @@
       autoUpdateInput: false
     });
 
-    $('#datesearch').on('apply.daterangepicker', function (ev, picker) {
+    $('#datesearch').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
       awal_date = picker.startDate.format('DD/MM/YYYY');
       akhir_date = picker.endDate.format('DD/MM/YYYY');
@@ -285,7 +284,7 @@
       $tableid.draw();
     });
 
-    $('#datesearch').on('cancel.daterangepicker', function (ev, picker) {
+    $('#datesearch').on('cancel.daterangepicker', function(ev, picker) {
       $(this).val('');
       awal_date = '';
       akhir_date = '';
@@ -293,12 +292,11 @@
       $tableid.draw();
     });
   });
-
 </script>
 <script>
   var start_date;
   var end_date;
-  var DateFilterFunction = (function (oSettings, aData, iDataIndex) {
+  var DateFilterFunction = (function(oSettings, aData, iDataIndex) {
     var dateStart = parseDateValue(start_date);
     var dateEnd = parseDateValue(end_date);
     var evalDate = parseDateValue(aData[1]);
@@ -322,7 +320,7 @@
     return parsedDate;
   }
 
-  $(document).ready(function () {
+  $(document).ready(function() {
     var $dTable = $('#filter2').DataTable({
       "dom": "<'row'<'col-sm-4'l><'col-sm-5' <'datesearchbox'>><'col-sm-3'f>>" +
         "<'row'<'col-sm-12'tr>>" +
@@ -334,7 +332,7 @@
       ],
       'columnDefs': [{
         'targets': 4,
-        'render': function (data, type, full, meta) {
+        'render': function(data, type, full, meta) {
           if (type === 'display') {
             data = strtrunc(data, 20);
           }
@@ -353,7 +351,7 @@
       autoUpdateInput: false
     });
 
-    $('#datesearch').on('apply.daterangepicker', function (ev, picker) {
+    $('#datesearch').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
       start_date = picker.startDate.format('DD/MM/YYYY');
       end_date = picker.endDate.format('DD/MM/YYYY');
@@ -361,7 +359,7 @@
       $dTable.draw();
     });
 
-    $('#datesearch').on('cancel.daterangepicker', function (ev, picker) {
+    $('#datesearch').on('cancel.daterangepicker', function(ev, picker) {
       $(this).val('');
       start_date = '';
       end_date = '';
@@ -369,10 +367,9 @@
       $dTable.draw();
     });
   });
-
 </script>
 <script>
-  $(function () {
+  $(function() {
     $('.select2').select2()
     $('.select2bs4').select2({
       theme: 'bootstrap4'
@@ -413,7 +410,7 @@
         startDate: moment().subtract(29, 'days'),
         endDate: moment()
       },
-      function (start, end) {
+      function(start, end) {
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
       }
     )
@@ -423,10 +420,10 @@
     $('.duallistbox').bootstrapDualListbox()
     $('.my-colorpicker1').colorpicker()
     $('.my-colorpicker2').colorpicker()
-    $('.my-colorpicker2').on('colorpickerChange', function (event) {
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
       $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
     })
-    $("input[data-bootstrap-switch]").each(function () {
+    $("input[data-bootstrap-switch]").each(function() {
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
   })
@@ -435,5 +432,4 @@
     format: 'L',
     inline: true
   })
-
 </script>

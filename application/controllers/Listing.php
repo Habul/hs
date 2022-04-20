@@ -421,16 +421,20 @@ class Listing extends CI_Controller
 
    public function qoutation_update()
    {
-      $this->form_validation->set_rules('id_hs', 'ID', 'required');
+      $id = $this->input->post('id');
+      $price = $this->input->post('price');
+      $cek = $this->db->select('price')->where('id', $id)->get('qoutation')->row();
+      $update10 = $cek->price - ($cek->price * 0.1);
+      $valid = $price < $update10;
+
       $this->form_validation->set_rules('id_listing', 'ID Listing', 'required');
+      $this->form_validation->set_rules($valid, 'Price', 'required');
 
       if ($this->form_validation->run() != false) {
          $id = $this->input->post('id');
-         $id_hs = $this->input->post('id_hs');
          $price = $this->input->post('price');
          $price_unit = $this->input->post('price_unit');
          $updated_at = mdate('%Y-%m-%d %H:%i:%s');
-
          $data = array(
             'price' => $price,
             'price_unit' => $price_unit,
@@ -442,12 +446,12 @@ class Listing extends CI_Controller
          );
 
          $this->m_data->update_data($where, $data, 'qoutation');
-         $this->session->set_flashdata('berhasil', 'Update successfully, ID : ' . $id_hs . ' !');
+         $this->session->set_flashdata('berhasil', 'Update Price successfully');
          $id = $this->input->post('id_listing');
          $encrypt = urlencode($this->encrypt->encode($id));
          redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
       } else {
-         $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+         $this->session->set_flashdata('gagal', 'Data failed to update, Max Markdown10% !');
          $id = $this->input->post('id_listing');
          $encrypt = urlencode($this->encrypt->encode($id));
          redirect(base_url() . 'listing/list_update/?list=' . $encrypt);

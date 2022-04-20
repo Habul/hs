@@ -487,15 +487,14 @@
 						<small class="badge badge-info" title="Thread"><?php echo strtoupper($u->thread) ?></small>
 						<small class="badge badge-warning" title="Size"><?php echo strtoupper($u->size) ?></small>
 						<small class="badge badge-warning" title="Qty"><?php echo strtoupper($u->qty) ?></small>
-						<div class="input-group mt-1">
+						<div class="input-group mt-1 mb-0">
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-5">Price</label>
 							</div>
 							<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
 							<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
-							<input type="hidden" name="id_hs" value="<?php echo $u->id_hs; ?>">
 							<input type="hidden" name="price_unit" value="<?php echo $u->price_unit; ?>">
-							<input type="number" name="price" class="form-control" id="price" min="1" value="<?php echo $u->price ?>" onchange="editprice(this.value)">
+							<input type="number" name="price" class="form-control toggle-edit" id="price" min="1" value="<?php echo $u->price ?>">
 						</div>
 						<small>Max markdown 10%</small>
 					</div>
@@ -534,8 +533,21 @@
 	</div>
 <?php endforeach; ?>
 
-<script>
-	function editprice(val) {
-		alert("Max Markdown 10% " + val);
+<!-- <script>
+	function editprice() {
+		let x = document.getElementById("price").value;
+		let y = x - (x * 0.1);
+		let z = x[0];
+		if (z < y) {
+			document.getElementById('editbtn').disabled = true;
+			document.getElementById('editbtn').classList.add('btn-secondary');
+			document.getElementsByClassName('toggle-edit')[0].classList.add('is-invalid');
+			document.getElementById('editbtn').classList.remove('btn-primary');
+		} else {
+			document.getElementById('editbtn').disabled = false;
+			document.getElementById('editbtn').classList.add('btn-primary');
+			document.getElementsByClassName('toggle-edit')[0].classList.remove('is-invalid');
+			document.getElementById('editbtn').classList.remove('btn-secondary');
+		}
 	}
-</script>
+</script> -->
