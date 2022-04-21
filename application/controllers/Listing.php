@@ -421,16 +421,12 @@ class Listing extends CI_Controller
 
    public function qoutation_update()
    {
-      $id = $this->input->post('id');
-      $price = $this->input->post('price');
-      $cek = $this->db->select('price')->where('id', $id)->get('qoutation')->row();
+      $idd = $this->input->post('id');
+      $pricee = $this->input->post('price');
+      $cek = $this->db->select('price')->where('id', $idd)->get('qoutation')->row();
       $update10 = $cek->price - ($cek->price * 0.1);
-      $valid = $price < $update10;
 
-      $this->form_validation->set_rules('id_listing', 'ID Listing', 'required');
-      $this->form_validation->set_rules($valid, 'Price', 'required');
-
-      if ($this->form_validation->run() != false) {
+      if ($pricee >= $update10) {
          $id = $this->input->post('id');
          $price = $this->input->post('price');
          $price_unit = $this->input->post('price_unit');
@@ -451,7 +447,7 @@ class Listing extends CI_Controller
          $encrypt = urlencode($this->encrypt->encode($id));
          redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
       } else {
-         $this->session->set_flashdata('gagal', 'Data failed to update, Max Markdown10% !');
+         $this->session->set_flashdata('gagal2', 'Data failed to update, Max Markdown10% !');
          $id = $this->input->post('id_listing');
          $encrypt = urlencode($this->encrypt->encode($id));
          redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
@@ -507,6 +503,28 @@ class Listing extends CI_Controller
       $this->m_data->delete_data($where, 'listing');
       $this->session->set_flashdata('berhasil', 'Qoutation ID ' . $id_hs . ' has been deleted !');
       redirect(base_url() . 'listing/listing');
+   }
+
+   public function qoutation_print()
+   {
+      $id = rawurldecode($this->encrypt->decode($_GET['print']));
+      $this->load->library('pdf');
+      $file_pdf = 'Print SJ';
+      $paper = 'A4';
+      $orientation = "POTRAIT";
+
+      $where = array(
+         'id' => $id
+      );
+
+      $where2 = array(
+         'id_listing' => $id
+      );
+
+      $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
+      $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
+      $html = $this->load->view('listing/v_print', $data, true);
+      $this->pdf->generate($html, $file_pdf, $paper, $orientation);
    }
 
    public function listing_item()

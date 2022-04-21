@@ -87,8 +87,8 @@
 
   #table td,
   #table th {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid rgb(13, 13, 13);
+    padding: 3px;
   }
 
   #table tr:nth-child(even) {
@@ -100,9 +100,8 @@
   }
 
   #table th {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     text-align: left;
-    background-color: #4CAF50;
-    color: white;
+    color: rgb(12, 12, 12);
   }

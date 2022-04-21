@@ -18,18 +18,22 @@
 
 	<section class="content">
 		<div class="container-fluid">
-			<?php if ($this->session->flashdata('berhasil')) { ?>
+			<?php if ($this->session->flashdata('berhasil')) : ?>
 				<div class="alert alert-success alert-dismissible fade show" id="info" role="alert">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					<i class="icon fa fa-check"></i>&nbsp;<?= $this->session->flashdata('berhasil') ?>
 				</div>
-			<?php } ?>
-			<?php if ($this->session->flashdata('gagal')) { ?>
+			<?php elseif ($this->session->flashdata('gagal')) : ?>
 				<div class="alert alert-warning alert-dismissible fade show" id="info" role="alert">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal') ?>
 				</div>
-			<?php } ?>
+			<?php elseif ($this->session->flashdata('gagal2')) : ?>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<i class="icon fa fa-warning"></i>&nbsp;<?= $this->session->flashdata('gagal2') ?>
+				</div>
+			<?php endif ?>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="callout callout-info">
@@ -192,7 +196,7 @@
 											<?php } ?>
 										<?php elseif ($list->status == 3) :  ?>
 											<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
-											<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print/?print=' . $encrypturl) ?>">
+											<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print/?print=' . $encrypturl) ?>" rel="noopener" target="_blank">
 												<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
 											<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
@@ -494,9 +498,9 @@
 							<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
 							<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
 							<input type="hidden" name="price_unit" value="<?php echo $u->price_unit; ?>">
-							<input type="number" name="price" class="form-control toggle-edit" id="price" min="1" value="<?php echo $u->price ?>">
+							<input type="number" name="price" class="form-control" id="price" min="1" value="<?php echo $u->price ?>" required>
 						</div>
-						<small>Max markdown 10%</small>
+						<small><i>Max markdown 10%</i></small>
 					</div>
 					<div class="modal-footer justify-content-between">
 						<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
@@ -532,6 +536,21 @@
 		</div>
 	</div>
 <?php endforeach; ?>
+
+<!-- <script>
+	function createeditbtn() {
+		$('.toggle-edit').each(function() {
+			$(this).attr('readonly', true);
+			$(this).attr('disabled', true);
+			$(this).css('cursor', 'not-allowed');
+		});
+		$('.toggle-edit').click(function() {
+			$(this).attr('readonly', false);
+			$(this).attr('disabled', false);
+			$(this).css('cursor', 'text');
+		});
+	}
+</script> -->
 
 <!-- <script>
 	function editprice() {

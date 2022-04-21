@@ -97,15 +97,10 @@
 						<div class="icon">
 							<i class="fas fa-users"></i>
 						</div>
-						<a href="<?= base_url('dashboard/pengguna') ?>" class="small-box-footer">More info
+						<a <?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?> href="<?= base_url('dashboard/pengguna') ?>" <?php } ?> class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
 	</section>
 </div>
-<script>
-	$("a").click(function() {
-		val = $(this).data('value')
-	});
-</script>
