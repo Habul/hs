@@ -3,13 +3,13 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Input List Qoutation</h1>
+					<h1>Input List Quotation</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
 						<li class="breadcrumb-item"><a href="<?php echo base_url('listing/listing') ?>">Listing</a></li>
-						<li class="breadcrumb-item active">Input List Qoutation</li>
+						<li class="breadcrumb-item active">Input List Quotation</li>
 					</ol>
 				</div>
 			</div>
@@ -196,7 +196,7 @@
 											<?php } ?>
 										<?php elseif ($list->status == 3) :  ?>
 											<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
-											<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print/?print=' . $encrypturl) ?>">
+											<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print/?print=' . $encrypturl) ?>" rel="noopener" target="_blank">
 												<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
 											<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">

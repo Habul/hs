@@ -16,7 +16,7 @@ class Listing extends CI_Controller
 
    public function listing()
    {
-      $data['title'] = 'Listing Qoutation';
+      $data['title'] = 'Listing';
       $data['listings'] = $this->db->order_by('created_at', 'desc')->get('listing')->result();
       $data['id_add'] = $this->db->select_max('id')->get('listing')->row();
       $this->load->view('dashboard/v_header', $data);
@@ -26,7 +26,7 @@ class Listing extends CI_Controller
 
    public function search()
    {
-      $data['title'] = 'Listing Qoutation';
+      $data['title'] = 'Listing';
       $keyword = $this->input->post('keyword');
       $data['listing'] = $this->m_data->search_listing($keyword);
       $this->load->view('dashboard/v_header', $data);
@@ -36,7 +36,7 @@ class Listing extends CI_Controller
 
    public function list()
    {
-      $data2['title'] = 'Listing Qoutation';
+      $data2['title'] = 'Listing';
       if ($this->uri->segment(3) == '1') : {
             $data['listing'] = $this->db->get_where('listing', ['status' => '1'])->result();
          }

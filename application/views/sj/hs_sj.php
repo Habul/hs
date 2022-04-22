@@ -17,6 +17,7 @@
 							<td><img src="<?php echo base_url(); ?>gambar/website/Logo-02.png" style="width:250px;height:50px;"></td>
 							<td width="30%"></td>
 							<td style="text-align:center">
+								<br>
 								<h3><b>SURAT JALAN</b></h3>
 								<h3><b>( DELIVERY ORDER )</b></h3>
 							</td>

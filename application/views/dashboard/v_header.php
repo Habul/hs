@@ -162,7 +162,7 @@
 								<?php if ($total != 0) : ?>
 									<span class="badge badge-warning right"><?php echo $total; ?></span>
 								<?php endif; ?>
-								<p>Listing Qoutation
+								<p>Listing
 									<i class=" fas fa-angle-left right"></i>
 								</p>
 							</a>
@@ -186,7 +186,7 @@
 										<?php if ($total != 0) : ?>
 											<span class="badge badge-warning right"><?php echo $total; ?></span>
 										<?php endif; ?>
-										<p>Listing Qoutation</p>
+										<p>Listing Quotation</p>
 									</a>
 								</li>
 								<li class="nav-item">
