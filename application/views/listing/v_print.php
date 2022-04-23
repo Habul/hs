@@ -24,7 +24,7 @@
       </div>
 
       <div>
-         <table id="table_hide">
+         <table id="table_hide_atas">
             <?php foreach ($listing as $u) : ?>
                <tr>
                   <td width="15%">Customer Name</td>
@@ -39,12 +39,12 @@
                <tr>
                   <td width="15%">SO Date</td>
                   <td style="text-align:right"> : </td>
-                  <td><?php echo date("d-m-Y", strtotime($u->created_at)); ?></td>
+                  <td><?php echo date("d-m-Y", strtotime($u->created_at)) ?></td>
                </tr>
                <tr>
                   <td width="15%">Sales Name</td>
                   <td style="text-align:right"> : </td>
-                  <td><?php echo $u->user; ?></td>
+                  <td><?php echo ucwords($u->user) ?></td>
                </tr>
             <?php endforeach; ?>
          </table>
@@ -57,7 +57,7 @@
                   <th width="5%"><b>No</b></th>
                   <th width="10%"><b>Part No</b></th>
                   <th width="50%"><b>Part Description</b></th>
-                  <th width="10%"><b>Load Time</b></th>
+                  <th width="10%"><b>Lead Time</b></th>
                   <th width="5%"><b>Qty</b></th>
                   <th width="10%"><b>Price</b></th>
                   <th width="10%"><b>Total</b></th>
@@ -73,7 +73,7 @@
                <tbody>
                   <tr>
                      <td class="text-center"><?= $no++; ?></td>
-                     <td class="text-center">DEFAULT</td>
+                     <td class="text-center"><?= strtoupper($h->part_code) ?></td>
                      <?php if ($h->id_item == 1) : ?>
                         <td><?= 'PIPE-' . strtoupper($h->brand) . '-' . strtoupper($h->model) . '-' . $h->i_d . '-' . $h->od ?></td>
                      <?php elseif ($h->id_item == 2) : ?>
@@ -94,16 +94,19 @@
          </table>
          <table id="table_hide">
             <tr>
-               <td width="90%" style="text-align:right;color:blue"><b>TOTAL&emsp;:<b></td>
-               <td style="text-align:center;color:blue">&emsp;<b><?php echo number_format($total_price, 0, '.', '.') ?><b></td>
+               <td width="75%"></td>
+               <td width="15%" style="text-align:left;color:blue"><b>TOTAL&emsp;<b></td>
+               <td style="text-align:right;color:blue">&emsp;<b><?php echo number_format($total_price, 0, '.', '.') ?><b></td>
             </tr>
             <tr>
-               <td width="90%" style="text-align:right"><b>PPN&emsp;:<b></td>
-               <td style="text-align:center"><b>&emsp;<?php echo number_format($ppn, 0, '.', '.') ?><b></td>
+               <td width="75%"></td>
+               <td width="15%" style="text-align:left"><b>PPN&emsp;<b></td>
+               <td style="text-align:right"><b>&emsp;<?php echo number_format($ppn, 0, '.', '.') ?><b></td>
             </tr>
             <tr>
-               <td width="90%" style="text-align:right"><b>GRAND TOTAL &emsp;:<b></td>
-               <td style="text-align:center"><b>&emsp;<?php echo number_format($total, 0, '.', '.') ?><b></td>
+               <td width="75%"></td>
+               <td width="15%" style="text-align:left"><b>GRAND TOTAL &emsp;<b></td>
+               <td style="text-align:right"><b>&emsp;<?php echo number_format($total, 0, '.', '.') ?><b></td>
             </tr>
          </table>
       </div>
