@@ -230,6 +230,15 @@
       "autoWidth": false,
       "responsive": true,
     });
+    $('#example13').DataTable({
+      "paging": true,
+      "searching": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "ordering": false,
+      "info": false,
+    });
   });
 </script>
 <script>

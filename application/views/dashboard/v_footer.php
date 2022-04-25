@@ -319,6 +319,28 @@
 			} else {
 				$('#thread').html('');
 			}
+			if (id == 3) {
+				$.ajax({
+					url: "<?php echo site_url('listing/get_list_posisi'); ?>",
+					method: "POST",
+					data: {
+						id: id
+					},
+					async: true,
+					dataType: 'json',
+					success: function(data) {
+						var html = '<option value="">- Choose posisi -</option>';
+						var i;
+						for (i = 0; i < data.length; i++) {
+							html += '<option value=' + data[i].nama + '>' + data[i]
+								.nama.toUpperCase() + '</option>';
+						}
+						$('#posisi').html(html);
+					}
+				});
+			} else {
+				$('#posisi').html('');
+			}
 			return false;
 		});
 	});

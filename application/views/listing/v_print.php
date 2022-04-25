@@ -55,7 +55,7 @@
             <thead>
                <tr>
                   <th width="5%"><b>No</b></th>
-                  <th width="10%"><b>Part No</b></th>
+                  <th width="20%"><b>Part No</b></th>
                   <th width="50%"><b>Part Description</b></th>
                   <th width="10%"><b>Lead Time</b></th>
                   <th width="5%"><b>Qty</b></th>
@@ -95,17 +95,17 @@
          <table id="table_hide">
             <tr>
                <td width="75%"></td>
-               <td width="15%" style="text-align:left;color:blue"><b>TOTAL&emsp;<b></td>
+               <td width="15%" style="text-align:right;color:blue"><b>TOTAL&emsp;<b></td>
                <td style="text-align:right;color:blue">&emsp;<b><?php echo number_format($total_price, 0, '.', '.') ?><b></td>
             </tr>
             <tr>
                <td width="75%"></td>
-               <td width="15%" style="text-align:left"><b>PPN&emsp;<b></td>
+               <td width="15%" style="text-align:right"><b>PPN&emsp;<b></td>
                <td style="text-align:right"><b>&emsp;<?php echo number_format($ppn, 0, '.', '.') ?><b></td>
             </tr>
             <tr>
                <td width="75%"></td>
-               <td width="15%" style="text-align:left"><b>GRAND TOTAL &emsp;<b></td>
+               <td width="15%" style="text-align:right"><b>GRAND TOTAL &emsp;<b></td>
                <td style="text-align:right"><b>&emsp;<?php echo number_format($total, 0, '.', '.') ?><b></td>
             </tr>
          </table>

@@ -122,6 +122,7 @@
 														<small class="badge badge-info" title="ID"><?php echo strtoupper($p->i_d) ?></small>
 														<small class="badge badge-info" title="Plat"><?php echo strtoupper($p->plat) ?></small>
 														<small class="badge badge-info" title="Thread"><?php echo strtoupper($p->thread) ?></small>
+														<small class="badge badge-warning" title="Posisi Fitting"><?php echo strtoupper($p->posisi) ?></small>
 													</td>
 													<td class="align-middle text-center"><?php echo $p->size ?></td>
 													<td class="align-middle text-center"><?php echo $p->qty ?></td>
@@ -176,13 +177,15 @@
 												</form>
 											<?php endif ?>
 											<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
-												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-													<input type="hidden" name="id" value="<?php echo $list->id ?>">
-													<input type="hidden" name="status" value="1">
-													<input type="hidden" name="ket" value="Notice ID : <?php echo $list->id_hs ?>">
-													<button class="btn btn-warning col-15 shadow" type="submit">
-														<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
-												</form>
+												<?php if ($list->status != 1) : ?>
+													<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
+														<input type="hidden" name="id" value="<?php echo $list->id ?>">
+														<input type="hidden" name="status" value="1">
+														<input type="hidden" name="ket" value="Notice ID : <?php echo $list->id_hs ?>">
+														<button class="btn btn-warning col-15 shadow" type="submit">
+															<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
+													</form>
+												<?php endif ?>
 												<?php if ($list->status != 0) : ?>
 													<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
 														<input type="hidden" name="id" value="<?php echo $list->id ?>">
@@ -489,6 +492,7 @@
 						<small class="badge badge-info" title="ID"><?php echo strtoupper($u->i_d) ?></small>
 						<small class="badge badge-info" title="Plat"><?php echo strtoupper($u->plat) ?></small>
 						<small class="badge badge-info" title="Thread"><?php echo strtoupper($u->thread) ?></small>
+						<small class="badge badge-warning" title="Posisi Fitting"><?php echo strtoupper($u->posisi) ?></small>
 						<small class="badge badge-warning" title="Size"><?php echo strtoupper($u->size) ?></small>
 						<small class="badge badge-warning" title="Qty"><?php echo strtoupper($u->qty) ?></small>
 						<div class="input-group mt-1 mb-0">
@@ -536,3 +540,37 @@
 		</div>
 	</div>
 <?php endforeach; ?>
+
+<!-- <script>
+	function createeditbtn() {
+		$('.toggle-edit').each(function() {
+			$(this).attr('readonly', true);
+			$(this).attr('disabled', true);
+			$(this).css('cursor', 'not-allowed');
+		});
+		$('.toggle-edit').click(function() {
+			$(this).attr('readonly', false);
+			$(this).attr('disabled', false);
+			$(this).css('cursor', 'text');
+		});
+	}
+</script> -->
+
+<!-- <script>
+	function editprice() {
+		let x = document.getElementById("price").value;
+		let y = x - (x * 0.1);
+		let z = x[0];
+		if (z < y) {
+			document.getElementById('editbtn').disabled = true;
+			document.getElementById('editbtn').classList.add('btn-secondary');
+			document.getElementsByClassName('toggle-edit')[0].classList.add('is-invalid');
+			document.getElementById('editbtn').classList.remove('btn-primary');
+		} else {
+			document.getElementById('editbtn').disabled = false;
+			document.getElementById('editbtn').classList.add('btn-primary');
+			document.getElementsByClassName('toggle-edit')[0].classList.remove('is-invalid');
+			document.getElementById('editbtn').classList.remove('btn-secondary');
+		}
+	}
+</script> -->

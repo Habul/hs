@@ -552,6 +552,57 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="col-md-6">
+						<div class="card card-info">
+							<div class="card-header">
+								<h4 class="card-title"><i class="fa fa-tools"></i> Posisi</h4>
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool" data-card-widget="maximize">
+										<i class="fas fa-expand"></i>
+									</button>
+									<button type="button" class="btn btn-tool" data-card-widget="collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-tool" data-card-widget="remove">
+										<i class="fas fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="card-body">
+								<table id="example13" class="table table-hover table-sm">
+									<thead class="thead-light" style="text-align:center">
+										<tr>
+											<th width="7%">No</th>
+											<th>Name</th>
+											<th width="25%">Actions</th>
+										</tr>
+									</thead>
+									<?php
+									$no = 1;
+									$query = $this->db->where('id_item', $b->id)->get('item_posisi');
+									foreach ($query->result() as $p) { ?>
+										<tr style="text-align:center">
+											<td><?php echo $no++ ?></td>
+											<td><?php echo strtoupper($p->nama) ?></td>
+											<td>
+												<a class="btn-sm btn-warning" data-toggle="modal" data-target="#posisi_edit<?php echo $p->id; ?>" title="Edit">
+													<i class="fa fa-edit"></i></a>
+												<a class="btn-sm btn-danger" data-toggle="modal" data-target="#posisi_del<?php echo $p->id; ?>" title="Delete">
+													<i class="fa fa-trash"></i></a>
+											</td>
+										</tr>
+									<?php } ?>
+								</table>
+							</div>
+							<div class="card-body row">
+								<div class="col-md-4">
+									<button class="btn btn-success btn-block" data-toggle="modal" data-target="#posisi_add">
+										<i class="fa fa-plus"></i> Add New Posisi</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				<?php endif ?>
 			</div>
 		</div>
@@ -1451,7 +1502,7 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="col-12 modal-title text-center">Edit Plat
+					<h4 class="col-12 modal-title text-center">Edit Thread
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -1508,3 +1559,98 @@
 	</div>
 <?php endforeach; ?>
 <!-- modal thread -->
+
+<!-- modal posisi -->
+<div class="modal fade" id="posisi_add" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="col-12 modal-title text-center">Add Posisi
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h4>
+			</div>
+			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/add_item') ?>">
+				<div class="modal-body">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<label class="input-group-text">Posisi</label>
+						</div>
+						<?php foreach ($listitem as $u) : ?>
+							<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+						<?php endforeach; ?>
+						<input type="hidden" name="jenis" class="form-control" value="item_posisi">
+						<input type="text" name="nama" class="form-control" placeholder="..." required>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php foreach ($item_posisi as $posisi) : ?>
+	<div class="modal fade" id="posisi_edit<?php echo $posisi->id ?>" tabindex="-1" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="col-12 modal-title text-center">Edit Posisi
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</h4>
+				</div>
+				<form onsubmit="editbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/edit_item') ?>">
+					<div class="modal-body">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<label class="input-group-text">Posisi</label>
+							</div>
+							<?php foreach ($listitem as $u) : ?>
+								<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id; ?>">
+							<?php endforeach; ?>
+							<input type="hidden" name="id" class="form-control" value="<?php echo $posisi->id; ?>">
+							<input type="hidden" name="jenis" class="form-control" value="item_posisi">
+							<input type="text" name="nama" class="form-control" value="<?php echo $posisi->nama ?>" required>
+						</div>
+					</div>
+					<div class="modal-footer justify-content-between">
+						<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+						<button class="btn btn-primary" id="editbtn"><i class="fa fa-check"></i> Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="posisi_del<?php echo $posisi->id ?>" tabindex="-1" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content bg-danger">
+				<div class="modal-header">
+					<h4 class="col-12 modal-title text-center">Delete Posisi
+						<button class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</h4>
+				</div>
+				<form class="form-horizontal" onsubmit="delbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/del_item') ?>">
+					<div class="modal-body">
+						<?php foreach ($listitem as $u) : ?>
+							<input type="hidden" name="id_item" value="<?php echo $u->id; ?>">
+						<?php endforeach ?>
+						<input type="hidden" name="id" value="<?php echo $posisi->id; ?>">
+						<input type="hidden" name="jenis" class="form-control" value="item_posisi">
+						<span>Are you sure delete <?php echo $posisi->nama; ?> ?</span>
+					</div>
+					<div class="modal-footer justify-content-between">
+						<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+						<button class="btn btn-outline-light" id="delbtn"><i class="fa fa-check"></i> Yes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<?php endforeach; ?>
+<!-- modal posisi -->

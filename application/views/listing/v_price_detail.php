@@ -35,8 +35,11 @@
 				<div class="col-md-12">
 					<div class="card card-success card-outline">
 						<div class="card-header">
-							<h4 class="card-title"><a class="form-control btn btn-success shadow" data-toggle="modal" data-target="#modal_add">
-									<i class="fa fa-plus"></i>&nbsp; Add New List</a></h4>
+							<h4 class="card-title"><a class="btn btn-success col-15 shadow" data-toggle="modal" data-target="#modal_add">
+									<i class="fa fa-plus"></i>&nbsp; Add New List</a>
+								<a class="btn btn-warning col-15 shadow" data-toggle="modal" data-target="#modal_import">
+									<i class="fas fa-file-import"></i>&nbsp; Import Data</a>
+							</h4>
 							<div class="card-tools">
 								<button type="button" class="btn btn-xs btn-icon btn-circle btn-warning" data-card-widget="collapse">
 									<i class="fas fa-minus"></i>
@@ -64,8 +67,7 @@
 										<th width="9%">Actions</th>
 									</tr>
 								</thead>
-								<?php $query = $this->db->where('id_item', $b->id)->get('list_price');
-								foreach ($query->result() as $u) { 	?>
+								<?php foreach ($listprice as $u) { 	?>
 									<tr>
 										<td class="align-middle text-center"></td>
 										<td class="align-middle text-center"><?php echo strtoupper($u->jenis) ?></td>
@@ -259,6 +261,37 @@
 <?php endforeach; ?>
 <!-- end modal -->
 
+<!--add MODAL import-->
+<div class="modal fade" id="modal_import" tabindex="-1" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="col-12 modal-title text-center">Import Price List
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</h4>
+			</div>
+			<form method="post" onsubmit="importform.disabled = true; return true;" action="<?php echo base_url('listing/price_import') ?>" enctype="multipart/form-data">
+				<div class="modal-body">
+					<input type="hidden" name="id_item" value="<?php echo $pricerow->id ?>">
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="customFile" name="data">
+						<label class="custom-file-label" for="customFile">Choose file</label>
+					</div>
+					<small>* Extensi file xls atau xlsx<br />
+						* File yang di import akan me replace data yang sudah ada<br />
+						* Format file harus sesuai dengan column price list</small>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="form-control btn btn-primary" id="importform">
+						<i class="fa fa-check"></i> Import Data</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--END MODAL import MASTER-->
 
 <!--MODAL HAPUS ALL-->
 <?php foreach ($listprice as $p) : ?>
@@ -274,11 +307,11 @@
 				</div>
 				<form class="form-horizontal" onsubmit="delform.disabled = true; return true;" method="post" action="<?php echo base_url('listing/price_delete') ?>">
 					<div class="modal-body">
-						<input type="hidden" name="id" value="<?php echo $p->id; ?>">
-						<input type="hidden" name="id_item" value="<?php echo $p->id_item; ?>">
-						<input type="hidden" name="jenis" value="<?php echo $p->jenis; ?>">
-						<input type="hidden" name="part_code" value="<?php echo $p->part_code; ?>">
-						<span>Are you sure delete part code <?php echo $p->part_code; ?> ?</span>
+						<input type="hidden" name="id" value="<?= $p->id; ?>">
+						<input type="hidden" name="id_item" value="<?= $p->id_item; ?>">
+						<input type="hidden" name="jenis" value="<?= $p->jenis; ?>">
+						<input type="hidden" name="part_code" value="<?= $p->part_code; ?>">
+						<span>Are you sure delete part code <?= $p->part_code; ?> ?</span>
 					</div>
 					<div class="modal-footer justify-content-between">
 						<button class="btn btn-outline-light" data-dismiss="modal"><i class="fa fa-times"></i> No</button>

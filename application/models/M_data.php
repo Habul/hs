@@ -180,12 +180,6 @@ class M_data extends CI_Model
     return $data->row();
   }
 
-  public function insert_kurs($data)
-  {
-    $this->db->insert_batch('kurs', $data);
-    return $this->db->affected_rows();
-  }
-
   public function check_kurs($currency)
   {
     $this->db->where('currency', $currency);
@@ -200,31 +194,9 @@ class M_data extends CI_Model
     return $data->num_rows();
   }
 
-  public function insert_master($data)
+  public function insert_price($data)
   {
-    $this->db->insert_batch('master', $data);
+    $this->db->insert_batch('list_price', $data);
     return $this->db->affected_rows();
-  }
-
-  public function select_inquiry()
-  {
-    $sql = "SELECT a.sales,a.tanggal,a.inquiry_id,a.brand,a.desc,a.qty,a.deadline,a.keter,a.request,a.cek,a.fu1,a.ket_fu,a.cogs,b.currency 
-    AS kurs,a.cogs_idr,a.reseller,a.new_seller,a.user,a.delivery,a.ket_purch,a.name_purch FROM inquiry a INNER JOIN kurs b ON a.kurs=b.id_kurs";
-    $data = $this->db->query($sql);
-    return $data->result();
-  }
-
-  public function buffer()
-  {
-    $sql = "SELECT * FROM `buffer` WHERE status!='approve' AND status!='finish'";
-    $data = $this->db->query($sql);
-    return $data->result();
-  }
-
-  public function arshipbuffer()
-  {
-    $sql = "SELECT * FROM `buffer` WHERE status='approve' OR status='finish'";
-    $data = $this->db->query($sql);
-    return $data->result();
   }
 }

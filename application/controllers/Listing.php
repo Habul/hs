@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+
 class Listing extends CI_Controller
 {
    public function __construct()
@@ -92,7 +96,7 @@ class Listing extends CI_Controller
 
    public function new_list()
    {
-      $id = rawurldecode($this->encrypt->decode($_GET['list']));
+      $id = urldecode($this->encrypt->decode($_GET['list']));
 
       $where = array(
          'id' => $id
@@ -148,7 +152,7 @@ class Listing extends CI_Controller
 
    public function list_update()
    {
-      $id = rawurldecode($this->encrypt->decode($_GET['list']));
+      $id = urldecode($this->encrypt->decode($_GET['list']));
 
       $where = array(
          'id' => $id
@@ -268,6 +272,13 @@ class Listing extends CI_Controller
       echo json_encode($data);
    }
 
+   public function get_list_posisi()
+   {
+      $id = $this->input->post('id', true);
+      $data = $this->m_data->get_item($id, 'item_posisi')->result();
+      echo json_encode($data);
+   }
+
    public function qoutation_save()
    {
       $this->form_validation->set_rules('id_hs', 'ID HS', 'required');
@@ -289,6 +300,7 @@ class Listing extends CI_Controller
          $thread = $this->input->post('thread');
          $qty = $this->input->post('qty');
          $assembly = $this->input->post('assembly');
+         $posisi = $this->input->post('posisi');
          $type_price = $this->input->post('type_price');
          $created_at = mdate('%Y-%m-%d %H:%i:%s');
 
@@ -421,6 +433,7 @@ class Listing extends CI_Controller
             'thread' => $thread,
             'qty' => $qty,
             'id_assembly' => $assembly,
+            'posisi' => $posisi,
             'type_price' => $type_price,
             'price_unit' => $price_unit,
             'price' => $price,
@@ -528,7 +541,7 @@ class Listing extends CI_Controller
 
    public function qoutation_print()
    {
-      $id = rawurldecode($this->encrypt->decode($_GET['print']));
+      $id = urldecode($this->encrypt->decode($_GET['print']));
       $this->load->library('pdf');
       $file_pdf = 'Print SJ';
       $paper = 'A4';
@@ -560,7 +573,7 @@ class Listing extends CI_Controller
 
    public function listing_item_detail()
    {
-      $id = rawurldecode($this->encrypt->decode($_GET['item']));
+      $id = urldecode($this->encrypt->decode($_GET['item']));
 
       $where = array(
          'id' => $id
@@ -582,6 +595,7 @@ class Listing extends CI_Controller
       $data['item_size'] = $this->m_data->edit_data($where2, 'item_size')->result();
       $data['item_thread'] = $this->m_data->edit_data($where2, 'item_thread')->result();
       $data['item_type'] = $this->m_data->edit_data($where2, 'item_type')->result();
+      $data['item_posisi'] = $this->m_data->edit_data($where2, 'item_posisi')->result();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_item_detail', $data);
       $this->load->view('dashboard/v_footer');
@@ -680,7 +694,7 @@ class Listing extends CI_Controller
 
    public function listing_price_detail()
    {
-      $id = rawurldecode($this->encrypt->decode($_GET['price']));
+      $id = urldecode($this->encrypt->decode($_GET['price']));
 
       $where = array(
          'id' => $id
@@ -693,6 +707,7 @@ class Listing extends CI_Controller
       $data['title'] = 'Price List Detail';
       $data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
       $data['listprice'] = $this->m_data->edit_data($where2, 'list_price')->result();
+      $data['pricerow'] = $this->db->select('id')->where('id', $id)->get('list_item')->row();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_price_detail', $data);
       $this->load->view('dashboard/v_footer');
@@ -791,18 +806,73 @@ class Listing extends CI_Controller
       }
    }
 
+   public function price_import()
+   {
+      $this->form_validation->set_rules('data', 'Import Price list', 'trim|required');
+
+      if ($_FILES['data']['name'] != '') {
+         $config['upload_path'] = './assets/excel/';
+         $config['allowed_types'] = 'xls|xlsx';
+         $config['overwrite']  = true;
+
+         $this->load->library('upload', $config);
+         $id_item = $this->input->post('id_item');
+
+         if (!$this->upload->do_upload('data')) {
+            $this->upload->display_errors();
+         } else {
+            $data = $this->upload->data();
+            $this->m_data->delete_data(array('id_item' => $id_item), 'list_price');
+
+            error_reporting(E_ALL);
+            date_default_timezone_set('Asia/Jakarta');
+            include './assets/phpexcel/Classes/PHPExcel/IOFactory.php';
+            $inputFileName = './assets/excel/' . $data['file_name'];
+            $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+            $sheetData = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
+
+            $index = 0;
+            foreach ($sheetData as $key => $value) {
+               if ($key != 1) {
+                  $resultData[$index]['id_item'] = $id_item;
+                  $resultData[$index]['jenis'] = strtoupper($value['A']);
+                  $resultData[$index]['part_code'] = trim($value['B']);
+                  $resultData[$index]['desc'] = trim($value['C']);
+                  $resultData[$index]['distributor'] = $value['D'];
+                  $resultData[$index]['oem'] = $value['E'];
+                  $resultData[$index]['reseller'] = $value['F'];
+                  $resultData[$index]['user'] = $value['G'];
+                  $resultData[$index]['created_at'] = mdate('%Y-%m-%d %H:%i:%s');
+               }
+               $index++;
+            }
+
+            unlink('./assets/excel/' . $data['file_name']);
+            if (count($resultData) != 0) {
+               $result = $this->m_data->insert_price($resultData);
+               if ($result > 0) {
+                  $this->session->set_flashdata('berhasil', 'Price successfully imported');
+                  $id_item = $this->input->post('id_item');
+                  $encrypt = urlencode($this->encrypt->encode($id_item));
+                  redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+               }
+            } else {
+               $this->session->set_flashdata('gagal', 'Price failed to import');
+               $id_item = $this->input->post('id_item');
+               $encrypt = urlencode($this->encrypt->encode($id_item));
+               redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+            }
+         }
+      }
+   }
+
    public function price_delete()
    {
       $id = $this->input->post('id', true);
-      $id_item = $this->input->post('id_item', true);
       $jenis = $this->input->post('jenis', true);
+      $id_item = $this->input->post('id_item', true);
       $part_code = $this->input->post('part_code', true);
-
-      $where = array(
-         'id' => $id
-      );
-
-      $this->m_data->delete_data($where, 'list_price');
+      $this->m_data->delete_data(array('id' => $id), 'list_price');
       $this->session->set_flashdata('berhasil', 'Delete successfully Jenis ' . $jenis . ' Part Code ' . $part_code . ' !');
       $id_item = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id_item));
