@@ -21,7 +21,37 @@ class Listing extends CI_Controller
    public function listing()
    {
       $data['title'] = 'Listing';
-      $data['listings'] = $this->db->order_by('created_at', 'desc')->get('listing')->result();
+
+      $jumlah_data = $this->m_data->get_data('listing')->num_rows();
+      $this->load->library('pagination');
+      $config['base_url'] = base_url() . 'listing/listing';
+      $config['total_rows'] = $jumlah_data;
+      $config['per_page'] = 10;
+      $config['first_link']       = 'First';
+      $config['last_link']        = 'Last';
+      $config['next_link']        = 'Next';
+      $config['prev_link']        = 'Prev';
+      $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+      $config['full_tag_close']   = '</ul></nav></div>';
+      $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+      $config['num_tag_close']    = '</span></li>';
+      $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+      $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+      $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+      $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+      $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+      $config['prev_tagl_close']  = '</span>Next</li>';
+      $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+      $config['first_tagl_close'] = '</span></li>';
+      $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+      $config['last_tagl_close']  = '</span></li>';
+
+      $from = $this->uri->segment(3);
+      if ($from == "") {
+         $from = 0;
+      }
+      $this->pagination->initialize($config);
+      $data['listings'] = $this->db->query("SELECT * FROM listing ORDER BY created_at DESC LIMIT $config[per_page] OFFSET $from")->result();
       $data['id_add'] = $this->db->select_max('id')->get('listing')->row();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_index', $data);
@@ -32,6 +62,9 @@ class Listing extends CI_Controller
    {
       $data['title'] = 'Listing';
       $keyword = $this->input->post('keyword');
+      if ($keyword == '') {
+         redirect(base_url() . 'listing/listing');
+      }
       $data['listing'] = $this->m_data->search_listing($keyword);
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_search', $data);
@@ -165,7 +198,7 @@ class Listing extends CI_Controller
       $data['title'] = 'Create New List';
       $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
       $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
-      $data['assembly'] = $this->db->get_where('assembly', array('id_qoutation' => null))->result();
+      $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
       $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
       $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
       $data['list_item'] = $this->m_data->get_data('list_item')->result();
@@ -179,7 +212,7 @@ class Listing extends CI_Controller
       $this->form_validation->set_rules('name', 'Name', 'required');
       $this->form_validation->set_rules('desc', 'Notes', 'required');
       if ($this->form_validation->run() != false) {
-         $id = $this->input->post('id');
+         $id_listing = $this->input->post('id_listing');
          $name = $this->input->post('name');
          $desc = $this->input->post('desc');
          $created_at = mdate('%Y-%m-%d %H:%i:%s');
@@ -187,16 +220,18 @@ class Listing extends CI_Controller
          $data = array(
             'name' => $name,
             'desc' => $desc,
+            'id_listing' => $id_listing,
             'created_at' => $created_at,
          );
 
          $this->m_data->insert_data($data, 'assembly');
-         $id = $this->input->post('id');
+         $this->session->set_flashdata('berhasil', 'Assembly successfully added ' . $name . ' !');
+         $id = $this->input->post('id_listing');
          $encrypt = urlencode($this->encrypt->encode($id));
          redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
       } else {
-         $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
-         $id = $this->input->post('id');
+         $this->session->set_flashdata('gagal', 'Assembly failed to Add, Please repeat !');
+         $id = $this->input->post('id_listing');
          $encrypt = urlencode($this->encrypt->encode($id));
          redirect(base_url() . 'listing/list_update/?list=' . $encrypt);
       }
@@ -432,7 +467,7 @@ class Listing extends CI_Controller
             'plat' => $plat,
             'thread' => $thread,
             'qty' => $qty,
-            'id_assembly' => $assembly,
+            'assembly' => $assembly,
             'posisi' => $posisi,
             'type_price' => $type_price,
             'price_unit' => $price_unit,
@@ -534,6 +569,7 @@ class Listing extends CI_Controller
       );
 
       $this->m_data->delete_data($where2, 'qoutation');
+      $this->m_data->delete_data($where2, 'assembly');
       $this->m_data->delete_data($where, 'listing');
       $this->session->set_flashdata('berhasil', 'Qoutation ID ' . $id_hs . ' has been deleted !');
       redirect(base_url() . 'listing/listing');

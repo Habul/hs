@@ -103,9 +103,7 @@
 												<tr>
 													<td class="align-middle text-center"><?php echo $no++ ?></td>
 													<td>
-														<?php if ($p->id_assembly != 0) : ?>
-															<span class="badge badge-secondary" title="Assembly"> Assembly</span>
-														<?php endif; ?>
+														<small class="badge badge-secondary" title="Id Assembly"><?php echo $p->assembly ?></small>
 														<small class="badge badge-danger" title="Price Type"><?php echo strtoupper($p->type_price) ?></small>
 														<br />
 														<b><?php echo strtoupper($p->item) ?></b><br />
@@ -380,10 +378,10 @@
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-4">Assembly&nbsp;&nbsp;&nbsp;</label>
 							</div>
-							<select name="assembly" id="assembly" class="form-control">
+							<select name="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
 								<?php foreach ($assembly as $i) : ?>
-									<option value="<?php echo $i->id ?>"><?php echo strtoupper($i->name) ?></option>
+									<option value="<?php echo $i->name ?>"><?php echo strtoupper($i->name) ?></option>
 								<?php endforeach ?>
 							</select>
 						</div>
@@ -427,7 +425,7 @@
 							<label class="input-group-text pr-3">Id Assm</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $list->id ?>" readonly>
+							<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
 						<?php endforeach ?>
 						<input type="text" name="name" class="form-control" value="<?= 'ASSM', date('md-'), $id_assm->id + 1 ?>" readonly>
 					</div>

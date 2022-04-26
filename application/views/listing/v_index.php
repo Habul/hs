@@ -69,6 +69,7 @@
 						<?php } ?>
 					</div>
 				</div>
+				<?php echo $this->pagination->create_links(); ?>
 			</div>
 			<div class="col-md-3 mb-3 shadow" style="padding: 0;">
 				<a class="form-control btn btn-block btn-outline-success" data-toggle="modal" data-target="#modal_add">

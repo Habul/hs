@@ -75,15 +75,35 @@
                      <td class="text-center"><?= $no++; ?></td>
                      <td class="text-center"><?= strtoupper($h->part_code) ?></td>
                      <?php if ($h->id_item == 1) : ?>
-                        <td><?= 'PIPE-' . strtoupper($h->brand) . '-' . strtoupper($h->model) . '-' . $h->i_d . '-' . $h->od ?></td>
+                        <?php if ($h->assembly != '') : ?>
+                           <td><?= 'PIPE-' . $h->assembly . '-' . strtoupper($h->brand) . '-' . strtoupper($h->model) . '-' . $h->i_d . '-' . $h->od ?></td>
+                        <?php else : ?>
+                           <td><?= 'PIPE-' . strtoupper($h->brand) . '-' . strtoupper($h->model) . '-' . $h->i_d . '-' . $h->od ?></td>
+                        <?php endif ?>
                      <?php elseif ($h->id_item == 2) : ?>
-                        <td><?= 'HOSE-' . strtoupper($h->brand) . '-' . strtoupper($h->type) . '-' . $h->size ?></td>
+                        <?php if ($h->assembly != '') : ?>
+                           <td><?= 'HOSE-' . $h->assembly . '-' . strtoupper($h->brand) . '-' . strtoupper($h->type) . '-' . $h->size ?></td>
+                        <?php else : ?>
+                           <td><?= 'HOSE-' . strtoupper($h->brand) . '-' . strtoupper($h->type) . '-' . $h->size ?></td>
+                        <?php endif ?>
                      <?php elseif ($h->id_item == 3) : ?>
-                        <td><?= 'FITTING-' . strtoupper($h->brand) . '-' . strtoupper($h->model) . '-' . strtoupper($h->thread) . '-' . strtoupper($h->type) . '-' . strtoupper($h->category) . '-' . $h->size ?></td>
+                        <?php if ($h->assembly != '') : ?>
+                           <td><?= 'FITTING-' . $h->assembly . '-' . strtoupper($h->brand) . '-' . strtoupper($h->model) . '-' . strtoupper($h->thread) . '-' . strtoupper($h->type) . '-' . strtoupper($h->category) . '-' . $h->size ?></td>
+                        <?php else : ?>
+                           <td><?= 'FITTING-' . strtoupper($h->brand) . '-' . strtoupper($h->model) . '-' . strtoupper($h->thread) . '-' . strtoupper($h->type) . '-' . strtoupper($h->category) . '-' . $h->size ?></td>
+                        <?php endif ?>
                      <?php elseif ($h->id_item == 4) : ?>
-                        <td><?= 'HOSE COVER-' . strtoupper($h->category) . '-' . $h->size ?></td>
+                        <?php if ($h->assembly != '') : ?>
+                           <td><?= 'HOSE COVER-' . $h->assembly . '-' . strtoupper($h->category) . '-' . $h->size ?></td>
+                        <?php else : ?>
+                           <td><?= 'HOSE COVER-' . strtoupper($h->category) . '-' . $h->size ?></td>
+                        <?php endif ?>
                      <?php elseif ($h->id_item == 5) : ?>
-                        <td><?= 'CLAMP PIPE-' . strtoupper($h->hole) . '-' . strtoupper($h->plat) . '-' . $h->size ?></td>
+                        <?php if ($h->assembly != '') : ?>
+                           <td><?= 'CLAMP PIPE-' . $h->assembly . '-' . strtoupper($h->hole) . '-' . strtoupper($h->plat) . '-' . $h->size ?></td>
+                        <?php else : ?>
+                           <td><?= 'CLAMP PIPE-' . strtoupper($h->hole) . '-' . strtoupper($h->plat) . '-' . $h->size ?></td>
+                        <?php endif ?>
                      <?php endif ?>
                      <td class="text-center">7-14 DAYS</td>
                      <td class="text-center"><?= number_format($h->qty, 0, '.', '.') ?></td>

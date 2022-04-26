@@ -58,7 +58,7 @@
 									<tr>
 										<th width="5%">No</th>
 										<th>Jenis</th>
-										<th width="13%">Part Code</th>
+										<th width="18%">Part Code</th>
 										<th>Desc</th>
 										<th>Distributor</th>
 										<th>Oem</th>
