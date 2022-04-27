@@ -32,7 +32,7 @@
 				<div class="card-header d-flex justify-content-end">
 					<?php echo form_open('listing/search') ?>
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search.." name="keyword">
+						<input type="text" class="form-control" placeholder="Search.." name="keyword" value="<?= html_escape($keyword) ?>">
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary" type="submit">Search</button>
 						</div>
