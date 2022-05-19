@@ -36,8 +36,8 @@
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary" type="submit">Search</button>
 						</div>
-						<?php echo form_close() ?>
 					</div>
+					<?php echo form_close() ?>
 				</div>
 				<div class="card-body pb-0">
 					<div class="row row-cols-1 row-cols-md-2 g-4">

@@ -87,13 +87,13 @@
   #table_hide {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-style: hidden;
-    width: 100%;   
+    width: 100%;
   }
 
   #table td,
   #table th {
     border: 1px solid rgb(13, 13, 13);
-    padding: 0px;
+    padding: 1px;
   }
 
   #table tr:nth-child(even) {

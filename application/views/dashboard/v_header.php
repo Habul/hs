@@ -33,9 +33,6 @@
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm">
 	<div class="wrapper">
-		<div class="preloader flex-column justify-content-center align-items-center">
-			<img src="<?php echo base_url(); ?>assets/dist/img/loading.gif" alt="Untitled-1-02.png" height="100" width="100">
-		</div>
 
 		<nav class="main-header navbar navbar-expand navbar-light navbar-light">
 			<ul class="navbar-nav">
@@ -53,14 +50,6 @@
 			</ul>
 
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item">
-					<div class="theme-switch-wrapper nav-link">
-						<label class="theme-switch" for="checkbox">
-							<input type="checkbox" id="checkbox" title="Dark Mode" />
-							<span class="slider round"></span>
-						</label>
-					</div>
-				</li>
 
 				<li class="nav-item dropdown user-menu">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

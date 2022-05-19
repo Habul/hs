@@ -12,8 +12,7 @@ class Listing extends CI_Controller
       parent::__construct();
 
       date_default_timezone_set('Asia/Jakarta');
-      $session = $this->session->userdata('status');
-      if ($session == '') {
+      if ($this->session->userdata('status') != "telah_login") {
          redirect(base_url() . 'login?alert=belum_login');
       }
    }
@@ -24,9 +23,9 @@ class Listing extends CI_Controller
 
       $jumlah_data = $this->m_data->get_data('listing')->num_rows();
       $this->load->library('pagination');
-      $config['base_url'] = base_url() . 'listing/listing';
-      $config['total_rows'] = $jumlah_data;
-      $config['per_page'] = 10;
+      $config['base_url']         = base_url() . 'listing/listing';
+      $config['total_rows']       = $jumlah_data;
+      $config['per_page']         = 10;
       $config['first_link']       = 'First';
       $config['last_link']        = 'Last';
       $config['next_link']        = 'Next';
@@ -65,6 +64,7 @@ class Listing extends CI_Controller
       if ($keyword == '') {
          redirect(base_url() . 'listing/listing');
       }
+      $data['words'] = $keyword;
       $data['listing'] = $this->m_data->search_listing($keyword);
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_search', $data);
@@ -142,12 +142,36 @@ class Listing extends CI_Controller
       $data['title'] = 'Create New List';
       $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
       $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
-      $data['assembly'] = $this->db->get_where('assembly', array('id_qoutation' => null))->result();
+      $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
       $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
       $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
       $data['list_item'] = $this->m_data->get_data('list_item')->result();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_detail_new', $data);
+      $this->load->view('dashboard/v_footer');
+   }
+
+   public function list_update()
+   {
+      $id = urldecode($this->encrypt->decode($_GET['list']));
+
+      $where = array(
+         'id' => $id
+      );
+
+      $where2 = array(
+         'id_listing' => $id
+      );
+
+      $data['title'] = 'Create New List';
+      $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
+      $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
+      $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
+      $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
+      $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
+      $data['list_item'] = $this->m_data->get_data('list_item')->result();
+      $this->load->view('dashboard/v_header', $data);
+      $this->load->view('listing/v_detail', $data);
       $this->load->view('dashboard/v_footer');
    }
 
@@ -181,30 +205,6 @@ class Listing extends CI_Controller
          $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
          redirect(base_url() . 'listing/listing');
       }
-   }
-
-   public function list_update()
-   {
-      $id = urldecode($this->encrypt->decode($_GET['list']));
-
-      $where = array(
-         'id' => $id
-      );
-
-      $where2 = array(
-         'id_listing' => $id
-      );
-
-      $data['title'] = 'Create New List';
-      $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
-      $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
-      $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
-      $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
-      $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
-      $data['list_item'] = $this->m_data->get_data('list_item')->result();
-      $this->load->view('dashboard/v_header', $data);
-      $this->load->view('listing/v_detail', $data);
-      $this->load->view('dashboard/v_footer');
    }
 
    public function add_assembly()

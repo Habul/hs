@@ -3,7 +3,13 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0">Welcome back, <?php echo ucwords($this->session->userdata('nama')) ?></h1>
+					<?php if (mdate('%H:%i') >= '00:01' && mdate('%H:%i') <= '10:00') : ?>
+						<h1 class="m-0">Good Morning <?php echo ucwords($this->session->userdata('nama')) ?></h1>
+					<?php elseif (mdate('%H:%i') >= '10:01' && mdate('%H:%i') <= '18:00') : ?>
+						<h1 class="m-0">Good Afternoon <?php echo ucwords($this->session->userdata('nama')) ?></h1>
+					<?php elseif (mdate('%H:%i') >= '18:01' && mdate('%H:%i') <= '23:59') : ?>
+						<h1 class="m-0">Good Evening <?php echo ucwords($this->session->userdata('nama')) ?></h1>
+					<?php endif ?>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
