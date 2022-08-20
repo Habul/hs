@@ -12,7 +12,7 @@ class Listing extends CI_Controller
       parent::__construct();
 
       date_default_timezone_set('Asia/Jakarta');
-      if ($this->session->userdata('status') != "telah_login") {
+      if ($this->session->userdata('status') != "hs_login") {
          redirect(base_url() . 'login?alert=belum_login');
       }
    }
@@ -127,6 +127,37 @@ class Listing extends CI_Controller
       }
    }
 
+   public function edit()
+   {
+      $this->form_validation->set_rules('company', 'Company Name', 'required');
+      $this->form_validation->set_rules('notes', 'Notes', 'required');
+
+      if ($this->form_validation->run() != false) {
+         $id = $this->input->post('id');
+         $id_hs = $this->input->post('id_hs');
+         $company = $this->input->post('company');
+         $notes = $this->input->post('notes');
+
+         $data =
+            [
+               'company' => $company,
+               'notes' => $notes,
+               'updated_at' => date('Y-m-d H:i:s')
+            ];
+
+         $this->m_data->update_data(['id' => $id], $data, 'listing');
+         $this->session->set_flashdata('berhasil', '' . $id_hs . ' successfully updated !');
+         $id = $this->input->post('id');
+         $encrypt = urlencode($this->encrypt->encode($id));
+         redirect(base_url() . 'listing/new_list/?list=' . $encrypt);
+      } else {
+         $this->session->set_flashdata('gagal', 'Data failed to update, Please repeat !');
+         $id = $this->input->post('id');
+         $encrypt = urlencode($this->encrypt->encode($id));
+         redirect(base_url() . 'listing/new_list/?list=' . $encrypt);
+      }
+   }
+
    public function new_list()
    {
       $id = urldecode($this->encrypt->decode($_GET['list']));
@@ -173,38 +204,6 @@ class Listing extends CI_Controller
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_detail', $data);
       $this->load->view('dashboard/v_footer');
-   }
-
-   public function edit()
-   {
-      $this->form_validation->set_rules('id_hs', 'ID HS', 'required');
-      $this->form_validation->set_rules('company', 'Company Name', 'required');
-
-      if ($this->form_validation->run() != false) {
-         $id = $this->input->post('id');
-         $id_hs = $this->input->post('id_hs');
-         $company = $this->input->post('company');
-         $notes = $this->input->post('notes');
-         $updated_at = mdate('%Y-%m-%d %H:%i:%s');
-
-         $data = array(
-            'id_hs' => $id_hs,
-            'company' => $company,
-            'notes' => $notes,
-            'updated_at' => $updated_at
-         );
-
-         $where = array(
-            'id' => $id
-         );
-
-         $this->m_data->update_data($where, $data, 'listing');
-         $this->session->set_flashdata('berhasil', 'Update successfully, ID : ' . $id_hs . ' !');
-         redirect(base_url() . 'listing/listing');
-      } else {
-         $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
-         redirect(base_url() . 'listing/listing');
-      }
    }
 
    public function add_assembly()

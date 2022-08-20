@@ -7,8 +7,8 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item"><a href="<?php echo base_url('listing/listing') ?>">Listing</a></li>
+						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+						<li class="breadcrumb-item"><a href="<?= base_url('listing/listing') ?>">Listing</a></li>
 						<li class="breadcrumb-item active">Input List Quotation</li>
 					</ol>
 				</div>
@@ -38,7 +38,7 @@
 				<div class="col-md-12">
 					<div class="callout callout-info">
 						<?php foreach ($listing as $list) : ?>
-							<li>ID &emsp;&emsp;&emsp;: <b><?php echo $list->id_hs; ?></b>
+							<li>ID &emsp;&emsp;&emsp;: <b><?= $list->id_hs; ?></b>
 								<?php if ($list->status == 1) : ?>
 									<span class="badge badge-warning">NOTICE</span>
 								<?php elseif ($list->status == 2) : ?>
@@ -48,9 +48,13 @@
 								<?php else : ?>
 									<span class="badge badge-default">OPEN</span>
 								<?php endif ?>
+								<?php if ($list->status == 0 || $list->status == 1) : ?>
+									<a class="btn-sm text-muted" data-toggle="modal" data-target="#edit_header<?= $list->id; ?>" title="Edit Header">
+										<i class="fa fa-pencil-alt"></i></a>
+								<?php endif ?>
 							</li>
-							<li>Company : <?php echo $list->company; ?></li>
-							<li>Notes&emsp;&emsp;: <?php echo $list->notes; ?></li>
+							<li>Company : <?= $list->company; ?></li>
+							<li>Notes&emsp;&emsp;: <?= $list->notes; ?></li>
 					</div>
 				</div>
 			</div>
@@ -101,38 +105,38 @@
 												$sum_total[] = $p->price;
 												$total_qty = array_sum($sum_total); ?>
 												<tr>
-													<td class="align-middle text-center"><?php echo $no++ ?></td>
+													<td class="align-middle text-center"><?= $no++ ?></td>
 													<td>
-														<small class="badge badge-secondary" title="Id Assembly"><?php echo $p->assembly ?></small>
-														<small class="badge badge-danger" title="Price Type"><?php echo strtoupper($p->type_price) ?></small>
+														<small class="badge badge-secondary" title="Id Assembly"><?= $p->assembly ?></small>
+														<small class="badge badge-danger" title="Price Type"><?= strtoupper($p->type_price) ?></small>
 														<br />
-														<b><?php echo strtoupper($p->item) ?></b><br />
-														<small class="badge badge-info" title="brand"><?php echo strtoupper($p->brand) ?></small>
+														<b><?= strtoupper($p->item) ?></b><br />
+														<small class="badge badge-info" title="brand"><?= strtoupper($p->brand) ?></small>
 														<?php if ($p->model === '45' || $p->model === '90') : ?>
-															<small class="badge badge-info" title="Model"><?php echo strtoupper($p->model) ?>&deg;</small>
+															<small class="badge badge-info" title="Model"><?= strtoupper($p->model) ?>&deg;</small>
 														<?php else : ?>
-															<small class="badge badge-info" title="Model"><?php echo strtoupper($p->model) ?></small>
+															<small class="badge badge-info" title="Model"><?= strtoupper($p->model) ?></small>
 														<?php endif ?>
-														<small class="badge badge-info" title="OD"><?php echo strtoupper($p->od) ?></small>
-														<small class="badge badge-info" title="Type"><?php echo strtoupper($p->type) ?></small>
-														<small class="badge badge-info" title="Category"><?php echo strtoupper($p->category) ?></small>
-														<small class="badge badge-info" title="Hole"><?php echo strtoupper($p->hole) ?></small>
-														<small class="badge badge-info" title="ID"><?php echo strtoupper($p->i_d) ?></small>
-														<small class="badge badge-info" title="Plat"><?php echo strtoupper($p->plat) ?></small>
-														<small class="badge badge-info" title="Thread"><?php echo strtoupper($p->thread) ?></small>
-														<small class="badge badge-warning" title="Posisi Fitting"><?php echo strtoupper($p->posisi) ?></small>
+														<small class="badge badge-info" title="OD"><?= strtoupper($p->od) ?></small>
+														<small class="badge badge-info" title="Type"><?= strtoupper($p->type) ?></small>
+														<small class="badge badge-info" title="Category"><?= strtoupper($p->category) ?></small>
+														<small class="badge badge-info" title="Hole"><?= strtoupper($p->hole) ?></small>
+														<small class="badge badge-info" title="ID"><?= strtoupper($p->i_d) ?></small>
+														<small class="badge badge-info" title="Plat"><?= strtoupper($p->plat) ?></small>
+														<small class="badge badge-info" title="Thread"><?= strtoupper($p->thread) ?></small>
+														<small class="badge badge-warning" title="Posisi Fitting"><?= strtoupper($p->posisi) ?></small>
 													</td>
-													<td class="align-middle text-center"><?php echo $p->size ?></td>
-													<td class="align-middle text-center"><?php echo $p->qty ?></td>
+													<td class="align-middle text-center"><?= $p->size ?></td>
+													<td class="align-middle text-center"><?= $p->qty ?></td>
 													<td class="align-middle text-center">
 														<?= number_format($p->price, 0, '.', '.'); ?> IDR<br />
 														<small>@ <?= number_format($p->price_unit, 0, '.', '.') ?> IDR</small>
 													</td>
 													<td class="align-middle text-center">
 														<?php if ($list->status == 1 || $list->status == 0) : ?>
-															<a class="btn btn-warning" data-toggle="modal" data-target="#modal_edit<?php echo $p->id; ?>" title="Edit">
+															<a class="btn btn-warning" data-toggle="modal" data-target="#modal_edit<?= $p->id; ?>" title="Edit">
 																<i class="fa fa-pencil-alt"></i></a>
-															<a class="btn btn-danger" data-toggle="modal" data-target="#modal_hapus<?php echo $p->id; ?>" title="Delete">
+															<a class="btn btn-danger" data-toggle="modal" data-target="#modal_hapus<?= $p->id; ?>" title="Delete">
 																<i class="fa fa-trash"></i></a>
 														<?php elseif ($list->status == 3 || $list->status == 2) : ?>
 															<button type="button" class="btn btn-danger float-end" title="Lock" disabled>
@@ -147,7 +151,7 @@
 												<tr>
 													<th width="70%" style="text-align:center"><b>Total<b></th>
 													<th style="text-align:center">
-														<b><?php echo number_format($total_qty, 0, '.', '.'); ?> IDR<b>
+														<b><?= number_format($total_qty, 0, '.', '.'); ?> IDR<b>
 													</th>
 												</tr>
 											</thead>
@@ -158,38 +162,38 @@
 									<div class="d-flex justify-content-around mb-3">
 										<?php if ($list->status != 3) : ?>
 											<?php if ($list->status != 2) : ?>
-												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-													<input type="hidden" name="id" value="<?php echo $list->id ?>">
+												<form action="<?= base_url('listing/qoutation_submit') ?>" method="post">
+													<input type="hidden" name="id" value="<?= $list->id ?>">
 													<input type="hidden" name="status" value="2">
-													<input type="hidden" name="ket" value="Submited ID : <?php echo $list->id_hs ?>">
+													<input type="hidden" name="ket" value="Submited ID : <?= $list->id_hs ?>">
 													<button class="btn btn-info col-15 shadow" type="submit">
 														<i class="fas fa-bookmark"></i>&nbsp;Submit List</button>
 												</form>
 											<?php endif ?>
-											<?php if ($list->status == 0) : ?>
-												<form action="<?php echo base_url('listing/qoutation_remove') ?>" method="post">
-													<input type="hidden" name="id" value="<?php echo $list->id ?>">
-													<input type="hidden" name="id_hs" value="<?php echo $list->id_hs ?>">
+											<?php if ($list->status == 0 || $list->status == 1) : ?>
+												<form action="<?= base_url('listing/qoutation_remove') ?>" method="post">
+													<input type="hidden" name="id" value="<?= $list->id ?>">
+													<input type="hidden" name="id_hs" value="<?= $list->id_hs ?>">
 													<button class="btn btn-danger col-15 shadow" type="submit">
 														<i class="fa fa-trash"></i>&nbsp;Remove List</button>
 												</form>
 											<?php endif ?>
 											<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
 												<?php if ($list->status != 1) : ?>
-													<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-														<input type="hidden" name="id" value="<?php echo $list->id ?>">
+													<form action="<?= base_url('listing/qoutation_submit') ?>" method="post">
+														<input type="hidden" name="id" value="<?= $list->id ?>">
 														<input type="hidden" name="status" value="1">
-														<input type="hidden" name="ket" value="Notice ID : <?php echo $list->id_hs ?>">
+														<input type="hidden" name="ket" value="Notice ID : <?= $list->id_hs ?>">
 														<button class="btn btn-warning col-15 shadow" type="submit">
 															<i class="fas fa-bullhorn"></i>&nbsp;Notice</button>
 													</form>
 												<?php endif ?>
 												<?php if ($list->status != 0) : ?>
-													<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-														<input type="hidden" name="id" value="<?php echo $list->id ?>">
+													<form action="<?= base_url('listing/qoutation_submit') ?>" method="post">
+														<input type="hidden" name="id" value="<?= $list->id ?>">
 														<input type="hidden" name="status" value="3">
-														<input type="hidden" name="ket" value="Confrim ID : <?php echo $list->id_hs ?>">
-														<input type="hidden" name="updated_at" value="<?php echo mdate('%Y-%m-%d %H:%i:%s') ?>">
+														<input type="hidden" name="ket" value="Confrim ID : <?= $list->id_hs ?>">
+														<input type="hidden" name="updated_at" value="<?= mdate('%Y-%m-%d %H:%i:%s') ?>">
 														<button class="btn btn-success col-15 shadow" type="submit">
 															<i class="fas fa-lock"></i>&nbsp;Confrim</button>
 													</form>
@@ -197,11 +201,11 @@
 											<?php } ?>
 										<?php elseif ($list->status == 3) :  ?>
 											<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
-											<a class="btn btn-primary col-15 shadow" href="<?php echo base_url('listing/qoutation_print/?print=' . $encrypturl) ?>" rel="noopener" target="_blank">
+											<a class="btn btn-primary col-15 shadow" href="<?= base_url('listing/qoutation_print/?print=' . $encrypturl) ?>" rel="noopener" target="_blank">
 												<i class="fas fa-print"></i>&nbsp;Download Accepted List</a>
 											<?php if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "mgr") {  ?>
-												<form action="<?php echo base_url('listing/qoutation_submit') ?>" method="post">
-													<input type="hidden" name="id" value="<?php echo $list->id ?>">
+												<form action="<?= base_url('listing/qoutation_submit') ?>" method="post">
+													<input type="hidden" name="id" value="<?= $list->id ?>">
 													<input type="hidden" name="status" value="1">
 													<input type="hidden" name="ket" value="Revoke">
 													<button class="btn btn-warning col-15 shadow" type="submit">
@@ -213,7 +217,7 @@
 									</div>
 								</div>
 								<div class="col-12 table-responsive-sm text-center mb-3">
-									<a href="<?php echo base_url() . 'listing/listing' ?>" class="btn btn-default"><i class="fas fa-undo"></i>
+									<a href="<?= base_url() . 'listing/listing' ?>" class="btn btn-default"><i class="fas fa-undo"></i>
 										Back</a>
 								</div>
 							</div>
@@ -225,7 +229,7 @@
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add_item" tabindex="-1" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
+		<div class="modal-content bg-light color-palette">
 			<div class="modal-header">
 				<h5 class="col-12 modal-title text-center">Add New Item
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -233,21 +237,21 @@
 					</button>
 				</h5>
 			</div>
-			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/qoutation_save') ?>">
+			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/qoutation_save') ?>">
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text pr-5">Item&emsp;</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
-							<input type="hidden" name="id" readonly class="form-control" value="<?php echo $id_qoutation->id + 1; ?>">
-							<input type="hidden" name="id_hs" class="form-control" value="<?php echo $list->id_hs ?>">
-							<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
+							<input type="hidden" name="id" readonly class="form-control" value="<?= $id_qoutation->id + 1; ?>">
+							<input type="hidden" name="id_hs" class="form-control" value="<?= $list->id_hs ?>">
+							<input type="hidden" name="id_listing" class="form-control" value="<?= $list->id ?>">
 						<?php endforeach ?>
 						<select id="item" name="item" class="form-control" required>
 							<option value="">- Choose Item -</option>
 							<?php foreach ($list_item as $list) : ?>
-								<option value="<?php echo $list->id ?>"><?php echo strtoupper($list->nama) ?></option>
+								<option value="<?= $list->id ?>"><?= strtoupper($list->nama) ?></option>
 							<?php endforeach ?>
 						</select>
 					</div>
@@ -381,7 +385,7 @@
 							<select name="assembly" class="form-control">
 								<option value="">- Choose Assembly -</option>
 								<?php foreach ($assembly as $i) : ?>
-									<option value="<?php echo $i->name ?>"><?php echo strtoupper($i->name) ?></option>
+									<option value="<?= $i->name ?>"><?= strtoupper($i->name) ?></option>
 								<?php endforeach ?>
 							</select>
 						</div>
@@ -410,7 +414,7 @@
 <!-- Bootstrap modal add assembly -->
 <div class="modal fade" id="modal_add_ass" tabindex="-1" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
+		<div class="modal-content bg-light color-palette">
 			<div class="modal-header">
 				<h5 class="col-12 modal-title text-center">Create New Assembly
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -418,14 +422,14 @@
 					</button>
 				</h5>
 			</div>
-			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/add_assembly') ?>">
+			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/add_assembly') ?>">
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text pr-3">Id Assm</label>
 						</div>
 						<?php foreach ($listing as $list) : ?>
-							<input type="hidden" name="id_listing" class="form-control" value="<?php echo $list->id ?>">
+							<input type="hidden" name="id_listing" class="form-control" value="<?= $list->id ?>">
 						<?php endforeach ?>
 						<input type="text" name="name" class="form-control" value="<?= 'ASSM', date('md-'), $id_assm->id + 1 ?>" readonly>
 					</div>
@@ -448,9 +452,9 @@
 
 <!--Modals edit&delete-->
 <?php foreach ($qoutation as $u) : ?>
-	<div class="modal fade" id="modal_edit<?php echo $u->id ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal fade" id="modal_edit<?= $u->id ?>" tabindex="-1" data-backdrop="static">
 		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
+			<div class="modal-content bg-light color-palette">
 				<div class="modal-header">
 					<h4 class="col-12 modal-title text-center">Update Price
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -458,12 +462,12 @@
 						</button>
 					</h4>
 				</div>
-				<form onsubmit="editbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/qoutation_update') ?>">
+				<form onsubmit="editbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/qoutation_update') ?>">
 					<div class="modal-body">
 						<?php if ($u->id_assembly != 0) : ?>
 							<span class="badge badge-secondary"> Assembly</span>
 						<?php endif; ?>
-						<small class="badge badge-danger" title="Type Price"><?php echo strtoupper($u->type_price) ?></small>
+						<small class="badge badge-danger" title="Type Price"><?= strtoupper($u->type_price) ?></small>
 						<br />
 						<?php if ($u->id_item == 1) : ?>
 							<b>PIPE</b>
@@ -477,30 +481,30 @@
 							<b>CLAMP PIPE</b>
 						<?php endif ?>
 						<br />
-						<small class="badge badge-info" title="Brand"><?php echo strtoupper($u->brand) ?></small>
+						<small class="badge badge-info" title="Brand"><?= strtoupper($u->brand) ?></small>
 						<?php if ($u->model === '45' || $u->model === '90') : ?>
-							<small class="badge badge-info" title="Model"><?php echo strtoupper($u->model) ?>&deg;</small>
+							<small class="badge badge-info" title="Model"><?= strtoupper($u->model) ?>&deg;</small>
 						<?php else : ?>
-							<small class="badge badge-info" title="Model"><?php echo strtoupper($u->model) ?></small>
+							<small class="badge badge-info" title="Model"><?= strtoupper($u->model) ?></small>
 						<?php endif ?>
-						<small class="badge badge-info" title="OD"><?php echo strtoupper($u->od) ?></small>
-						<small class="badge badge-info" title="Type"><?php echo strtoupper($u->type) ?></small>
-						<small class="badge badge-info" title="Category"><?php echo strtoupper($u->category) ?></small>
-						<small class="badge badge-info" title="Hole"><?php echo strtoupper($u->hole) ?></small>
-						<small class="badge badge-info" title="ID"><?php echo strtoupper($u->i_d) ?></small>
-						<small class="badge badge-info" title="Plat"><?php echo strtoupper($u->plat) ?></small>
-						<small class="badge badge-info" title="Thread"><?php echo strtoupper($u->thread) ?></small>
-						<small class="badge badge-warning" title="Posisi Fitting"><?php echo strtoupper($u->posisi) ?></small>
-						<small class="badge badge-warning" title="Size"><?php echo strtoupper($u->size) ?></small>
-						<small class="badge badge-warning" title="Qty"><?php echo strtoupper($u->qty) ?></small>
+						<small class="badge badge-info" title="OD"><?= strtoupper($u->od) ?></small>
+						<small class="badge badge-info" title="Type"><?= strtoupper($u->type) ?></small>
+						<small class="badge badge-info" title="Category"><?= strtoupper($u->category) ?></small>
+						<small class="badge badge-info" title="Hole"><?= strtoupper($u->hole) ?></small>
+						<small class="badge badge-info" title="ID"><?= strtoupper($u->i_d) ?></small>
+						<small class="badge badge-info" title="Plat"><?= strtoupper($u->plat) ?></small>
+						<small class="badge badge-info" title="Thread"><?= strtoupper($u->thread) ?></small>
+						<small class="badge badge-warning" title="Posisi Fitting"><?= strtoupper($u->posisi) ?></small>
+						<small class="badge badge-warning" title="Size"><?= strtoupper($u->size) ?></small>
+						<small class="badge badge-warning" title="Qty"><?= strtoupper($u->qty) ?></small>
 						<div class="input-group mt-1 mb-0">
 							<div class="input-group-prepend">
 								<label class="input-group-text pr-5">Price</label>
 							</div>
-							<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
-							<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
-							<input type="hidden" name="price_unit" value="<?php echo $u->price_unit; ?>">
-							<input type="number" name="price" class="form-control" id="price" min="1" value="<?php echo $u->price ?>" required>
+							<input type="hidden" name="id" class="form-control" value="<?= $u->id; ?>">
+							<input type="hidden" name="id_listing" value="<?= $u->id_listing; ?>">
+							<input type="hidden" name="price_unit" value="<?= $u->price_unit; ?>">
+							<input type="number" name="price" class="form-control" id="price" min="1" value="<?= $u->price ?>" required>
 						</div>
 						<small><i>Max markdown 10%</i></small>
 					</div>
@@ -513,7 +517,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="modal_hapus<?php echo $u->id; ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal fade" id="modal_hapus<?= $u->id; ?>" tabindex="-1" data-backdrop="static">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content bg-danger">
 				<div class="modal-header">
@@ -523,10 +527,10 @@
 						</button>
 					</h5>
 				</div>
-				<form onsubmit="delbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/qoutation_delete') ?>">
+				<form onsubmit="delbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/qoutation_delete') ?>">
 					<div class="modal-body">
-						<input type="hidden" name="id" value="<?php echo $u->id; ?>">
-						<input type="hidden" name="id_listing" value="<?php echo $u->id_listing; ?>">
+						<input type="hidden" name="id" value="<?= $u->id; ?>">
+						<input type="hidden" name="id_listing" value="<?= $u->id_listing; ?>">
 						<span>Are you sure delete this ?</span>
 					</div>
 					<div class="modal-footer justify-content-between">
@@ -538,3 +542,43 @@
 		</div>
 	</div>
 <?php endforeach; ?>
+
+
+<!-- ============ MODAL EDIT DATA =============== -->
+<?php foreach ($listing as $list) : ?>
+	<div class="modal fade" id="edit_header<?= $list->id ?>" tabindex="-1" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content bg-light color-palette">
+				<div class="modal-header">
+					<h4 class="col-12 modal-title text-center">Edit header
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</h4>
+				</div>
+				<form onsubmit="edithdr.disabled = true; return true;" method="post" action="<?= base_url('listing/edit') ?>">
+					<div class="card-body">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-1">Company</label>
+							</div>
+							<input type="hidden" name="id" value="<?= $list->id ?>"></input>
+							<input type="hidden" name="id_hs" value="<?= $list->id_hs ?>"></input>
+							<input type="text" name="company" class="form-control" value="<?= $list->company ?>" required></input>
+						</div>
+						<div class="input-group mb-0">
+							<div class="input-group-prepend">
+								<label class="input-group-text pr-4">Notes&nbsp;</label>
+							</div>
+							<textarea name="notes" class="form-control" required><?= $list->notes ?></textarea>
+						</div>
+					</div>
+					<div class="modal-footer justify-content-center">
+						<button class="btn btn-primary col-md-6" id="edithdr"><i class="fa fa-check"></i> Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<?php endforeach; ?>
+<!--END MODAL EDIT DATA-->

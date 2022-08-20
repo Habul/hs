@@ -65,55 +65,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 mb-3 shadow" style="padding: 0;">
-				<a class="form-control btn btn-block btn-outline-success" data-toggle="modal" data-target="#modal_add">
-					<i class="fa fa-plus"></i>&nbsp; Create New List</a>
-			</div>
 		</div>
 	</section>
 </div>
-
-<!-- Bootstrap modal add -->
-<div class="modal fade" id="modal_add" tabindex="-1" data-backdrop="static">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="col-12 modal-title text-center">Create New List
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</h5>
-			</div>
-			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?php echo base_url('listing/post') ?>">
-				<div class="modal-body">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text pr-5">ID</span>
-						</div>
-						<input type="hidden" name="id" readonly class="form-control" value="<?php echo $id_add->id + 1; ?>">
-						<input type="text" name="id_hs" class="form-control" value="<?php echo 'HS', date('Ymd-'), $id_add->id + 1; ?>" readonly>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text pr-1">Company</span>
-						</div>
-						<input type=" text" name="company" class="form-control" placeholder="(ex. PT. XYZ)" required>
-					</div>
-					<div class="form-group mb-0">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text pr-4">Notes</span>
-							</div>
-							<textarea type="text" name="notes" class="form-control" placeholder="..." required></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!--End Modals Add-->

@@ -23,13 +23,19 @@
 					<div class="card card-success card-outline">
 						<div class="card-body box-profile shadow">
 							<div class="text-center">
-								<img class="profile-user-img img-fluid img-circle" src="<?php echo base_url() . 'gambar/profile/' . $this->session->userdata('foto'); ?>" alt="User profile picture" id="blah">
+								<img class="profile-user-img img-fluid img-circle" src="<?= base_url() . 'gambar/profile/' . $this->session->userdata('foto'); ?>" alt="User profile picture" id="blah">
 							</div>
-							<h3 class="profile-username text-center"><?php echo $this->session->userdata('nama'); ?></h3>
-							<p class="text-muted text-center"><?php echo $this->session->userdata('level'); ?></p>
+							<h3 class="profile-username text-center"><?= $this->session->userdata('nama'); ?></h3>
+							<p class="text-muted text-center"><?= $this->session->userdata('level'); ?></p>
 							<ul class="list-group list-group-unbordered mb-3">
 								<li class="list-group-item">
-									<b>Username</b><a class="float-right"><?php echo $this->session->userdata('username'); ?></a>
+									<b>Name</b><a class="float-right"><?= strtoupper($this->session->userdata('nama')) ?></a>
+								</li>
+								<li class="list-group-item">
+									<b>Username</b><a class="float-right"><?= ucwords($this->session->userdata('username')) ?></a>
+								</li>
+								<li class="list-group-item">
+									<b>Email</b><a class="float-right"><?= $this->session->userdata('email'); ?></a>
 								</li>
 							</ul>
 						</div>

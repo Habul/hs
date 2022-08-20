@@ -29,9 +29,6 @@
       "orderable": false,
       "targets": 0
     }],
-    "order": [
-      [1, 'desc']
-    ]
   });
 
   t.on('order.dt search.dt', function() {

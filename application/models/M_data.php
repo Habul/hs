@@ -12,7 +12,11 @@ class M_data extends CI_Model
     return $this->db->get($table);
   }
 
-  // fungsi untuk menginput data ke database
+  function get_index($table, $condition)
+  {
+    return $this->db->order_by($condition, 'desc')->get($table);
+  }
+
   function insert_data($data, $table)
   {
     $this->db->insert($table, $data);
@@ -23,7 +27,6 @@ class M_data extends CI_Model
     $this->db->insert($table, $data);
   }
 
-  // fungsi untuk mengedit data
   function edit_data($where, $table)
   {
     return $this->db->get_where($table, $where);
@@ -34,7 +37,6 @@ class M_data extends CI_Model
     return $this->db->where($where)->where($where2)->get($table);
   }
 
-  // fungsi untuk mengupdate atau mengubah data di database
   function update_data($where, $data, $table)
   {
     $this->db->where($where);

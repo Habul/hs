@@ -83,6 +83,15 @@
 			}
 		});
 	});
+
+	<?php if ($this->session->flashdata('loginok')) : ?> {
+			$(document).Toasts('create', {
+				class: 'bg-success',
+				title: 'Welcome',
+				body: '<?= ucwords($this->session->flashdata('loginok')) ?>'
+			})
+		};
+	<?php endif; ?>
 </script>
 <script>
 	$(function() {
@@ -355,7 +364,7 @@
 		const d = new Date();
 		weekdayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 		monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-		var dateString = d.getFullYear() + ' ' + monthNames[d.getMonth()] + ' ' + d.getDate() + ' - ' +
+		var dateString = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear() + ' - ' +
 			('00' + d.getHours()).slice(-2) + ':' + ('00' + d.getMinutes()).slice(-2) + ':' + ('00' + d.getSeconds()).slice(-
 				2);
 		document.getElementById('hclock').innerHTML = dateString;

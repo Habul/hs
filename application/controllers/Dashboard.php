@@ -9,7 +9,7 @@ class Dashboard extends CI_Controller
     parent::__construct();
 
     date_default_timezone_set('Asia/Jakarta');
-    if ($this->session->userdata('status') != "telah_login") {
+    if ($this->session->userdata('status') != "hs_login") {
       redirect(base_url() . 'login?alert=belum_login');
     }
   }
@@ -23,9 +23,10 @@ class Dashboard extends CI_Controller
     $data['listing_notice'] = $this->m_data->db->get_where('listing', ['status' => '1'])->num_rows();
     $data['listing_submit'] = $this->m_data->db->get_where('listing', ['status' => '2'])->num_rows();
     $data['listing_accept'] = $this->m_data->db->get_where('listing', ['status' => '3'])->num_rows();
+    $data['history_log'] = $this->m_data->get_index('history_log', 'date')->result();
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('dashboard/v_index', $data);
-    $this->load->view('dashboard/v_footer');
+    $this->load->view('dashboard/v_footer', $data);
   }
 
   public function keluar()
@@ -168,7 +169,6 @@ class Dashboard extends CI_Controller
     $this->form_validation->set_rules('username', 'Username Pengguna', 'required');
     $this->form_validation->set_rules('password', 'Password Pengguna', 'required|min_length[6]');
     $this->form_validation->set_rules('level', 'Level Pengguna', 'required');
-    $this->form_validation->set_rules('status', 'Status Pengguna', 'required');
 
     if ($this->form_validation->run() != false) {
       $nama = $this->input->post('nama');
@@ -176,7 +176,6 @@ class Dashboard extends CI_Controller
       $username = $this->input->post('username');
       $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
       $level = $this->input->post('level');
-      $status = $this->input->post('status');
       $timestamp = mdate('%Y-%m-%d %H:%i:%s');
 
       $data = array(
@@ -185,7 +184,7 @@ class Dashboard extends CI_Controller
         'pengguna_username' => $username,
         'pengguna_password' => $password,
         'pengguna_level' => $level,
-        'pengguna_status' => $status,
+        'pengguna_status' => 1,
         'date_created' => $timestamp
       );
 

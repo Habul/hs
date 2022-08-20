@@ -3,7 +3,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0">Listing</h1>
+					<h1 class="m-0">Listing Quotation</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -94,21 +94,21 @@
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text pr-5">ID</span>
+							<label class="input-group-text pr-5">ID</label>
 						</div>
 						<input type="hidden" name="id" readonly class="form-control" value="<?php echo $id_add->id + 1; ?>">
 						<input type="text" name="id_hs" class="form-control" value="<?php echo 'HS', date('Ymd-'), $id_add->id + 1; ?>" readonly>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text pr-1">Company</span>
+							<label class="input-group-text pr-1">Company</label>
 						</div>
 						<input type=" text" name="company" class="form-control" placeholder="(ex. PT. XYZ)" required>
 					</div>
 					<div class="form-group mb-0">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text pr-4">Notes</span>
+								<label class="input-group-text pr-4">Notes&nbsp;</label>
 							</div>
 							<textarea type="text" name="notes" class="form-control" placeholder="..." required></textarea>
 						</div>
