@@ -4,16 +4,16 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<?php if (mdate('%H:%i') >= '00:01' && mdate('%H:%i') <= '10:00') : ?>
-						<h1 class="m-0">Good Morning <?php echo ucwords($this->session->userdata('nama')) ?></h1>
+						<h1 class="m-0">Good Morning <?= ucwords($this->session->userdata('nama')) ?></h1>
 					<?php elseif (mdate('%H:%i') >= '10:01' && mdate('%H:%i') <= '18:00') : ?>
-						<h1 class="m-0">Good Afternoon <?php echo ucwords($this->session->userdata('nama')) ?></h1>
+						<h1 class="m-0">Good Afternoon <?= ucwords($this->session->userdata('nama')) ?></h1>
 					<?php elseif (mdate('%H:%i') >= '18:01' && mdate('%H:%i') <= '23:59') : ?>
-						<h1 class="m-0">Good Evening <?php echo ucwords($this->session->userdata('nama')) ?></h1>
+						<h1 class="m-0">Good Evening <?= ucwords($this->session->userdata('nama')) ?></h1>
 					<?php endif ?>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
+						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
 					</ol>
 				</div>
 			</div>
@@ -27,13 +27,14 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-light shadow">
 						<div class="inner">
-							<h3><?php echo $listing_na ?></h3>
+							<h3><?= $listing_na ?></h3>
 							<p>Total Listing N/A</p>
 						</div>
 						<div class="icon">
 							<i class="fas fa-file"></i>
 						</div>
-						<a href="<?php echo base_url('listing/list/0') ?>" class="small-box-footer">More info
+						<?php $id0 = urlencode($this->encrypt->encode('0')) ?>
+						<a href="<?= base_url('listing/list/?id=' . $id0) ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
@@ -41,13 +42,14 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-info shadow">
 						<div class="inner">
-							<h3><?php echo $listing_submit ?></h3>
+							<h3><?= $listing_submit ?></h3>
 							<p>Total Listing Submited</p>
 						</div>
 						<div class="icon">
 							<i class="fas fa-bookmark"></i>
 						</div>
-						<a href="<?= base_url('listing/list/2') ?>" data-name="keyword" class="small-box-footer">More info
+						<?php $id2 = urlencode($this->encrypt->encode('2')) ?>
+						<a href="<?= base_url('listing/list/?id=' . $id2) ?>" data-name="keyword" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
@@ -55,13 +57,14 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-yellow shadow">
 						<div class="inner">
-							<h3><?php echo $listing_notice ?></h3>
+							<h3><?= $listing_notice ?></h3>
 							<p>Total Listing Notice</p>
 						</div>
 						<div class="icon">
 							<i class="fas fa-bullhorn"></i>
 						</div>
-						<a href="<?= base_url('listing/list/1') ?>" class="small-box-footer">More info
+						<?php $id1 = urlencode($this->encrypt->encode('1')) ?>
+						<a href="<?= base_url('listing/list/?id=' . $id1) ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
@@ -69,13 +72,14 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-green shadow">
 						<div class="inner">
-							<h3><?php echo $listing_accept ?></h3>
+							<h3><?= $listing_accept ?></h3>
 							<p>Total Listing Accepted</p>
 						</div>
 						<div class="icon">
 							<i class="fas fa-lock"></i>
 						</div>
-						<a href="<?= base_url('listing/list/3') ?>" class="small-box-footer">More info
+						<?php $id3 = urlencode($this->encrypt->encode('3')) ?>
+						<a href="<?= base_url('listing/list/?id=' . $id3) ?>" class="small-box-footer">More info
 							<i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
@@ -85,7 +89,7 @@
 						<span class="info-box-icon bg-danger"><i class="fas fa-file-invoice"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Total Listing All</span>
-							<span class="info-box-number"><?php echo $listing_all ?></span>
+							<span class="info-box-number"><?= $listing_all ?></span>
 						</div>
 					</div>
 				</div>
@@ -95,7 +99,7 @@
 						<span class="info-box-icon bg-secondary"><i class="fas fa-shopping-cart"></i></span>
 						<div class="info-box-content">
 							<span class="info-box-text">Total PO</span>
-							<span class="info-box-number">0</span>
+							<span class="info-box-number"><?= $total_po ?></span>
 						</div>
 					</div>
 				</div>

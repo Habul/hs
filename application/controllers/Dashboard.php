@@ -18,6 +18,7 @@ class Dashboard extends CI_Controller
   {
     $data['title'] = 'Dashboard';
     $data['jumlah_pengguna'] = $this->m_data->get_data('pengguna')->num_rows();
+    $data['total_po'] = $this->m_data->get_data('po_customer')->num_rows();
     $data['listing_all'] = $this->m_data->get_data('listing')->num_rows();
     $data['listing_na'] = $this->m_data->db->get_where('listing', ['status' => '0'])->num_rows();
     $data['listing_notice'] = $this->m_data->db->get_where('listing', ['status' => '1'])->num_rows();

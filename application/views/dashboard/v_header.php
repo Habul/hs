@@ -194,11 +194,10 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() . 'listing/po' ?>" <?= $this->uri->segment(2) == 'Po' ||
-																									$this->uri->segment(2) == 'po_detail' ||
+									<a href="<?= base_url() . 'listing/po' ?>" <?= $this->uri->segment(2) == 'po' ||
 																									$this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 										<i class="fas fa-shopping-cart nav-icon"></i>
-										<p>Purchase Order</p>
+										<p>PO Customer</p>
 									</a>
 								</li>
 								<li class="nav-item">

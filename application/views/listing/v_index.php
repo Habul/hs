@@ -82,7 +82,7 @@
 <!-- Bootstrap modal add -->
 <div class="modal fade" id="modal_add" tabindex="-1" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
+		<div class="modal-content bg-light color-palette">
 			<div class="modal-header">
 				<h5 class="col-12 modal-title text-center">Create New List
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">

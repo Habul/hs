@@ -4,14 +4,14 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<?php foreach ($listitem as $b) : ?>
-						<h1 class="m-0"><b><?php echo ucwords($b->nama) ?></b> Price List</h1>
+						<h1 class="m-0"><b><?= ucwords($b->nama) ?></b> Price List</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item"><a href="<?php echo base_url('listing/listing_price') ?>">Price List</a>
+						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+						<li class="breadcrumb-item"><a href="<?= base_url('listing/listing_price') ?>">Price List</a>
 						</li>
-						<li class="breadcrumb-item active"><?php echo ucwords($b->nama) ?></li>
+						<li class="breadcrumb-item active"><?= ucwords($b->nama) ?></li>
 					</ol>
 				</div>
 			</div>
@@ -70,19 +70,19 @@
 								<?php foreach ($listprice as $u) { 	?>
 									<tr>
 										<td class="align-middle text-center"></td>
-										<td class="align-middle text-center"><?php echo strtoupper($u->jenis) ?></td>
-										<td class="align-middle text-center"><?php echo strtoupper($u->part_code) ?></td>
-										<td><?php echo $u->desc; ?></td>
+										<td class="align-middle text-center"><?= strtoupper($u->jenis) ?></td>
+										<td class="align-middle text-center"><?= strtoupper($u->part_code) ?></td>
+										<td><?= $u->desc; ?></td>
 										<td class="align-middle text-center">
-											<?php echo number_format($u->distributor, 0, '.', '.'); ?></td>
-										<td class="align-middle text-center"><?php echo number_format($u->oem, 0, '.', '.'); ?></td>
-										<td class="align-middle text-center"><?php echo number_format($u->reseller, 0, '.', '.'); ?>
+											<?= number_format($u->distributor, 0, '.', '.'); ?></td>
+										<td class="align-middle text-center"><?= number_format($u->oem, 0, '.', '.'); ?></td>
+										<td class="align-middle text-center"><?= number_format($u->reseller, 0, '.', '.'); ?>
 										</td>
-										<td class="align-middle text-center"><?php echo number_format($u->user, 0, '.', '.'); ?></td>
+										<td class="align-middle text-center"><?= number_format($u->user, 0, '.', '.'); ?></td>
 										<td class="align-middle text-center">
-											<a class="btn-sm btn-warning" data-toggle="modal" data-target="#modal_edit<?php echo $u->id; ?>" title="Edit">
+											<a class="btn-sm btn-warning" data-toggle="modal" data-target="#modal_edit<?= $u->id; ?>" title="Edit">
 												<i class="fa fa-pencil-alt"></i></a>
-											<a class="btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus<?php echo $u->id; ?>" title="Delete">
+											<a class="btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus<?= $u->id; ?>" title="Delete">
 												<i class="fa fa-trash"></i></a>
 										</td>
 									</tr>
@@ -91,7 +91,7 @@
 						</div>
 					</div>
 					<div class="col-12 table-responsive-sm text-center mb-3">
-						<a href="<?php echo base_url() . 'listing/listing_price' ?>" class="btn btn-default">
+						<a href="<?= base_url() . 'listing/listing_price' ?>" class="btn btn-default">
 							<i class="fas fa-undo"></i> Back</a>
 					</div>
 				</div>
@@ -112,7 +112,7 @@
 					</button>
 				</h4>
 			</div>
-			<form class="form-horizontal" method="post" onsubmit="addbtn.disabled = true; return true;" action="<?php echo base_url('listing/price_add') ?>">
+			<form class="form-horizontal" method="post" onsubmit="addbtn.disabled = true; return true;" action="<?= base_url('listing/price_add') ?>">
 				<div class="card-body">
 					<div class="form-group mb-3">
 						<div class="input-group">
@@ -120,7 +120,7 @@
 								<label class="input-group-text pr-5">Jenis</label>
 							</div>
 							<?php foreach ($listitem as $p) : ?>
-								<input type="hidden" name="id_item" class="form-control" value="<?php echo $p->id ?>" required>
+								<input type="hidden" name="id_item" class="form-control" value="<?= $p->id ?>" required>
 							<?php endforeach ?>
 							<input type="text" name="jenis" class="form-control" placeholder="Input Jenis.." required>
 						</div>
@@ -186,27 +186,27 @@
 
 <!-- modal Edit -->
 <?php foreach ($listprice as $u) : ?>
-	<div class="modal fade" id="modal_edit<?php echo $u->id; ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal fade" id="modal_edit<?= $u->id; ?>" tabindex="-1" data-backdrop="static">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="col-12 modal-title text-center">Edit List <?php echo ucwords($u->jenis); ?>
+					<h4 class="col-12 modal-title text-center">Edit List <?= ucwords($u->jenis); ?>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</h4>
 				</div>
-				<form class="form-horizontal" onsubmit="editdesc.disabled = true; return true;" method="post" action="<?php echo base_url('listing/price_edit') ?>">
+				<form class="form-horizontal" onsubmit="editdesc.disabled = true; return true;" method="post" action="<?= base_url('listing/price_edit') ?>">
 					<div class="modal-body">
 						<div class="form-group mb-3">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<label class="input-group-text pr-4">Part Code</label>
 								</div>
-								<input type="hidden" name="id" class="form-control" value="<?php echo $u->id; ?>">
-								<input type="hidden" name="id_item" class="form-control" value="<?php echo $u->id_item; ?>">
-								<input type="hidden" name="jenis" class="form-control" value="<?php echo $u->jenis; ?>">
-								<input type="text" name="part_code" class="form-control" readonly value="<?php echo $u->part_code; ?>">
+								<input type="hidden" name="id" class="form-control" value="<?= $u->id; ?>">
+								<input type="hidden" name="id_item" class="form-control" value="<?= $u->id_item; ?>">
+								<input type="hidden" name="jenis" class="form-control" value="<?= $u->jenis; ?>">
+								<input type="text" name="part_code" class="form-control" readonly value="<?= $u->part_code; ?>">
 							</div>
 						</div>
 						<div class="form-group mb-3">
@@ -214,7 +214,7 @@
 								<div class="input-group-prepend">
 									<label class="input-group-text pr-5">Desc&nbsp;&nbsp;</label>
 								</div>
-								<textarea name="desc" class="form-control" required><?php echo $u->desc; ?></textarea>
+								<textarea name="desc" class="form-control" required><?= $u->desc; ?></textarea>
 							</div>
 						</div>
 						<div class="form-group mb-3">
@@ -222,7 +222,7 @@
 								<div class="input-group-prepend">
 									<label class="input-group-text">Distributor</label>
 								</div>
-								<input type="number" name="distributor" class="form-control" min="1" value=<?php echo $u->distributor; ?> required>
+								<input type="number" name="distributor" class="form-control" min="1" value=<?= $u->distributor; ?> required>
 							</div>
 						</div>
 						<div class="form-group mb-3">
@@ -230,7 +230,7 @@
 								<div class="input-group-prepend">
 									<label class="input-group-text pr-5">Oem&nbsp;</label>
 								</div>
-								<input type="number" name="oem" class="form-control" min="1" value=<?php echo $u->oem; ?> required>
+								<input type="number" name="oem" class="form-control" min="1" value=<?= $u->oem; ?> required>
 							</div>
 						</div>
 						<div class="form-group mb-3">
@@ -238,7 +238,7 @@
 								<div class="input-group-prepend">
 									<label class="input-group-text pr-4">Reseller&nbsp;&nbsp;</label>
 								</div>
-								<input type="number" name="reseller" class="form-control" min="1" value=<?php echo $u->reseller; ?> required>
+								<input type="number" name="reseller" class="form-control" min="1" value=<?= $u->reseller; ?> required>
 							</div>
 						</div>
 						<div class="form-group mb-0">
@@ -246,7 +246,7 @@
 								<div class="input-group-prepend">
 									<label class="input-group-text pr-5">User&nbsp;</label>
 								</div>
-								<input type="number" name="user" class="form-control" min="1" value=<?php echo $u->user; ?> required>
+								<input type="number" name="user" class="form-control" min="1" value=<?= $u->user; ?> required>
 							</div>
 						</div>
 					</div>
@@ -272,9 +272,9 @@
 					</button>
 				</h4>
 			</div>
-			<form method="post" onsubmit="importform.disabled = true; return true;" action="<?php echo base_url('listing/price_import') ?>" enctype="multipart/form-data">
+			<form method="post" onsubmit="importform.disabled = true; return true;" action="<?= base_url('listing/price_import') ?>" enctype="multipart/form-data">
 				<div class="modal-body">
-					<input type="hidden" name="id_item" value="<?php echo $pricerow->id ?>">
+					<input type="hidden" name="id_item" value="<?= $pricerow->id ?>">
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="customFile" name="data">
 						<label class="custom-file-label" for="customFile">Choose file</label>
@@ -295,17 +295,17 @@
 
 <!--MODAL HAPUS ALL-->
 <?php foreach ($listprice as $p) : ?>
-	<div class="modal fade" id="modal_hapus<?php echo $p->id; ?>" tabindex="-1" data-backdrop="static">
+	<div class="modal fade" id="modal_hapus<?= $p->id; ?>" tabindex="-1" data-backdrop="static">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content bg-danger">
 				<div class="modal-header">
-					<h4 class="col-12 modal-title text-center">Delete List <?php echo ucwords($p->jenis); ?>
+					<h4 class="col-12 modal-title text-center">Delete List <?= ucwords($p->jenis); ?>
 						<button class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</h4>
 				</div>
-				<form class="form-horizontal" onsubmit="delform.disabled = true; return true;" method="post" action="<?php echo base_url('listing/price_delete') ?>">
+				<form class="form-horizontal" onsubmit="delform.disabled = true; return true;" method="post" action="<?= base_url('listing/price_delete') ?>">
 					<div class="modal-body">
 						<input type="hidden" name="id" value="<?= $p->id; ?>">
 						<input type="hidden" name="id_item" value="<?= $p->id_item; ?>">

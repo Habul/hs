@@ -29,6 +29,7 @@
       "orderable": false,
       "targets": 0
     }],
+    "order": [],
   });
 
   t.on('order.dt search.dt', function() {

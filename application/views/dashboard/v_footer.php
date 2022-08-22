@@ -29,47 +29,47 @@
 
 </div>
 
-<script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
 	$.widget.bridge('uibutton', $.ui.button)
 </script>
-<script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jszip/jszip.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/toastr/toastr.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/inputmask/jquery.inputmask.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js">
+<script src="<?= base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jszip/jszip.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/toastr/toastr.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/sparklines/sparkline.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/moment/moment.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js">
 </script>
-<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/dropzone/min/dropzone.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/dist/js/adminlte.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/filterizr/jquery.filterizr.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/dropzone/min/dropzone.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="<?= base_url(); ?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/filterizr/jquery.filterizr.min.js"></script>
 <?php include './assets/plugins/ajax.php'; ?>
 <script>
 	$(document).ready(function() {
@@ -110,7 +110,7 @@
 			$('#div_posisi')[(id == 3) ? "show" : "hide"]();
 			if (id == 1 || id == 2 || id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_brand'); ?>",
+					url: "<?= site_url('listing/get_list_brand'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -132,7 +132,7 @@
 			}
 			if (id == 2 || id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_type'); ?>",
+					url: "<?= site_url('listing/get_list_type'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -154,7 +154,7 @@
 			}
 			if (id == 2 || id == 3 || id == 4 || id == 5) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_size'); ?>",
+					url: "<?= site_url('listing/get_list_size'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -176,7 +176,7 @@
 			}
 			if (id == 1 || id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_model'); ?>",
+					url: "<?= site_url('listing/get_list_model'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -198,7 +198,7 @@
 			}
 			if (id == 1) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_od'); ?>",
+					url: "<?= site_url('listing/get_list_od'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -220,7 +220,7 @@
 			}
 			if (id == 3 || id == 4) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_category'); ?>",
+					url: "<?= site_url('listing/get_list_category'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -242,7 +242,7 @@
 			}
 			if (id == 5) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_hole'); ?>",
+					url: "<?= site_url('listing/get_list_hole'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -264,7 +264,7 @@
 			}
 			if (id == 1) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_id'); ?>",
+					url: "<?= site_url('listing/get_list_id'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -286,7 +286,7 @@
 			}
 			if (id == 5) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_plat'); ?>",
+					url: "<?= site_url('listing/get_list_plat'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -308,7 +308,7 @@
 			}
 			if (id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_thread'); ?>",
+					url: "<?= site_url('listing/get_list_thread'); ?>",
 					method: "POST",
 					data: {
 						id: id
@@ -330,7 +330,7 @@
 			}
 			if (id == 3) {
 				$.ajax({
-					url: "<?php echo site_url('listing/get_list_posisi'); ?>",
+					url: "<?= site_url('listing/get_list_posisi'); ?>",
 					method: "POST",
 					data: {
 						id: id

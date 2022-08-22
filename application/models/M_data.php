@@ -201,4 +201,13 @@ class M_data extends CI_Model
     $this->db->insert_batch('list_price', $data);
     return $this->db->affected_rows();
   }
+
+  public function po()
+  {
+    $this->db->select('p.*,l.company');
+    $this->db->from('po_customer p');
+    $this->db->join('listing l', 'l.id_hs=p.id_hs', 'inner');
+    $this->db->order_by('created_at', 'desc');
+    return $this->db->get();
+  }
 }

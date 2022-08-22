@@ -74,16 +74,17 @@ class Listing extends CI_Controller
    public function list()
    {
       $data2['title'] = 'Listing';
-      if ($this->uri->segment(3) == '1') : {
+      $id = urldecode($this->encrypt->decode($this->input->get('id')));
+      if ($id == '1') : {
             $data['listing'] = $this->db->get_where('listing', ['status' => '1'])->result();
          }
-      elseif ($this->uri->segment(3) == '2') : {
+      elseif ($id == '2') : {
             $data['listing'] = $this->db->get_where('listing', ['status' => '2'])->result();
          }
-      elseif ($this->uri->segment(3) == '3') : {
+      elseif ($id == '3') : {
             $data['listing'] = $this->db->get_where('listing', ['status' => '3'])->result();
          }
-      elseif ($this->uri->segment(3) == '0') : {
+      elseif ($id == '0') : {
             $data['listing'] = $this->db->get_where('listing', ['status' => '0'])->result();
          }
       else : {
@@ -877,7 +878,7 @@ class Listing extends CI_Controller
                   $resultData[$index]['oem'] = $value['E'];
                   $resultData[$index]['reseller'] = $value['F'];
                   $resultData[$index]['user'] = $value['G'];
-                  $resultData[$index]['created_at'] = mdate('%Y-%m-%d %H:%i:%s');
+                  $resultData[$index]['created_at'] = date('Y-m-d H:i:s');
                }
                $index++;
             }
@@ -912,5 +913,83 @@ class Listing extends CI_Controller
       $id_item = $this->input->post('id_item');
       $encrypt = urlencode($this->encrypt->encode($id_item));
       redirect(base_url() . 'listing/listing_price_detail/?price=' . $encrypt);
+   }
+
+   public function po()
+   {
+      $data['title'] = 'PO Customer';
+      $data['po'] = $this->m_data->po()->result();
+      $data['listing'] = $this->m_data->edit_data(['status_po' => NULL], 'listing')->result();
+      $this->load->view('dashboard/v_header', $data);
+      $this->load->view('listing/v_po', $data);
+      $this->load->view('dashboard/v_footer');
+   }
+
+   public function po_add()
+   {
+      $this->form_validation->set_rules('id_hs', 'Id HS', 'trim|required|is_unique[po_customer.id_hs]');
+      $this->form_validation->set_rules('no_po', 'No PO', 'trim|required');
+
+      if ($this->form_validation->run() != false) {
+         $user = $this->input->post('user');
+         $id_hs = $this->input->post('id_hs');
+         $no_po = $this->input->post('no_po');
+         $note = $this->input->post('note');
+
+         $data =
+            [
+               'user' => $user,
+               'id_hs' => $id_hs,
+               'no_po' => $no_po,
+               'note' => $note,
+               'created_at' => date('Y-m-d H:i:s')
+            ];
+
+         $data2 = ['status_po' => '1'];
+
+         $this->m_data->insert_data($data, 'po_customer');
+         $this->m_data->update_data(['id_hs' => $id_hs], $data2, 'listing');
+         $this->session->set_flashdata('berhasil', 'Add successfully PO ' . $no_po . ' !');
+         redirect(base_url() . 'listing/po');
+      } else {
+         $this->session->set_flashdata('gagal', 'Data failed to Add, Please repeat !');
+         redirect(base_url() . 'listing/po');
+      }
+   }
+
+   public function po_edit()
+   {
+      $this->form_validation->set_rules('no_po', 'No PO', 'trim|required');
+
+      if ($this->form_validation->run() != false) {
+         $id = $this->input->post('id', true);
+         $no_po = $this->input->post('no_po');
+         $note = $this->input->post('note');
+
+         $data =
+            [
+               'no_po' => $no_po,
+               'note' => $note,
+               'updated_at' => date('Y-m-d H:i:s')
+            ];
+
+         $this->m_data->update_data(['id' => $id], $data, 'po_customer');
+         $this->session->set_flashdata('berhasil', 'Edit successfully PO ' . $no_po . ' !');
+         redirect(base_url() . 'listing/po');
+      } else {
+         $this->session->set_flashdata('gagal', 'Data failed to Edit, Please repeat !');
+         redirect(base_url() . 'listing/po');
+      }
+   }
+
+   public function po_delete()
+   {
+      $id = $this->input->post('id', true);
+      $no_po = $this->input->post('no_po', true);
+      $id_hs = $this->input->post('id_hs', true);
+      $this->m_data->delete_data(['id' => $id], 'po_customer');
+      $this->m_data->update_data(['id_hs' => $id_hs], ['status_po' => NULL], 'listing');
+      $this->session->set_flashdata('berhasil', 'Delete successfully PO ' . $no_po . ' !');
+      redirect(base_url() . 'listing/po');
    }
 }
