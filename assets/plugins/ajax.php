@@ -240,6 +240,41 @@
   });
 </script>
 <script>
+  var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+  var pieData = {
+    labels: [<?php
+              if (count($data_user) > 0) {
+                foreach ($data_user as $data) {
+                  echo "'" . ucwords($data->user) . "',";
+                }
+              }
+              ?>],
+    datasets: [{
+      data: [<?php
+              if (count($data_user) > 0) {
+                foreach ($data_user as $data) {
+                  echo $data->jmlh . ", ";
+                }
+              }
+              ?>],
+      backgroundColor: <?= $user_color ?>,
+    }]
+  }
+  var pieOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      display: true
+    }
+  }
+  new Chart(pieChartCanvas, {
+    type: 'pie',
+    data: pieData,
+    options: pieOptions,
+
+  })
+</script>
+<script>
   var awal_date;
   var akhir_date;
   var filterdate = (function(oSettings, aData, iDataIndex) {

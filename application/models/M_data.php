@@ -51,7 +51,6 @@ class M_data extends CI_Model
     $this->db->update($table, $data);
   }
 
-  // fungsi untuk menghapus data dari database
   function delete_data($where, $table)
   {
     $this->db->delete($table, $where);
@@ -100,14 +99,7 @@ class M_data extends CI_Model
 
   public function select_by_sales()
   {
-    $sql = "SELECT sales,COUNT(inquiry_id) AS jmlh FROM inquiry GROUP BY sales";
-    $data = $this->db->query($sql);
-    return $data->result();
-  }
-
-  public function select_by_brand()
-  {
-    $sql = "SELECT brand,COUNT(inquiry_id) AS jmlh FROM inquiry GROUP BY brand";
+    $sql = "SELECT `user`,COUNT(id) AS jmlh FROM listing GROUP BY `user`";
     $data = $this->db->query($sql);
     return $data->result();
   }
@@ -208,6 +200,26 @@ class M_data extends CI_Model
     $this->db->from('po_customer p');
     $this->db->join('listing l', 'l.id_hs=p.id_hs', 'inner');
     $this->db->order_by('created_at', 'desc');
+    return $this->db->get();
+  }
+
+  public function quotation($where)
+  {
+    $this->db->select('q.*,l.nama AS item,po.no_po AS no_po');
+    $this->db->from('qoutation q');
+    $this->db->join('list_item l', 'q.id_item=l.id', 'inner');
+    $this->db->join('po_customer po', 'q.id_hs=po.id_hs', 'left');
+    $this->db->where($where);
+    $this->db->order_by('created_at', 'asc');
+    return $this->db->get();
+  }
+
+  public function listing($where)
+  {
+    $this->db->select('l.*,po.no_po AS no_po');
+    $this->db->from('listing l');
+    $this->db->join('po_customer po', 'l.id_hs=po.id_hs', 'left');
+    $this->db->where($where);
     return $this->db->get();
   }
 }

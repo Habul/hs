@@ -37,6 +37,8 @@
 <script src="<?= base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
@@ -92,6 +94,38 @@
 			})
 		};
 	<?php endif; ?>
+
+	$(document).ready(function() {
+		let qty = document.getElementById('qty').value;
+		let price_unit = document.getElementById('price_unit').value;
+		let value = qty * price_unit;
+		let min = value - (value * 0.1);
+		$('#markdown').validate({
+			rules: {
+				price: {
+					required: true,
+					min: min
+				},
+			},
+			messages: {
+				price: {
+					required: "Please provide a price",
+					min: "Max markdown 10%"
+				},
+			},
+			errorElement: 'span',
+			errorPlacement: function(error, element) {
+				error.addClass('invalid-feedback');
+				element.closest('.form-group').append(error);
+			},
+			highlight: function(element, errorClass, validClass) {
+				$(element).addClass('is-invalid');
+			},
+			unhighlight: function(element, errorClass, validClass) {
+				$(element).removeClass('is-invalid');
+			}
+		});
+	});
 </script>
 <script>
 	$(function() {

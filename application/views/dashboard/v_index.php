@@ -3,13 +3,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<?php if (mdate('%H:%i') >= '00:01' && mdate('%H:%i') <= '10:00') : ?>
-						<h1 class="m-0">Good Morning <?= ucwords($this->session->userdata('nama')) ?></h1>
-					<?php elseif (mdate('%H:%i') >= '10:01' && mdate('%H:%i') <= '18:00') : ?>
-						<h1 class="m-0">Good Afternoon <?= ucwords($this->session->userdata('nama')) ?></h1>
-					<?php elseif (mdate('%H:%i') >= '18:01' && mdate('%H:%i') <= '23:59') : ?>
-						<h1 class="m-0">Good Evening <?= ucwords($this->session->userdata('nama')) ?></h1>
-					<?php endif ?>
+					<h1>Dashboard</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -159,6 +153,25 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-6">
+					<div class="card card-danger">
+						<div class="card-header">
+							<h3 class="card-title">Sales Chart</h3>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool" data-card-widget="remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>
 	</section>
 </div>

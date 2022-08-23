@@ -28,25 +28,27 @@
 						</div>
 					</div>
 					<div class='d-flex justify-content-center form_container mt-5'>
-						<form action="<?= base_url() . 'login/proses' ?>" onsubmit="logbtn.disabled = true; return true;" id="loginform" method="post">
-							<div class="input-group mb-3">
-								<div class="input-group-append">
-									<div class="input-group-text">
-										<span class="fas fa-user">&nbsp;</span>
+						<form action="<?= base_url('login/proses') ?>" id="loginform" method="post">
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-append">
+										<div class="input-group-text">
+											<span class="fas fa-user">&nbsp;</span>
+										</div>
 									</div>
+									<input type="text" class="form-control" placeholder="Username" name="username" autofocus>
 								</div>
-								<input type="text" class="form-control" placeholder="Username" id="username" name="username" required="" oninvalid="this.setCustomValidity('Field username belum diisi')" oninput="setCustomValidity('')" autofocus>
 							</div>
-							<?= form_error('username'); ?>
-							<div class="input-group mb-3">
-								<div class="input-group-append">
-									<div class="input-group-text">
-										<span class="fa fa-fw fa-lock"></span>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-append">
+										<div class="input-group-text">
+											<span class="fa fa-fw fa-lock"></span>
+										</div>
 									</div>
+									<input id="password-field" type="password" class="form-control" name="password" placeholder="Password">
 								</div>
-								<input id="password-field" type="password" class="form-control" name="password" placeholder="Password" required="" oninvalid="this.setCustomValidity('Field Password belum diisi')" oninput="setCustomValidity('')">
 							</div>
-							<?= form_error('password'); ?>
 							<div class='form-group'>
 								<div class='custom-control custom-checkbox'>
 									<input type='checkbox' class='custom-control-input' id='customControlInline'>
@@ -54,7 +56,7 @@
 								</div>
 							</div>
 							<div class="col-12 mb-0">
-								<button type="submit" id="logbtn" class="btn btn-danger btn-block">Sign In</button>
+								<button type="submit" class="btn btn-danger btn-block">Sign In</button>
 							</div>
 						</form>
 					</div>
@@ -75,6 +77,10 @@
 			?>
 		</div>
 	</div>
+	<script src="<?= base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+	<script src="<?= base_url(); ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<?= base_url(); ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+	<script src="<?= base_url(); ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 	<script>
 		const password = document.getElementById("password-field");
 		const togglePassword = document.getElementById("customControlInline");
@@ -87,6 +93,38 @@
 				password.type = "password";
 			}
 		}
+
+		$('#loginform').validate({
+			rules: {
+				username: {
+					required: true,
+				},
+				password: {
+					required: true,
+					minlength: 6
+				},
+			},
+			messages: {
+				username: {
+					required: "Please enter a username",
+				},
+				password: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 6 characters long"
+				},
+			},
+			errorElement: 'span',
+			errorPlacement: function(error, element) {
+				error.addClass('invalid-feedback');
+				element.closest('.form-group').append(error);
+			},
+			highlight: function(element, errorClass, validClass) {
+				$(element).addClass('is-invalid');
+			},
+			unhighlight: function(element, errorClass, validClass) {
+				$(element).removeClass('is-invalid');
+			}
+		});
 	</script>
 </body>
 

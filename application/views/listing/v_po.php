@@ -131,9 +131,8 @@
                   </div>
                </div>
             </div>
-            <div class="modal-footer justify-content-between">
-               <button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-               <button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
+            <div class="modal-footer justify-content-center">
+               <button class="btn btn-outline-success col-6" id="addbtn"><i class="fa fa-check"></i> Save</button>
             </div>
          </form>
       </div>
@@ -177,9 +176,8 @@
                      </div>
                   </div>
                </div>
-               <div class="modal-footer justify-content-between">
-                  <button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                  <button class="btn btn-primary" id="editbtn"><i class="fa fa-check"></i> Update</button>
+               <div class="modal-footer justify-content-center">
+                  <button class="btn btn-outline-warning col-6" id="editbtn"><i class="fa fa-check"></i> Update</button>
                </div>
             </form>
          </div>

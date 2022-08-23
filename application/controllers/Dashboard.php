@@ -25,6 +25,22 @@ class Dashboard extends CI_Controller
     $data['listing_submit'] = $this->m_data->db->get_where('listing', ['status' => '2'])->num_rows();
     $data['listing_accept'] = $this->m_data->db->get_where('listing', ['status' => '3'])->num_rows();
     $data['history_log'] = $this->m_data->get_index('history_log', 'date')->result();
+
+    $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+
+    $user = $this->m_data->select_by_sales();
+    $index = 0;
+    foreach ($user as $value) {
+      $color = '#' . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)] . $rand[rand(0, 15)];
+
+      $user_color[$index] = $color;
+      $data_user[$index] = $value->user;
+
+      $index++;
+    }
+
+    $data['data_user'] = $this->m_data->select_by_sales();
+    $data['user_color'] = json_encode($user_color);
     $this->load->view('dashboard/v_header', $data);
     $this->load->view('dashboard/v_index', $data);
     $this->load->view('dashboard/v_footer', $data);

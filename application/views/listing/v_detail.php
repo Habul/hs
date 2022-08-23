@@ -55,6 +55,7 @@
 							</li>
 							<li>Company : <?= $list->company; ?></li>
 							<li>Notes&emsp;&emsp;: <?= $list->notes; ?></li>
+							<li>No PO : <?= $list->no_po ?></li>
 					</div>
 				</div>
 			</div>
@@ -100,8 +101,7 @@
 											</thead>
 											<?php
 											$no = 1;
-											$query =	$this->db->query("SELECT q.*,l.nama AS item FROM qoutation q INNER JOIN list_item l ON q.id_item=l.id WHERE q.id_listing='$list->id' order by created_at ASC");
-											foreach ($query->result() as $p) {
+											foreach ($qoutation as $p) {
 												$sum_total[] = $p->price;
 												$total_qty = array_sum($sum_total); ?>
 												<tr>
@@ -208,7 +208,7 @@
 													<input type="hidden" name="id" value="<?= $list->id ?>">
 													<input type="hidden" name="status" value="1">
 													<input type="hidden" name="ket" value="Revoke">
-													<button class="btn btn-warning col-15 shadow" type="submit">
+													<button class="btn btn-warning col-15 shadow" <?= $list->status_po != NULL || '' ? 'disabled' : '' ?> type="submit">
 														<i class="fas fa-lock-open"></i>&nbsp;Revoke Acceptance</button>
 												</form>
 											<?php } ?>
@@ -404,9 +404,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
+				<div class="modal-footer justify-content-center">
+					<button class="btn btn-outline-success col-6" id="addbtn"><i class="fa fa-check"></i> Save</button>
 				</div>
 			</form>
 		</div>
@@ -425,7 +424,7 @@
 					</button>
 				</h5>
 			</div>
-			<form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/add_assembly') ?>">
+			<form onsubmit="assbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/add_assembly') ?>">
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -436,16 +435,15 @@
 						<?php endforeach ?>
 						<input type="text" name="name" class="form-control" value="<?= 'ASSM', date('md-'), $id_assm->id + 1 ?>" readonly>
 					</div>
-					<div class="input-group mb-3">
+					<div class="input-group mb-0">
 						<div class="input-group-prepend">
 							<label class="input-group-text pr-4">Desc &nbsp;&nbsp;</label>
 						</div>
 						<textarea name="desc" class="form-control" placeholder="..." required></textarea>
 					</div>
 				</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-					<button class="btn btn-primary" id="addbtn"><i class="fa fa-check"></i> Save</button>
+				<div class="modal-footer justify-content-center">
+					<button class="btn btn-outline-secondary col-6" id="assbtn"><i class="fa fa-check"></i> Save</button>
 				</div>
 			</form>
 		</div>
@@ -465,7 +463,7 @@
 						</button>
 					</h4>
 				</div>
-				<form onsubmit="editbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/qoutation_update') ?>">
+				<form id="markdown" method="post" action="<?= base_url('listing/qoutation_update') ?>">
 					<div class="modal-body">
 						<?php if ($u->id_assembly != 0) : ?>
 							<span class="badge badge-secondary"> Assembly</span>
@@ -500,20 +498,21 @@
 						<small class="badge badge-warning" title="Posisi Fitting"><?= strtoupper($u->posisi) ?></small>
 						<small class="badge badge-warning" title="Size"><?= strtoupper($u->size) ?></small>
 						<small class="badge badge-warning" title="Qty"><?= strtoupper($u->qty) ?></small>
-						<div class="input-group mt-1 mb-0">
-							<div class="input-group-prepend">
-								<label class="input-group-text pr-5">Price</label>
+						<div class="form-group mb-0 mt-1">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<label class="input-group-text pr-5">Price</label>
+								</div>
+								<input type="hidden" id="qty" value="<?= $u->qty ?>">
+								<input type="hidden" id="price_unit" value="<?= $u->price_unit; ?>">
+								<input type="hidden" name="id" class="form-control" value="<?= $u->id; ?>">
+								<input type="hidden" name="id_listing" value="<?= $u->id_listing; ?>">
+								<input type="number" name="price" class="form-control" value="<?= $u->price ?>">
 							</div>
-							<input type="hidden" name="id" class="form-control" value="<?= $u->id; ?>">
-							<input type="hidden" name="id_listing" value="<?= $u->id_listing; ?>">
-							<input type="hidden" name="price_unit" value="<?= $u->price_unit; ?>">
-							<input type="number" name="price" class="form-control" id="price" min="1" value="<?= $u->price ?>" required>
 						</div>
-						<small><i>Max markdown 10%</i></small>
 					</div>
-					<div class="modal-footer justify-content-between">
-						<button class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-						<button class="btn btn-primary" id="editbtn"><i class="fa fa-check"></i> Update</button>
+					<div class="modal-footer justify-content-center">
+						<button class="btn btn-outline-warning col-6"><i class="fa fa-check"></i> Update</button>
 					</div>
 				</form>
 			</div>

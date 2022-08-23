@@ -173,7 +173,7 @@ class Listing extends CI_Controller
 
       $data['title'] = 'Create New List';
       $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
-      $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
+      $data['qoutation'] = $this->m_data->quotation($where2)->result();
       $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
       $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
       $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
@@ -196,8 +196,9 @@ class Listing extends CI_Controller
       );
 
       $data['title'] = 'Create New List';
-      $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
-      $data['qoutation'] = $this->m_data->edit_data($where2, 'qoutation')->result();
+      // $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
+      $data['listing'] = $this->m_data->listing($where)->result();
+      $data['qoutation'] = $this->m_data->quotation($where2)->result();
       $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
       $data['id_assm'] = $this->db->select_max('id')->get('assembly')->row();
       $data['id_qoutation'] = $this->db->select_max('id')->get('qoutation')->row();
@@ -215,13 +216,12 @@ class Listing extends CI_Controller
          $id_listing = $this->input->post('id_listing');
          $name = $this->input->post('name');
          $desc = $this->input->post('desc');
-         $created_at = mdate('%Y-%m-%d %H:%i:%s');
 
          $data = array(
             'name' => $name,
             'desc' => $desc,
             'id_listing' => $id_listing,
-            'created_at' => $created_at,
+            'created_at' => date('Y-m-d H:i:s')
          );
 
          $this->m_data->insert_data($data, 'assembly');
@@ -498,11 +498,9 @@ class Listing extends CI_Controller
       if ($pricee >= $update10) {
          $id = $this->input->post('id');
          $price = $this->input->post('price');
-         $price_unit = $this->input->post('price_unit');
          $updated_at = mdate('%Y-%m-%d %H:%i:%s');
          $data = array(
             'price' => $price,
-            'price_unit' => $price_unit,
             'updated_at' => $updated_at
          );
 
@@ -554,6 +552,7 @@ class Listing extends CI_Controller
       $this->session->set_flashdata('berhasil', 'Listing has been ' . $keter . ' !');
       redirect(base_url() . 'listing/listing');
    }
+
 
    public function qoutation_remove()
    {
@@ -919,7 +918,7 @@ class Listing extends CI_Controller
    {
       $data['title'] = 'PO Customer';
       $data['po'] = $this->m_data->po()->result();
-      $data['listing'] = $this->m_data->edit_data(['status_po' => NULL], 'listing')->result();
+      $data['listing'] = $this->m_data->multiple_edit(['status_po' => NULL], ['status' => '3'], 'listing')->result();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_po', $data);
       $this->load->view('dashboard/v_footer');
