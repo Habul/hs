@@ -50,7 +50,7 @@ class Listing extends CI_Controller
          $from = 0;
       }
       $this->pagination->initialize($config);
-      $data['listings'] = $this->db->query("SELECT * FROM listing ORDER BY created_at DESC LIMIT $config[per_page] OFFSET $from")->result();
+      $data['listings'] = $this->db->query("SELECT l.*,p.pengguna_nama FROM listing l INNER JOIN pengguna p ON l.user=p.pengguna_id ORDER BY created_at DESC LIMIT $config[per_page] OFFSET $from")->result();
       $data['id_add'] = $this->db->select_max('id')->get('listing')->row();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_index', $data);
@@ -107,7 +107,7 @@ class Listing extends CI_Controller
          $company = $this->input->post('company');
          $notes = $this->input->post('notes');
          $created_at = mdate('%Y-%m-%d %H:%i:%s');
-         $user = $this->session->userdata('username');
+         $user = $this->session->userdata('id');
 
          $data = array(
             'id' => $id,
@@ -164,7 +164,7 @@ class Listing extends CI_Controller
       $id = urldecode($this->encrypt->decode($_GET['list']));
 
       $where = array(
-         'id' => $id
+         'l.id' => $id
       );
 
       $where2 = array(
@@ -188,7 +188,7 @@ class Listing extends CI_Controller
       $id = urldecode($this->encrypt->decode($_GET['list']));
 
       $where = array(
-         'id' => $id
+         'l.id' => $id
       );
 
       $where2 = array(
@@ -196,7 +196,6 @@ class Listing extends CI_Controller
       );
 
       $data['title'] = 'Create New List';
-      // $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
       $data['listing'] = $this->m_data->listing($where)->result();
       $data['qoutation'] = $this->m_data->quotation($where2)->result();
       $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
@@ -930,7 +929,7 @@ class Listing extends CI_Controller
       $this->form_validation->set_rules('no_po', 'No PO', 'trim|required');
 
       if ($this->form_validation->run() != false) {
-         $user = $this->input->post('user');
+         $user = $this->session->userdata('id');
          $id_hs = $this->input->post('id_hs');
          $no_po = $this->input->post('no_po');
          $note = $this->input->post('note');
@@ -990,5 +989,23 @@ class Listing extends CI_Controller
       $this->m_data->update_data(['id_hs' => $id_hs], ['status_po' => NULL], 'listing');
       $this->session->set_flashdata('berhasil', 'Delete successfully PO ' . $no_po . ' !');
       redirect(base_url() . 'listing/po');
+   }
+
+   public function summary()
+   {
+      $data['title'] = 'Summary Report';
+      // $data['users'] = $this->m_data->edit_data(['pengguna_level' => 'sales'], 'pengguna')->result();
+      $data['users'] = $this->m_data->get_data('pengguna')->result();
+      $this->load->view('dashboard/v_header', $data);
+      $this->load->view('listing/v_summary', $data);
+      $this->load->view('dashboard/v_footer', $data);
+   }
+
+   public function summary_print()
+   {
+      $data['title'] = 'Summary Report Print';
+      $this->load->view('dashboard/v_header', $data);
+      $this->load->view('listing/v_summary_print', $data);
+      $this->load->view('dashboard/v_footer', $data);
    }
 }

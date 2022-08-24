@@ -38,7 +38,7 @@
 				<div class="col-md-12">
 					<div class="callout callout-info">
 						<?php foreach ($listing as $list) : ?>
-							<li>ID &emsp;&emsp;&emsp;: <b><?= $list->id_hs; ?></b>
+							<li>ID &emsp;&emsp;&emsp;&emsp;: <b><?= $list->id_hs; ?></b>
 								<?php if ($list->status == 1) : ?>
 									<span class="badge badge-warning">NOTICE</span>
 								<?php elseif ($list->status == 2) : ?>
@@ -53,8 +53,11 @@
 										<i class="fa fa-pencil-alt"></i></a>
 								<?php endif ?>
 							</li>
-							<li>Company : <?= $list->company; ?></li>
-							<li>Notes&emsp;&emsp;: <?= $list->notes; ?></li>
+							<li>Company&emsp;: <?= $list->company; ?></li>
+							<li>Notes&emsp;&emsp;&nbsp;&nbsp;&nbsp;: <?= $list->notes; ?></li>
+							<?php if ($list->no_po != NULL) : ?>
+								<li>No PO&emsp;&emsp;&nbsp;&nbsp;: <?= $list->no_po ?></li>
+							<?php endif; ?>
 					</div>
 				</div>
 			</div>

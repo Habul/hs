@@ -95,6 +95,40 @@
 		};
 	<?php endif; ?>
 
+	$(function() {
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 6000
+		});
+
+		<?php if ($this->session->flashdata('ok')) { ?>
+			Toast.fire({
+				icon: 'success',
+				title: '<?= ucwords($this->session->flashdata('ok')) ?>'
+			})
+		<?php } else if ($this->session->flashdata('nok')) { ?>
+			Toast.fire({
+				icon: 'error',
+				title: '<?= ucwords($this->session->flashdata('nok')) ?>'
+			})
+		<?php } else if ($this->session->flashdata('repeat')) { ?>
+			Toast.fire({
+				icon: 'warning',
+				title: '<?= ucwords($this->session->flashdata('repeat')) ?>'
+			})
+		<?php } ?>
+	});
+
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if (activeTab) {
+		$('#myTab a[href="' + activeTab + '"]').tab('show');
+	}
+
 	$(document).ready(function() {
 		let qty = document.getElementById('qty').value;
 		let price_unit = document.getElementById('price_unit').value;
@@ -125,6 +159,48 @@
 				$(element).removeClass('is-invalid');
 			}
 		});
+	});
+
+	$('#change_pass').validate({
+		rules: {
+			password_lama: {
+				required: true,
+				minlength: 6
+			},
+			password_baru: {
+				required: true,
+				minlength: 6
+			},
+			konfirmasi_password: {
+				required: true,
+				minlength: 6
+			},
+		},
+		messages: {
+			password_lama: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 6 characters long"
+			},
+			password_baru: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 6 characters long"
+			},
+			konfirmasi_password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 6 characters long"
+			},
+		},
+		errorElement: 'span',
+		errorPlacement: function(error, element) {
+			error.addClass('invalid-feedback');
+			element.closest('.form-group').append(error);
+		},
+		highlight: function(element, errorClass, validClass) {
+			$(element).addClass('is-invalid');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).removeClass('is-invalid');
+		}
 	});
 </script>
 <script>

@@ -8,7 +8,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
+						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
 						<li class="breadcrumb-item active">Profile</li>
 					</ol>
 				</div>
@@ -61,12 +61,12 @@
 					?>
 					<div class="card card-success card-outline card-outline-tabs">
 						<div class="card-header p-0 border-bottom-0">
-							<ul class="nav nav-tabs" role="tablist">
+							<ul class="nav nav-tabs" role="tablist" id="myTab">
 								<li class="nav-item">
-									<a class="nav-link active" id="set_user" data-toggle="pill" href="#profile-settiing" role="tab" aria-controls="profile-settiing" aria-selected="true">Profile</a>
+									<a class="nav-link active" id="set_user" data-toggle="tab" href="#profile-settiing" role="tab" aria-controls="profile-settiing" aria-selected="true">Profile</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="set_pass" data-toggle="pill" href="#pass-setting" role="tab" aria-controls="pass-setting" aria-selected="false">Password</a>
+									<a class="nav-link" id="set_pass" data-toggle="tab" href="#pass-setting" role="tab" aria-controls="pass-setting" aria-selected="false">Password</a>
 								</li>
 							</ul>
 						</div>
@@ -75,19 +75,19 @@
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="profile-settiing" role="tabpanel" aria-labelledby="profile-settiing-tab">
 									<?php foreach ($profil as $p) { ?>
-										<form class="form-horizontal" onsubmit="profil.disabled = true; return true;" method="post" action="<?php echo base_url('dashboard/profil_update') ?>" enctype="multipart/form-data">
+										<form onsubmit="profil.disabled = true; return true;" method="post" action="<?= base_url('dashboard/profil_update') ?>" enctype="multipart/form-data">
 											<div class="form-group row">
 												<label for="inputName" class="col-sm-2 col-form-label">Nama *</label>
 												<div class="col-sm-10">
-													<input type="text" name="nama" id="inputName" class="form-control" placeholder="Masukkan nama .." value="<?php echo $p->pengguna_nama; ?>" required>
-													<?php echo form_error('nama'); ?>
+													<input type="text" name="nama" id="inputName" class="form-control" placeholder="Masukkan nama .." value="<?= $p->pengguna_nama; ?>" required>
+													<?= form_error('nama'); ?>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="inputEmail" class="col-sm-2 col-form-label">Email *</label>
 												<div class="col-sm-10">
-													<input type="text" name="email" id="inputEmail" class="form-control" placeholder="Masukkan email .." value="<?php echo $p->pengguna_email; ?>" required>
-													<?php echo form_error('email'); ?>
+													<input type="text" name="email" id="inputEmail" class="form-control" placeholder="Masukkan email .." value="<?= $p->pengguna_email; ?>" required>
+													<?= form_error('email'); ?>
 												</div>
 											</div>
 											<div class="form-group row">
@@ -98,44 +98,57 @@
 														<label class="custom-file-label" for="image">Choose file</label>
 													</div>
 													<img class="img-priview img-fluid col-sm-5 mt-3">
-													<?php echo form_error('foto'); ?>
+													<?= form_error('foto'); ?>
 												</div>
 											</div>
-											<div class="form-group text-center">
-												<div class="offset-sm-2 col-sm-10">
-													<input type="submit" class="btn btn-info col-3" id="profil" value="Update">
-												</div>
+											<div class="text-center mb-3">
+												<button type="submit" class="btn btn-outline-success col-3"><i class="fa fa-check"></i> Update</button>
 											</div>
 										</form>
 									<?php } ?>
 								</div>
 								<div class="tab-pane fade" id="pass-setting" role="tabpanel" aria-labelledby="pass-setting-tab">
-									<form method="post" onsubmit="pass.disabled = true; return true;" action="<?php echo base_url('dashboard/ganti_password_aksi') ?>">
-										<div class="form-group">
-											<label>Old Password *</label>
-											<input type="password" name="password_lama" class="form-control" placeholder="Masukkan Password Lama Anda .." required>
-											<?php echo form_error('password_lama'); ?>
+									<form method="post" action="<?= base_url('dashboard/ganti_password_aksi') ?>" id="change_pass">
+										<div class="card-body">
+											<div class="form-group">
+												<label>Old Password *</label>
+												<div class="input-group">
+													<input type="password" name="password_lama" class="form-control" placeholder="Masukkan Password Lama Anda ..">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i class="fas fa-eye"></i></span>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="form-group">
+												<label>New Password *</label>
+												<div class="input-group">
+													<input type="password" name="password_baru" class="form-control" placeholder="Masukkan Password Baru ..">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i class="fas fa-eye"></i></span>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label>Confirm New Password *</label>
+												<div class="input-group">
+													<input type="password" name="konfirmasi_password" class="form-control" placeholder="Ulangi Password Baru ..">
+													<div class="input-group-prepend">
+														<span class="input-group-text"><i class="fas fa-eye"></i></span>
+													</div>
+												</div>
+											</div>
 										</div>
-										<hr>
-										<div class="form-group">
-											<label>New Password *</label>
-											<input type="password" name="password_baru" class="form-control" placeholder="Masukkan Password Baru .." required>
-											<?php echo form_error('password_baru'); ?>
-										</div>
-										<div class="form-group">
-											<label>Confirm New Password *</label>
-											<input type="password" name="konfirmasi_password" class="form-control" placeholder="Ulangi Password Baru .." required>
-											<?php echo form_error('konfirmasi_password'); ?>
-										</div>
-										<div class="form-group text-center">
-											<input type="submit" class="btn btn-primary col-3" id="pass" value="Update">
-										</div>
-									</form>
 								</div>
+								<div class="text-center mb-3">
+									<button type="submit" class="btn btn-outline-success col-3"><i class="fa fa-check"></i> Update</button>
+								</div>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
 	</section>
 </div>
 <script>

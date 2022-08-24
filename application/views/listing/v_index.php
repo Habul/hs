@@ -59,7 +59,7 @@
 															<?php echo strtoupper($list->company) ?>
 														</span><br />
 														<span class="float-left list-inline-item"><i class='fas fa-user'></i>&nbsp;&nbsp;
-															<?php echo ucwords($list->user) ?>
+															<?php echo ucwords($list->pengguna_nama) ?>
 														</span>
 														<span class="float-right list-inline-item"><?php echo $list->created_at ?></span>
 													</div>

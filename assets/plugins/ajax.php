@@ -245,7 +245,7 @@
     labels: [<?php
               if (count($data_user) > 0) {
                 foreach ($data_user as $data) {
-                  echo "'" . ucwords($data->user) . "',";
+                  echo "'" . ucwords($data->pengguna_nama) . "',";
                 }
               }
               ?>],

@@ -87,8 +87,9 @@ class M_data extends CI_Model
 
   public function search_listing($keyword)
   {
-    $this->db->select('*');
-    $this->db->from('listing');
+    $this->db->select('l.*,p.pengguna_nama');
+    $this->db->from('listing l');
+    $this->db->join('pengguna p', 'l.user=p.pengguna_id', 'inner');
     $this->db->order_by('created_at', 'DESC');
     if (!empty($keyword)) {
       $this->db->like('id_hs', $keyword);
@@ -99,23 +100,7 @@ class M_data extends CI_Model
 
   public function select_by_sales()
   {
-    $sql = "SELECT `user`,COUNT(id) AS jmlh FROM listing GROUP BY `user`";
-    $data = $this->db->query($sql);
-    return $data->result();
-  }
-
-  public function suratjalan($table)
-  {
-    $sql = "SELECT COUNT(*) as total FROM $table WHERE EXTRACT(YEAR FROM date_delivery) = date('Y');
-		GROUP BY EXTRACT(MONTH FROM date_delivery) ORDER BY EXTRACT(MONTH FROM date_delivery)";
-    $data = $this->db->query($sql);
-    return $data->result();
-  }
-
-  public function bartracking($type)
-  {
-    $sql = "SELECT COUNT(*) AS total FROM driver WHERE join_id IN (SELECT no_id FROM type_vehicles WHERE TYPE='$type') AND
-		EXTRACT(YEAR FROM tanggal) = date('Y') GROUP BY EXTRACT(MONTH FROM tanggal) ORDER BY EXTRACT(MONTH FROM tanggal)";
+    $sql = "SELECT p.pengguna_nama,l.user,COUNT(l.id) AS jmlh FROM listing l INNER JOIN pengguna p ON l.user=p.pengguna_id GROUP BY `user`";
     $data = $this->db->query($sql);
     return $data->result();
   }
@@ -196,27 +181,26 @@ class M_data extends CI_Model
 
   public function po()
   {
-    $this->db->select('p.*,l.company');
+    $this->db->select('p.*,l.company,pe.pengguna_nama');
     $this->db->from('po_customer p');
     $this->db->join('listing l', 'l.id_hs=p.id_hs', 'inner');
+    $this->db->join('pengguna pe', 'p.user=pe.pengguna_id', 'inner');
     $this->db->order_by('created_at', 'desc');
     return $this->db->get();
   }
 
   public function quotation($where)
   {
-    $this->db->select('q.*,l.nama AS item,po.no_po AS no_po');
+    $this->db->select('q.*,l.nama AS item');
     $this->db->from('qoutation q');
     $this->db->join('list_item l', 'q.id_item=l.id', 'inner');
-    $this->db->join('po_customer po', 'q.id_hs=po.id_hs', 'left');
     $this->db->where($where);
-    $this->db->order_by('created_at', 'asc');
     return $this->db->get();
   }
 
   public function listing($where)
   {
-    $this->db->select('l.*,po.no_po AS no_po');
+    $this->db->select('l.*,po.no_po');
     $this->db->from('listing l');
     $this->db->join('po_customer po', 'l.id_hs=po.id_hs', 'left');
     $this->db->where($where);

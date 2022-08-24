@@ -64,7 +64,7 @@
                         <?php foreach ($po as $p) {    ?>
                            <tr>
                               <td class="align-middle text-center"></td>
-                              <td class="align-middle text-center"><?= ucwords($p->user) ?></td>
+                              <td class="align-middle text-center"><?= ucwords($p->pengguna_nama) ?></td>
                               <td class="align-middle text-center"><?= strtoupper($p->no_po) ?></td>
                               <td class="align-middle text-center"><?= strtoupper($p->id_hs) ?></td>
                               <td class="align-middle"><?= ucwords($p->company) ?></td>
@@ -99,12 +99,6 @@
          </div>
          <form onsubmit="addbtn.disabled = true; return true;" method="post" action="<?= base_url('listing/po_add') ?>">
             <div class="modal-body">
-               <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                     <label class="input-group-text pr-4">Name&nbsp;</label>
-                  </div>
-                  <input type="text" name="user" class="form-control" value="<?= ucwords($this->session->userdata('nama')) ?>" readonly>
-               </div>
                <div class="input-group mb-3">
                   <div class="input-group-prepend">
                      <label class="input-group-text pr-4">No PO</label>

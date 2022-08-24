@@ -7,7 +7,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
+						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
 						<li class="breadcrumb-item active">Listing Quotation</li>
 					</ol>
 				</div>
@@ -30,13 +30,13 @@
 			<?php } ?>
 			<div class="card card-solid">
 				<div class="card-header d-flex justify-content-end">
-					<?php echo form_open('listing/search') ?>
+					<?= form_open('listing/search') ?>
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search.." name="keyword" value="<?= $words ?>">
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary" type="submit">Search</button>
 						</div>
-						<?php echo form_close() ?>
+						<?= form_close() ?>
 					</div>
 				</div>
 				<div class="card-body pb-0">
@@ -44,19 +44,19 @@
 						<?php foreach ($listing as $list) { ?>
 							<div class="col">
 								<?php $encrypturl = urlencode($this->encrypt->encode($list->id)) ?>
-								<a href="<?php echo base_url() . 'listing/list_update/?list=' . $encrypturl; ?>" class="text-muted">
+								<a href="<?= base_url() . 'listing/list_update/?list=' . $encrypturl; ?>" class="text-muted">
 									<?php if ($list->status == 1) : ?> <div class="card bg-warning shadow">
 										<?php elseif ($list->status == 2) : ?> <div class="card bg-info shadow">
 											<?php elseif ($list->status == 3) : ?> <div class="card bg-success shadow">
 												<?php else : ?> <div class="card bg-default shadow">
 													<?php endif; ?>
 													<div class="card-body">
-														<span class="float-left list-inline-item"><?php echo $list->id_hs ?></span>
-														<span class="float-right list-inline-item"><?php echo strtoupper($list->company) ?></span><br />
+														<span class="float-left list-inline-item"><?= $list->id_hs ?></span>
+														<span class="float-right list-inline-item"><?= strtoupper($list->company) ?></span><br />
 														<span class="float-left list-inline-item">
-															<i class='fas fa-user'></i>&nbsp;&nbsp;<?php echo ucwords($list->user) ?>
+															<i class='fas fa-user'></i>&nbsp;&nbsp;<?= ucwords($list->pengguna_nama) ?>
 														</span>
-														<span class="float-right list-inline-item"><?php echo $list->created_at ?></span>
+														<span class="float-right list-inline-item"><?= $list->created_at ?></span>
 													</div>
 													</div>
 								</a>
