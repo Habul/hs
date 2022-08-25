@@ -84,6 +84,33 @@
 				input.attr("type", "password");
 			}
 		});
+		$(".toggle-password0").click(function() {
+			$(this).toggleClass("fa-eye fa-eye-slash");
+			var input = $($(this).attr("toggle"));
+			if (input.attr("type") == "password") {
+				input.attr("type", "text");
+			} else {
+				input.attr("type", "password");
+			}
+		});
+		$(".toggle-password1").click(function() {
+			$(this).toggleClass("fa-eye fa-eye-slash");
+			var input = $($(this).attr("toggle"));
+			if (input.attr("type") == "password") {
+				input.attr("type", "text");
+			} else {
+				input.attr("type", "password");
+			}
+		});
+		$(".toggle-password2").click(function() {
+			$(this).toggleClass("fa-eye fa-eye-slash");
+			var input = $($(this).attr("toggle"));
+			if (input.attr("type") == "password") {
+				input.attr("type", "text");
+			} else {
+				input.attr("type", "password");
+			}
+		});
 	});
 
 	<?php if ($this->session->flashdata('loginok')) : ?> {
@@ -173,7 +200,7 @@
 			},
 			konfirmasi_password: {
 				required: true,
-				minlength: 6
+				equalTo: '#password_field1'
 			},
 		},
 		messages: {
@@ -187,7 +214,7 @@
 			},
 			konfirmasi_password: {
 				required: "Please provide a password",
-				minlength: "Your password must be at least 6 characters long"
+				equalTo: "Please enter the same value again"
 			},
 		},
 		errorElement: 'span',
@@ -200,6 +227,7 @@
 		},
 		unhighlight: function(element, errorClass, validClass) {
 			$(element).removeClass('is-invalid');
+			$(element).addClass('is-valid');
 		}
 	});
 </script>

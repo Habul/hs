@@ -113,9 +113,9 @@
 											<div class="form-group">
 												<label>Old Password *</label>
 												<div class="input-group">
-													<input type="password" name="password_lama" class="form-control" placeholder="Masukkan Password Lama Anda ..">
-													<div class="input-group-prepend">
-														<span class="input-group-text"><i class="fas fa-eye"></i></span>
+													<input type="password" name="password_lama" class="form-control" placeholder="Masukkan Password Lama Anda .." id="password_field0">
+													<div class="input-group-append">
+														<span class="input-group-text"><i toggle="#password_field0" class="fas fa-fw fa-eye field-icon toggle-password0"></i></span>
 													</div>
 												</div>
 											</div>
@@ -123,32 +123,31 @@
 											<div class="form-group">
 												<label>New Password *</label>
 												<div class="input-group">
-													<input type="password" name="password_baru" class="form-control" placeholder="Masukkan Password Baru ..">
-													<div class="input-group-prepend">
-														<span class="input-group-text"><i class="fas fa-eye"></i></span>
+													<input type="password" name="password_baru" class="form-control" placeholder="Masukkan Password Baru .." id="password_field1">
+													<div class="input-group-append">
+														<span class="input-group-text"><i toggle="#password_field1" class="fas fa-fw fa-eye field-icon toggle-password1"></i></span>
 													</div>
 												</div>
 											</div>
 											<div class="form-group">
 												<label>Confirm New Password *</label>
 												<div class="input-group">
-													<input type="password" name="konfirmasi_password" class="form-control" placeholder="Ulangi Password Baru ..">
-													<div class="input-group-prepend">
-														<span class="input-group-text"><i class="fas fa-eye"></i></span>
+													<input type="password" name="konfirmasi_password" class="form-control" placeholder="Ulangi Password Baru .." id="password_field2">
+													<div class="input-group-append">
+														<span class="input-group-text"><i toggle="#password_field2" class="fas fa-fw fa-eye field-icon toggle-password2"></i></span>
 													</div>
 												</div>
 											</div>
 										</div>
+										<div class="text-center mb-3">
+											<button type="submit" class="btn btn-outline-success col-3"><i class="fa fa-check"></i> Update</button>
+										</div>
+									</form>
 								</div>
-								<div class="text-center mb-3">
-									<button type="submit" class="btn btn-outline-success col-3"><i class="fa fa-check"></i> Update</button>
-								</div>
-								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 	</section>
 </div>
 <script>

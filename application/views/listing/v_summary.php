@@ -47,6 +47,50 @@
                </div>
             </div>
          </div>
+
+         <div class="row">
+            <div class="col-md-12">
+               <div class="card card-success card-outline">
+                  <div class="card-header">
+                     <h4 class="card-title"><i class="fas fa-search"></i> Priview Summary Report
+                     </h4>
+                     <div class="card-tools">
+                        <button type="button" class="btn btn-xs btn-icon btn-circle" data-card-widget="collapse">
+                           <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-xs btn-icon btn-circle" data-card-widget="maximize">
+                           <i class="fas fa-expand"></i>
+                        </button>
+                        <button type="button" class="btn btn-xs btn-icon btn-circle" data-card-widget="remove">
+                           <i class="fas fa-times"></i>
+                        </button>
+                     </div>
+                  </div>
+                  <div class="card-body">
+                     <table id="index1" class="table table-striped table-sm">
+                        <thead class="thead-dark text-center">
+                           <tr>
+                              <th width="5%">No</th>
+                              <th>User</th>
+                              <th>No Po</th>
+                              <th>Id Hs</th>
+                              <th>Company</th>
+                              <th>Notes</th>
+                           </tr>
+                        </thead>
+                        <tr>
+                           <td class="align-middle text-center"></td>
+                           <td class="align-middle text-center"></td>
+                           <td class="align-middle text-center"></td>
+                           <td class="align-middle text-center"></td>
+                           <td class="align-middle"></td>
+                           <td class="align-middle"></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
    </section>
 </div>
