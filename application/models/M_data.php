@@ -1,4 +1,7 @@
 <?php
+
+use Svg\Tag\Group;
+
 class M_data extends CI_Model
 {
 
@@ -204,6 +207,35 @@ class M_data extends CI_Model
     $this->db->from('listing l');
     $this->db->join('po_customer po', 'l.id_hs=po.id_hs', 'left');
     $this->db->where($where);
+    return $this->db->get();
+  }
+
+  public function summary($where)
+  {
+    $this->db->select('l.id,l.id_hs,l.company,l.notes,l.created_at,q.part_code,q.brand,q.model,q.od,q.size,q.type,q.category,q.hole,
+    q.i_d,q.plat,q.thread,q.posisi,q.type_price,q.qty,q.price_unit,q.price,p.pengguna_nama,po.no_po,item.nama AS item,a.name AS assembly');
+    $this->db->from('listing l');
+    $this->db->join('qoutation q', 'l.id_hs=q.id_hs', 'inner');
+    $this->db->join('po_customer po', 'l.id_hs=po.id_hs', 'left');
+    $this->db->join('pengguna p', 'l.user=p.pengguna_id', 'inner');
+    $this->db->join('list_item item', 'q.id_item=item.id', 'inner');
+    $this->db->join('assembly a ', 'l.id=a.id_listing', 'left');
+    $this->db->where($where);
+    $this->db->group_by('l.id_hs', 'asc');
+    return $this->db->get();
+  }
+
+  public function summary_all()
+  {
+    $this->db->select('l.id,l.id_hs,l.company,l.notes,l.created_at,q.part_code,q.brand,q.model,q.od,q.size,q.type,q.category,q.hole,
+    q.i_d,q.plat,q.thread,q.posisi,q.type_price,q.qty,q.price_unit,q.price,p.pengguna_nama,po.no_po,item.nama AS item,a.name AS assembly');
+    $this->db->from('listing l');
+    $this->db->join('qoutation q', 'l.id_hs=q.id_hs', 'inner');
+    $this->db->join('po_customer po', 'l.id_hs=po.id_hs', 'left');
+    $this->db->join('pengguna p', 'l.user=p.pengguna_id', 'inner');
+    $this->db->join('list_item item', 'q.id_item=item.id', 'inner');
+    $this->db->join('assembly a ', 'l.id=a.id_listing', 'left');
+    $this->db->group_by('l.id_hs', 'asc');
     return $this->db->get();
   }
 }

@@ -139,6 +139,7 @@
 									$this->uri->segment(2) == 'listing_price_detail' ||
 									$this->uri->segment(2) == 'po' ||
 									$this->uri->segment(2) == 'summary' ||
+									$this->uri->segment(2) == 'summarys' ||
 									$this->uri->uri_string() == '' ? 'class="nav-item menu-open"' : 'class="nav-item"' ?>>
 							<a href="#" <?= $this->uri->segment(2) == 'listing' ||
 												$this->uri->segment(2) == 'list_update' ||
@@ -152,6 +153,7 @@
 												$this->uri->segment(2) == 'listing_price_detail' ||
 												$this->uri->segment(2) == 'po' ||
 												$this->uri->segment(2) == 'summary' ||
+												$this->uri->segment(2) == 'summarys' ||
 												$this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 								<i class="nav-icon fas fa-briefcase"></i>
 								<?php $total = $this->db->where('status!=', '3')->get('listing')->num_rows(); ?>
@@ -201,7 +203,7 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() . 'listing/summary' ?>" <?= $this->uri->segment(2) == 'summary' ||
+									<a href="<?= base_url() . 'listing/summary' ?>" <?= $this->uri->segment(2) == 'summary' || $this->uri->segment(2) == 'summarys' ||
 																										$this->uri->uri_string() == '' ? 'class="nav-link active"' : 'class="nav-link"' ?>>
 										<i class="fas fa-book-open nav-icon"></i>
 										<p>Summary Report</p>

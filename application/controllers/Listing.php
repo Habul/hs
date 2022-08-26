@@ -171,7 +171,7 @@ class Listing extends CI_Controller
          'id_listing' => $id
       );
 
-      $data['title'] = 'Create New List';
+      $data['title'] = 'New Listing';
       $data['listing'] = $this->m_data->edit_data($where, 'listing')->result();
       $data['qoutation'] = $this->m_data->quotation($where2)->result();
       $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
@@ -195,7 +195,7 @@ class Listing extends CI_Controller
          'id_listing' => $id
       );
 
-      $data['title'] = 'Create New List';
+      $data['title'] = 'Listing item';
       $data['listing'] = $this->m_data->listing($where)->result();
       $data['qoutation'] = $this->m_data->quotation($where2)->result();
       $data['assembly'] = $this->m_data->edit_data($where2, 'assembly')->result();
@@ -994,14 +994,39 @@ class Listing extends CI_Controller
    public function summary()
    {
       $data['title'] = 'Summary Report';
-      // $data['users'] = $this->m_data->edit_data(['pengguna_level' => 'sales'], 'pengguna')->result();
       $data['users'] = $this->m_data->get_data('pengguna')->result();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_summary', $data);
       $this->load->view('dashboard/v_footer', $data);
    }
 
-   public function summary_print()
+   public function summarys()
+   {
+      $id_user = $this->input->post('users');
+
+      if ($id_user == '') {
+         $data['summary'] = $this->m_data->summary_all()->result();
+      } else {
+         $data['summary'] = $this->m_data->summary(['l.user' => $id_user])->result();
+      }
+      $data['title'] = 'Summary Report';
+      $data['users'] = $this->m_data->get_data('pengguna')->result();
+      // $data['qto'] = $this->m_data->edit_data('')->result();
+      $data['user'] = $id_user;
+      $this->load->view('dashboard/v_header', $data);
+      $this->load->view('listing/v_summarys', $data);
+      $this->load->view('dashboard/v_footer', $data);
+   }
+
+   public function summary_excel()
+   {
+      $data['title'] = 'Summary Report Print';
+      $this->load->view('dashboard/v_header', $data);
+      $this->load->view('listing/v_summary_print', $data);
+      $this->load->view('dashboard/v_footer', $data);
+   }
+
+   public function summary_pdf()
    {
       $data['title'] = 'Summary Report Print';
       $this->load->view('dashboard/v_header', $data);
