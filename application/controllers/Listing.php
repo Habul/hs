@@ -1011,8 +1011,8 @@ class Listing extends CI_Controller
       }
       $data['title'] = 'Summary Report';
       $data['users'] = $this->m_data->get_data('pengguna')->result();
-      // $data['qto'] = $this->m_data->edit_data('')->result();
       $data['user'] = $id_user;
+      $data['detail'] = $this->m_data->detail_qto(['l.user' => $id_user])->result();
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_summarys', $data);
       $this->load->view('dashboard/v_footer', $data);

@@ -238,4 +238,14 @@ class M_data extends CI_Model
     $this->db->group_by('l.id_hs', 'asc');
     return $this->db->get();
   }
+
+  public function detail_qto($where)
+  {
+    $this->db->select('q.*,p.pengguna_id');
+    $this->db->from('qoutation q');
+    $this->db->join('listing l', 'q.id_listing=l.id', 'inner');
+    $this->db->join('pengguna p', 'l.user=p.pengguna_id', 'inner');
+    $this->db->where($where);
+    return $this->db->get();
+  }
 }

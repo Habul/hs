@@ -108,3 +108,81 @@
       </div>
    </section>
 </div>
+
+<?php foreach ($detail as $d) : ?>
+   <div class="modal fade" id="modal_view<?= $d->id_listing ?>" tabindex="-1" data-backdrop="static">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+         <div class="modal-content bg-light color-palette">
+            <div class="modal-header">
+               <h5 class="col-12 modal-title text-center">Detail Qoutation
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </h5>
+            </div>
+            <div class="modal-body">
+               <div class="card-body table-responsive">
+                  <table class="table table-hover table-sm" id="example12">
+                     <thead class="thead-dark" style="text-align:center">
+                        <tr style="text-align:center">
+                           <th width="5%">No</th>
+                           <th>Category Type</th>
+                           <th>Size</th>
+                           <th>Qty</th>
+                           <th>Price</th>
+                        </tr>
+                     </thead>
+                     <?php
+                     $no = 1;
+                     foreach ($detail as $p) {
+                        $sum_total[] = $p->price;
+                        $total_qty = array_sum($sum_total); ?>
+                        <tr>
+                           <td class="align-middle text-center"><?= $no++ ?></td>
+                           <td>
+                              <small class="badge badge-secondary" title="Id Assembly"><?= $p->assembly ?></small>
+                              <small class="badge badge-danger" title="Price Type"><?= strtoupper($p->type_price) ?></small>
+                              <br />
+                              <b><?= strtoupper($p->item) ?></b><br />
+                              <small class="badge badge-info" title="brand"><?= strtoupper($p->brand) ?></small>
+                              <?php if ($p->model === '45' || $p->model === '90') : ?>
+                                 <small class="badge badge-info" title="Model"><?= strtoupper($p->model) ?>&deg;</small>
+                              <?php else : ?>
+                                 <small class="badge badge-info" title="Model"><?= strtoupper($p->model) ?></small>
+                              <?php endif ?>
+                              <small class="badge badge-info" title="OD"><?= strtoupper($p->od) ?></small>
+                              <small class="badge badge-info" title="Type"><?= strtoupper($p->type) ?></small>
+                              <small class="badge badge-info" title="Category"><?= strtoupper($p->category) ?></small>
+                              <small class="badge badge-info" title="Hole"><?= strtoupper($p->hole) ?></small>
+                              <small class="badge badge-info" title="ID"><?= strtoupper($p->i_d) ?></small>
+                              <small class="badge badge-info" title="Plat"><?= strtoupper($p->plat) ?></small>
+                              <small class="badge badge-info" title="Thread"><?= strtoupper($p->thread) ?></small>
+                              <small class="badge badge-warning" title="Posisi Fitting"><?= strtoupper($p->posisi) ?></small>
+                           </td>
+                           <td class="align-middle text-center"><?= $p->size ?></td>
+                           <td class="align-middle text-center"><?= $p->qty ?></td>
+                           <td class="align-middle text-center">
+                              <?= number_format($p->price, 0, '.', '.'); ?> IDR<br />
+                              <small>@ <?= number_format($p->price_unit, 0, '.', '.') ?> IDR</small>
+                           </td>
+                        </tr>
+                     <?php } ?>
+                  </table>
+                  <table class="table table-sm">
+                     <thead class="thead-light">
+                        <tr>
+                           <th width="70%" style="text-align:center"><b>Total<b></th>
+                           <th style="text-align:center">
+                              <b><?= number_format($total_qty, 0, '.', '.'); ?> IDR<b>
+                           </th>
+                        </tr>
+                     </thead>
+                     <th></th>
+                     <th></th>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+<?php endforeach ?>
