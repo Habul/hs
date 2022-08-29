@@ -80,6 +80,12 @@ class M_data extends CI_Model
     return $query;
   }
 
+  function get_listing($id, $table)
+  {
+    $query = $this->db->get_where($table, array('id_listing' => $id));
+    return $query;
+  }
+
   public function select_sjhs($no_po)
   {
     $sql = "SELECT sj_hs.no_id as no_id, sj_hs.no_po as no_po, sj_hs.descript as descript, sj_hs.qty as qty FROM sj_hs INNER JOIN sj_user 

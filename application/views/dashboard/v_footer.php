@@ -493,6 +493,43 @@
 	});
 </script>
 <script>
+	$(function() {
+		$('#listing').click(function() {
+			var id = $(this).val();
+			$.ajax({
+				url: "<?= site_url('listing/get_list_brand'); ?>",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function(data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<tr>' +
+							'<td>' +
+							'<small class="badge badge-secondary">' + data[i].assembly + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'</td>' +
+							'<td>' + data[i].barang_nama + '</td>' +
+							'<td>' + data[i].barang_harga + '</td>' +
+							'</tr>';
+					}
+					$('#tbody').html(html);
+				}
+			});
+		});
+	});
+
 	$("#info").fadeTo(2000, 500).slideUp(500, function() {
 		$("#info").slideUp(1000);
 	});
