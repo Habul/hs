@@ -493,31 +493,49 @@
 	});
 </script>
 <script>
-	$(function() {
-		$('#listing').click(function() {
-			var id = $(this).val();
+	$(document).ready(function() {
+		$('.view_detail').click(function() {
+			var id = $(this).attr('relid');
 			$.ajax({
-				url: "<?= site_url('listing/get_listing'); ?>",
-				method: "POST",
+				url: "<?= site_url('listing/get_id_listing'); ?>",
 				data: {
 					id: id
 				},
-				async: true,
+				method: 'GET',
 				dataType: 'json',
 				success: function(data) {
 					var html = '';
 					var i;
 					for (i = 0; i < data.length; i++) {
 						html += '<tr>' +
-							'<td>' +
+							'<td class="align-middle>' +
 							'<small class="badge badge-secondary">' + data[i].assembly + '</small>' +
 							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
+							'<br>' +
+							'<b>' + data[i].id_item + '</b> <br>' +
+							'<small class="badge badge-info">' + data[i].brand + '</small>' +
+							'<small class="badge badge-info">' + data[i].model + '</small>' +
+							'<small class="badge badge-info">' + data[i].od + '</small>' +
+							'<small class="badge badge-info">' + data[i].type + '</small>' +
+							'<small class="badge badge-info">' + data[i].category + '</small>' +
+							'<small class="badge badge-info">' + data[i].hole + '</small>' +
+							'<small class="badge badge-info">' + data[i].i_d + '</small>' +
+							'<small class="badge badge-info">' + data[i].plat + '</small>' +
+							'<small class="badge badge-info">' + data[i].thread + '</small>' +
+							'<small class="badge badge-warning">' + data[i].posisi + '</small>' +
 							'</td>' +
-							'<td>' + data[i].barang_nama + '</td>' +
-							'<td>' + data[i].barang_harga + '</td>' +
+							'<td class="align-middle text-center">' + data[i].size + '</td>' +
+							'<td class="align-middle text-center">' + data[i].qty + '</td>' +
+							'<td class="align-middle text-center">' + data[i].price + '<br>' +
+							'<small>@' + data[i].price_unit + '</td>' +
 							'</tr>';
 					}
-					$('#tbody').html(html);
+					$('#modal_view').modal({
+						backdrop: 'static',
+						keyboard: true,
+						show: true
+					});
+					$('#show_data').html(html);
 				}
 			});
 		});

@@ -1037,8 +1037,8 @@ class Listing extends CI_Controller
 
    public function get_id_listing()
    {
-      $id = $this->input->post('id', true);
-      $data = $this->m_data->get_listing($id, 'qoutation')->row();
-      echo ($data);
+      $id = $this->input->get('id');
+      $data = $this->m_data->get_listing($id, 'qoutation')->result();
+      echo json_encode($data);
    }
 }

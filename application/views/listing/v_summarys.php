@@ -95,8 +95,8 @@
                               <td class="align-middle"><?= $s->company ?></td>
                               <td class="align-middle"><?= $s->notes ?></td>
                               <td class="align-middle text-center">
-                                 <a class="btn-sm btn-info" data-toggle="modal" data-target="#modal_view<?= $s->id ?>" id="id_listing" title="View Detail Quotation">
-                                    <i class="fas fa-search-dollar"></i></a>
+                                 <a class="btn-sm btn-info view_detail" relid="<?= $s->id ?>">
+                                    <i class=" fas fa-search-dollar"></i></a>
                               </td>
                            </tr>
                         <?php } ?>
@@ -109,48 +109,44 @@
    </section>
 </div>
 
-<?php foreach ($detail as $d) : ?>
-   <div class="modal fade" id="modal_view<?= $d->id_listing ?>" tabindex="-1" data-backdrop="static">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-         <div class="modal-content bg-light color-palette">
-            <div class="modal-header">
-               <h5 class="col-12 modal-title text-center">Detail Qoutation
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
-               </h5>
-            </div>
-            <div class="modal-body">
-               <div class="card-body table-responsive">
-                  <table class="table table-hover table-sm" id="example12">
-                     <thead class="thead-dark" style="text-align:center">
-                        <tr style="text-align:center">
-                           <th width="5%">No</th>
-                           <th>Category Type</th>
-                           <th>Size</th>
-                           <th>Qty</th>
-                           <th>Price</th>
-                        </tr>
-                     </thead>
-                     <tbody id="tbody">
-
-                     </tbody>
-                  </table>
-                  <table class="table table-sm">
-                     <thead class="thead-light">
-                        <tr>
-                           <th width="70%" style="text-align:center"><b>Total<b></th>
-                           <th style="text-align:center">
-                              <b><?= number_format($total_qty, 0, '.', '.'); ?> IDR<b>
-                           </th>
-                        </tr>
-                     </thead>
-                     <th></th>
-                     <th></th>
-                  </table>
-               </div>
+<div class="modal fade" id="modal_view" tabindex="-1" data-backdrop="static">
+   <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-light color-palette">
+         <div class="modal-header">
+            <h5 class="col-12 modal-title text-center">Detail Qoutation
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </h5>
+         </div>
+         <div class="modal-body">
+            <div class="card-body table-responsive">
+               <table class="table table-hover table-sm" id="example12">
+                  <thead class="thead-dark" style="text-align:center">
+                     <tr style="text-align:center">
+                        <th>Category Type</th>
+                        <th>Size</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                     </tr>
+                  </thead>
+                  <tbody id="show_data">
+                  </tbody>
+               </table>
+               <table class="table table-sm">
+                  <thead class="thead-light">
+                     <tr>
+                        <th width="70%" style="text-align:center"><b>Total<b></th>
+                        <th style="text-align:center">
+                           <b> IDR<b>
+                        </th>
+                     </tr>
+                  </thead>
+                  <th></th>
+                  <th></th>
+               </table>
             </div>
          </div>
       </div>
    </div>
-<?php endforeach ?>
+</div>
