@@ -274,7 +274,7 @@
 			</div>
 			<form method="post" onsubmit="importform.disabled = true; return true;" action="<?= base_url('listing/price_import') ?>" enctype="multipart/form-data">
 				<div class="modal-body">
-					<input type="hidden" name="id_item" value="<?= $pricerow->id ?>">
+					<input type="text" name="id_item" value="<?= $pricerow ?>">
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="customFile" name="data">
 						<label class="custom-file-label" for="customFile">Choose file</label>

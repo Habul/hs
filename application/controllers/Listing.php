@@ -741,7 +741,7 @@ class Listing extends CI_Controller
       $data['title'] = 'Price List Detail';
       $data['listitem'] = $this->m_data->edit_data($where, 'list_item')->result();
       $data['listprice'] = $this->m_data->edit_data($where2, 'list_price')->result();
-      $data['pricerow'] = $this->db->select('id')->where('id', $id)->get('list_item')->row();
+      $data['pricerow'] = $id;
       $this->load->view('dashboard/v_header', $data);
       $this->load->view('listing/v_price_detail', $data);
       $this->load->view('dashboard/v_footer');
@@ -856,7 +856,7 @@ class Listing extends CI_Controller
             $this->upload->display_errors();
          } else {
             $data = $this->upload->data();
-            $this->m_data->delete_data(array('id_item' => $id_item), 'list_price');
+            $this->m_data->delete_data(['id_item' => $id_item], 'list_price');
 
             error_reporting(E_ALL);
             date_default_timezone_set('Asia/Jakarta');

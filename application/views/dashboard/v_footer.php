@@ -497,7 +497,7 @@
 		$('#listing').click(function() {
 			var id = $(this).val();
 			$.ajax({
-				url: "<?= site_url('listing/get_list_brand'); ?>",
+				url: "<?= site_url('listing/get_listing'); ?>",
 				method: "POST",
 				data: {
 					id: id
@@ -511,13 +511,6 @@
 						html += '<tr>' +
 							'<td>' +
 							'<small class="badge badge-secondary">' + data[i].assembly + '</small>' +
-							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
-							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
-							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
-							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
-							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
-							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
-							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
 							'<small class="badge badge-danger">' + data[i].type_price + '</small>' +
 							'</td>' +
 							'<td>' + data[i].barang_nama + '</td>' +
