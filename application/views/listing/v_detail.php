@@ -107,7 +107,7 @@
 												$sum_total[] = $p->price;
 												$total_qty = array_sum($sum_total); ?>
 												<tr>
-													<td class="align-middle text-center"><?= $no++ ?></td>
+													<th class="align-middle text-center" scope"row"><?= $no++ ?></th>
 													<td>
 														<small class="badge badge-secondary" title="Id Assembly"><?= $p->assembly ?></small>
 														<small class="badge badge-danger" title="Price Type"><?= strtoupper($p->type_price) ?></small>

@@ -507,6 +507,9 @@
 					var html = '';
 					var i;
 					for (i = 0; i < data.length; i++) {
+						var remove = data.filter(function(el) {
+							return el != null;
+						})
 						html += '<tr>' +
 							'<td class="align-middle>' +
 							'<small class="badge badge-secondary">' + data[i].assembly + '</small>' +
